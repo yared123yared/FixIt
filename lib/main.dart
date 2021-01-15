@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'Screens/Category_main_screen.dart';
+import 'Screens/Customer_main_screen.dart';
 
 
 
@@ -47,6 +48,7 @@ class _MyAppState extends State<MyApp> {
       initialRoute:'/',
       routes: {
         '/' : (ctx)=>CategoryMainScreen(),
+        '/customer' : (ctx)=>CustomerMainScreen(),
 
       },
       onUnknownRoute: (settings){
