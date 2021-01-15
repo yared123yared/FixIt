@@ -50,6 +50,7 @@ class _MyAppState extends State<MyApp> {
         '/' : (ctx)=>CategoryMainScreen(),
         '/customer' : (ctx)=>CustomerMainScreen(),
         '/customerr' : (ctx)=>CustomerMainScreen(),
+        '/customerrd' : (ctx)=>CustomerMainScreen(),
 
 
 
