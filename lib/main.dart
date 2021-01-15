@@ -49,6 +49,9 @@ class _MyAppState extends State<MyApp> {
       routes: {
         '/' : (ctx)=>CategoryMainScreen(),
         '/customer' : (ctx)=>CustomerMainScreen(),
+        '/customerr' : (ctx)=>CustomerMainScreen(),
+
+
 
       },
       onUnknownRoute: (settings){
