@@ -4,7 +4,8 @@ class CategoryMainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child:Text("CategoryMainScreen")
-    );
+          child:Text("CategoryMainScreen")
+      );
+
   }
 }
