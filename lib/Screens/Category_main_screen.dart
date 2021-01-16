@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../Widgets/Services_item.dart';
 import 'dart:math';
 import '../dummy_data.dart';
 import '../Model/Service.dart';
@@ -7,28 +8,6 @@ import '../Model/Service.dart';
 
 class CategoryMainScreen extends StatelessWidget {
   static const routeName='/category_screen';
-
-
-
-  List<Service> services = [
-    Service(id:1, title:"Fix Stove",imageUrl:'fixit.png',categoryId:1, description:'Repair stove that is not working well'),
-    Service(id:2, title:"Fix Frige",imageUrl:'fixit.png',categoryId:1, description:'Repair stove that is not working well'),
-    Service(id:3, title:"Fix Metad",imageUrl:'fixit.png',categoryId:2, description:'Repair stove that is not working well'),
-    Service(id:4, title:"Fix Stove",imageUrl:'fixit.png',categoryId:3, description:'Repair stove that is not working well'),
-    Service(id:5, title:"Fix Stove",imageUrl:'fixit.png',categoryId:2, description:'Repair stove that is not working well'),
-    Service(id:6, title:"Fix Stove",imageUrl:'fixit.png',categoryId:4, description:'Repair stove that is not working well'),
-    Service(id:7, title:"Fix Stove",imageUrl:'fixit.png',categoryId:4, description:'Repair stove that is not working well'),
-    Service(id:8, title:"Fix Stove",imageUrl:'fixit.png',categoryId:5, description:'Repair stove that is not working well'),
-    Service(id:9, title:"Fix Stove",imageUrl:'fixit.png',categoryId:6, description:'Repair stove that is not working well'),
-    Service(id:10, title:"Fix Stove",imageUrl:'fixit.png',categoryId:6, description:'Repair stove that is not working well'),
-    Service(id:11, title:"Fix Stove",imageUrl:'fixit.png',categoryId:5, description:'Repair stove that is not working well'),
-
-  ];
-
-
-
-
-
   Widget buildSectionTitle(BuildContext context, String text){
     return  Container(
 
@@ -40,10 +19,7 @@ class CategoryMainScreen extends StatelessWidget {
         style: Theme.of(context).textTheme.headline6,),
     );
   }
-  void makeFavorite(int index){
-//    this is the make favorite method
 
-  }
   Widget buildContainer(BuildContext context , Widget child){
     return Container(
       height: MediaQuery.of(context).size.height * 0.5 ,
@@ -72,7 +48,14 @@ class CategoryMainScreen extends StatelessWidget {
 
     print(randomNumber);
 
-    var selectedCategory=DUMMY_CATEGORIES[randomNumber];
+    var  selectedCategory= DUMMY_CATEGORIES[randomNumber];
+    List<Service> selectedService=DUMMY_SERVICES;
+     selectedService=DUMMY_SERVICES.where((service) {
+      if(service.id==selectedCategory.id){
+        return true;
+      }
+      return false;
+    }).toList();
 
     return Scaffold(
       appBar: AppBar(
@@ -91,10 +74,10 @@ class CategoryMainScreen extends StatelessWidget {
 //           ingredient
               buildSectionTitle(context,'Services'),
         buildContainer(context,ListView.builder(
-            itemCount: services.length,
+            itemCount: selectedService.length,
            itemBuilder: (ctx,index) => Column(
              children:[
-               buildServiceList(context,index),
+               ServiceItem(index,selectedService),
              ]
 
 
