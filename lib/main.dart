@@ -28,6 +28,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
           primarySwatch: Colors.pink,
           accentColor: Colors.amber,
+          errorColor:Colors.red,
           canvasColor: Color.fromRGBO(225, 254, 229, 1),
           fontFamily: 'Raleway',
           textTheme: ThemeData.light().textTheme.copyWith(
@@ -45,9 +46,9 @@ class _MyAppState extends State<MyApp> {
           )
       ),
 
-      initialRoute:'/',
+      initialRoute: CategoryMainScreen.routeName,
       routes: {
-        '/' : (ctx)=>CategoryMainScreen(),
+        CategoryMainScreen.routeName: (ctx)=>CategoryMainScreen(),
         '/customer' : (ctx)=>CustomerMainScreen(),
         '/customerr' : (ctx)=>CustomerMainScreen(),
         '/customerrd' : (ctx)=>CustomerMainScreen(),
