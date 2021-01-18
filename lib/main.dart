@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'Screens/Category_main_screen.dart';
 import 'Screens/Customer_main_screen.dart';
-
+import 'Screens/login_page.dart';
 
 
 void main() => runApp(MyApp());
@@ -47,7 +47,7 @@ class _MyAppState extends State<MyApp> {
 
       initialRoute:'/',
       routes: {
-        '/' : (ctx)=>CategoryMainScreen(),
+        '/' : (ctx)=>LogInScreen(),
         '/customer' : (ctx)=>CustomerMainScreen(),
         '/customerr' : (ctx)=>CustomerMainScreen(),
         '/customerrd' : (ctx)=>CustomerMainScreen(),
