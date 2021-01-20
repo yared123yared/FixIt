@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_group_project/Screens/Map_screen.dart';
+import 'package:flutter_group_project/Screens/Technician_detail_screen.dart';
 
 import 'Screens/Category_main_screen.dart';
 import 'Screens/Customer_main_screen.dart';
-
-
 
 void main() => runApp(MyApp());
 
@@ -13,20 +13,12 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
-
-
-
-
-
-
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'DeliMeals',
       theme: ThemeData(
-          primarySwatch: Colors.pink,
+          primarySwatch: Colors.purple,
           accentColor: Colors.amber,
           canvasColor: Color.fromRGBO(225, 254, 229, 1),
           fontFamily: 'Raleway',
@@ -37,27 +29,19 @@ class _MyAppState extends State<MyApp> {
               bodyText2: TextStyle(
                 color: Color.fromRGBO(20, 31, 51, 1),
               ),
-              headline6: TextStyle(
-                  fontSize: 24,
-                  fontFamily: 'RobotoCondensed'
-              )
-
-          )
-      ),
-
-      initialRoute:'/',
+              headline6:
+                  TextStyle(fontSize: 24, fontFamily: 'RobotoCondensed'))),
+      initialRoute: '/techinician_detail',
       routes: {
-        '/' : (ctx)=>CategoryMainScreen(),
-        '/customer' : (ctx)=>CustomerMainScreen(),
-        '/customerr' : (ctx)=>CustomerMainScreen(),
-        '/customerrd' : (ctx)=>CustomerMainScreen(),
-
-
-
-
+        '/': (ctx) => CategoryMainScreen(),
+        '/customer': (ctx) => CustomerMainScreen(),
+        '/customerr': (ctx) => CustomerMainScreen(),
+        '/customerrd': (ctx) => CustomerMainScreen(),
+        '/techinician_detail': (ctx) => TechnicianDetail(),
+        '/goto_map': (ctx) => MapScreen(),
       },
-      onUnknownRoute: (settings){
-        return MaterialPageRoute(builder: (ctx)=>CategoryMainScreen());
+      onUnknownRoute: (settings) {
+        return MaterialPageRoute(builder: (ctx) => CategoryMainScreen());
       },
     );
   }
@@ -69,7 +53,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,6 +63,5 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Text('Navigation Time!'),
       ),
     );
-
   }
 }
