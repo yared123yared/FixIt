@@ -1,91 +1,114 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_group_project/Screens/signup_page.dart';
+import 'package:flutter_group_project/Screens/mainPage.dart';
 
-class LogInScreen extends StatelessWidget {
-  TextEditingController nameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+class SignIn extends StatefulWidget {
+  @override
+  _SignInState createState() => _SignInState();
+}
 
+class _SignInState extends State<SignIn> {
+  FirebaseAuth _auth = FirebaseAuth.instance;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController _emailController = TextEditingController();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final TextEditingController _passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Sample App'),
-        ),
-        body: Padding(
-            padding: EdgeInsets.all(10),
-            child: ListView(
+      key: _scaffoldKey,
+      body: Builder(builder: (BuildContext context) {
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            withEmailPassword(),
+          ],
+        );
+      }),
+    );
+  }
+
+  Widget withEmailPassword() {
+    return Form(
+        key: _formKey,
+        child: Card(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Container(
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.all(10),
-                    child: Text(
-                      'TutorialKart',
-                      style: TextStyle(
-                          color: Colors.blue,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 30),
-                    )),
-                Container(
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.all(10),
-                    child: Text(
-                      'Sign in',
-                      style: TextStyle(fontSize: 20),
-                    )),
-                Container(
-                  padding: EdgeInsets.all(10),
-                  child: TextField(
-                    controller: nameController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'User Name',
-                    ),
+                  child: const Text(
+                    'Sign in with email and password',
+                    style: TextStyle(fontWeight: FontWeight.bold),
                   ),
+                  alignment: Alignment.center,
+                ),
+                TextFormField(
+                  controller: _emailController,
+                  decoration: const InputDecoration(labelText: 'Email'),
+                  validator: (value) {
+                    if (value.isEmpty) return 'Please enter some text';
+                    return null;
+                  },
+                ),
+                TextFormField(
+                  controller: _passwordController,
+                  decoration: const InputDecoration(labelText: 'Password'),
+                  validator: (value) {
+                    if (value.isEmpty) return 'Please enter some text';
+                    return null;
+                  },
+                  obscureText: true,
                 ),
                 Container(
-                  padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                  child: TextField(
-                    obscureText: true,
-                    controller: passwordController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Password',
-                    ),
+                  padding: const EdgeInsets.only(top: 16.0),
+                  alignment: Alignment.center,
+                  child: OutlineButton(
+                    child: Text("Sign In"),
+                    onPressed: () async {
+                      if (_formKey.currentState.validate()) {
+                        _signInWithEmailAndPassword();
+                      }
+                    },
                   ),
                 ),
-                Container(
-                    height: 50,
-                    padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                    child: RaisedButton(
-                      textColor: Colors.white,
-                      color: Colors.blue,
-                      child: Text('Login'),
-                      onPressed: () {
-                        print(nameController.text);
-                        print(passwordController.text);
-                      },
-                    )),
-                Container(
-                    child: Row(
-                      children: <Widget>[
-                        Text('Does not have account?'),
-                        FlatButton(
-                          textColor: Colors.blue,
-                          child: Text(
-                            'Sign in',
-                            style: TextStyle(fontSize: 20),
-                          ),
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => SignUpScreen()),
-                              );
-                            }
-                        )
-                      ],
-                      mainAxisAlignment: MainAxisAlignment.center,
-                    ))
               ],
-            )));
+            ),
+          ),
+        ));
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  void _signInWithEmailAndPassword() async {
+    try {
+      final User user = (await _auth.signInWithEmailAndPassword(
+        email: _emailController.text,
+        password: _passwordController.text,
+      ))
+          .user;
+      if (!user.emailVerified) {
+        await user.sendEmailVerification();
+      }
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) {
+        return MainPage(
+          user: user,
+        );
+      }));
+    } catch (e) {
+      Scaffold.of(context).showSnackBar(SnackBar(
+        content: Text("Failed to sign in with Email & Password"),
+      ));
+    }
+  }
+
+  void _signOut() async {
+    await _auth.signOut();
   }
 }
