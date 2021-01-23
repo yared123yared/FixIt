@@ -9,24 +9,18 @@ class ServiceList extends StatefulWidget {
 }
 
 class _ServiceListState extends State<ServiceList> {
+    final images =['mitad.jpg','electronics.jpg','mitad.jpg','electronics.jpg','mitad.jpg','electronics.jpg'];
+    final texts =['mitad','electronics.','mitad','electronics','mitad','electronics'];
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      scrollDirection: Axis.vertical,
-      children: [
-        Row(
-          children: [
-            Expanded(child: CategoryItem(image: 'electronics.jpg',)), Expanded(child: CategoryItem(image: 'mitad.jpg',)),
-          ],
-        ),
-        Row(
-          children: [
-            Expanded(child: CategoryItem(image: 'electronics.jpg',)), Expanded(child:CategoryItem(image: 'mitad.jpg',)),
-          ],
-        ),
-        Row(
-          children: [
-            Expanded(child: CategoryItem(image: 'electronics.jpg',)), Expanded(child:CategoryItem(image: 'mitad.jpg',)),
-          ],
-        ),
-      ],);}}
+    return GridView.count(
+        crossAxisCount: 2,
+      children: List.generate(6, (index) {
+        return CategoryItem(image: images[index],text: texts[index] ,);
+      }),
+
+    );
+
+
+
+  }}
