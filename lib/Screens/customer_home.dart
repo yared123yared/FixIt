@@ -13,7 +13,8 @@ class _CustomerHomeState extends State<CustomerHome> {
 
     ServiceList()
 ,
-    CategoryList()
+    CategoryList(),
+    Center(child: Text("No history yet!"),)
   ];
   int _navIndex = 0;
   String get title{
@@ -47,6 +48,11 @@ class _CustomerHomeState extends State<CustomerHome> {
           BottomNavigationBarItem(
               icon: Icon(Icons.supervised_user_circle),
               label: 'Technicians',
+              backgroundColor: Colors.purple
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.history),
+              label: 'History',
               backgroundColor: Colors.purple
           )
         ],
