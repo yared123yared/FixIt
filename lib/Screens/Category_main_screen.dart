@@ -39,9 +39,9 @@ class CategoryMainScreen extends StatelessWidget {
 //
 
 //
-  Widget getFloatingButton() {
+  Widget getFloatingButton(BuildContext context) {
     return FloatingActionButton(
-      backgroundColor: Color(0XFF212121),
+      backgroundColor: Theme.of(context).primaryColor,
       foregroundColor: Colors.white,
       onPressed: () {
         // this is the home optiion
@@ -127,10 +127,10 @@ class CategoryMainScreen extends StatelessWidget {
             ]
         ),
       ),
-        floatingActionButton: getFloatingButton(),
+        floatingActionButton: getFloatingButton(context),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: BottomAppBar(
-          color: Color(0XFF212121),
+          color: Theme.of(context).primaryColor,
           shape: CircularNotchedRectangle(),
           child: Row(
               mainAxisSize: MainAxisSize.max,

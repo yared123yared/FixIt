@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../Screens/Service_main_screen.dart';
 import '../Model/Service.dart';
 
 import '../dummy_data.dart';
@@ -47,12 +48,18 @@ class ServiceItem extends StatelessWidget {
               label:Text("Favorite"),
 
 
+
+
             ): IconButton(
                 icon: Icon(Icons.star_border,color: Theme.of(context).errorColor,),
                 onPressed: ()=>makeFavorite(selectedService[index].id)
 
 
             ),
+            onTap: (){
+              print(this.index);
+              Navigator.pushNamed(context, ServiceMainScreen.routeName,arguments: selectedService[index].title);
+            },
           ),
         ),
 

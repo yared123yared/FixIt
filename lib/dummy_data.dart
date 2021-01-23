@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import './Model/Category.dart';
 import 'Model/Service.dart';
+import 'Model/Technicians.dart';
 
 
 
@@ -85,3 +86,12 @@ const  DUMMY_SERVICES = [
 
 
 ];
+const  DUMMY_TECHNICIANS = [
+  Technician(id: 1, name: "Yared Solmon", imageUrl: './Assets/Images/carpenter.jpg'),
+  Technician(id: 2, name: "Ashenafi Chufamo", imageUrl: './Assets/Images/electronics.jpg'),
+  Technician(id: 3, name: "Getachew Tebekew", imageUrl: './Assets/Images/mechanic.jpg'),
+  Technician(id: 4, name: "Fasikaw Kindea", imageUrl: './Assets/Images/mitad.jpg'),
+  Technician(id: 5, name: "Some one 1", imageUrl: './Assets/Images/carpenter.jpg'),
+  Technician(id: 6, name: "Some one 2", imageUrl: './Assets/Images/electronics.jpg'),
+
+  ];
