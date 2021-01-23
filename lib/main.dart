@@ -36,7 +36,7 @@ class _MyAppState extends State<MyApp> {
 
       initialRoute:CategoryMainScreen.routeName,
       routes: {
-        '/': (context) => CustomerHome(),
+        '/': (context) => CategoryMainScreen(),
         CategoryMainScreen.routeName:(context) => CategoryMainScreen(),
       },
     );

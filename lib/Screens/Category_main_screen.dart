@@ -39,6 +39,19 @@ class CategoryMainScreen extends StatelessWidget {
 //
 
 //
+  Widget getFloatingButton() {
+    return FloatingActionButton(
+      backgroundColor: Color(0XFF212121),
+      foregroundColor: Colors.white,
+      onPressed: () {
+        // this is the home optiion
+        print('welcome to the home');
+      },
+      tooltip: "Home",
+      child: Icon(Icons.home),
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +73,28 @@ class CategoryMainScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Category Name'),
+          actions: [
+          PopupMenuButton(
+
+    icon: Icon(Icons.more_vert),
+    itemBuilder:(_) => [
+    PopupMenuItem(
+    child: Text('Only Favorite'),
+    value:null,
+
+
+    ),
+    PopupMenuItem(
+    child: Text('Show All'),
+    value: null,
+
+
+    ),
+    ]
       ),
+    ]
+    ),
+
       body: SingleChildScrollView(
         child: Column(
             children:[
@@ -93,6 +127,31 @@ class CategoryMainScreen extends StatelessWidget {
             ]
         ),
       ),
+        floatingActionButton: getFloatingButton(),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        bottomNavigationBar: BottomAppBar(
+          color: Color(0XFF212121),
+          shape: CircularNotchedRectangle(),
+          child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                IconButton(
+                  icon: Icon(Icons.search),
+                  color: Colors.white,
+                  onPressed: () {
+                    print("search icon button have been clicked");
+                  },
+                ),
+                IconButton(
+                  icon: Icon(Icons.note),
+                  color: Colors.white,
+                  onPressed: () {
+                    print("the note icon button have been clicked");
+                  },
+                )
+              ]),
+        )
 
     );
   }
