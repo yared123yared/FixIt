@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'Screens/Category_main_screen.dart';
 import 'Screens/customer_home.dart';
 
 void main(){
@@ -33,10 +34,12 @@ class _MyAppState extends State<MyApp> {
         )
       ),
 
-      initialRoute: '/',
+      initialRoute:CategoryMainScreen.routeName,
       routes: {
         '/': (context) => CustomerHome(),
+        CategoryMainScreen.routeName:(context) => CategoryMainScreen(),
       },
     );
   }
 }
+
