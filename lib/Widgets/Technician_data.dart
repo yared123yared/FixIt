@@ -11,15 +11,17 @@ class TechnicianData extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      // subtitle: Text('you can do this'),
-      leading: Icon(
-        icon,
-        color: Colors.amber,
-      ),
-      title: Text(
-        data,
-        style: textStyle,
+    return Expanded(
+          child: ListTile(
+        // subtitle: Text('you can do this'),
+        leading: Icon(
+          icon,
+          color: Colors.amber,
+        ),
+        title: Text(
+          data,
+          style: textStyle,
+        ),
       ),
     );
   }

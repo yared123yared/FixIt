@@ -15,15 +15,19 @@ class _MapScreenState extends State<MapScreen> {
   TextEditingController _controller = TextEditingController();
   @override
   void initState() {
+    // SystemChrome.setPreferredOrientations([
+    //   DeviceOrientation.portraitUp,
+    //   DeviceOrientation.portraitDown,
+    // ]);
     super.initState();
     _getCurrentUserLocation();
   }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Column(
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
           children: [
             Expanded(
               // flex: 3,
@@ -37,53 +41,53 @@ class _MapScreenState extends State<MapScreen> {
                 onTap: _handleTap,
               ),
             ),
-            TextField(
-              controller: _controller,
-              textAlignVertical: TextAlignVertical.bottom,
-              onChanged: (value) {
-                print(value);
+            RaisedButton.icon(
+              onPressed: () async {
+                await _getCurrentUserLocation();
+                _handleTap(_currentUserLocation);
               },
-              style: TextStyle(
-                fontSize: 20,
-                decorationColor: Colors.amberAccent,
-              ),
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(5.0),
+              icon: Icon(Icons.my_location),
+              label: Text('Auto Detect'),
+            ),
+            Container(
+              margin: EdgeInsets.all(10.0),
+              child: TextField(
+                controller: _controller,
+                textAlignVertical: TextAlignVertical.bottom,
+                onChanged: (value) {
+                  // print(value);
+                },
+                style: TextStyle(
+                  fontSize: 20,
+                  decorationColor: Colors.amberAccent,
+                ),
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(5.0),
+                    ),
+                  ),
+                  labelText: "Job Description",
+                  hintText:
+                      "Please write some description of the task to be done here",
+                  hintStyle: TextStyle(
+                    fontStyle: FontStyle.italic,
+                    color: Colors.grey,
                   ),
                 ),
-                labelText: "Description",
-                hintText:
-                    "Please write some description of the task to be done here",
-                hintStyle: TextStyle(
-                  fontStyle: FontStyle.italic,
-                  color: Colors.grey,
-                ),
-              ),
-              maxLines: 7,
-            ),
-            RaisedButton(
-              onPressed: () {
-                print(_controller.text);
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Icon(Icons.my_location),
-                  Text('Auto Detect'),
-                ],
+                maxLines: 2,
               ),
             ),
           ],
         ),
-        floatingActionButton: CustomFAB(
-          onPressed: () async {
-            // Navigator.pushNamed(context, '/technician_detail');+
-            await _getCurrentUserLocation();
-            Navigator.pop(context);
-          },
-        ),
+      ),
+      floatingActionButton: CustomFAB(
+        onPressed: () async {
+          print(_controller.text);
+          await _getCurrentUserLocation();
+
+          Navigator.pop(context);
+        },
       ),
     );
   }

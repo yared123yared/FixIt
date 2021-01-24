@@ -15,38 +15,105 @@ class TechnicianDetail extends StatelessWidget {
       appBar: AppBar(
         title: Text("Technician Detail"),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+      body: OrientationBuilder(
+        builder: (context, orientation) {
+          if (orientation == Orientation.landscape) {
+            return LandscapeView();
+          } else {
+            return PortraitView();
+          }
+        },
+      ),
+      floatingActionButton: CustomFAB(
+        onPressed: () {
+          Navigator.pushNamed(context, '/goto_map');
+        },
+      ),
+    );
+  }
+}
+
+class LandscapeView extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        // crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            // height: MediaQuery.of(context).size.height / ,
-            padding: EdgeInsets.symmetric(vertical: 3.0),
+            // height: MediaQuery.of(context).size.height / 2,
+            width: MediaQuery.of(context).size.width * 0.5,
+            padding: EdgeInsets.all(3.0),
             child: Image(
               image: AssetImage('assets/Images/computer_technician.jpg'),
             ),
           ),
-          TechnicianData(
-            data: "Getachew Tebikew",
-            textStyle: _kTechnicianTextStyle,
-          ),
-          TechnicianData(
-            data: "Email@example.com",
-            icon: Icons.email,
-            textStyle: _kTechnicianTextStyle,
-          ),
-          TechnicianData(
-            data: "+25199-099-9090",
-            icon: Icons.phone,
-            textStyle: _kTechnicianTextStyle,
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                TechnicianData(
+                  data: "Getachew Tebikew",
+                  textStyle: _kTechnicianTextStyle,
+                ),
+                TechnicianData(
+                  data: "Getachew Tebikew",
+                  textStyle: _kTechnicianTextStyle,
+                ),
+                TechnicianData(
+                  data: "Email@example.com",
+                  icon: Icons.email,
+                  textStyle: _kTechnicianTextStyle,
+                ),
+                TechnicianData(
+                  data: "+25199-099-9090",
+                  icon: Icons.phone,
+                  textStyle: _kTechnicianTextStyle,
+                ),
+              ],
+            ),
           ),
         ],
       ),
-      floatingActionButton: CustomFAB(
-        onPressed: () {
-          print("ello");
-          Navigator.pushNamed(context, '/goto_map');
-        },
-      ),
+    );
+  }
+}
+
+class PortraitView extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Container(
+          // height: MediaQuery.of(context).size.height / 2,
+          // width: MediaQuery.of(context).size.width,
+          padding: EdgeInsets.symmetric(vertical: 3.0),
+          child: Image(
+            image: AssetImage('assets/Images/computer_technician.jpg'),
+          ),
+        ),
+        TechnicianData(
+          data: "Getachew Tebikew",
+          textStyle: _kTechnicianTextStyle,
+        ),
+        SingleChildScrollView(
+          child: Column(
+            children: [
+              TechnicianData(
+                data: "Email@example.com",
+                icon: Icons.email,
+                textStyle: _kTechnicianTextStyle,
+              ),
+              TechnicianData(
+                data: "+25199-099-9090",
+                icon: Icons.phone,
+                textStyle: _kTechnicianTextStyle,
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
