@@ -1,18 +1,20 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_group_project/Screens/Map_screen.dart';
 import 'package:flutter_group_project/Screens/Technician_detail_screen.dart';
-
 import 'Screens/Category_main_screen.dart';
-import 'Screens/Customer_main_screen.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_group_project/FirebaseAuthFGP.dart';
 
-void main() => runApp(MyApp());
+// void main() => runApp(MyApp());
 
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
+
+Future<void >main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
 }
-
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -34,9 +36,9 @@ class _MyAppState extends State<MyApp> {
       initialRoute: '/techinician_detail',
       routes: {
         '/': (ctx) => CategoryMainScreen(),
-        '/customer': (ctx) => CustomerMainScreen(),
-        '/customerr': (ctx) => CustomerMainScreen(),
-        '/customerrd': (ctx) => CustomerMainScreen(),
+        // '/customer': (ctx) => CustomerMainScreen(),
+        // '/customerr': (ctx) => CustomerMainScreen(),
+        // '/customerrd': (ctx) => CustomerMainScreen(),
         '/techinician_detail': (ctx) => TechnicianDetail(),
         '/goto_map': (ctx) => MapScreen(),
       },
@@ -62,6 +64,15 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: Text('Navigation Time!'),
       ),
+    );
+  }
+}
+class MyApp extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: FirebaseAuthFGP(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
