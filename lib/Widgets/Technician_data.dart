@@ -11,17 +11,22 @@ class TechnicianData extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-          child: ListTile(
-        // subtitle: Text('you can do this'),
-        leading: Icon(
-          icon,
-          color: Colors.amber,
-        ),
-        title: Text(
-          data,
-          style: textStyle,
-        ),
+    return Container(
+      margin:EdgeInsets.all(5),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Icon(
+            icon,
+            color: Colors.amber,
+          ),
+          SizedBox(width:20.0),
+          Text(
+            data,
+            style: textStyle,
+          ),
+        ],
       ),
     );
   }
