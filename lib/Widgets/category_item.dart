@@ -3,13 +3,19 @@ import 'package:flutter/material.dart';
 class CategoryItem extends StatelessWidget {
   final String image;
   final String text;
+  var width;
+  var height;
   CategoryItem({this.image,this.text});
   @override
   Widget build(BuildContext context) {
+
+    width = MediaQuery.of(context).size.width;
+    height = MediaQuery.of(context).size.width;
+
     return Container(
-        margin: EdgeInsets.all(5),
-      width: 150,
-      height: 185,
+      margin: EdgeInsets.all(5),
+      width: width * 0.46875,
+      height: height * 0.5,
       child: GestureDetector(
         onTap: (){
           print('I am tapped');
@@ -22,7 +28,7 @@ class CategoryItem extends StatelessWidget {
           color: Colors.white70,
           child: Column(
             children: [
-              Image.asset('assets/images/${image==null? 'electronics.jpg': image}' ,height: 140,),
+              Image.asset('assets/images/${image==null? 'electronics.jpg': image}' ,height: height* 0.3, width: width *0.6 ,),
               Padding(
                 padding: const EdgeInsets.only(left:20.0,bottom: 10.0,top: 5.0),
                 child: Row(

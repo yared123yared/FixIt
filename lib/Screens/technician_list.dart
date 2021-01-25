@@ -7,28 +7,16 @@ class CategoryList extends StatefulWidget {
 }
 
 class _CategoryListState extends State<CategoryList> {
+  final images =['carpenter.jpg','mechanic.png','carpenter.jpg','mechanic.png','carpenter.jpg','mechanic.png'];
+  final texts =['carpenter','mechanic','carpenter','mechanic','carpenter','mechanic'];
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      scrollDirection: Axis.vertical,
+    return GridView.count(
+      crossAxisCount: 2,
+      children: List.generate(6, (index) {
+        return CategoryItem(image: images[index],text: texts[index],);
+      }),
 
-      children: [
-        Row(
-          children: [
-            Expanded(child: CategoryItem(image: 'carpenter.jpg',text: 'Carpenter',)),
-            Expanded(child: CategoryItem(image: 'mechanic.png',text: 'Mechanic',)),
-          ],
-        ),
-        Row(
-          children: [
-            Expanded(child: CategoryItem(image: 'carpenter.jpg',text: 'Carpenter',)),
-            Expanded(child: CategoryItem(image: 'mechanic.png',text: 'Mechanic',)),          ],
-        ),
-        Row(
-          children: [
-            Expanded(child: CategoryItem(image: 'carpenter.jpg',text: 'Carpenter',)),
-            Expanded(child: CategoryItem(image: 'mechanic.png',text: 'Mechanic',)),          ],
-        ),
-      ],);
+    );
   }
 }
