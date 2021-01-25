@@ -13,12 +13,14 @@ class _ServiceListState extends State<ServiceList> {
     final texts =['mitad','electronics.','mitad','electronics','mitad','electronics'];
   @override
   Widget build(BuildContext context) {
-    return GridView.count(
-        crossAxisCount: 2,
-      children: List.generate(6, (index) {
-        return CategoryItem(image: images[index],text: texts[index] ,);
-      }),
-
+    return Padding(
+      padding: const EdgeInsets.all(3.0),
+      child: GridView.count(
+          crossAxisCount: 2,
+        children: List.generate(6, (index) {
+          return CategoryItem(image: images[index],text: texts[index] ,);
+        }),
+      ),
     );
 
 
