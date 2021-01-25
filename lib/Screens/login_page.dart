@@ -18,12 +18,25 @@ class _SignInState extends State<SignIn> {
     return Scaffold(
       key: _scaffoldKey,
       body: Builder(builder: (BuildContext context) {
-        return Column(
+        return Container(
+            decoration: BoxDecoration(
+            gradient: LinearGradient(
+            colors: <Color>[
+            Colors.deepPurple,
+            Colors.purpleAccent,
+            ],
+            stops: [ 0.0, 1.0 ],
+            begin: FractionalOffset.topCenter,
+            end: FractionalOffset.bottomCenter,
+            tileMode: TileMode.repeated)),
+
+        child: Column(
+
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             withEmailPassword(),
           ],
-        );
+        ));
       }),
     );
   }

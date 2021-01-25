@@ -26,7 +26,19 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+        body: Container(
+        decoration: BoxDecoration(
+        gradient: LinearGradient(
+        colors: <Color>[
+        Colors.deepPurple,
+        Colors.purpleAccent,
+        ],
+        stops: [ 0.0, 1.0 ],
+        begin: FractionalOffset.topCenter,
+        end: FractionalOffset.bottomCenter,
+        tileMode: TileMode.repeated)),
+
+    child: Center(
         child: Form(
             key: _formKey,
             child: Card(
@@ -84,7 +96,7 @@ class _RegisterState extends State<Register> {
               ),
             )),
       ),
-    );
+        ));
   }
 
   void _registerAccount() async {
