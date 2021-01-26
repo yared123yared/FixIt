@@ -7,8 +7,8 @@ class CategoryList extends StatefulWidget {
 }
 
 class _CategoryListState extends State<CategoryList> {
-  final images =['carpenter.jpg','mechanic.png','carpenter.jpg','mechanic.png','carpenter.jpg','mechanic.png'];
-  final texts =['carpenter','mechanic','carpenter','mechanic','carpenter','mechanic'];
+  final texts =['Builder','Mechanical Exp','Electrician','Metal Exp','Plumber','Wood Exp'];
+  final images =['civ.jpg','mec.jpg','elc.jpg','me.jpg','plu.jpg','woo.jpg'];
   @override
   Widget build(BuildContext context) {
     return GridView.count(

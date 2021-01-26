@@ -19,7 +19,7 @@ class _CustomerHomeState extends State<CustomerHome> {
   int _navIndex = 0;
   String get title{
     if (_navIndex == 0){
-      return 'Services';
+      return 'Categories';
     }else if(_navIndex ==1){
       return 'Technicians';
     }else{
