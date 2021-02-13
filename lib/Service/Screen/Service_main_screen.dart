@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../Widgets/Technicians_item.dart';
 
-import '../dummy_data.dart';
+import '../../dummy_data.dart';
 
 class ServiceMainScreen extends StatelessWidget {
    static  const routeName= "/service_screen";

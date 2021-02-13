@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../Screens/Service_main_screen.dart';
+import '../Screen/Service_main_screen.dart';
 import '../Model/Service.dart';
 
-import '../dummy_data.dart';
+import '../../dummy_data.dart';
 
 class ServiceItem extends StatelessWidget {
 
@@ -38,9 +38,9 @@ class ServiceItem extends StatelessWidget {
 
 
 
-            title: Text(selectedService[index].title,
+            title: Text(selectedService[index].ServiceName,
               style: Theme.of(context).textTheme.headline6,),
-            subtitle: Text(selectedService[index].description,),
+            subtitle: Text(selectedService[index].Description,),
             trailing: MediaQuery.of(context).size.width > 450 ? FlatButton.icon(
               textColor:Theme.of(context).errorColor,
               icon: Icon(Icons.star_border),
@@ -58,7 +58,7 @@ class ServiceItem extends StatelessWidget {
             ),
             onTap: (){
               print(this.index);
-              Navigator.pushNamed(context, ServiceMainScreen.routeName,arguments: selectedService[index].title);
+              Navigator.pushNamed(context, ServiceMainScreen.routeName,arguments: selectedService[index].ServiceName);
             },
           ),
         ),

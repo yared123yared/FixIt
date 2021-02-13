@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../Widgets/Services_item.dart';
 import 'dart:math';
-import '../dummy_data.dart';
+import '../../dummy_data.dart';
 import '../Model/Service.dart';
 
 

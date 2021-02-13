@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_group_project/Screens/technician_list.dart';
+import 'file:///C:/Users/yared/AndroidStudioProjects/flutter_app4/flutter_group_project/lib/Service/Screen/technician_list.dart';
 import 'package:flutter_group_project/Screens/drawer.dart';
-import 'package:flutter_group_project/Screens/service_lists.dart';
+import 'file:///C:/Users/yared/AndroidStudioProjects/flutter_app4/flutter_group_project/lib/Service/Screen/service_lists.dart';
 
 class CustomerHome extends StatefulWidget {
   @override
