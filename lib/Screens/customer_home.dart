@@ -19,12 +19,14 @@ class _CustomerHomeState extends State<CustomerHome> {
   int _navIndex = 0;
   String get title{
     if (_navIndex == 0){
-      return 'Services';
-    }else{
+      return 'Categories';
+    }else if(_navIndex ==1){
       return 'Technicians';
+    }else{
+      return 'History';
     }
   }
-
+Color colors = Color(0xfff0e0df);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,35 +35,30 @@ class _CustomerHomeState extends State<CustomerHome> {
         elevation: 0.0,
         centerTitle: true,
       ),
-      backgroundColor: Colors.white70,
+      backgroundColor:colors,
       body: Container(child: homeWidgets[_navIndex],),
       drawer: NavDrawer(),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _navIndex,
+      bottomNavigationBar: CurvedNavigationBar(
+        backgroundColor: Colors.transparent,
+        color: Theme.of(context).accentColor,
         items: [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.cleaning_services_rounded),
-              label: "Services",
-              backgroundColor: Theme.of(context).textTheme.title.color,
-
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.supervised_user_circle),
-              label: 'Technicians',
-              backgroundColor: Colors.purple
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.history),
-              label: 'History',
-              backgroundColor: Colors.purple
-          )
+          Icon(Icons.cleaning_services_rounded,color: Colors.white,size: 25.0,),
+          Icon(Icons.supervised_user_circle,color: Colors.white,size: 25.0),
+          Icon(Icons.history,color: Colors.white,size: 25.0),
         ],
-        onTap: (index){
-          setState(() {
-            _navIndex = index;
-          });
-        },
-      ),
+    height: 50,
+    animationDuration: Duration(
+      microseconds: 500
+    ),
+    animationCurve: Curves.bounceOut,
+    onTap: (index){
+        setState(() {
+          _navIndex = index;
+        });
+      },
+
+      )
     );
   }
 }
+
