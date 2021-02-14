@@ -27,7 +27,8 @@ class _FirebaseAuthFGPState extends State<FirebaseAuthFGP> {
 
             child: Center(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,           children: <Widget>[
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
                 Image.asset('Assets/assets/fixit.png',
                   height: MediaQuery.of(context).size.height * 0.4,
                   width: MediaQuery.of(context).size.width * 0.4,
@@ -47,7 +48,8 @@ class _FirebaseAuthFGPState extends State<FirebaseAuthFGP> {
                           color: Colors.orange,
                           splashColor: Colors.blue,
                           shape: RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(18.0),                      side: BorderSide(color: Colors.black)),
+                              borderRadius: new BorderRadius.circular(18.0),
+                              side: BorderSide(color: Colors.black)),
                           child: Text("Sign In",
                           style: TextStyle(
                               color: Colors.white,
@@ -62,7 +64,8 @@ class _FirebaseAuthFGPState extends State<FirebaseAuthFGP> {
                           color: Colors.orange,
                           splashColor: Colors.blue,
                           shape: RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(18.0),                      side: BorderSide(color: Colors.black)),
+                              borderRadius: new BorderRadius.circular(18.0),
+                              side: BorderSide(color: Colors.black)),
                           child: Text("Register",
                             style: TextStyle(
                               color: Colors.white,
@@ -86,6 +89,7 @@ Center(
             ),    ));
 
   }
+
 
   void _pushPage(BuildContext context, Widget page) {
     Navigator.of(context).push(
