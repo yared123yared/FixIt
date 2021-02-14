@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_group_project/FirebaseAuthFGP.dart';
 
+import 'Screens/login_page.dart';
+
 
 Future<void >main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,9 +16,8 @@ class MyApp extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: FirebaseAuthFGP(),
+      home: SignIn(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
-
