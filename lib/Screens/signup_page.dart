@@ -14,6 +14,7 @@ class _RegisterState extends State<Register> {
   bool ispassshow = false;
   bool _rememberme = false;
   final _myemailController = TextEditingController();
+  final _mynameController = TextEditingController();
   final _myPasswordController = TextEditingController();
 
   //String _password, _email;
@@ -21,6 +22,7 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
+    var asd=17.50;
     return Scaffold(
 
 
@@ -49,29 +51,47 @@ class _RegisterState extends State<Register> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
+                          SizedBox(
+                              width: MediaQuery.of(context).size.width*0.5,
+                              height: MediaQuery.of(context).size.height*0.05),
                           Text(
-                            "Flutter",
+                            'Fix It',
+                            textAlign: TextAlign.center,
                             style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold),
+                                fontWeight: FontWeight.bold,
+                                fontSize: displayHeight(context) * 0.06,
+                                color: Colors.white
+                            ),
                           ),
-                          CircleAvatar(
-                              backgroundColor: Colors.white,
-                              radius: 50,
-                              child: FlutterLogo(
-                                size: 40,
-                              )),
+                          Container(
+                            color: Colors.transparent,
+                            height: MediaQuery.of(context).size.height/3.5,
+                            width: MediaQuery.of(context).size.width/3.5 ,
+                            child:new Image.asset(
+                              'Assets/assets/fixit.png',
+                              // width: 600.0,
+                              // height: 240.0,
+                              //fit: BoxFit.cover,
+                            ),
+                          ),
                           Padding(
                             padding: const EdgeInsets.only(right: 22),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                Text(
-                                  "Login",
-                                  style:
-                                  TextStyle(color: Colors.white, fontSize: 20),
-                                )
+                                Container(
+                                  color: Colors.transparent,
+                                  width: displayHeight(context) * 0.25,
+                                  child: Text(
+                                    'Sign Up',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: displayWidth(context) * 0.03,
+                                        color: Colors.white
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
                           )
@@ -87,7 +107,37 @@ class _RegisterState extends State<Register> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Material(
+                            SizedBox(
+
+                                height: MediaQuery.of(context).size.height*0.05,
+                                child: Material(
+                                  elevation: 6.0,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(40)),
+                                  child: TextField(
+                                    controller: _mynameController,
+                                    keyboardType: TextInputType.emailAddress,
+                                    textInputAction: TextInputAction.next,
+                                    onEditingComplete: () =>
+                                        FocusScope.of(context).nextFocus(),
+                                    style: TextStyle(
+                                        fontSize: asd,
+                                        color: Colors.grey),
+                                    decoration: InputDecoration(
+                                      contentPadding: EdgeInsets.only(top: 14),
+                                      prefixIcon: Icon(Icons.email),
+                                      border: InputBorder.none,
+                                      hintText: "Enter Your Name ",
+                                    ),
+                                  ),
+                                )),
+                            SizedBox(
+                                width: MediaQuery.of(context).size.width*0.5,
+                                height: MediaQuery.of(context).size.height*0.01),
+                            SizedBox(
+
+                                height: MediaQuery.of(context).size.height*0.05,
+                            child: Material(
                               elevation: 6.0,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(40)),
@@ -97,134 +147,99 @@ class _RegisterState extends State<Register> {
                                 textInputAction: TextInputAction.next,
                                 onEditingComplete: () =>
                                     FocusScope.of(context).nextFocus(),
-                                style: TextStyle(fontSize: 18, color: Colors.grey),
+                                style: TextStyle(fontSize: asd, color: Colors.grey),
                                 decoration: InputDecoration(
                                   contentPadding: EdgeInsets.only(top: 14),
                                   prefixIcon: Icon(Icons.email),
                                   border: InputBorder.none,
-                                  hintText: "Enter the Email ",
+                                  hintText: "Enter Your Email ",
                                 ),
                               ),
-                            ),
+                            )),
                             SizedBox(
-                              height: 20,
-                            ),
-                            Material(
-                              elevation: 6.0,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(40)),
-                              child: TextField(
-                                controller: _myPasswordController,
-                                obscureText: !ispassshow,
-                                keyboardType: TextInputType.text,
-                                textInputAction: TextInputAction.done,
-                                onEditingComplete: () =>
-                                    FocusScope.of(context).unfocus(),
-                                style: TextStyle(fontSize: 18, color: Colors.grey),
-                                decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.only(top: 14),
-                                  prefixIcon: Icon(Icons.lock),
-                                  border: InputBorder.none,
-                                  suffixIcon: IconButton(
-                                    icon: Icon(ispassshow
-                                        ? Icons.visibility
-                                        : Icons.visibility_off),
-                                    onPressed: () {
-                                      setState(() {
-                                        ispassshow = !ispassshow;
-                                      });
-                                    },
+                                width: MediaQuery.of(context).size.width*0.5,
+                                height: MediaQuery.of(context).size.height*0.01),
+                            SizedBox(
+
+                                height: MediaQuery.of(context).size.height*0.05,
+                                child: Material(
+                                  elevation: 6.0,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(40)),
+                                  child: TextField(
+                                    controller: _myPasswordController,
+                                    obscureText: !ispassshow,
+                                    keyboardType: TextInputType.text,
+                                    textInputAction: TextInputAction.done,
+                                    onEditingComplete: () =>
+                                        FocusScope.of(context).unfocus(),
+                                    style: TextStyle(fontSize: asd, color: Colors.grey),
+                                    decoration: InputDecoration(
+                                      contentPadding: EdgeInsets.only(top: 14),
+                                      prefixIcon: Icon(Icons.lock),
+                                      border: InputBorder.none,
+                                      suffixIcon: IconButton(
+                                        icon: Icon(ispassshow
+                                            ? Icons.visibility
+                                            : Icons.visibility_off),
+                                        onPressed: () {
+                                          setState(() {
+                                            ispassshow = !ispassshow;
+                                          });
+                                        },
+                                      ),
+                                      hintText: "Enter Your Password ",
+                                    ),
                                   ),
-                                  hintText: "Enter the Password ",
                                 ),
-                              ),
                             ),
                             SizedBox(
-                              height: 20,
-                            ),
-                            Material(
-                              elevation: 6.0,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(40)),
-                              child: TextField(
-                                controller: _myPasswordController,
-                                obscureText: !ispassshow,
-                                keyboardType: TextInputType.text,
-                                textInputAction: TextInputAction.done,
-                                onEditingComplete: () =>
-                                    FocusScope.of(context).unfocus(),
-                                style: TextStyle(fontSize: 18, color: Colors.grey),
-                                decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.only(top: 14),
-                                  prefixIcon: Icon(Icons.lock),
-                                  border: InputBorder.none,
-                                  suffixIcon: IconButton(
-                                    icon: Icon(ispassshow
-                                        ? Icons.visibility
-                                        : Icons.visibility_off),
-                                    onPressed: () {
-                                      setState(() {
-                                        ispassshow = !ispassshow;
-                                      });
-                                    },
+                                width: MediaQuery.of(context).size.width*0.5,
+                                height: MediaQuery.of(context).size.height*0.01),
+
+                            SizedBox(
+
+                                height: MediaQuery.of(context).size.height*0.05,
+                                child: Material(
+                                  elevation: 6.0,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(40)),
+                                  child: TextField(
+                                    controller: _myemailController,
+                                    keyboardType: TextInputType.emailAddress,
+                                    textInputAction: TextInputAction.next,
+                                    onEditingComplete: () =>
+                                        FocusScope.of(context).nextFocus(),
+                                    style: TextStyle(fontSize: asd, color: Colors.grey),
+                                    decoration: InputDecoration(
+                                      contentPadding: EdgeInsets.only(top: 14),
+                                      prefixIcon: Icon(Icons.email),
+                                      border: InputBorder.none,
+                                      hintText: "Enter Your Email ",
+                                    ),
                                   ),
-                                  hintText: "Enter the Password ",
-                                ),
-                              ),
-                            ),
+                                )),
                             SizedBox(
-                              height: 20,
-                            ),
-                            Material(
-                              elevation: 6.0,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(40)),
-                              child: TextField(
-                                controller: _myPasswordController,
-                                obscureText: !ispassshow,
-                                keyboardType: TextInputType.text,
-                                textInputAction: TextInputAction.done,
-                                onEditingComplete: () =>
-                                    FocusScope.of(context).unfocus(),
-                                style: TextStyle(fontSize: 18, color: Colors.grey),
-                                decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.only(top: 14),
-                                  prefixIcon: Icon(Icons.lock),
-                                  border: InputBorder.none,
-                                  suffixIcon: IconButton(
-                                    icon: Icon(ispassshow
-                                        ? Icons.visibility
-                                        : Icons.visibility_off),
-                                    onPressed: () {
-                                      setState(() {
-                                        ispassshow = !ispassshow;
-                                      });
-                                    },
-                                  ),
-                                  hintText: "Enter the Password ",
-                                ),
-                              ),
-                            ),
+                                width: MediaQuery.of(context).size.width*0.5,
+                                height: MediaQuery.of(context).size.height*0.01),
+
+                            // Row(
+                            //   children: [
+                            //     Checkbox(
+                            //         checkColor: Colors.white,
+                            //         value: _rememberme,
+                            //         activeColor: Colors.orange,
+                            //         onChanged: (value) {
+                            //           setState(() {
+                            //             _rememberme = !_rememberme;
+                            //           });
+                            //         }),
+                            //     Text("Remember me"),
+                            //   ],
+                            // ),
                             SizedBox(
-                              height: 20,
-                            ),
-                            Row(
-                              children: [
-                                Checkbox(
-                                    checkColor: Colors.white,
-                                    value: _rememberme,
-                                    activeColor: Colors.orange,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        _rememberme = !_rememberme;
-                                      });
-                                    }),
-                                Text("Remember me"),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
+                                width: MediaQuery.of(context).size.width*0.5,
+                                height: MediaQuery.of(context).size.height*0.03),
                             // Expanded(
                             //     child: MaterialButton(
                             //       color: Colors.orange,
@@ -244,21 +259,21 @@ class _RegisterState extends State<Register> {
                             gradientbutton(),
 
                             SizedBox(
-                              height: 10,
-                            ),
+                                width: MediaQuery.of(context).size.width*0.5,
+                                height: MediaQuery.of(context).size.height*0.01),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  "Don\'t have and account ?",
+                                  "Already have an account ?",
                                   style: TextStyle(color: Colors.grey[700]),
                                 ),
                                 SizedBox(width: 10,),
                                 GestureDetector(
-                                  onTap: () => _pushPage(context, Register()),
+                                  onTap: () => _pushPage(context, SignIn()),
                                   child: new Text(
 
-                                    "Signup",
+                                    "Log in",
                                     style: TextStyle(
                                         color: Colors.blue,
                                         fontWeight: FontWeight.bold),
@@ -326,7 +341,7 @@ class _RegisterState extends State<Register> {
           width: MediaQuery.of(context).size.width * 0.75,
           child: Center(
               child: Text(
-                'Login',
+                'SIGN UP',
                 style: TextStyle(
                     color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
               )),

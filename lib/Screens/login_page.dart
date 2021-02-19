@@ -49,29 +49,47 @@ class _SignInState extends State<SignIn> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Text(
-                            "Flutter",
+                        SizedBox(
+                      width: MediaQuery.of(context).size.width*0.5,
+            height: MediaQuery.of(context).size.height*0.05),
+                      Text(
+                            'Fix It',
+                            textAlign: TextAlign.center,
                             style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold),
+                                fontWeight: FontWeight.bold,
+                                fontSize: displayHeight(context) * 0.06,
+                                color: Colors.white
+                            ),
                           ),
-                          CircleAvatar(
-                              backgroundColor: Colors.white,
-                              radius: 50,
-                              child: FlutterLogo(
-                                size: 40,
-                              )),
+                            Container(
+                                                      color: Colors.transparent,
+                                                      height: MediaQuery.of(context).size.height/3.5,
+                                                      width: MediaQuery.of(context).size.width/3.5 ,
+                                                      child:new Image.asset(
+                                                        'Assets/assets/fixit.png',
+                                                        // width: 600.0,
+                                                        // height: 240.0,
+                                                        //fit: BoxFit.cover,
+                                                      ),
+                                                    ),
                           Padding(
                             padding: const EdgeInsets.only(right: 22),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                Text(
-                                  "Login",
-                                  style:
-                                  TextStyle(color: Colors.white, fontSize: 20),
-                                )
+                              Container(
+                                  color: Colors.transparent,
+                                  width: displayHeight(context) * 0.25,
+                                  child: Text(
+                                    'Login',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: displayWidth(context) * 0.03,
+                                        color: Colors.white
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
                           )
@@ -107,8 +125,8 @@ class _SignInState extends State<SignIn> {
                               ),
                             ),
                             SizedBox(
-                              height: 20,
-                            ),
+                                width: MediaQuery.of(context).size.width*0.5,
+                                height: MediaQuery.of(context).size.height*0.01),
                             Material(
                               elevation: 6.0,
                               shape: RoundedRectangleBorder(
@@ -140,8 +158,8 @@ class _SignInState extends State<SignIn> {
                               ),
                             ),
                             SizedBox(
-                              height: 20,
-                            ),
+                                width: MediaQuery.of(context).size.width*0.5,
+                                height: MediaQuery.of(context).size.height*0.01),
                             Row(
                               children: [
                                 Checkbox(
@@ -157,8 +175,8 @@ class _SignInState extends State<SignIn> {
                               ],
                             ),
                             SizedBox(
-                              height: 20,
-                            ),
+                                width: MediaQuery.of(context).size.width*0.5,
+                                height: MediaQuery.of(context).size.height*0.01),
                             // Expanded(
                             //     child: MaterialButton(
                             //       color: Colors.orange,
@@ -178,8 +196,8 @@ class _SignInState extends State<SignIn> {
                             gradientbutton(),
 
                             SizedBox(
-                              height: 10,
-                            ),
+                                width: MediaQuery.of(context).size.width*0.5,
+                                height: MediaQuery.of(context).size.height*0.01),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -228,7 +246,10 @@ class _SignInState extends State<SignIn> {
     );
   }
   Widget gradientbutton() {
-    return InkWell(
+    return SizedBox(
+        //width: MediaQuery.of(context).size.width*0.5,
+        height: MediaQuery.of(context).size.height*0.04,
+    child: InkWell(
       splashColor: Colors.white,
       onTap: (){
         //TODO
@@ -260,12 +281,26 @@ class _SignInState extends State<SignIn> {
           width: MediaQuery.of(context).size.width * 0.75,
           child: Center(
               child: Text(
-                'Login',
+                'LOG IN',
                 style: TextStyle(
                     color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
               )),
         ),
       ),
-    );
+    ));
   }
+}
+Size displaySize(BuildContext context) {
+  debugPrint('Size = ' + MediaQuery.of(context).size.toString());
+  return MediaQuery.of(context).size;
+}
+
+double displayHeight(BuildContext context) {
+  debugPrint('Height = ' + displaySize(context).height.toString());
+  return displaySize(context).height;
+}
+
+double displayWidth(BuildContext context) {
+  debugPrint('Width = ' + displaySize(context).width.toString());
+  return displaySize(context).width;
 }
