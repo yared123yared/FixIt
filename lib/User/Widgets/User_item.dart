@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_group_project/Service/Screen/ServiceDetail.dart';
-import '../Screen/Service_main_screen.dart';
-import '../Model/Service.dart';
+import 'package:flutter_group_project/User/Screen/UserDetail.dart';
+import '../Model/User.dart';
 
 class ServiceItem extends StatelessWidget {
 
   final int index;
 
-  final List<Service> selectedService;
+  final List<User> selectedService;
   ServiceItem(this.index, this.selectedService);
-  void makeFavorite(int index){
-      print( index);
-
-
+  void makeFavorite(String email){
+      print( email );
   }
   @override
   Widget build(BuildContext context) {
@@ -37,25 +34,25 @@ class ServiceItem extends StatelessWidget {
 
 
 
-            title: Text(selectedService[index].ServiceName !=null ? selectedService[index].ServiceName : "place holder",
+            title: Text(selectedService[index].fName !=null ? (selectedService[index].fName+" "+selectedService[index].lName) : "No name yet :(",
               style: Theme.of(context).textTheme.headline6,),
-            subtitle: Text(selectedService[index].Description !=null ?selectedService[index].Description: "Place holder" ,),
+            subtitle: Text(selectedService[index].role !=null ?selectedService[index].role: "No role yet :(" ,),
             trailing: MediaQuery.of(context).size.width > 450 ? FlatButton.icon(
               textColor:Theme.of(context).errorColor,
               icon: Icon(Icons.delete_forever,color: Theme.of(context).errorColor,),
-              onPressed: ()=>makeFavorite(selectedService[index].id),
-              label:Text("Favorite"),
+              onPressed: ()=>makeFavorite(selectedService[index].email),
+              label:Text("Give Role"),
 
 
 
 
             ): IconButton(
-                icon: Icon(Icons.star_border,color: Theme.of(context).errorColor,),
-                onPressed: ()=>makeFavorite(selectedService[index].id)
+                icon: Icon(Icons.edit,color: Theme.of(context).errorColor,),
+                onPressed: ()=>makeFavorite(selectedService[index].email)
 
 
             ),
-            onTap: () => Navigator.of(context).pushNamed(ServiceDetail.routeName, arguments:selectedService[index]),
+            onTap: () => Navigator.of(context).pushNamed(UserDetail.routeName, arguments:selectedService[index]),
           ),
 //            onTap: (){
 //              print(this.index);

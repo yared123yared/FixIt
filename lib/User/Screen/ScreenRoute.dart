@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_group_project/Service/Screen/AddUpdateService.dart';
-import 'package:flutter_group_project/Service/Service.dart';
+import 'package:flutter_group_project/Service/Model/models.dart';
+import 'package:flutter_group_project/Service/Screen/ServiceDetail.dart';
+import 'package:flutter_group_project/User/Model/User.dart';
+import 'package:flutter_group_project/User/Screen/User_main_screen.dart';
+
+import 'AddUpdateUser.dart';
 
 
-class ServiceAppRoute {
+class UserAppRoute {
   static Route generateRoute(RouteSettings settings) {
     if (settings.name == '/') {
       return MaterialPageRoute(builder: (context) => CategoryMainScreen());
     }
 
-    if (settings.name == AddUpdateService.routeName) {
-      ServiceArgument args = settings.arguments;
+    if (settings.name == AddUpdateUser.routeName) {
+      UserArgument args = settings.arguments;
       return MaterialPageRoute(
-          builder: (context) => AddUpdateService(
+          builder: (context) => AddUpdateUser(
             args: args,
           ));
     }
@@ -29,8 +33,8 @@ class ServiceAppRoute {
   }
 }
 
-class ServiceArgument {
-  final Service service;
+class UserArgument {
+  final User user;
   final bool edit;
-  ServiceArgument({this.service, this.edit});
+  UserArgument({this.user, this.edit});
 }
