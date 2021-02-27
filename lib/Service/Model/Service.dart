@@ -37,13 +37,13 @@ class Service extends Equatable{
   factory Service.fromJson(Map<String, dynamic> json) {
     return Service(
       id: json['serviceId'],
-      ServiceName: json['ServiceName'],
+      ServiceName: json['serviceName'],
       imageUrl: json['imageUrl'],
-      Description: json['Description'],
-      Category: json['Category'],
-      InitialPrice: json['InitialPrice'],
-      IntermediatePrice: json['IntermediatePrice'],
-      AdvancedPrice: json['AdvancedPrice'],
+      Description: json['description'],
+      Category: json['category'],
+      InitialPrice: json['initialPrice'],
+      IntermediatePrice: json['intermediatePrice'],
+      AdvancedPrice: json['advancedPrice'],
     );
   }
 

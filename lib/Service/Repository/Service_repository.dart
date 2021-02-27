@@ -13,6 +13,7 @@ class ServiceRepository {
   }
 
   Future<List<Service>> getServices() async {
+    print("This is the getService method");
     return await dataProvider.getServices();
   }
 

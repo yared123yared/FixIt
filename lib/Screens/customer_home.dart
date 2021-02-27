@@ -38,26 +38,46 @@ Color colors = Color(0xfff0e0df);
       backgroundColor:colors,
       body: Container(child: homeWidgets[_navIndex],),
       drawer: NavDrawer(),
-      bottomNavigationBar: CurvedNavigationBar(
-        backgroundColor: Colors.transparent,
-        color: Theme.of(context).accentColor,
-        items: [
-          Icon(Icons.cleaning_services_rounded,color: Colors.white,size: 25.0,),
-          Icon(Icons.supervised_user_circle,color: Colors.white,size: 25.0),
-          Icon(Icons.history,color: Colors.white,size: 25.0),
-        ],
-    height: 50,
-    animationDuration: Duration(
-      microseconds: 500
-    ),
-    animationCurve: Curves.bounceOut,
-    onTap: (index){
-        setState(() {
-          _navIndex = index;
-        });
-      },
-
+      floatingActionButton: getFloatingButton(context),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomAppBar(
+        color: Theme.of(context).primaryColor,
+        shape: CircularNotchedRectangle(),
+        child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              IconButton(
+                icon: Icon(Icons.search),
+                color: Colors.white,
+                onPressed: (){
+                  setState(() {
+                    _navIndex = 1;
+                  });
+                },
+              ),
+              IconButton(
+                icon: Icon(Icons.note),
+                color: Colors.white,
+                onPressed: () {
+                  print("the note icon button have been clicked");
+                },
+              )
+            ]),
       )
+
+    );
+  }
+  Widget getFloatingButton(BuildContext context) {
+    return FloatingActionButton(
+      backgroundColor: Theme.of(context).primaryColor,
+      foregroundColor: Colors.white,
+      onPressed: () {
+        // this is the home optiion
+        print('welcome to the home');
+      },
+      tooltip: "Home",
+      child: Icon(Icons.home),
     );
   }
 }

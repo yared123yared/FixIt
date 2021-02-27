@@ -1,27 +1,81 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_group_project/Screens/Map_screen.dart';
-import 'package:flutter_group_project/Screens/Technician_detail_screen.dart';
-import 'Screens/Category_main_screen.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_group_project/FirebaseAuthFGP.dart';
-
-// void main() => runApp(MyApp());
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_group_project/Service/Bloc/bloc.dart';
+import 'package:flutter_group_project/Service/Repository/repository.dart';
+import 'package:flutter_group_project/bloc_observer.dart';
 
 
-Future<void >main() async{
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(MyApp());
+
+
+import 'package:http/http.dart' as http;
+
+import 'Service/Data_provider/data_provider.dart';
+import 'Service/Screen/screens.dart';
+
+void main()
+{
+  Bloc.observer = SimpleBlocObserver();
+  ServiceDataProvider serviceDataProvider=new ServiceDataProvider(httpClient: http.Client(),);
+  final ServiceRepository serviceRepository = ServiceRepository(
+    dataProvider:serviceDataProvider
+  );
+
+  runApp(
+    FixIt(serviceRepository: serviceRepository),
+  );
 }
-class _MyAppState extends State<MyHomePage> {
+
+
+
+
+class FixIt extends StatelessWidget {
+  final ServiceRepository serviceRepository;
+
+  FixIt({@required this.serviceRepository})
+      : assert(serviceRepository != null);
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider<ServiceBloc>(
+            create: (_) => ServiceBloc(serviceRepository: this.serviceRepository)
+              ..add(ServiceLoad()),
+          ),
+
+        ],
+
+      child: MyApp(),
+    );
+    /*
+    return RepositoryProvider.value(
+      value: this.courseRepository,
+      child: BlocProvider(
+        create: (context) => CourseBloc(courseRepository: this.courseRepository)
+          ..add(CourseLoad()),
+        child: MaterialApp(
+          title: 'Course App',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+          ),
+          onGenerateRoute: CourseAppRoute.generateRoute,
+        ),
+      ),
+    );
+    */
+  }
+}
+
+
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'DeliMeals',
       theme: ThemeData(
-          primarySwatch: Colors.purple,
-          accentColor: Colors.amber,
+          primarySwatch: Colors.amber,
+          accentColor: Colors.purple,
           canvasColor: Color.fromRGBO(225, 254, 229, 1),
           fontFamily: 'Raleway',
           textTheme: ThemeData.light().textTheme.copyWith(
@@ -32,16 +86,10 @@ class _MyAppState extends State<MyHomePage> {
                 color: Color.fromRGBO(20, 31, 51, 1),
               ),
               headline6:
-                  TextStyle(fontSize: 24, fontFamily: 'RobotoCondensed'))),
-      initialRoute: '/techinician_detail',
-      routes: {
-        '/': (ctx) => CategoryMainScreen(),
-        // '/customer': (ctx) => CustomerMainScreen(),
-        // '/customerr': (ctx) => CustomerMainScreen(),
-        // '/customerrd': (ctx) => CustomerMainScreen(),
-        '/techinician_detail': (ctx) => TechnicianDetail(),
-        '/goto_map': (ctx) => MapScreen(),
-      },
+              TextStyle(fontSize: 24, fontFamily: 'RobotoCondensed'))),
+
+
+      onGenerateRoute: ServiceAppRoute.generateRoute,
       onUnknownRoute: (settings) {
         return MaterialPageRoute(builder: (ctx) => CategoryMainScreen());
       },
@@ -49,30 +97,9 @@ class _MyAppState extends State<MyHomePage> {
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
 
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('DeliMeals'),
-      ),
-      body: Center(
-        child: Text('Navigation Time!'),
-      ),
-    );
-  }
-}
-class MyApp extends StatelessWidget{
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: FirebaseAuthFGP(),
-      debugShowCheckedModeBanner: false,
-    );
-  }
-}
+
+//
+//
+// this is the previoud main.dart file to be updated soon
+

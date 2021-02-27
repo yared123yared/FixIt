@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_group_project/Service/Screen/ServiceDetail.dart';
 import '../Screen/Service_main_screen.dart';
 import '../Model/Service.dart';
 
@@ -38,12 +39,12 @@ class ServiceItem extends StatelessWidget {
 
 
 
-            title: Text(selectedService[index].ServiceName,
+            title: Text(selectedService[index].ServiceName !=null ? selectedService[index].ServiceName : "place holder",
               style: Theme.of(context).textTheme.headline6,),
-            subtitle: Text(selectedService[index].Description,),
+            subtitle: Text(selectedService[index].Description !=null ?selectedService[index].Description: "Place holder" ,),
             trailing: MediaQuery.of(context).size.width > 450 ? FlatButton.icon(
               textColor:Theme.of(context).errorColor,
-              icon: Icon(Icons.star_border),
+              icon: Icon(Icons.delete_forever,color: Theme.of(context).errorColor,),
               onPressed: ()=>makeFavorite(selectedService[index].id),
               label:Text("Favorite"),
 
@@ -56,14 +57,16 @@ class ServiceItem extends StatelessWidget {
 
 
             ),
-            onTap: (){
-              print(this.index);
-              Navigator.pushNamed(context, ServiceMainScreen.routeName,arguments: selectedService[index].ServiceName);
-            },
+            onTap: () => Navigator.of(context).pushNamed(ServiceDetail.routeName, arguments:selectedService[index]),
+          ),
+//            onTap: (){
+//              print(this.index);
+//              Navigator.pushNamed(context, ServiceMainScreen.routeName,arguments: selectedService[index].ServiceName);
+//            },
           ),
         ),
 
-      ),
+
     );
   }
 }

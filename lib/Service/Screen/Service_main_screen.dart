@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_group_project/Service/Model/models.dart';
 import '../Widgets/Technicians_item.dart';
 
 import '../../dummy_data.dart';
@@ -12,12 +13,12 @@ class ServiceMainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final serviceTitle=ModalRoute.of(context).settings.arguments as String;
+    final service=ModalRoute.of(context).settings.arguments as Service;
 
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(serviceTitle),
+        title: Text(service.ServiceName),
       ),
       body: ListView.builder(
         itemCount: DUMMY_TECHNICIANS.length,
