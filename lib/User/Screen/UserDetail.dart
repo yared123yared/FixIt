@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_group_project/Service/Bloc/Service_bloc.dart';
 import 'package:flutter_group_project/User/Bloc/User_event.dart';
 import 'package:flutter_group_project/User/Bloc/bloc.dart';
 import 'package:flutter_group_project/User/Model/User.dart';
@@ -20,7 +19,7 @@ class UserDetail extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('${(this.user.fName+""+this.user.lName)}'),
+        title: Text('${(this.user.fName+""+this.user.phone)}'),
         actions: [
           IconButton(
             icon: Icon(Icons.edit),
@@ -58,7 +57,7 @@ class UserDetail extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            Text('Description: ${this.user.lName}',style: TextStyle(
+            Text('Description: ${this.user.phone}',style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
             ),),

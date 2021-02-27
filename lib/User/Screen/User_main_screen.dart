@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_group_project/Service/Bloc/bloc.dart';
-import 'package:flutter_group_project/Service/Screen/AddUpdateService.dart';
-import 'package:flutter_group_project/Service/Screen/screens.dart';
+import 'package:flutter_group_project/User/Bloc/User_bloc.dart';
+import 'package:flutter_group_project/User/Bloc/User_state.dart';
+import 'package:flutter_group_project/User/Screen/AddUpdateUser.dart';
+import 'package:flutter_group_project/User/Screen/ScreenRoute.dart';
+import 'package:flutter_group_project/User/Screen/UserDetail.dart';
 import '../../dummy_data.dart';
 import 'dart:math';
 
@@ -117,17 +119,17 @@ class CategoryMainScreen extends StatelessWidget {
 //           ingredient
                       buildSectionTitle(context, 'Services'),
 
-        BlocBuilder<ServiceBloc, ServiceState>(
+        BlocBuilder<UserBloc, UserState>(
           builder: (_, state) {
-    if (state is ServiceOperationFailure) {
+    if (state is UserOperationFailure) {
     return Text('Could not do Service  operation');
     }
-    if (state is ServicesLoadSuccess) {
-    final services = state.services;
-    print("This is the comming service _______________+++++++++++++++++$services");
+    if (state is UserLoadSuccess) {
+    final user = state.user;
+    print("This is the comming user _______________+++++++++++++++++$user");
 
     return buildContainer(context, ListView.builder(
-    itemCount: services.length,
+    itemCount: user.length,
     itemBuilder: (ctx, index) =>
     Column(
     children: [
@@ -146,14 +148,14 @@ class CategoryMainScreen extends StatelessWidget {
         child: Center(
           child: ListTile(
             leading: CircleAvatar(
-              backgroundImage: AssetImage('Assets/Images/${services[index].imageUrl}'),
+              backgroundImage: AssetImage('Assets/Images/${user[index].imageUrl}'),
             ),
 
 
 
-            title: Text(services[index].ServiceName !=null ? services[index].ServiceName : "place holder",
+            title: Text(user[index].email !=null ? user[index].email : "place holder",
               style: Theme.of(context).textTheme.headline6,),
-            subtitle: Text(services[index].Description !=null ?services[index].Description: "Place holder" ,),
+            subtitle: Text(user[index].fName !=null ?user[index].fName: "Place holder" ,),
             trailing: MediaQuery.of(context).size.width > 450 ? FlatButton.icon(
               textColor:Theme.of(context).errorColor,
               icon: Icon(Icons.delete_forever,color: Theme.of(context).errorColor,),
@@ -168,7 +170,7 @@ class CategoryMainScreen extends StatelessWidget {
 
 
             ),
-            onTap: () => Navigator.of(context).pushNamed(ServiceDetail.routeName, arguments:services[index]),
+            onTap: () => Navigator.of(context).pushNamed(UserDetail.routeName, arguments:user[index]),
           ),
 //            onTap: (){
 //              print(this.index);
@@ -194,8 +196,8 @@ class CategoryMainScreen extends StatelessWidget {
               ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.of(context).pushNamed(
-          AddUpdateService.routeName,
-          arguments: ServiceArgument(edit: false),
+          AddUpdateUser.routeName,
+          arguments: UserArgument(edit: false),
         ),
         child: Icon(Icons.add),
       ),

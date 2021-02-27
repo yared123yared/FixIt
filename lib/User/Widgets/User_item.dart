@@ -34,7 +34,7 @@ class ServiceItem extends StatelessWidget {
 
 
 
-            title: Text(selectedService[index].fName !=null ? (selectedService[index].fName+" "+selectedService[index].lName) : "No name yet :(",
+            title: Text(selectedService[index].fName !=null ? (selectedService[index].fName+" "+selectedService[index].phone) : "No name yet :(",
               style: Theme.of(context).textTheme.headline6,),
             subtitle: Text(selectedService[index].role !=null ?selectedService[index].role: "No role yet :(" ,),
             trailing: MediaQuery.of(context).size.width > 450 ? FlatButton.icon(

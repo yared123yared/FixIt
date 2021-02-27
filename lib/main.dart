@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_group_project/FirebaseAuthFGP.dart';
 
 import 'Screens/login_page.dart';
+import 'User/Screen/User_main_screen.dart';
 
 
 Future<void >main() async{
@@ -16,7 +17,8 @@ class MyApp extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: SignIn(),
+       home: SignIn(),
+      // home: CategoryMainScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

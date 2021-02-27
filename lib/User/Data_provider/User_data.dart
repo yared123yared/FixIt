@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_group_project/Service/Model/Service.dart';
 import 'package:flutter_group_project/User/Model/models.dart';
-import 'package:http/http.dart';
 import 'package:meta/meta.dart';
 import 'package:http/http.dart' as http;
 
@@ -20,11 +18,11 @@ class UserDataProvider {
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, dynamic>{
-        "serviceName": user.email,
-        "description": user.fName,
-        "category": user.lName,
-        "initialPrice": user.password,
-        "intermediatePrice": user.role
+        "FullName": user.fName,
+        "Email": user.email,
+        "Password": user.password,
+        "Phone": user.phone,
+        "Role": "USER"
       }),
     );
 
@@ -54,8 +52,9 @@ class UserDataProvider {
     try {
       final response = await http.get('http://192.168.137.1:4000/User/$email');
       if (response.statusCode == 200) {
-        final user = jsonDecode(response.body) as List;
-        return user.map((user) => User.fromJson(user)).toList().first;
+        // final user = jsonDecode(response.body) as List;
+        // return user.map((user) => User.fromJson(user)).toList().first;
+        return User.fromJson(jsonDecode(response.body));
       } else {
         throw Exception('Failed to load User');
       }
@@ -69,7 +68,7 @@ class UserDataProvider {
 
   Future<void> deleteUser(String email) async {
     print("This is the delete method");
-    print("email of service to be deleted $email");
+    print("email of service to be deleted : $email");
 
     final http.Response response = await http.delete(
       'http://192.168.137.1:4000/User/$email',
@@ -90,11 +89,11 @@ class UserDataProvider {
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, dynamic>{
-        "serviceName": user.email,
-        "description": user.fName,
-        "category": user.lName,
-        "initialPrice": user.password,
-        "intermediatePrice": user.role
+        "FullName": user.fName,
+        "Email": user.email,
+        "Password": user.password,
+        "Phone": user.phone,
+        "Role": user.role
       }),
     );
 

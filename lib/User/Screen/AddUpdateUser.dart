@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_group_project/Service/Screen/screens.dart';
-import 'package:flutter_group_project/Service/Service.dart';
 import 'package:flutter_group_project/User/Bloc/bloc.dart';
 import 'package:flutter_group_project/User/Model/models.dart';
 import 'package:flutter_group_project/User/Screen/ScreenRoute.dart';
+import 'package:flutter_group_project/User/Screen/User_main_screen.dart';
 
 
 
@@ -64,7 +63,7 @@ class _AddUpdateUserState extends State<AddUpdateUser> {
                   }),
               TextFormField(
                   initialValue: widget.args.edit
-                      ? widget.args.user.lName
+                      ? widget.args.user.phone
                       : '',
                   validator: (value) {
                     if (value.isEmpty) {
@@ -108,7 +107,7 @@ class _AddUpdateUserState extends State<AddUpdateUser> {
                         User(
                           email: this._user["email"],
                           fName: this._user["fName"],
-                          lName: this._user["lName"],
+                          phone: this._user["lName"],
                           password: this._user["password"],
                           imageUrl: 'this._user["intermediatePrice"]',
                           role: 'this._user["advancedPrice"]',
@@ -119,7 +118,7 @@ class _AddUpdateUserState extends State<AddUpdateUser> {
 
                           email: this._user["email"],
                           fName: this._user["fName"],
-                          lName: this._user["lName"],
+                          phone: this._user["lName"],
                           password: this._user["password"],
                           imageUrl: 'this._user["intermediatePrice"]',
                           role: 'this._user["advancedPrice"]',

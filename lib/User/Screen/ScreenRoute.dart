@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_group_project/Service/Model/models.dart';
-import 'package:flutter_group_project/Service/Screen/ServiceDetail.dart';
 import 'package:flutter_group_project/User/Model/User.dart';
+import 'package:flutter_group_project/User/Screen/UserDetail.dart';
 import 'package:flutter_group_project/User/Screen/User_main_screen.dart';
 
 import 'AddUpdateUser.dart';
@@ -21,11 +20,11 @@ class UserAppRoute {
           ));
     }
 
-    if (settings.name == ServiceDetail.routeName) {
-      Service service = settings.arguments;
+    if (settings.name == UserDetail.routeName) {
+      User user = settings.arguments;
       return MaterialPageRoute(
-          builder: (context) => ServiceDetail(
-            service: service,
+          builder: (context) => UserDetail(
+            user: user,
           ));
     }
 

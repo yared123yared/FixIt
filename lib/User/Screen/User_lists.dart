@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_group_project/Widgets/category_item.dart';
-class ServiceList extends StatefulWidget {
+class UserList extends StatefulWidget {
 
 
 
   @override
-  _ServiceListState createState() => _ServiceListState();
+  _UserListState createState() => _UserListState();
 }
 
-class _ServiceListState extends State<ServiceList> {
+class _UserListState extends State<UserList> {
   final texts =['Building','Mechanical','Electrical','Metal','Plumbing','Wood'];
   final images =['building.jpg','mechanical.jpg','electric.jpg','metal.jpg','plumbing.png','wood.jpg'];
   @override
