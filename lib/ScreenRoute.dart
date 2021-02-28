@@ -8,7 +8,10 @@ class ServiceAppRoute {
     switch(settings.name){
       case '/':
 //        /
-//        do the initial route here
+        return MaterialPageRoute(
+            builder: (context) => AdminServiceMainPage(
+//              the arguments will pass here
+            ));
         break;
       case AdminMainPage.routeName:
 //        /admin
@@ -71,31 +74,68 @@ class ServiceAppRoute {
         break;
       case UserMain.routeName:
 //        /user
+        return MaterialPageRoute(
+            builder: (context) => UserMain(
+//              the arguments will pass here
+            ));
         break;
       case UserJobMain.routeName:
 //        /user/job
+        return MaterialPageRoute(
+            builder: (context) => UserJobMain(
+//              the arguments will pass here
+            ));
       break;
       case UserJobDetail.routeName:
 //        /user/job/detail
+        return MaterialPageRoute(
+            builder: (context) => UserJobDetail(
+//              the arguments will pass here
+            ));
         break;
       case UserCreateJob.routeName:
 //        /user/job/create
+        return MaterialPageRoute(
+            builder: (context) => UserCreateJob(
+//              the arguments will pass here
+            ));
         break;
       case UserCategoryMain.routeName:
 //        /user/category
+        return MaterialPageRoute(
+            builder: (context) => UserCategoryMain(
+//              the arguments will pass here
+            ));
+
         break;
       case UserServiceMain.routeName:
 //        /user/category/service
+        return MaterialPageRoute(
+            builder: (context) => UserServiceMain(
+//              the arguments will pass here
+            ));
         break;
       case UserServiceDetail.routeName:
 //        /user/category/service/detail
+        return MaterialPageRoute(
+            builder: (context) => UserServiceDetail(
+//              the arguments will pass here
+            ));
         break;
-      case '/technician/request':
+      case TechnicianRequestMain.rotueName:
+//        /technician
+        return MaterialPageRoute(
+            builder: (context) => TechnicianRequestMain(
+//              the arguments will pass here
+            ));
+        break;
+      case TechnicianRequestDetail.routeName:
+        return MaterialPageRoute(
+            builder: (context) => TechnicianRequestDetail(
+//              the arguments will pass here
+            ));
 //        /technician
         break;
-      case '/technician/request/detail':
-//        /technician
-        break;
 
 
 
@@ -103,31 +143,7 @@ class ServiceAppRoute {
     }
 
 
-
-
-    if (settings.name == '/') {
-//      initial route
-//      return MaterialPageRoute(builder: (context) => CategoryMainScreen());
-
-    }
-
-    if (settings.name == AddUpdateService.routeName) {
-      ServiceArgument args = settings.arguments;
-      return MaterialPageRoute(
-          builder: (context) => AddUpdateService(
-            args: args,
-          ));
-    }
-
-    if (settings.name == ServiceDetail.routeName) {
-      Service service = settings.arguments;
-      return MaterialPageRoute(
-          builder: (context) => ServiceDetail(
-            service: service,
-          ));
-    }
-
-    return MaterialPageRoute(builder: (context) => CategoryMainScreen());
+//    return MaterialPageRoute(builder: (context) => CategoryMainScreen());
   }
 }
 
@@ -139,3 +155,4 @@ class ServiceArgument {
 class AdminArgument {
 //  Login in admin object
 }
+
