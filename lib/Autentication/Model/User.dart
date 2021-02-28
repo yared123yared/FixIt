@@ -7,7 +7,6 @@ import 'package:equatable/equatable.dart';
 @immutable
 class User extends Equatable{
 
-  final int UserId;
   final String email;
   final String fName;
   final String phone;
@@ -17,7 +16,6 @@ class User extends Equatable{
 
 
   const User({
-    this.UserId,
     @required this.email,
     @required this.fName,
     @required this.phone,

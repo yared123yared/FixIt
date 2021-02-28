@@ -1,4 +1,4 @@
-import 'package:flutter_group_project/User/Data_provider/User_data.dart';
+import 'package:flutter_group_project/Autentication/Model/User.dart';
 import 'package:meta/meta.dart';
 
 import '../User.dart';

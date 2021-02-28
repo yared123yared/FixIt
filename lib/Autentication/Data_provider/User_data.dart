@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_group_project/User/Model/models.dart';
+import 'package:flutter_group_project/Autentication/Model/User.dart';
 import 'package:meta/meta.dart';
 import 'package:http/http.dart' as http;
 
@@ -22,6 +22,7 @@ class UserDataProvider {
         "Email": user.email,
         "Password": user.password,
         "Phone": user.phone,
+        "Picture":"Assets/assets/fixit.png",
         "Role": "USER"
       }),
     );

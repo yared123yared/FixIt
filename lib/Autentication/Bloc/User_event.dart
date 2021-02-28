@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_group_project/User/Model/User.dart';
+import 'package:flutter_group_project/Autentication/Model/User.dart';
 
 abstract class UserEvent extends Equatable {
   const UserEvent();

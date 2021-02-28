@@ -30,8 +30,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       yield UserLoading();
 
       try {
-        List<User> user;
-        user.first = await userRepository.getUser(event.email);
+        User user;
+        user= await userRepository.getUser(event.email);
         print("This is the User $user");
         yield UserLoadSuccess(user);
       } catch (_) {
@@ -43,8 +43,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     if (event is UserCreate) {
       try {
         await userRepository.createUser(event.user);
-        final user = await userRepository.getUsers();
-        yield UsersLoadSuccess(user);
+        final user= await userRepository.getUser(event.user.email);
+        yield UserLoadSuccess(user);
       } catch (_) {
         yield UserOperationFailure();
       }

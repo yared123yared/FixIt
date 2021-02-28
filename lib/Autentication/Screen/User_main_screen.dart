@@ -1,17 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_group_project/User/Bloc/User_bloc.dart';
-import 'package:flutter_group_project/User/Bloc/User_state.dart';
-import 'package:flutter_group_project/User/Screen/AddUpdateUser.dart';
-import 'package:flutter_group_project/User/Screen/ScreenRoute.dart';
-import 'package:flutter_group_project/User/Screen/UserDetail.dart';
+import 'package:flutter_group_project/Autentication/Bloc/User_bloc.dart';
+import 'package:flutter_group_project/Autentication/Bloc/User_state.dart';
+import 'package:flutter_group_project/Autentication/Screen/AddUpdateUser.dart';
+import 'package:flutter_group_project/Autentication/Screen/ScreenRoute.dart';
+import 'package:flutter_group_project/Autentication/Screen/UserDetail.dart';
 import '../../dummy_data.dart';
 import 'dart:math';
 
 
 class CategoryMainScreen extends StatelessWidget {
-  static const routeName='/category_screen';
+  static const routeName='/users_screen';
   Widget buildSectionTitle(BuildContext context, String text){
     return  Container(
 
@@ -124,7 +124,7 @@ class CategoryMainScreen extends StatelessWidget {
     if (state is UserOperationFailure) {
     return Text('Could not do Service  operation');
     }
-    if (state is UserLoadSuccess) {
+    if (state is UsersLoadSuccess) {
     final user = state.user;
     print("This is the comming user _______________+++++++++++++++++$user");
 

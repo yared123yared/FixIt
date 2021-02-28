@@ -1,14 +1,15 @@
+import 'package:dropdown_formfield/dropdown_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_group_project/User/Bloc/bloc.dart';
-import 'package:flutter_group_project/User/Model/models.dart';
-import 'package:flutter_group_project/User/Screen/ScreenRoute.dart';
-import 'package:flutter_group_project/User/Screen/User_main_screen.dart';
+import 'package:flutter_group_project/Autentication/Bloc/bloc.dart';
+import 'package:flutter_group_project/Autentication/Model/models.dart';
+import 'package:flutter_group_project/Autentication/Screen/ScreenRoute.dart';
+import 'package:flutter_group_project/Autentication/Screen/User_main_screen.dart';
 
 
 
 class AddUpdateUser extends StatefulWidget {
-  static const routeName = 'courseAddUpdate';
+  static const routeName = 'userAddUpdate';
   final UserArgument args;
 
   AddUpdateUser({this.args});
@@ -25,7 +26,8 @@ class _AddUpdateUserState extends State<AddUpdateUser> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('${widget.args.edit ? "Edit Profile" : "Add New Course"}'),
+        //title: Text('${widget.args.edit ? "Edit Profile" : "Add New Course"}'),
+        title: Text("Edit profile"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -67,24 +69,55 @@ class _AddUpdateUserState extends State<AddUpdateUser> {
                       : '',
                   validator: (value) {
                     if (value.isEmpty) {
-                      return 'Please enter your last name';
+                      return 'Please enter your phonr name';
                     }
                     return null;
                   },
                   decoration: InputDecoration(labelText: 'lName'),
                   onSaved: (value) {
                     setState(() {
-                      this._user["lName"] = value;
+                      this._user["phone"] = value;
                     });
                   }),
 
+              DropDownFormField(
+                titleText: 'Role',
+                hintText: 'Please choose one',
+                value: this._user["role"],
+                onSaved: (value) {
+                  setState(() {
+                    this._user["role"] = value;
+                  });
+                },
+                onChanged: (value) {
+                  setState(() {
+                    this._user["role"] = value;
+                  });
+                },
+                dataSource: [
+                  {
+                    "display": "User",
+                      "value": "USER",
+                  },
+                  {
+                    "display": "Admin",
+                    "value": "ADMIN",
+                  },
+                  {
+                    "display": "Technician",
+                    "value": "TECHNICIAN",
+                  },
+                ],
+                textField: 'display',
+                valueField: 'value',
+              ),
               TextFormField(
                   initialValue: widget.args.edit
                       ? widget.args.user.password
                       : '',
                   validator: (value) {
                     if (value.isEmpty) {
-                      return 'Please enter your passowrd';
+                      return 'Please enter your password';
                     }
                     return null;
                   },
@@ -107,7 +140,7 @@ class _AddUpdateUserState extends State<AddUpdateUser> {
                         User(
                           email: this._user["email"],
                           fName: this._user["fName"],
-                          phone: this._user["lName"],
+                          phone: this._user["phone"],
                           password: this._user["password"],
                           imageUrl: 'this._user["intermediatePrice"]',
                           role: 'this._user["advancedPrice"]',
@@ -118,7 +151,7 @@ class _AddUpdateUserState extends State<AddUpdateUser> {
 
                           email: this._user["email"],
                           fName: this._user["fName"],
-                          phone: this._user["lName"],
+                          phone: this._user["phone"],
                           password: this._user["password"],
                           imageUrl: 'this._user["intermediatePrice"]',
                           role: 'this._user["advancedPrice"]',

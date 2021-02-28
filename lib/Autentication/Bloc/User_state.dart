@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_group_project/User/Model/User.dart';
+import 'package:flutter_group_project/Autentication/Model/User.dart';
 
 
 class UserState extends Equatable {
@@ -19,12 +19,12 @@ class UsersLoadSuccess extends UserState{
   List<Object> get props => [user];
 }
 class UserLoadSuccess extends UserState{
-  final List<User> user;
+  final User user;
 
-  UserLoadSuccess([this.user = const[] ]);
+  UserLoadSuccess([this.user]);
 
   @override
-  List<Object> get props => [user.first];
+  List<Object> get props => [user];
 }
 
 class UserOperationFailure extends UserState {}
