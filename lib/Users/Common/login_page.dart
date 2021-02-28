@@ -46,7 +46,7 @@ class _SignInState extends State<SignIn> {
           }
         }
           else{
-            Toast.show("Incorrect Email/password combination", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+            Toast.show("Incorrect Email/Password combination", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
           }
         }
         if(state is UserLoading){//On loading call the loading event manager UI
