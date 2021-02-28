@@ -2,16 +2,24 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_group_project/Autentication/Bloc/User_bloc.dart';
+import 'package:flutter_group_project/Autentication/Bloc/User_event.dart';
 import 'package:flutter_group_project/Autentication/Bloc/User_state.dart';
+import 'package:flutter_group_project/Autentication/Model/User.dart';
+import 'package:flutter_group_project/Autentication/Screen/AddUpdateAdmin.dart';
 import 'package:flutter_group_project/Autentication/Screen/AddUpdateUser.dart';
 import 'package:flutter_group_project/Autentication/Screen/ScreenRoute.dart';
 import 'package:flutter_group_project/Autentication/Screen/UserDetail.dart';
+import 'package:flutter_group_project/Autentication/Screen/login_page.dart';
 import '../../dummy_data.dart';
 import 'dart:math';
 
 
-class CategoryMainScreen extends StatelessWidget {
+class CategoryMainScreen extends StatelessWidget {//Main screen for the ADMIM
   static const routeName='/users_screen';
+  final User admin;
+
+
+  CategoryMainScreen({@required this.admin});
   Widget buildSectionTitle(BuildContext context, String text){
     return  Container(
 
@@ -76,33 +84,39 @@ class CategoryMainScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Category Name'),
-          actions: [
-          PopupMenuButton(
-
-    icon: Icon(Icons.refresh),
-
-    itemBuilder:(_) => [
-    PopupMenuItem(
-    child: Text('Refresh'),
-    value:(){
-
-    },
-
-
-
-    ),
-    PopupMenuItem(
-    child: Text('Show All'),
-    value: null,
-
-
-    ),
-    ]
+        title: Text('${(this.admin.fName)}'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.edit),
+            onPressed: () => Navigator.of(context).pushNamed(
+              AddUpdateAdmin.routeName,
+              arguments: UserArgument(user: this.admin, edit: true),
+            ),
+          ),
+          SizedBox(
+            width: 32,
+          ),
+          IconButton(
+              icon: Icon(Icons.delete),
+              onPressed: () {
+                BlocProvider.of<UserBloc>(context).add(UserDelete(this.admin));
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    SignIn.routeName, (route) => false);
+              }),
+          SizedBox(
+            width: 32,
+          ),
+          IconButton(
+              icon: Icon(Icons.logout),
+              onPressed: () {
+                isAuthenticated=false;
+                isAdmin=false;
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    SignIn.routeName, (route) => false);
+              }),
+        ],
       ),
-    ]
-    ),
-        body: SingleChildScrollView(
+      body: SingleChildScrollView(
                 child: Column(
                     children: [
                       Container(

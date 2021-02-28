@@ -3,7 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_group_project/Autentication/Bloc/bloc.dart';
 import 'package:flutter_group_project/Autentication/Repository/repository.dart';
+import 'package:flutter_group_project/Autentication/Screen/ScreenRoute.dart';
 import 'package:flutter_group_project/Autentication/Screen/login_page.dart';
+import 'package:flutter_group_project/Autentication/util/util.dart';
 import 'Autentication/Data_provider/User_data.dart';
 import 'bloc_observer.dart';
 import 'package:http/http.dart' as http;
@@ -30,10 +32,11 @@ class MyApp extends StatelessWidget{
     return RepositoryProvider.value(
       value: this.userRepository,
       child: BlocProvider(
-        create: (context) => UserBloc(userRepository: this.userRepository),
+        create: (context) => UserBloc(userRepository: this.userRepository,util: Util()),
 
         child: MaterialApp(
-          home: SignIn(),
+          initialRoute: "/",
+          onGenerateRoute: UserAppRoute.generateRoute,
           // home: CategoryMainScreen(),
           debugShowCheckedModeBanner: false,
         ),),

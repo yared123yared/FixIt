@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_group_project/Widgets/category_item.dart';
-class UserList extends StatefulWidget {
+class UserList extends StatefulWidget {//List of User
 
 
 

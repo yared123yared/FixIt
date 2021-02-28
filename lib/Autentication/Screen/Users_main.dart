@@ -7,18 +7,20 @@ import 'package:flutter_group_project/Autentication/Screen/AddUpdateUser.dart';
 import 'package:flutter_group_project/Autentication/Screen/ScreenRoute.dart';
 import 'package:flutter_group_project/Autentication/Screen/User_main_screen.dart';
 
+import 'login_page.dart';
 
-class UserDetail extends StatelessWidget {//To show detail of User
-  static const routeName = 'userDetail';
+
+class Users_main extends StatelessWidget {//Main page of the User
+  static const routeName = 'usersMain';
   final User user;
 
-  UserDetail({@required this.user});
+  Users_main({@required this.user});
 
   @override
+  @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      appBar: AppBar(
+        appBar: AppBar(
         title: Text('${(this.user.fName)}'),
         actions: [
           IconButton(
@@ -26,7 +28,7 @@ class UserDetail extends StatelessWidget {//To show detail of User
             onPressed: () => Navigator.of(context).pushNamed(
               AddUpdateUser.routeName,
               arguments: UserArgument(user: this.user, edit: true),
-            ),
+          ),
           ),
           SizedBox(
             width: 32,
@@ -36,47 +38,24 @@ class UserDetail extends StatelessWidget {//To show detail of User
               onPressed: () {
                 BlocProvider.of<UserBloc>(context).add(UserDelete(this.user));
                 Navigator.of(context).pushNamedAndRemoveUntil(
-                    CategoryMainScreen.routeName, (route) => false);
+                    SignIn.routeName, (route) => false);
+              }),
+          SizedBox(
+            width: 32,
+          ),
+          IconButton(
+              icon: Icon(Icons.logout),
+              onPressed: () {
+                isAuthenticated=false;
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    SignIn.routeName, (route) => false);
               }),
         ],
-      ),
-      body: Card(
-        child: Column(
-          children: [
-            ListTile(
-              title: Text('User Email: ${this.user.email}'),
-              subtitle: Text('Full Name: ${this.user.fName}'),
-            ),
-            Text(
-              'Details',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Text('Phone: ${this.user.phone}',style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),),
-            SizedBox(
-              height: 10,
-            ),
-            Text('Role: ${this.user.role}',style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            )),
-            SizedBox(
-              height: 10,
-            ),
+        ),
 
-            SizedBox(
-              height: 10,
-            ),
-
-          ],
+      body: Center(
+        child: Text(
+          "This is User ${this.user.fName}",
         ),
       ),
     );

@@ -22,14 +22,14 @@ class ServiceAppRoute {
             ));
         break;
 
-
-      case AdminServiceMainPage.routeName:
-//        /admin/service
-        return MaterialPageRoute(
-            builder: (context) => AdminServiceMainPage(
-//              the arguments will pass here
-            ));
-        break;
+//
+//       case AdminServiceMainPage.routeName:
+// //        /admin/service
+//         return MaterialPageRoute(
+//             builder: (context) => AdminServiceMainPage(
+// //              the arguments will pass here
+//             ));
+//         break;
       case AdminServiceDetail.routeName:
 //        /admin/service/detail
         return MaterialPageRoute(

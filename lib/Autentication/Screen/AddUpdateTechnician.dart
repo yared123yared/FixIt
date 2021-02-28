@@ -7,16 +7,16 @@ import 'package:flutter_group_project/Autentication/Screen/User_main_screen.dart
 
 
 
-class AddUpdateUser extends StatefulWidget {//Update page for user, Only Updates
-  static const routeName = 'userAddUpdate';
+class AddUpdateTechnician extends StatefulWidget {//Update Page for the Technician, only updates
+  static const routeName = 'technicianAddUpdate';
   final UserArgument args;
 
-  AddUpdateUser({this.args});
+  AddUpdateTechnician({this.args});
   @override
-  _AddUpdateUserState createState() => _AddUpdateUserState();
+  _AddUpdateTechnicianState createState() => _AddUpdateTechnicianState();
 }
 
-class _AddUpdateUserState extends State<AddUpdateUser> {
+class _AddUpdateTechnicianState extends State<AddUpdateTechnician> {
   final _formKey = GlobalKey<FormState>();
 
   final Map<String, dynamic> _user = {};
@@ -102,7 +102,7 @@ class _AddUpdateUserState extends State<AddUpdateUser> {
                     if (form.validate()) {
                       form.save();
                       final UserEvent event =
-                          UserUpdate(
+                      UserUpdate(
 
                         User(
                           email: this._user["email"],

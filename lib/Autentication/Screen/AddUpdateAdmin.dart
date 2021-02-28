@@ -1,3 +1,4 @@
+import 'package:dropdown_formfield/dropdown_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_group_project/Autentication/Bloc/bloc.dart';
@@ -7,16 +8,16 @@ import 'package:flutter_group_project/Autentication/Screen/User_main_screen.dart
 
 
 
-class AddUpdateUser extends StatefulWidget {//Update page for user, Only Updates
-  static const routeName = 'userAddUpdate';
+class AddUpdateAdmin extends StatefulWidget {//Add and Update page only for the Admin
+  static const routeName = 'adminAddUpdate';
   final UserArgument args;
 
-  AddUpdateUser({this.args});
+  AddUpdateAdmin({this.args});
   @override
-  _AddUpdateUserState createState() => _AddUpdateUserState();
+  _AddUpdateAdminState createState() => _AddUpdateAdminState();
 }
 
-class _AddUpdateUserState extends State<AddUpdateUser> {
+class _AddUpdateAdminState extends State<AddUpdateAdmin> {
   final _formKey = GlobalKey<FormState>();
 
   final Map<String, dynamic> _user = {};
@@ -68,16 +69,48 @@ class _AddUpdateUserState extends State<AddUpdateUser> {
                       : '',
                   validator: (value) {
                     if (value.isEmpty) {
-                      return 'Please enter your phone number';
+                      return 'Please enter your phonr name';
                     }
                     return null;
                   },
-                  decoration: InputDecoration(labelText: 'Phone'),
+                  decoration: InputDecoration(labelText: 'lName'),
                   onSaved: (value) {
                     setState(() {
                       this._user["phone"] = value;
                     });
                   }),
+
+              DropDownFormField(
+                titleText: 'Role',
+                hintText: 'Please choose one',
+                value: this._user["role"],
+                onSaved: (value) {
+                  setState(() {
+                    this._user["role"] = value;
+                  });
+                },
+                onChanged: (value) {
+                  setState(() {
+                    this._user["role"] = value;
+                  });
+                },
+                dataSource: [
+                  {
+                    "display": "User",
+                    "value": "USER",
+                  },
+                  {
+                    "display": "Admin",
+                    "value": "ADMIN",
+                  },
+                  {
+                    "display": "Technician",
+                    "value": "TECHNICIAN",
+                  },
+                ],
+                textField: 'display',
+                valueField: 'value',
+              ),
               TextFormField(
                   initialValue: widget.args.edit
                       ? widget.args.user.password
@@ -101,19 +134,29 @@ class _AddUpdateUserState extends State<AddUpdateUser> {
                     final form = _formKey.currentState;
                     if (form.validate()) {
                       form.save();
-                      final UserEvent event =
-                          UserUpdate(
+                      final UserEvent event = widget.args.edit
+                          ? UserUpdate(//If edit it will update or Creates new user
 
                         User(
                           email: this._user["email"],
                           fName: this._user["fName"],
                           phone: this._user["phone"],
                           password: this._user["password"],
-                          imageUrl: 'Assets/assets/fixit.png',
+                          imageUrl: 'this._user["intermediatePrice"]',
+                          role: this._user["role"],
+                        ),
+                      )
+                          : UserCreate(
+                        User(
+
+                          email: this._user["email"],
+                          fName: this._user["fName"],
+                          phone: this._user["phone"],
+                          password: this._user["password"],
+                          imageUrl: 'this._user["intermediatePrice"]',
                           role: this._user["role"],
                         ),
                       );
-
                       BlocProvider.of<UserBloc>(context).add(event);
                       Navigator.of(context).pushNamedAndRemoveUntil(
                           CategoryMainScreen.routeName, (route) => false);
