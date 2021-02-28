@@ -4,6 +4,10 @@ class UserJobMain extends StatelessWidget {
   static const routeName='/user/job';
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('user'),
+      ),
+    );
   }
 }

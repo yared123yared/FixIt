@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_group_project/Features/job/bloc/bloc.dart';
+import 'package:flutter_group_project/Features/job/job.dart';
+import 'package:flutter_group_project/Role/Admin/admin.dart';
+import 'package:flutter_group_project/Role/User/Job/userJobMainPage.dart';
+import 'package:flutter_group_project/Role/User/userMainPage.dart';
 import 'package:flutter_group_project/bloc_observer.dart';
 import 'package:http/http.dart' as http;
 import 'Features/Service/Service.dart';
@@ -14,8 +19,10 @@ void main()
     dataProvider:serviceDataProvider
   );
 
+  JobDataProvider jobDataProvider = JobDataProvider(httpClient: http.Client());
+  final JobRepository jobRepository = JobRepository(dataProvider: jobDataProvider);
   runApp(
-    FixIt(serviceRepository: serviceRepository),
+    FixIt(serviceRepository: serviceRepository,jobRepository: jobRepository,),
   );
 }
 
@@ -24,9 +31,10 @@ void main()
 
 class FixIt extends StatelessWidget {
   final ServiceRepository serviceRepository;
+  final JobRepository jobRepository;
 
-  FixIt({@required this.serviceRepository})
-      : assert(serviceRepository != null);
+  FixIt({@required this.serviceRepository, @required this.jobRepository})
+      : assert(serviceRepository != null && jobRepository != null);
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +43,10 @@ class FixIt extends StatelessWidget {
           BlocProvider<ServiceBloc>(
             create: (_) => ServiceBloc(serviceRepository: this.serviceRepository)
               ..add(ServiceLoad()),
+          ),
+          BlocProvider<JobBloc>(
+            create: (_) => JobBloc(jobRepository: this.jobRepository)
+              ..add(JobLoad()),
           ),
 
         ],
@@ -82,7 +94,7 @@ class MyApp extends StatelessWidget {
               headline6:
               TextStyle(fontSize: 24, fontFamily: 'RobotoCondensed'))),
 
-
+      initialRoute: UserMain.routeName,
       onGenerateRoute: ServiceAppRoute.generateRoute,
       onUnknownRoute: (settings) {
         return MaterialPageRoute(builder: (ctx) => CategoryMainScreen());
