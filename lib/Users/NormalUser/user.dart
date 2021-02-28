@@ -1,4 +1,4 @@
-export './Job/job.dart';
-export './Service/service.dart';
-export './Category/category.dart';
+export './JobDisplayScreen/job.dart';
+export './ServiceDisplayScreen/service.dart';
+export './CategoryDisplayScreen/category.dart';
 export './userMainPage.dart';
