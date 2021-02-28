@@ -18,7 +18,54 @@ class _UserMainState extends State<UserMain> {
         title: Text('user'),
         centerTitle: true,
       ),
-      drawer: NavDrawer(),
+      drawer: Drawer(
+        child:Column(
+
+          children: [
+            UserAccountsDrawerHeader(
+              accountName: Text('Fasikaw'),
+              accountEmail: Text('fasikaw@gmail.com'),
+              currentAccountPicture: CircleAvatar(
+                backgroundImage: AssetImage('assets/images/user.jpg'),
+              ),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(begin: Alignment.bottomLeft,end: Alignment.topRight,
+                    colors:[Colors.purple,Colors.purpleAccent] ),
+                // color: Colors.purpleAccent
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.contact_page),
+              title: Text('account'),
+
+            ),
+            ListTile(
+                leading: Icon(Icons.settings),
+                title:Text('settings')
+            ),
+            ListTile(
+              leading: Icon(Icons.color_lens),
+              title: Text('theme'),
+            ),
+            Divider(height: 20,),
+            ListTile(
+              leading: Icon(Icons.flag),
+              title: Text('FAQ'),
+            ),
+            Divider(height: 20,),
+            ListTile(
+              trailing: Icon(Icons.close),
+              title: Text('close'),
+              onTap: (){
+                Navigator.of(context).pop();
+              },
+            )
+
+
+          ],
+        ),
+
+      ),
 
       bottomNavigationBar:  CurvedNavigationBar(
         backgroundColor: Colors.transparent,

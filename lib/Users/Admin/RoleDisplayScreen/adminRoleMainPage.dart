@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_group_project/Role/Admin/admin.dart';
 
-class AdminTechnicianMainPage extends StatelessWidget {
+class AdminRoleMainPage extends StatelessWidget {
   static const routeName='/admin/technician';
   @override
   Widget build(BuildContext context) {
