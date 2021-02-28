@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_group_project/Features/Role/models/role.dart';
 import 'Features/Service/Service.dart';
 import 'Features/job/models/job.dart';
 import 'Users/users.dart';
@@ -163,4 +164,10 @@ class JobArguments {
   final Job job;
   final bool edit;
   JobArguments({this.job, this.edit});
+}
+
+class RoleArgument{
+  final Role role;
+  final bool edit;
+  RoleArgument({this.role, this.edit});
 }

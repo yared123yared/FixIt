@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_group_project/Features/Role/bloc/bloc.dart';
+import 'package:flutter_group_project/Features/Role/data_provider/data__provider.dart';
+import 'package:flutter_group_project/Features/Role/repository/repository.dart';
 import 'package:flutter_group_project/Features/job/bloc/bloc.dart';
 import 'package:flutter_group_project/Features/job/job.dart';
 
@@ -23,6 +26,9 @@ void main()
   runApp(
     FixIt(serviceRepository: serviceRepository,jobRepository: jobRepository,),
   );
+
+  RoleDataProvider roleDataProvider = RoleDataProvider(httpClient: http.Client());
+  final RoleRepository roleRepository = RoleRepository(dataProvider: roleDataProvider);
 }
 
 
@@ -31,9 +37,10 @@ void main()
 class FixIt extends StatelessWidget {
   final ServiceRepository serviceRepository;
   final JobRepository jobRepository;
+  final RoleRepository roleRepository;
 
-  FixIt({@required this.serviceRepository, @required this.jobRepository})
-      : assert(serviceRepository != null && jobRepository != null);
+  FixIt({@required this.serviceRepository, @required this.jobRepository,@required this.roleRepository})
+      : assert(serviceRepository != null && jobRepository != null && roleRepository != null);
 
   @override
   Widget build(BuildContext context) {
@@ -47,28 +54,15 @@ class FixIt extends StatelessWidget {
             create: (_) => JobBloc(jobRepository: this.jobRepository)
               ..add(JobLoad()),
           ),
+          BlocProvider<RoleBloc>(
+            create: (_) => RoleBloc(roleRepository: this.roleRepository)
 
+          ),
         ],
 
       child: MyApp(),
     );
-    /*
-    return RepositoryProvider.value(
-      value: this.courseRepository,
-      child: BlocProvider(
-        create: (context) => CourseBloc(courseRepository: this.courseRepository)
-          ..add(CourseLoad()),
-        child: MaterialApp(
-          title: 'Course App',
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-            visualDensity: VisualDensity.adaptivePlatformDensity,
-          ),
-          onGenerateRoute: CourseAppRoute.generateRoute,
-        ),
-      ),
-    );
-    */
+
   }
 }
 
