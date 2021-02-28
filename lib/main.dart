@@ -1,42 +1,105 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_group_project/Autentication/Bloc/bloc.dart';
-import 'package:flutter_group_project/Autentication/Repository/repository.dart';
-import 'package:flutter_group_project/Autentication/Screen/login_page.dart';
-import 'Autentication/Data_provider/User_data.dart';
-import 'bloc_observer.dart';
+import 'package:flutter_group_project/Service/Bloc/bloc.dart';
+import 'package:flutter_group_project/Service/Repository/repository.dart';
+import 'package:flutter_group_project/bloc_observer.dart';
+
+
+
+
 import 'package:http/http.dart' as http;
 
+import 'Service/Data_provider/data_provider.dart';
+import 'Service/Screen/screens.dart';
 
-Future<void >main() async{
+void main()
+{
   Bloc.observer = SimpleBlocObserver();
-
-  final UserRepository userRepository = UserRepository(
-    dataProvider: UserDataProvider(
-      httpClient: http.Client(),
-    ),
+  ServiceDataProvider serviceDataProvider=new ServiceDataProvider(httpClient: http.Client(),);
+  final ServiceRepository serviceRepository = ServiceRepository(
+    dataProvider:serviceDataProvider
   );
 
-  runApp(MyApp(userRepository: userRepository,));
+  runApp(
+    FixIt(serviceRepository: serviceRepository),
+  );
 }
 
-class MyApp extends StatelessWidget{
-  final UserRepository userRepository;
-  MyApp({@required this.userRepository})
-  :assert(userRepository!=null);
+
+
+
+class FixIt extends StatelessWidget {
+  final ServiceRepository serviceRepository;
+
+  FixIt({@required this.serviceRepository})
+      : assert(serviceRepository != null);
+
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider.value(
-        value: this.userRepository,
-      child: BlocProvider(
-        create: (context) => UserBloc(userRepository: this.userRepository),
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider<ServiceBloc>(
+            create: (_) => ServiceBloc(serviceRepository: this.serviceRepository)
+              ..add(ServiceLoad()),
+          ),
 
-      child: MaterialApp(
-       home: SignIn(),
-      // home: CategoryMainScreen(),
-      debugShowCheckedModeBanner: false,
-    ),),
+        ],
+
+      child: MyApp(),
+    );
+    /*
+    return RepositoryProvider.value(
+      value: this.courseRepository,
+      child: BlocProvider(
+        create: (context) => CourseBloc(courseRepository: this.courseRepository)
+          ..add(CourseLoad()),
+        child: MaterialApp(
+          title: 'Course App',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+          ),
+          onGenerateRoute: CourseAppRoute.generateRoute,
+        ),
+      ),
+    );
+    */
+  }
+}
+
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'DeliMeals',
+      theme: ThemeData(
+          primarySwatch: Colors.amber,
+          accentColor: Colors.purple,
+          canvasColor: Color.fromRGBO(225, 254, 229, 1),
+          fontFamily: 'Raleway',
+          textTheme: ThemeData.light().textTheme.copyWith(
+              bodyText1: TextStyle(
+                color: Color.fromRGBO(20, 51, 51, 1),
+              ),
+              bodyText2: TextStyle(
+                color: Color.fromRGBO(20, 31, 51, 1),
+              ),
+              headline6:
+              TextStyle(fontSize: 24, fontFamily: 'RobotoCondensed'))),
+
+
+      onGenerateRoute: ServiceAppRoute.generateRoute,
+      onUnknownRoute: (settings) {
+        return MaterialPageRoute(builder: (ctx) => CategoryMainScreen());
+      },
     );
   }
 }
+
+
+
+//
+//
+// this is the previoud main.dart file to be updated soon
+

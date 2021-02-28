@@ -4,9 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_group_project/Service/Bloc/bloc.dart';
 import 'package:flutter_group_project/Service/Screen/AddUpdateService.dart';
 import 'package:flutter_group_project/Service/Screen/screens.dart';
-import '../../dummy_data.dart';
 import '../Widgets/Services_item.dart';
 import 'dart:math';
+import '../../dummy_data.dart';
 import '../Model/Service.dart';
 
 
@@ -45,14 +45,21 @@ class CategoryMainScreen extends StatelessWidget {
 //
   Widget getFloatingButton(BuildContext context) {
     return FloatingActionButton(
-      backgroundColor: Theme.of(context).primaryColor,
-      foregroundColor: Colors.white,
-      onPressed: () {
-        // this is the home optiion
-        print('welcome to the home');
-      },
-      tooltip: "Home",
-      child: Icon(Icons.home),
+
+//      backgroundColor: Theme.of(context).primaryColor,
+//      foregroundColor: Colors.white,
+//      onPressed: () {
+//        // this is the home optiion
+//        print('welcome to the home');
+//      },
+//      tooltip: "Home",
+//      child: Icon(Icons.home),
+
+      onPressed: () => Navigator.of(context).pushNamed(
+        AddUpdateService.routeName,
+        arguments: ServiceArgument(edit: false),
+      ),
+      child: Icon(Icons.add),
     );
   }
 
@@ -112,10 +119,7 @@ class CategoryMainScreen extends StatelessWidget {
                             .width * 0.5,
                         width: double.infinity,
 
-                        child: Image.network(
-                          selectedCategory.imageUrl, fit: BoxFit.cover,),
-
-                      ),
+                        child: Image.asset("Assets/assets/back.jpg",fit: BoxFit.fill,),),
 //           ingredient
                       buildSectionTitle(context, 'Services'),
 
@@ -148,7 +152,7 @@ class CategoryMainScreen extends StatelessWidget {
         child: Center(
           child: ListTile(
             leading: CircleAvatar(
-              backgroundImage: AssetImage('Assets/Images/${services[index].imageUrl}'),
+              backgroundImage: AssetImage('Assets/assets/fixit.png'),
             ),
 
 
@@ -194,39 +198,39 @@ class CategoryMainScreen extends StatelessWidget {
                     ]
                 ),
               ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.of(context).pushNamed(
-          AddUpdateService.routeName,
-          arguments: ServiceArgument(edit: false),
-        ),
-        child: Icon(Icons.add),
-      ),
+//      floatingActionButton: FloatingActionButton(
+//        onPressed: () => Navigator.of(context).pushNamed(
+//          AddUpdateService.routeName,
+//          arguments: ServiceArgument(edit: false),
+//        ),
+//        child: Icon(Icons.add),
+//      ),
 
-//        floatingActionButton: getFloatingButton(context),
-//        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-//        bottomNavigationBar: BottomAppBar(
-//          color: Theme.of(context).primaryColor,
-//          shape: CircularNotchedRectangle(),
-//          child: Row(
-//              mainAxisSize: MainAxisSize.max,
-//              mainAxisAlignment: MainAxisAlignment.spaceAround,
-//              children: <Widget>[
-//                IconButton(
-//                  icon: Icon(Icons.search),
-//                  color: Colors.white,
-//                  onPressed: () {
-//                    print("search icon button have been clicked");
-//                  },
-//                ),
-//                IconButton(
-//                  icon: Icon(Icons.note),
-//                  color: Colors.white,
-//                  onPressed: () {
-//                    print("the note icon button have been clicked");
-//                  },
-//                )
-//              ]),
-//        )
+        floatingActionButton: getFloatingButton(context),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        bottomNavigationBar: BottomAppBar(
+          color: Theme.of(context).primaryColor,
+          shape: CircularNotchedRectangle(),
+          child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                IconButton(
+                  icon: Icon(Icons.search),
+                  color: Colors.white,
+                  onPressed: () {
+                    print("search icon button have been clicked");
+                  },
+                ),
+                IconButton(
+                  icon: Icon(Icons.note),
+                  color: Colors.white,
+                  onPressed: () {
+                    print("the note icon button have been clicked");
+                  },
+                )
+              ]),
+        )
 
     );
   }

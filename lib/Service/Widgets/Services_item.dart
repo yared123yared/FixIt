@@ -3,6 +3,8 @@ import 'package:flutter_group_project/Service/Screen/ServiceDetail.dart';
 import '../Screen/Service_main_screen.dart';
 import '../Model/Service.dart';
 
+import '../../dummy_data.dart';
+
 class ServiceItem extends StatelessWidget {
 
   final int index;
