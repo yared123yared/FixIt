@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/yared/AndroidStudioProjects/flutter_app4/flutter_group_project/lib/Service/Screen/technician_list.dart';
-import 'package:flutter_group_project/Screens/drawer.dart';
-import 'file:///C:/Users/yared/AndroidStudioProjects/flutter_app4/flutter_group_project/lib/Service/Screen/service_lists.dart';
+import '../Features/Service/Service.dart';
+import 'drawer.dart';
+
 
 class CustomerHome extends StatefulWidget {
   @override
@@ -21,7 +21,7 @@ class _CustomerHomeState extends State<CustomerHome> {
     if (_navIndex == 0){
       return 'Categories';
     }else if(_navIndex ==1){
-      return 'Technicians';
+      return 'Role.Technicians';
     }else{
       return 'History';
     }

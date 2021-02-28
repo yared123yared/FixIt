@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_group_project/Service/Bloc/bloc.dart';
-import 'package:flutter_group_project/Service/Repository/repository.dart';
 import 'package:flutter_group_project/bloc_observer.dart';
-
-
-
-
 import 'package:http/http.dart' as http;
+import 'Features/Service/Service.dart';
 
-import 'Service/Data_provider/data_provider.dart';
-import 'Service/Screen/screens.dart';
+
 
 void main()
 {

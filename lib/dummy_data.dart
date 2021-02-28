@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './Model/Category.dart';
-import 'Service/Model/Service.dart';
+import './Features/Service/Model/Service.dart';
 import 'Model/Technicians.dart';
 
 
@@ -48,41 +48,41 @@ title: 'Exotic',
 ];
 /*
 const  DUMMY_SERVICES = [
-  Service(id:1, title:"Fix Stove",imageUrl:'fixit.png',categoryId:1, description:'Repair stove that is not working well'),
-  Service(id:1, title:"Fix Stove",imageUrl:'fixit.png',categoryId:1, description:'Repair stove that is not working well'),
-  Service(id:1, title:"Fix Stove",imageUrl:'fixit.png',categoryId:1, description:'Repair stove that is not working well'),
-  Service(id:1, title:"Fix Stove",imageUrl:'fixit.png',categoryId:1, description:'Repair stove that is not working well'),
-  Service(id:1, title:"Fix Stove",imageUrl:'fixit.png',categoryId:1, description:'Repair stove that is not working well'),
+  Features.Service(id:1, title:"Fix Stove",imageUrl:'fixit.png',categoryId:1, description:'Repair stove that is not working well'),
+  Features.Service(id:1, title:"Fix Stove",imageUrl:'fixit.png',categoryId:1, description:'Repair stove that is not working well'),
+  Features.Service(id:1, title:"Fix Stove",imageUrl:'fixit.png',categoryId:1, description:'Repair stove that is not working well'),
+  Features.Service(id:1, title:"Fix Stove",imageUrl:'fixit.png',categoryId:1, description:'Repair stove that is not working well'),
+  Features.Service(id:1, title:"Fix Stove",imageUrl:'fixit.png',categoryId:1, description:'Repair stove that is not working well'),
 
-  Service(id:2, title:"Fix Frige",imageUrl:'fixit.png',categoryId:1, description:'Repair stove that is not working well'),
-  Service(id:2, title:"Fix Frige",imageUrl:'fixit.png',categoryId:1, description:'Repair stove that is not working well'),
-  Service(id:2, title:"Fix Frige",imageUrl:'fixit.png',categoryId:1, description:'Repair stove that is not working well'),
-  Service(id:2, title:"Fix Frige",imageUrl:'fixit.png',categoryId:1, description:'Repair stove that is not working well'),
-  Service(id:2, title:"Fix Frige",imageUrl:'fixit.png',categoryId:1, description:'Repair stove that is not working well'),
+  Features.Service(id:2, title:"Fix Frige",imageUrl:'fixit.png',categoryId:1, description:'Repair stove that is not working well'),
+  Features.Service(id:2, title:"Fix Frige",imageUrl:'fixit.png',categoryId:1, description:'Repair stove that is not working well'),
+  Features.Service(id:2, title:"Fix Frige",imageUrl:'fixit.png',categoryId:1, description:'Repair stove that is not working well'),
+  Features.Service(id:2, title:"Fix Frige",imageUrl:'fixit.png',categoryId:1, description:'Repair stove that is not working well'),
+  Features.Service(id:2, title:"Fix Frige",imageUrl:'fixit.png',categoryId:1, description:'Repair stove that is not working well'),
 
-  Service(id:3, title:"Fix Metad",imageUrl:'fixit.png',categoryId:2, description:'Repair stove that is not working well'),
-  Service(id:3, title:"Fix Metad",imageUrl:'fixit.png',categoryId:2, description:'Repair stove that is not working well'),
-  Service(id:3, title:"Fix Metad",imageUrl:'fixit.png',categoryId:2, description:'Repair stove that is not working well'),
-  Service(id:3, title:"Fix Metad",imageUrl:'fixit.png',categoryId:2, description:'Repair stove that is not working well'),
-  Service(id:3, title:"Fix Metad",imageUrl:'fixit.png',categoryId:2, description:'Repair stove that is not working well'),
+  Features.Service(id:3, title:"Fix Metad",imageUrl:'fixit.png',categoryId:2, description:'Repair stove that is not working well'),
+  Features.Service(id:3, title:"Fix Metad",imageUrl:'fixit.png',categoryId:2, description:'Repair stove that is not working well'),
+  Features.Service(id:3, title:"Fix Metad",imageUrl:'fixit.png',categoryId:2, description:'Repair stove that is not working well'),
+  Features.Service(id:3, title:"Fix Metad",imageUrl:'fixit.png',categoryId:2, description:'Repair stove that is not working well'),
+  Features.Service(id:3, title:"Fix Metad",imageUrl:'fixit.png',categoryId:2, description:'Repair stove that is not working well'),
 
-  Service(id:4, title:"Fix Stove",imageUrl:'fixit.png',categoryId:3, description:'Repair stove that is not working well'),
-  Service(id:4, title:"Fix Stove",imageUrl:'fixit.png',categoryId:3, description:'Repair stove that is not working well'),
-  Service(id:4, title:"Fix Stove",imageUrl:'fixit.png',categoryId:3, description:'Repair stove that is not working well'),
-  Service(id:4, title:"Fix Stove",imageUrl:'fixit.png',categoryId:3, description:'Repair stove that is not working well'),
-  Service(id:4, title:"Fix Stove",imageUrl:'fixit.png',categoryId:3, description:'Repair stove that is not working well'),
+  Features.Service(id:4, title:"Fix Stove",imageUrl:'fixit.png',categoryId:3, description:'Repair stove that is not working well'),
+  Features.Service(id:4, title:"Fix Stove",imageUrl:'fixit.png',categoryId:3, description:'Repair stove that is not working well'),
+  Features.Service(id:4, title:"Fix Stove",imageUrl:'fixit.png',categoryId:3, description:'Repair stove that is not working well'),
+  Features.Service(id:4, title:"Fix Stove",imageUrl:'fixit.png',categoryId:3, description:'Repair stove that is not working well'),
+  Features.Service(id:4, title:"Fix Stove",imageUrl:'fixit.png',categoryId:3, description:'Repair stove that is not working well'),
 
-  Service(id:5, title:"Fix Stove",imageUrl:'fixit.png',categoryId:2, description:'Repair stove that is not working well'),
-  Service(id:5, title:"Fix Stove",imageUrl:'fixit.png',categoryId:2, description:'Repair stove that is not working well'),
-  Service(id:5, title:"Fix Stove",imageUrl:'fixit.png',categoryId:2, description:'Repair stove that is not working well'),
-  Service(id:5, title:"Fix Stove",imageUrl:'fixit.png',categoryId:2, description:'Repair stove that is not working well'),
-  Service(id:5, title:"Fix Stove",imageUrl:'fixit.png',categoryId:2, description:'Repair stove that is not working well'),
+  Features.Service(id:5, title:"Fix Stove",imageUrl:'fixit.png',categoryId:2, description:'Repair stove that is not working well'),
+  Features.Service(id:5, title:"Fix Stove",imageUrl:'fixit.png',categoryId:2, description:'Repair stove that is not working well'),
+  Features.Service(id:5, title:"Fix Stove",imageUrl:'fixit.png',categoryId:2, description:'Repair stove that is not working well'),
+  Features.Service(id:5, title:"Fix Stove",imageUrl:'fixit.png',categoryId:2, description:'Repair stove that is not working well'),
+  Features.Service(id:5, title:"Fix Stove",imageUrl:'fixit.png',categoryId:2, description:'Repair stove that is not working well'),
 
-  Service(id:6, title:"Fix Stove",imageUrl:'fixit.png',categoryId:4, description:'Repair stove that is not working well'),
-  Service(id:6, title:"Fix Stove",imageUrl:'fixit.png',categoryId:4, description:'Repair stove that is not working well'),
-  Service(id:6, title:"Fix Stove",imageUrl:'fixit.png',categoryId:4, description:'Repair stove that is not working well'),
-  Service(id:6, title:"Fix Stove",imageUrl:'fixit.png',categoryId:4, description:'Repair stove that is not working well'),
-  Service(id:6, title:"Fix Stove",imageUrl:'fixit.png',categoryId:4, description:'Repair stove that is not working well'),
+  Features.Service(id:6, title:"Fix Stove",imageUrl:'fixit.png',categoryId:4, description:'Repair stove that is not working well'),
+  Features.Service(id:6, title:"Fix Stove",imageUrl:'fixit.png',categoryId:4, description:'Repair stove that is not working well'),
+  Features.Service(id:6, title:"Fix Stove",imageUrl:'fixit.png',categoryId:4, description:'Repair stove that is not working well'),
+  Features.Service(id:6, title:"Fix Stove",imageUrl:'fixit.png',categoryId:4, description:'Repair stove that is not working well'),
+  Features.Service(id:6, title:"Fix Stove",imageUrl:'fixit.png',categoryId:4, description:'Repair stove that is not working well'),
 
 
 ];
