@@ -7,7 +7,7 @@ const _kJobLocationTextStyle =
 TextStyle(color: Colors.green, fontSize: 18.0, fontWeight: FontWeight.bold);
 const _kDetailsTextStyle = TextStyle(
     color: Colors.black54, fontSize: 16.0, fontWeight: FontWeight.w500);
-class AdminTechnicianDetail extends StatelessWidget {
+class AdminRoleDetail extends StatelessWidget {
   static const routeName='/admin/technician/detail';
   @override
   Widget build(BuildContext context) {
