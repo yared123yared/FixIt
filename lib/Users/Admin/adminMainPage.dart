@@ -1,14 +1,20 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_group_project/Features/User/Model/User.dart';
+import 'package:flutter_group_project/Features/User/util/util.dart';
 import 'package:flutter_group_project/Users/Admin/JobDisplayScreen/adminJobMainPage.dart';
 import 'package:flutter_group_project/Users/Admin/RoleDisplayScreen/adminRoleMainPage.dart';
+import 'package:flutter_group_project/Users/Admin/UserManagement/User_main_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'ServiceDisplayScreen/adminService.dart';
+import 'UserManagement/adminUserMainPage.dart';
 
 
 class AdminMainPage extends StatefulWidget {
   final int index;
-  AdminMainPage({this.index});
+  final User admin;
+  AdminMainPage({this.index, this.admin});
   static const routeName='/admin';
 
   @override
@@ -20,7 +26,8 @@ class _AdminMainPageState extends State<AdminMainPage> {
     AdminJobMainPage(),
     AdminRoleMainPage(),
     AdminServiceMainPage(),
-    Center(child: Text("No history yet!"),)
+    // Center(child: Text("No history yet!"),)
+    AdminUserMainPage(),
   ];
 
   int _navIndex = 0;

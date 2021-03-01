@@ -14,7 +14,7 @@ class UserModel{
 
    factory  UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
-        user: json['user'],
+        user: json['user'] != null ? new User.fromJson(json["user"]): null,
         token: json['token'],
 
     );

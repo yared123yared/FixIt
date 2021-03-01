@@ -35,7 +35,12 @@ class _SignInState extends State<SignIn> {
     return BlocConsumer<AuthBloc, AuthStates>(
       listener:(_,state){
         if(state is LoginSuccessState){
-          if(state.user.Role=="ADMIN"){//if role is ADMIN go to ADMIN screen
+          print(state.user.toString());
+          print(state.user.toString());print(state.user.toString());print(state.user.toString());
+
+
+          if(state.user.Role=="2"){//if role is ADMIN go to ADMIN screen
+
             Navigator.of(context).pushReplacementNamed(CategoryMainScreen.routeName, arguments: UserArgument(user: user));
           }else if(state.user.Role=="TECHNICIAN"){//If role is TECHNICIAN go to admin screen
             Navigator.of(context).pushReplacementNamed(Technician_main.routeName, arguments: UserArgument(user: user));
