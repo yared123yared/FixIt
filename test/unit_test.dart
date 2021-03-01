@@ -54,7 +54,7 @@ void main(){
   //     (){final user = User(email: "NameFather@mgmail.com",fName: "NameFather",phone: "0911223344",password: "MYPASS",role: "ADMIN" ,imageUrl: "Assets/assets/fixit.png");
 
   group('GetWeather', () {
-    final user = User(email: "NameFather@mgmail.com",fName: "NameFather",phone: "0911223344",password: "MYPASS",role: "ADMIN" ,imageUrl: "Assets/assets/fixit.png");
+    final user = User(Email: "NameFather@mgmail.com",FullName: "NameFather",Phone: "0911223344",Password: "MYPASS",Role: "ADMIN" ,Picture: "Assets/assets/fixit.png");
 
     // Old way of testing Blocs - like regular Streams
     test(

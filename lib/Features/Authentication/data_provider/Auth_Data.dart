@@ -46,11 +46,11 @@ class AuthDataProvider {
       print('code----------${response.statusCode}');
       if (response.statusCode == 422) {
         throw HttpException('Invalid Input');
-      } else if (response.statusCode == 404) {
+      } else if (response.statusCode == 400) {
         throw HttpException('Incorrect username or password');
       } else {
-        final extractedData =
-            json.decode(response.body) as Map<String, dynamic>;
+        print("++++++ELSE+++++");
+        final extractedData = json.decode(response.body) as Map<String, dynamic>;
         user1 = UserModel.fromJson(extractedData).user;
         String token = UserModel.fromJson(extractedData).token;
         // String expiry = response.headers['expiry_date'].toString();
@@ -60,7 +60,7 @@ class AuthDataProvider {
       }
     } catch (e) {
       print("++++++++CATCH++++");
-      print(e);
+      print("Exception $e");
       throw e;
     }
     return user1;

@@ -19,7 +19,7 @@ class Users_main extends StatelessWidget {//Main page of the User
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-        title: Text('${(this.user.fName)}'),
+        title: Text('${(this.user.FullName)}'),
         actions: [
           IconButton(
             icon: Icon(Icons.edit),
@@ -53,7 +53,7 @@ class Users_main extends StatelessWidget {//Main page of the User
 
       body: Center(
         child: Text(
-          "This is User ${this.user.fName}",
+          "This is User ${this.user.FullName}",
         ),
       ),
     );

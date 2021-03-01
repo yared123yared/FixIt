@@ -35,9 +35,9 @@ class _SignInState extends State<SignIn> {
     return BlocConsumer<AuthBloc, AuthStates>(
       listener:(_,state){
         if(state is LoginSuccessState){
-          if(state.user.role=="ADMIN"){//if role is ADMIN go to ADMIN screen
+          if(state.user.Role=="ADMIN"){//if role is ADMIN go to ADMIN screen
             Navigator.of(context).pushReplacementNamed(CategoryMainScreen.routeName, arguments: UserArgument(user: user));
-          }else if(state.user.role=="TECHNICIAN"){//If role is TECHNICIAN go to admin screen
+          }else if(state.user.Role=="TECHNICIAN"){//If role is TECHNICIAN go to admin screen
             Navigator.of(context).pushReplacementNamed(Technician_main.routeName, arguments: UserArgument(user: user));
           }else{//else go to USER Screen
             Navigator.of(context).pushReplacementNamed(Users_main.routeName, arguments: UserArgument(user: user));
@@ -54,6 +54,10 @@ class _SignInState extends State<SignIn> {
         }
         if(state is UserOperationFailure){//Toast the message of the Failure
           Toast.show("Login operation failed :(", context, backgroundColor: Colors.red, textColor: Colors.white, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+        }
+        else{
+          Toast.show("Incorrect Email/Password combination", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+
         }
       },
       builder:(_,state){//Build the page if not logging in
