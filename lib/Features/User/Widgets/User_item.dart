@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_group_project/Autentication/Screen/UserDetail.dart';
+import 'package:flutter_group_project/Users/Admin/UserManagement/UserDetail.dart';
 import '../Model/User.dart';
 
 class UserItem extends StatelessWidget {
