@@ -2,6 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_group_project/Autentication/Bloc/bloc.dart';
 import 'package:flutter_group_project/Autentication/Model/User.dart';
 import 'package:flutter_group_project/Autentication/Repository/repository.dart';
+import 'package:flutter_group_project/Autentication/util/util.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -13,7 +14,7 @@ void main() {
 
   setUp(() {
     userRepository = MockItemRepository();
-    userBloc = UserBloc(userRepository: userRepository);
+    userBloc = UserBloc(userRepository: userRepository,util: Util());
   });
 
   tearDown(() {
@@ -25,7 +26,7 @@ void main() {
         () {
       test('throws AssertionError if WeatherRepository is null', () {
         expect(
-              () => UserBloc(userRepository: null),
+              () => UserBloc(userRepository: null,util: null),
           throwsA(isAssertionError),
         );
       });
