@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'Features/Service/Service.dart';
+import 'Features/job/models/job.dart';
 import 'Role/role.dart';
 
 
 class ServiceAppRoute {
   static Route generateRoute(RouteSettings settings) {
     switch(settings.name){
-      case '/':
-//        /
-        return MaterialPageRoute(
-            builder: (context) => AdminServiceMainPage(
-//              the arguments will pass here
-            ));
-        break;
+//       case '/':
+// //        /
+//         return MaterialPageRoute(
+//             builder: (context) => AdminServiceMainPage(
+// //              the arguments will pass here
+//             ));
+//         break;
       case AdminMainPage.routeName:
 //        /admin
         AdminArgument args = settings.arguments;
@@ -22,7 +23,7 @@ class ServiceAppRoute {
             ));
         break;
 
-//
+
 //       case AdminServiceMainPage.routeName:
 // //        /admin/service
 //         return MaterialPageRoute(
@@ -52,9 +53,11 @@ class ServiceAppRoute {
             ));
         break;
       case AdminJobDetail.routeName:
+        Job job = settings.arguments;
 //        /admin/job/detail
         return MaterialPageRoute(
             builder: (context) => AdminJobDetail(
+              job: job ,
 //              the arguments will pass here
             ));
         break;
@@ -156,3 +159,8 @@ class AdminArgument {
 //  Login in admin object
 }
 
+class JobArguments {
+  final Job job;
+  final bool edit;
+  JobArguments({this.job, this.edit});
+}

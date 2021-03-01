@@ -1,26 +1,20 @@
+import "package:flutter/material.dart";
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_group_project/drawers/user_drawer.dart';
 
-class UserMain extends StatefulWidget {
-  static const routeName='/user';
 
+// ignore: must_be_immutable
+class BotNavBar extends StatefulWidget {
+    int index;
+    BotNavBar({this.index});
   @override
-  _UserMainState createState() => _UserMainState();
+  _BotNavBarState createState() => _BotNavBarState();
 }
 
-class _UserMainState extends State<UserMain> {
-  int _navIndex= 0;
+class _BotNavBarState extends State<BotNavBar> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('user'),
-        centerTitle: true,
-      ),
-      drawer: NavDrawer(),
-
-      bottomNavigationBar:  CurvedNavigationBar(
+    return Container(
+      child: CurvedNavigationBar(
         backgroundColor: Colors.transparent,
         color: Theme.of(context).accentColor,
         items: [
@@ -36,7 +30,7 @@ class _UserMainState extends State<UserMain> {
         animationCurve: Curves.bounceOut,
         onTap: (index){
           setState(() {
-            _navIndex = index;
+            widget.index = index;
           });
         },
       ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_group_project/Widgets/category_item.dart';
 class ServiceList extends StatefulWidget {
 
 
@@ -18,7 +17,7 @@ class _ServiceListState extends State<ServiceList> {
       child: GridView.count(
           crossAxisCount: 2,
         children: List.generate(6, (index) {
-          return CategoryItem(image: images[index],text: texts[index] ,);
+          return Container();
         }),
       ),
     );

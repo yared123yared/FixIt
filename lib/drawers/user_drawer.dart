@@ -18,7 +18,6 @@ class NavDrawer extends StatelessWidget {
                     colors:[Colors.purple,Colors.purpleAccent] ),
                 // color: Colors.purpleAccent
               ),
-
             ),
           ListTile(
             leading: Icon(Icons.contact_page),
