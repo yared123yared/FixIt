@@ -26,11 +26,16 @@ class AuthDataProvider {
     print('logging------------------------here-');
 
     User user1;
-    final urlLogin ="$URL/Users/authenticate";
+    final urlLogin ="http://192.168.137.1:5001/api/users/authenticate";
     try {
+      print("++++++++Try Method");
+      print("Username : ${auth.email}");
       final response = await httpClient.post(
         urlLogin,
-        body: json.encode({
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, dynamic>{
 
           'username': auth.email,
 
@@ -54,6 +59,8 @@ class AuthDataProvider {
         await util.storeTokenAndExpiration(token);
       }
     } catch (e) {
+      print("++++++++CATCH++++");
+      print(e);
       throw e;
     }
     return user1;

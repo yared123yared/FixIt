@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_group_project/Features/Authentication/authntication.dart';
 import 'package:flutter_group_project/Features/User/Bloc/User_bloc.dart';
 import 'package:flutter_group_project/Features/User/Bloc/User_event.dart';
 import 'package:flutter_group_project/Features/User/Bloc/User_state.dart';
@@ -31,10 +32,9 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<UserBloc, UserState>(
+    return BlocConsumer<AuthBloc, AuthStates>(
       listener:(_,state){
-        if(state is UserLoadSuccess){
-          if(state.user.password==_myPasswordController.text){//On success checks if the email and password matches
+        if(state is LoginSuccessState){
           if(state.user.role=="ADMIN"){//if role is ADMIN go to ADMIN screen
             Navigator.of(context).pushReplacementNamed(CategoryMainScreen.routeName, arguments: UserArgument(user: user));
           }else if(state.user.role=="TECHNICIAN"){//If role is TECHNICIAN go to admin screen
@@ -42,12 +42,14 @@ class _SignInState extends State<SignIn> {
           }else{//else go to USER Screen
             Navigator.of(context).pushReplacementNamed(Users_main.routeName, arguments: UserArgument(user: user));
           }
+
+
         }
-          else{
-            Toast.show("Incorrect Email/Password combination", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
-          }
+        else if(state is LoginFailedState){
+          Toast.show("Incorrect Email/Password combination", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
         }
-        if(state is UserLoading){//On loading call the loading event manager UI
+
+        if(state is LoggingState){//On loading call the loading event manager UI
           loading_screen(title:"Login loading");
         }
         if(state is UserOperationFailure){//Toast the message of the Failure
@@ -268,8 +270,8 @@ class _SignInState extends State<SignIn> {
       ),
     );
   }
-  Widget gradientbutton(UserState state) {//Custom widget
-    final UserState _state=state;
+  Widget gradientbutton(AuthStates state) {//Custom widget
+    final AuthStates _state=state;
 
     return SizedBox(
         //width: MediaQuery.of(context).size.width*0.5,
@@ -277,13 +279,11 @@ class _SignInState extends State<SignIn> {
     child: InkWell(
       splashColor: Colors.white,
       onTap: (){
+        final Authentication auth = new Authentication(email: _myemailController.text,password: _myPasswordController.text);
+        final LoginEvent event = LoginEvent(auth: auth);
 
-        final UserEvent event = UserLoad(_myemailController.text);
+        BlocProvider.of<AuthBloc>(context).add(event);
 
-        BlocProvider.of<UserBloc>(context).add(event);
-        if (state is UserOperationFailure) {
-          Toast.show("Login operation failed :(", context, backgroundColor: Colors.red, textColor: Colors.white, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
-        }
 
         },
 

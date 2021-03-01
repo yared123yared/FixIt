@@ -25,6 +25,7 @@ class AuthBloc extends Bloc<AuthEvents, AuthStates> {
   }
 
   Stream<AuthStates> _mapLoginEventToState(Authentication user) async* {
+    print("+++++++++++LoginEvent+++++");
     yield LoggingState();
     User u;
     try {
