@@ -1,16 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_group_project/Autentication/Bloc/User_bloc.dart';
-import 'package:flutter_group_project/Autentication/Bloc/User_event.dart';
-import 'package:flutter_group_project/Autentication/Bloc/User_state.dart';
-import 'package:flutter_group_project/Autentication/Model/User.dart';
-import 'package:flutter_group_project/Autentication/Screen/AddUpdateAdmin.dart';
-import 'package:flutter_group_project/Autentication/Screen/AddUpdateUser.dart';
-import 'package:flutter_group_project/Autentication/Screen/ScreenRoute.dart';
-import 'package:flutter_group_project/Autentication/Screen/UserDetail.dart';
-import 'package:flutter_group_project/Autentication/Screen/login_page.dart';
-import '../../dummy_data.dart';
+import 'package:flutter_group_project/Features/User/Bloc/User_bloc.dart';
+import 'package:flutter_group_project/Features/User/Bloc/User_event.dart';
+import 'package:flutter_group_project/Features/User/Bloc/User_state.dart';
+import 'package:flutter_group_project/Features/User/Model/User.dart';
+import 'package:flutter_group_project/Users/Admin/UserManagement/AddUpdateAdmin.dart';
+import 'package:flutter_group_project/Users/NormalUser/UserUpdate/AddUpdateUser.dart';
+import 'package:flutter_group_project/Users/Common/ScreenRoute.dart';
+import 'package:flutter_group_project/Users/Admin/UserManagement/UserDetail.dart';
+import 'package:flutter_group_project/Users/Common/login_page.dart';
 import 'dart:math';
 
 
