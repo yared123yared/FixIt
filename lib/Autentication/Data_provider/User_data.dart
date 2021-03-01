@@ -63,7 +63,7 @@ class UserDataProvider {
     print("This is the getUser(email) method");
     User user;
     try {
-      final response = await http.get('http://192.168.137.1:4000/User/$email');
+      final response = await httpClient.get('http://192.168.137.1:4000/User/$email');
       if (response.statusCode == 200) {
         final extractedData =
         json.decode(response.body) as Map<String, dynamic>;
