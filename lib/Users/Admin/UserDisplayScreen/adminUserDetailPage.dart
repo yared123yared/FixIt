@@ -1,27 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_group_project/Features/Service/Screen/screens.dart';
-import 'package:flutter_group_project/Features/job/screens/screens.dart';
+import 'package:flutter_group_project/Features/User/Bloc/User_event.dart';
+import 'package:flutter_group_project/Features/User/Bloc/bloc.dart';
+import 'package:flutter_group_project/Features/User/Model/User.dart';
+import 'package:flutter_group_project/Users/Admin/UserManagement/User_main_screen.dart';
+import 'package:flutter_group_project/Users/Common/ScreenRoute.dart';
+import 'package:flutter_group_project/Users/NormalUser/UserUpdate/AddUpdateUser.dart';
 
 
+class UserDetail extends StatelessWidget {//To show detail of User
+  static const routeName = 'userDetail';
+  final User user;
 
-class AdminUserDetail extends StatelessWidget {
-  static const routeName = 'jobDetail';
-  final User job;
-
-  JobDetail({@required this.job});
+  UserDetail({@required this.user});
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('${this.job.jobName}'),
+        title: Text('${(this.user.fName)}'),
         actions: [
           IconButton(
             icon: Icon(Icons.edit),
             onPressed: () => Navigator.of(context).pushNamed(
-              AddUpdateJob.routeName,
-              arguments: JobArguments(job: this.job, edit: true),
+              AddUpdateUser.routeName,
+              arguments: UserArgument(user: this.user, edit: true),
             ),
           ),
           SizedBox(
@@ -30,9 +34,9 @@ class AdminUserDetail extends StatelessWidget {
           IconButton(
               icon: Icon(Icons.delete),
               onPressed: () {
-                context.read<JobBloc>().add(JobDelete(this.job));
+                BlocProvider.of<UserBloc>(context).add(UserDelete(this.user));
                 Navigator.of(context).pushNamedAndRemoveUntil(
-                    JobsList.routeName, (route) => false);
+                    CategoryMainScreen.routeName, (route) => false);
               }),
         ],
       ),
@@ -40,8 +44,8 @@ class AdminUserDetail extends StatelessWidget {
         child: Column(
           children: [
             ListTile(
-              title: Text('Job:  ${this.job.jobName}'),
-              subtitle: Text('location:  ${this.job.location}'),
+              title: Text('User Email: ${this.user.email}'),
+              subtitle: Text('Full Name: ${this.user.fName}'),
             ),
             Text(
               'Details',
@@ -50,42 +54,26 @@ class AdminUserDetail extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            SizedBox(
+              height: 10,
+            ),
+            Text('Phone: ${this.user.phone}',style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),),
+            SizedBox(
+              height: 10,
+            ),
+            Text('Role: ${this.user.role}',style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            )),
+            SizedBox(
+              height: 10,
+            ),
 
-
-            Container(
-              margin: EdgeInsets.only(left: 20.0),
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: [
-                      Text('Acceptance Status: ',style: TextStyle(fontSize: 20.0,),),
-                      Text(this.job.acceptanceStatus),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: [
-                      Text('Done Status: ',style: TextStyle(fontSize: 20.0),),
-                      Text(this.job.doneStatus),
-                    ],
-
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: [
-                      Text('Description: ',style: TextStyle(fontSize: 20.0),),
-                      Expanded(child: Text(this.job.description)),
-                    ],
-                  ),
-                ],
-              ),
+            SizedBox(
+              height: 10,
             ),
 
           ],

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_group_project/Features/job/bloc/bloc.dart';
-import 'package:flutter_group_project/Features/job/bloc/job_event.dart';
-import 'package:flutter_group_project/Features/job/repository/repository.dart';
+import 'package:flutter_group_project/Features/Job/repository/job_repository.dart';
 
+import 'job_event.dart';
+import 'job_state.dart';
 
 class JobBloc extends Bloc<JobEvent, JobState>{
   final JobRepository jobRepository;
@@ -19,8 +19,7 @@ class JobBloc extends Bloc<JobEvent, JobState>{
       try {
         final job = await jobRepository.getJobs();
         yield JobLoadingSuccess(job);
-      } catch (err) {
-        print('the error is -$err');
+      } catch (_) {
         yield JobOperationFailure();
       }
     }

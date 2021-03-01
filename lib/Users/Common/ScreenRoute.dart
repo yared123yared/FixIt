@@ -1,8 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_group_project/Features/User/Bloc/User_bloc.dart';
-import 'package:flutter_group_project/Features/User/Bloc/User_state.dart';
+import 'package:flutter_group_project/Features/Authentication/bloc/auth.dart';
+
 import 'package:flutter_group_project/Features/User/Model/User.dart';
 import 'package:flutter_group_project/Users/Admin/UserManagement/UserDetail.dart';
 import 'package:flutter_group_project/Users/Admin/UserManagement/User_main_screen.dart';
@@ -22,7 +22,7 @@ class UserAppRoute {//All the routing info
     if (settings.name == '/') {
       return MaterialPageRoute(
           builder: (context) =>
-              BlocBuilder<UserBloc, UserState>(builder: (context, state) {
+              BlocBuilder<AuthBloc, AuthStates>(builder: (context, state) {
                 if (state is AutoLoginState) {
                   return loading_screen(title: 'Authenticating');
                 } else if (state is AutoLoginSuccessState) {//If the User has already signed in switch by the role

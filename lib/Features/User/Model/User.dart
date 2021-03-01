@@ -13,6 +13,7 @@ class User extends Equatable{
   final String password;
   final String role;
   final String imageUrl;
+  final String token;
 
 
   const User({
@@ -22,6 +23,7 @@ class User extends Equatable{
     @required this.password ,
     @required this.role,
     @required this.imageUrl ,
+    this.token,
 
 
 

@@ -1,8 +1,10 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_group_project/Users/Admin/JobDisplayScreen/adminJobMainPage.dart';
+import 'package:flutter_group_project/Users/Admin/RoleDisplayScreen/adminRoleMainPage.dart';
 
-import 'package:flutter_group_project/drawers/admin_drawer.dart';
+import 'ServiceDisplayScreen/adminService.dart';
+
 
 class AdminMainPage extends StatefulWidget {
   static const routeName='/admin';
@@ -15,6 +17,7 @@ class _AdminMainPageState extends State<AdminMainPage> {
   List<Widget> homeWidgets = [
     AdminJobMainPage(),
     AdminRoleMainPage(),
+    AdminServiceMainPage(),
     Center(child: Text("No history yet!"),)
   ];
 
@@ -24,6 +27,9 @@ class _AdminMainPageState extends State<AdminMainPage> {
     if (_navIndex == 0){
       return 'Jobs';
     }else if(_navIndex ==1){
+      return 'Technicians';
+    }
+    else if(_navIndex ==2){
       return 'Technicians';
     }else{
       return 'History';
@@ -35,7 +41,40 @@ class _AdminMainPageState extends State<AdminMainPage> {
     print('the index is ${_navIndex}');
     return Scaffold(
       appBar: AppBar(
-        title: Text('${title}'),
+        title: Text('admin'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.edit),
+            onPressed: () {
+              // Navigator.of(context).pushNamed(
+              //   AddUpdateUser.routeName,
+              //   arguments: UserArgument(user: this.technician, edit: true),
+              // )
+
+            }
+          ),
+          SizedBox(
+            width: 32,
+          ),
+          IconButton(
+              icon: Icon(Icons.delete),
+              onPressed: () {
+                // BlocProvider.of<UserBloc>(context).add(UserDelete(this.technician));
+                // Navigator.of(context).pushNamedAndRemoveUntil(
+                //     SignIn.routeName, (route) => false);
+              }),
+          SizedBox(
+            width: 32,
+          ),
+          IconButton(
+              icon: Icon(Icons.logout),
+              onPressed: () {
+                // isAuthenticated=false;
+                // isTechnician=false;
+                // Navigator.of(context).pushNamedAndRemoveUntil(
+                //     SignIn.routeName, (route) => false);
+              }),
+        ],
       ),
       drawer: Drawer(
         child:Column(
@@ -94,6 +133,7 @@ class _AdminMainPageState extends State<AdminMainPage> {
         items: [
           Icon(Icons.cleaning_services_rounded,color: Colors.white,size: 25.0,),
           Icon(Icons.supervised_user_circle,color: Colors.white,size: 25.0),
+          Icon(Icons.history,color: Colors.white,size: 25.0),
           Icon(Icons.history,color: Colors.white,size: 25.0),
         ],
 

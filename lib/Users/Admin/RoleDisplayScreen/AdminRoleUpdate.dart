@@ -3,18 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_group_project/Features/Role/bloc/bloc.dart';
 import 'package:flutter_group_project/Features/Role/models/models.dart';
-import 'package:flutter_group_project/Features/job/screens/shared.dart';
-import 'package:flutter_group_project/Role/Admin/Role/roleList.dart';
+import 'package:flutter_group_project/Users/Admin/RoleDisplayScreen/adminRoleMainPage.dart';
 
-class RoleAddUpate extends StatefulWidget {
+
+class RoleAddUpate  extends StatefulWidget {
   static const routeName = "/roleAddUpdate";
   final RoleArguments args;
-  RoleAddUpate({this.args});
+  RoleAddUpate ({this.args});
   @override
   _AddUpdateRoleState createState() => _AddUpdateRoleState();
 }
 
-class _AddUpdateRoleState extends State<RoleAddUpate> {
+class _AddUpdateRoleState extends State<RoleAddUpate > {
   final _formKey = GlobalKey<FormState>();
 
   final Map<String, dynamic> _role = {};
@@ -45,9 +45,10 @@ class _AddUpdateRoleState extends State<RoleAddUpate> {
                         }
                         return null;
                       },
-                      decoration: textInputDecoration.copyWith(
-                          hintText:
-                              'Role Name'), //InputDecoration(labelText: 'Role Name'),
+                      // TODO
+                      // decoration: textInputDecoration.copyWith(
+                      //     hintText:
+                      //         'Role Name'), //InputDecoration(labelText: 'Role Name'),
                       onSaved: (value) {
                         setState(() {
                           this._role["roleName"] = value;
@@ -80,7 +81,7 @@ class _AddUpdateRoleState extends State<RoleAddUpate> {
                           print('creating role');
                           BlocProvider.of<RoleBloc>(context).add(event);
                           Navigator.of(context).pushNamedAndRemoveUntil(
-                              RolesList.routeName, (route) => false);
+                              AdminRoleMainPage.routeName, (route) => false);
                         }
                       },
                       label: Text('SAVE'),

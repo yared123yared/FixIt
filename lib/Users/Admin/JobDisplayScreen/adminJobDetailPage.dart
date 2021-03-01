@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_group_project/Features/Job/bloc/bloc.dart';
-import 'package:flutter_group_project/Features/job/models/models.dart';
-import 'package:flutter_group_project/Features/job/screens/job_detail.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_group_project/Features/Job/bloc/job_bloc.dart';
+import 'package:flutter_group_project/Features/Job/bloc/job_event.dart';
+import 'package:flutter_group_project/Features/Job/bloc/job_state.dart';
+import 'package:flutter_group_project/Features/Job/models/job.dart';
 
 const _kTitleTextStyle = TextStyle(
     color: Color(0xffe6020a), fontSize: 24.0, fontWeight: FontWeight.bold);
@@ -23,48 +25,53 @@ class AdminJobDetail extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("${this.job.jobName}"),
-        centerTitle: true,
-      ),
-
-      body: Container(
-        margin: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-        child: Material(
-          color: Colors.white,
-          elevation: 0.0,
-          borderRadius: BorderRadius.circular(16.0),
-          shadowColor: Color(0x802196F3),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.only(top: 20),
-                child: Padding(
-                  padding: EdgeInsets.only(left: 16.0),
-                  child: buildJobDetail(job),
-                ),
-              ),
-              SizedBox(height:5),
-              Container(child: buildUserDetail(width, height,job.user)),
-              SizedBox(height:5),
-              Container(child: buildTechnicianDetail(width, height,job.technician,job.technician.user)),
-            ],
+    return BlocBuilder<JobBloc,JobState>(
+      builder: (_,state) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text("${this.job.jobName}"),
+            centerTitle: true,
           ),
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.delete),
-        onPressed: () async{
-          await context.read<JobBloc>().add(JobDelete(this.job));
-          Navigator.of(context).pop();
-          // AdminJobMainPage.routeName, (route) => false);
 
-        },
-      ),
-    );;
+          body: Container(
+            margin: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+            child: Material(
+              color: Colors.white,
+              elevation: 0.0,
+              borderRadius: BorderRadius.circular(16.0),
+              shadowColor: Color(0x802196F3),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.only(top: 20),
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 16.0),
+                      child: buildJobDetail(job),
+                    ),
+                  ),
+                  SizedBox(height: 5),
+                  Container(child: buildUserDetail(width, height, job.user)),
+                  SizedBox(height: 5),
+                  Container(child: buildTechnicianDetail(
+                      width, height, job.technician, job.technician.user)),
+                ],
+              ),
+            ),
+          ),
+          floatingActionButton: FloatingActionButton(
+            child: Icon(Icons.delete),
+            onPressed: () async {
+              await context.read<JobBloc>().add(JobDelete(this.job));
+              Navigator.of(context).pop();
+              // AdminJobMainPage.routeName, (route) => false);
+
+            },
+          ),
+        );
+      }
+    );
   }
   // TODO pass job ass argument
   Widget buildJobDetail(Job job) {

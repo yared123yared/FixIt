@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_group_project/Features/job/models/models.dart';
+import 'package:flutter_group_project/Features/Job/models/models.dart';
 import 'package:http/http.dart' as http;
 class JobDataProvider{
-  final _baseUrl = "http://192.168.137.1:3000/api/jobs";
+  final _baseUrl = "http://192.168.137.1:5001/api/jobs";
   final http.Client  httpClient;
 
 
@@ -13,7 +13,7 @@ class JobDataProvider{
     print("creating job");
       print('job: $job');
       final response = await httpClient.post(
-        Uri.http('192.168.137.1:3000','/api/jobs'),
+        Uri.http('192.168.137.1:5001','/api/jobs'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },

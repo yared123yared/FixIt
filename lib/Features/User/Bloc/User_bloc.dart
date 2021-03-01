@@ -8,7 +8,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   final UserRepository userRepository;
   final Util util;
   UserBloc({@required this.userRepository,@required this.util})
-      : assert(UserRepository != null),
+      : assert(userRepository != null),
         super(UserLoading());
 
   @override
@@ -72,30 +72,31 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       }
     }
   }
-  Stream<UserState> _mapAppLoginEventToState(UserEvent event)  async* {//For Auto login if the user has already logged in
 
-    yield AutoLoginState();
-    try {
-      String token = await util.getUserToken();
-      if (token == null) {
-        yield AutoLoginFailedState();
-        return;
-      }
-      String expiry = await util.getUserToken();
-      if (expiry == null) {
-        yield AutoLoginFailedState();
-        return;
-      }
-      bool isExpired = util.isExpired(expiry);
-      if (isExpired) {
-        yield AutoLoginFailedState();
-        return;
-      } else {
-        User user = await util.getUserInformation();
-        yield AutoLoginSuccessState(user: user);
-      }
-    } catch (e) {
-      yield AutoLoginFailedState();
-    }
-  }
+  // Stream<UserState> _mapAppLoginEventToState(UserEvent event)  async* {//For Auto login if the user has already logged in
+  //
+  //   yield AutoLoginState();
+  //   try {
+  //     String token = await util.getUserToken();
+  //     if (token == null) {
+  //       yield AutoLoginFailedState();
+  //       return;
+  //     }
+  //     String expiry = await util.getUserToken();
+  //     if (expiry == null) {
+  //       yield AutoLoginFailedState();
+  //       return;
+  //     }
+  //     bool isExpired = util.isExpired(expiry);
+  //     if (isExpired) {
+  //       yield AutoLoginFailedState();
+  //       return;
+  //     } else {
+  //       User user = await util.getUserInformation();
+  //       yield AutoLoginSuccessState(user: user);
+  //     }
+  //   } catch (e) {
+  //     yield AutoLoginFailedState();
+  //   }
+  // }
 }

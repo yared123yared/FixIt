@@ -30,22 +30,20 @@ class UserLoadSuccess extends UserState{//On getting one specific User
 }
 
 class UserOperationFailure extends UserState {}
-class AutoLoginState extends UserState {}
-
-class AutoLoginSuccessState extends UserState {//TO check if the user has already logged in on starting the app
+class SignUpSuccessState extends UserState {
   final User user;
-  AutoLoginSuccessState({@required this.user});
-
-  @override
-  List<Object> get props => [user];
+  SignUpSuccessState({@required this.user});
 }
 
-class AutoLoginFailedState extends UserState {
+class EmailAlreadyExistState extends UserState {}
+
+class PhoneAlreadyExistState extends UserState {}
+
+class IncorrectUsernameOrPasswordState extends UserState {}
+
+class InvalidInputState extends UserState {}
+
+class SignUpFailedState extends UserState {
   final String message;
-  AutoLoginFailedState({this.message});
+  SignUpFailedState({this.message});
 }
-class LoggingOutState extends UserState {}
-
-class LoggingOutSuccessState extends UserState {}
-
-class LoggingOutErrorState extends UserState {}

@@ -181,8 +181,8 @@
 // }
 import 'dart:convert';
 
-import 'package:flutter_group_project/Autentication/Data_provider/data_provider.dart';
-import 'package:flutter_group_project/Autentication/Model/User.dart';
+import 'package:flutter_group_project/Features/User/Data_provider/data_provider.dart';
+import 'package:flutter_group_project/Features/User/Model/User.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:http/http.dart' as http;

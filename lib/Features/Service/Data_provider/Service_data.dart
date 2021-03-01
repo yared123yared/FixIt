@@ -2,17 +2,18 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 import 'package:http/http.dart' as http;
+import '../../../ip_address.dart';
 import '../Service.dart';
 
 class ServiceDataProvider {
-  final _baseUrl = 'http://192.168.43.163:5000';
+  final _baseUrl = IpAdress.ipAddress;
   final http.Client httpClient;
 
   ServiceDataProvider({@required this.httpClient}) : assert(httpClient != null);
 
   Future<Service> createService(Service service) async {
     final response = await httpClient.post(
-      Uri.http('192.168.43.163:5000', '/Features.Service'),
+      Uri.http(_baseUrl, '/api/services'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -40,7 +41,7 @@ class ServiceDataProvider {
 //    Response response = await get(Uri.encodeFull('http://192.168.137.1:5000/Service'));
    try{
 //     print("try catch method");
-     final response = await http.get('http://192.168.43.163:5000/Features.Service');
+     final response = await http.get('$_baseUrl/api/services');
      if (response.statusCode == 200) {
 //       print("geting the service method completed successfully");
        final services = jsonDecode(response.body) as List;
@@ -62,7 +63,7 @@ class ServiceDataProvider {
     print("Id of service to be deleted $id");
 
     final http.Response response = await http.delete(
-      'http://192.168.43.163:5000/Features.Service/$id',
+      '$_baseUrl/api/services/$id',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -76,7 +77,7 @@ class ServiceDataProvider {
 
   Future<void> updateService(Service service) async {
     final http.Response response = await httpClient.put(
-      'http://192.168.43.163:5000/Features.Service/',
+      '$_baseUrl/api/services/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

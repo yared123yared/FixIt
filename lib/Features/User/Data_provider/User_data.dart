@@ -35,7 +35,7 @@ class UserDataProvider {
       String expiry = response.headers['expiry_date'].toString();
 
       await util.storeUserInformation(user);
-      await util.storeTokenAndExpiration(expiry, token);
+      await util.storeTokenAndExpiration(token);
       return user;
     } else {
       throw Exception('Failed to create User.');
@@ -71,7 +71,7 @@ class UserDataProvider {
         String token = response.headers['Token'].toString();
         String expiry = response.headers['Expiry_date'].toString();
         await util.storeUserInformation(user);
-        await util.storeTokenAndExpiration(expiry, token);
+        await util.storeTokenAndExpiration(token);
         return User.fromJson(jsonDecode(response.body));
       } else {
         throw Exception('Failed to load User');

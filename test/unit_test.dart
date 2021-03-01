@@ -1,9 +1,9 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:flutter_group_project/Autentication/Bloc/bloc.dart';
-import 'package:flutter_group_project/Autentication/Data_provider/User_data.dart';
-import 'package:flutter_group_project/Autentication/Model/User.dart';
-import 'package:flutter_group_project/Autentication/Repository/repository.dart';
-import 'package:flutter_group_project/Autentication/util/util.dart';
+import 'package:flutter_group_project/Features/User/Bloc/bloc.dart';
+import 'package:flutter_group_project/Features/User/Data_provider/data_provider.dart';
+import 'package:flutter_group_project/Features/User/Model/User.dart';
+import 'package:flutter_group_project/Features/User/Repository/repository.dart';
+import 'package:flutter_group_project/Features/User/util/util.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 //

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_group_project/drawer/admin_drawer.dart';
+
 const _kTitleTextStyle = TextStyle(
     color: Color(0xffe6020a), fontSize: 24.0, fontWeight: FontWeight.bold);
 const _kServiceTitleTextStyle = TextStyle(
@@ -9,6 +9,7 @@ TextStyle(color: Colors.green, fontSize: 18.0, fontWeight: FontWeight.bold);
 const _kDetailsTextStyle = TextStyle(
     color: Colors.black54, fontSize: 16.0, fontWeight: FontWeight.w500);
 class AdminServiceDetail extends StatelessWidget {
+  static const routeName='/admin/service/detail';
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;

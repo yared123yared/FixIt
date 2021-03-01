@@ -27,10 +27,10 @@ class Util {//User Info management ... Token and Shared Preferences
     return user;
   }
 
-  Future<void> storeTokenAndExpiration(String expiry, String token) async {
+  Future<void> storeTokenAndExpiration(String token) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('token', token);
-    await prefs.setString('expiry', expiry);
+
   }
 
   Future<String> getUserToken() async {

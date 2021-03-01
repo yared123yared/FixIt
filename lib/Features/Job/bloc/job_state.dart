@@ -1,7 +1,5 @@
-
 import 'package:equatable/equatable.dart';
-import 'package:flutter_group_project/Features/job/models/models.dart';
-
+import 'package:flutter_group_project/Features/Job/job.dart';
 class JobState extends Equatable{
   const JobState();
   @override

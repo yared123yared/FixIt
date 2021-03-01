@@ -52,7 +52,7 @@ class UserItem extends StatelessWidget {
 
 
             ),
-            onTap: () => Navigator.of(context).pushNamed(UserDetail.routeName, arguments:selectedUser[index]),
+            // onTap: () => Navigator.of(context).pushNamed(UserDetail.routeName, arguments:selectedUser[index]),
           ),
 //            onTap: (){
 //              print(this.index);

@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_group_project/Features/Role/models/role.dart';
+import 'Features/Job/models/job.dart';
 import 'Features/Service/Service.dart';
-import 'Features/job/models/job.dart';
 import 'Users/users.dart';
 
 
 class ServiceAppRoute {
   static Route generateRoute(RouteSettings settings) {
     switch(settings.name){
-      case '/':
-//        /
-        return MaterialPageRoute(
-            builder: (context) => AdminServiceMainPage(
-//              the arguments will pass here
-            ));
-        break;
+//       case '/':
+// //        /
+//         return MaterialPageRoute(
+//             builder: (context) => AdminServiceMainPage(
+// //              the arguments will pass here
+//             ));
+//         break;
       case AdminMainPage.routeName:
 //        /admin
         AdminArgument args = settings.arguments;
@@ -25,27 +25,27 @@ class ServiceAppRoute {
         break;
 
 
-      case AdminServiceMainPage.routeName:
-//        /admin/service
-        return MaterialPageRoute(
-            builder: (context) => AdminServiceMainPage(
-//              the arguments will pass here
-            ));
-        break;
-      case AdminServiceDetail.routeName:
-//        /admin/service/detail
-        return MaterialPageRoute(
-            builder: (context) => AdminServiceDetail(
-//              the arguments will pass here
-            ));
-        break;
-      case AdminServiceCreate.routeName:
-//        /admin/service/create
-        return MaterialPageRoute(
-            builder: (context) => AdminServiceCreate(
-//              the arguments will pass here
-            ));
-        break;
+//       case AdminServiceMainPage.routeName:
+// //        /admin/service
+//         return MaterialPageRoute(
+//             builder: (context) => AdminServiceMainPage(
+// //              the arguments will pass here
+//             ));
+//         break;
+//       case AdminServiceDetail.routeName:
+// //        /admin/service/detail
+//         return MaterialPageRoute(
+//             builder: (context) => AdminServiceDetail(
+// //              the arguments will pass here
+//             ));
+//         break;
+//       case AdminServiceCreate.routeName:
+// //        /admin/service/create
+//         return MaterialPageRoute(
+//             builder: (context) => AdminServiceCreate(
+// //              the arguments will pass here
+//             ));
+//         break;
       case AdminJobMainPage.routeName:
 //        /admin/job
         return MaterialPageRoute(
@@ -62,27 +62,27 @@ class ServiceAppRoute {
 //              the arguments will pass here
             ));
         break;
-      case AdminRoleMainPage.routeName:
-//        /admin/technician
-        return MaterialPageRoute(
-            builder: (context) => AdminRoleMainPage(
-//              the arguments will pass here
-            ));
-        break;
-      case AdminRoleDetail.routeName:
-//        /admin/technician/detail
-        return MaterialPageRoute(
-            builder: (context) => AdminRoleDetail(
-//              the arguments will pass here
-            ));
-        break;
-      case UserMain.routeName:
-//        /user
-        return MaterialPageRoute(
-            builder: (context) => UserMain(
-//              the arguments will pass here
-            ));
-        break;
+//       case AdminRoleMainPage.routeName:
+// //        /admin/technician
+//         return MaterialPageRoute(
+//             builder: (context) => AdminRoleMainPage(
+// //              the arguments will pass here
+//             ));
+//         break;
+//       case AdminRoleDetail.routeName:
+// //        /admin/technician/detail
+//         return MaterialPageRoute(
+//             builder: (context) => AdminRoleDetail(
+// //              the arguments will pass here
+//             ));
+//         break;
+//       case UserMain.routeName:
+// //        /user
+//         return MaterialPageRoute(
+//             builder: (context) => UserMain(
+// //              the arguments will pass here
+//             ));
+//         break;
       case UserJobMain.routeName:
 //        /user/job
         return MaterialPageRoute(

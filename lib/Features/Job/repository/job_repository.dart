@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_group_project/Features/job/job.dart';
+import 'package:flutter_group_project/Features/Job/data_provider/job_data.dart';
+import 'package:flutter_group_project/Features/Job/models/job.dart';
 
 
 class JobRepository{
