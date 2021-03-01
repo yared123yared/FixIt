@@ -34,13 +34,13 @@ class UserItem extends StatelessWidget {
 
 
 
-            title: Text(selectedUser[index].fName !=null ? (selectedUser[index].fName) : "No name yet :(",
+            title: Text(selectedUser[index].FullName !=null ? (selectedUser[index].FullName) : "No name yet :(",
               style: Theme.of(context).textTheme.headline6,),
-            subtitle: Text(selectedUser[index].role !=null ?selectedUser[index].role: "No role yet :(" ,),
+            subtitle: Text(selectedUser[index].Role !=null ?selectedUser[index].Role: "No role yet :(" ,),
             trailing: MediaQuery.of(context).size.width > 450 ? FlatButton.icon(
               textColor:Theme.of(context).errorColor,
               icon: Icon(Icons.delete_forever,color: Theme.of(context).errorColor,),
-              onPressed: ()=>makeFavorite(selectedUser[index].email),
+              onPressed: ()=>makeFavorite(selectedUser[index].Email),
               label:Text("Give Role"),
 
 
@@ -48,7 +48,7 @@ class UserItem extends StatelessWidget {
 
             ): IconButton(
                 icon: Icon(Icons.edit,color: Theme.of(context).errorColor,),
-                onPressed: ()=>makeFavorite(selectedUser[index].email)
+                onPressed: ()=>makeFavorite(selectedUser[index].Email)
 
 
             ),

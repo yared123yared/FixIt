@@ -26,11 +26,16 @@ class AuthDataProvider {
     print('logging------------------------here-');
 
     User user1;
-    final urlLogin ="$URL/Users/authenticate";
+    final urlLogin ="http://192.168.137.1:5001/api/users/authenticate";
     try {
+      print("++++++++Try Method");
+      print("Username : ${auth.email}");
       final response = await httpClient.post(
         urlLogin,
-        body: json.encode({
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, dynamic>{
 
           'username': auth.email,
 
@@ -41,11 +46,11 @@ class AuthDataProvider {
       print('code----------${response.statusCode}');
       if (response.statusCode == 422) {
         throw HttpException('Invalid Input');
-      } else if (response.statusCode == 404) {
+      } else if (response.statusCode == 400) {
         throw HttpException('Incorrect username or password');
       } else {
-        final extractedData =
-            json.decode(response.body) as Map<String, dynamic>;
+        print("++++++ELSE+++++");
+        final extractedData = json.decode(response.body) as Map<String, dynamic>;
         user1 = UserModel.fromJson(extractedData).user;
         String token = UserModel.fromJson(extractedData).token;
         // String expiry = response.headers['expiry_date'].toString();
@@ -54,6 +59,8 @@ class AuthDataProvider {
         await util.storeTokenAndExpiration(token);
       }
     } catch (e) {
+      print("++++++++CATCH++++");
+      print("Exception $e");
       throw e;
     }
     return user1;

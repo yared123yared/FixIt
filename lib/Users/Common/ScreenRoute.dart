@@ -26,8 +26,8 @@ class UserAppRoute {//All the routing info
                 if (state is AutoLoginState) {
                   return loading_screen(title: 'Authenticating');
                 } else if (state is AutoLoginSuccessState) {//If the User has already signed in switch by the role
-                  isAdmin = state.user.role == 'ADMIN';
-                  isTechnician = state.user.role == 'TECHNICIAN';
+                  isAdmin = state.user.Role == 'ADMIN';
+                  isTechnician = state.user.Role == 'TECHNICIAN';
                   isAuthenticated = true;
                   user=state.user;
                 } else if (state is AutoLoginFailedState) {

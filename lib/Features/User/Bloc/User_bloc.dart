@@ -44,7 +44,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     if (event is UserCreate) {
       try {
         await userRepository.createUser(event.user);
-        final user= await userRepository.getUser(event.user.email);
+        final user= await userRepository.getUser(event.user.Email);
         yield UserLoadSuccess(user);
       } catch (_) {
         yield UserOperationFailure();
@@ -63,7 +63,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
     if (event is UserDelete) {
       try {
-        await userRepository.deleteUser(event.user.email);
+        await userRepository.deleteUser(event.user.Email);
         final user = await userRepository.getUsers();
         yield UsersLoadSuccess(user);
       } catch (e) {

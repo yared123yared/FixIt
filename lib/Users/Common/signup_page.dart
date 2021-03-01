@@ -37,10 +37,10 @@ class _RegisterState extends State<Register> {
     return BlocConsumer<UserBloc, UserState>(
         listener:(_,state){
           if(state is UserLoadSuccess){
-            if(state.user.password==_myPasswordController.text){
-              if(state.user.role=="ADMIN"){
+            if(state.user.Password==_myPasswordController.text){
+              if(state.user.Role=="ADMIN"){
                 Navigator.of(context).pushReplacementNamed(CategoryMainScreen.routeName, arguments: UserArgument(user: user));
-              }else if(state.user.role=="TECHNICIAN"){
+              }else if(state.user.Role=="TECHNICIAN"){
                 Navigator.of(context).pushReplacementNamed(Technician_main.routeName, arguments: UserArgument(user: user));
               }else{
                 Navigator.of(context).pushReplacementNamed(Users_main.routeName, arguments: UserArgument(user: user));
@@ -407,12 +407,12 @@ class _RegisterState extends State<Register> {
         final UserEvent event = UserCreate(
           User(
 
-            email: _myemailController.text,
-            fName: _mynameController.text,
-            phone: _myPhoneController.text,
-            password: _myPasswordController.text,
-            imageUrl: 'this._user["intermediatePrice"]',
-            role: 'this._user["advancedPrice"]',
+            Email: _myemailController.text,
+            FullName: _mynameController.text,
+            Phone: _myPhoneController.text,
+            Password: _myPasswordController.text,
+            Picture: 'this._user["intermediatePrice"]',
+            Role: 'this._user["advancedPrice"]',
           ),
         );
         BlocProvider.of<UserBloc>(context).add(event);

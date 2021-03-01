@@ -83,7 +83,7 @@ class CategoryMainScreen extends StatelessWidget {//Main screen for the ADMIM
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('${(this.admin.fName)}'),
+        title: Text('${(this.admin.FullName)}'),
         actions: [
           IconButton(
             icon: Icon(Icons.edit),
@@ -161,14 +161,14 @@ class CategoryMainScreen extends StatelessWidget {//Main screen for the ADMIM
         child: Center(
           child: ListTile(
             leading: CircleAvatar(
-              backgroundImage: AssetImage('Assets/Images/${user[index].imageUrl}'),
+              backgroundImage: AssetImage('Assets/Images/${user[index].Picture}'),
             ),
 
 
 
-            title: Text(user[index].email !=null ? user[index].email : "place holder",
+            title: Text(user[index].Email !=null ? user[index].Email : "place holder",
               style: Theme.of(context).textTheme.headline6,),
-            subtitle: Text(user[index].fName !=null ?user[index].fName: "Place holder" ,),
+            subtitle: Text(user[index].FullName !=null ?user[index].FullName: "Place holder" ,),
             trailing: MediaQuery.of(context).size.width > 450 ? FlatButton.icon(
               textColor:Theme.of(context).errorColor,
               icon: Icon(Icons.delete_forever,color: Theme.of(context).errorColor,),

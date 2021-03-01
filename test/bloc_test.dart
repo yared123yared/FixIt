@@ -36,33 +36,33 @@ void main() {
             () {
           final List<User> mockItem = [
             User(
-                email: "asdfasd@gmail.com",
-                fName: "asdfasd",
-                password: "asdfasd@44",
-                phone: "0945684641",
-                role: "ADMIN",
-                imageUrl: "images/StateBags.jpg"),
+                Email: "asdfasd@gmail.com",
+                FullName: "asdfasd",
+                Password: "asdfasd@44",
+                Phone: "0945684641",
+                Role: "ADMIN",
+                Picture: "images/StateBags.jpg"),
             User(
-                email: "jghfghjg@gmail.com",
-                fName: "jghfghjg",
-                password: "jghfghjg@44",
-                phone: "0945684641",
-                role: "ADMIN",
-                imageUrl: "images/StateBags.jpg"),
+                Email: "jghfghjg@gmail.com",
+                FullName: "jghfghjg",
+                Password: "jghfghjg@44",
+                Phone: "0945684641",
+                Role: "ADMIN",
+                Picture: "images/StateBags.jpg"),
             User(
-                email: "nbzxmcbv@gmail.com",
-                fName: "nbzxmcbv",
-                password: "nbzxmcbv@44",
-                phone: "0945684641",
-                role: "ADMIN",
-                imageUrl: "images/StateBags.jpg"),
+                Email: "nbzxmcbv@gmail.com",
+                FullName: "nbzxmcbv",
+                Password: "nbzxmcbv@44",
+                Phone: "0945684641",
+                Role: "ADMIN",
+                Picture: "images/StateBags.jpg"),
             User(
-                email: "qwewqre@gmail.com",
-                fName: "qwewqre",
-                password: "qwewqre@44",
-                phone: "0986413545",
-                role: "ADMIN",
-                imageUrl: "images/StateBags.jpg"),
+                Email: "qwewqre@gmail.com",
+                FullName: "qwewqre",
+                Password: "qwewqre@44",
+                Phone: "0986413545",
+                Role: "ADMIN",
+                Picture: "images/StateBags.jpg"),
           ];
           blocTest(
               'emits [ItemLoad, ItemLoadSuccess] when WeatherRequested is added and getWeather succeeds',
@@ -106,36 +106,36 @@ void main() {
         'ItemRequested',
             () {
           final User mockItem = User(
-              email: "qwewqre@gmail.com",
-              fName: "qwewqre",
-              password: "qwewqre@44",
-              phone: "0986413545",
-              role: "ADMIN",
-              imageUrl: "images/StateBags.jpg");
+              Email: "qwewqre@gmail.com",
+              FullName: "qwewqre",
+              Password: "qwewqre@44",
+              Phone: "0986413545",
+              Role: "ADMIN",
+              Picture: "images/StateBags.jpg");
 
           final List<User> mockGetItem = [
             User(
-                email: "qwewqre@gmail.com",
-                fName: "qwewqre",
-                password: "qwewqre@44",
-                phone: "0986413545",
-                role: "ADMIN",
-                imageUrl: "images/StateBags.jpg"),
+                Email: "qwewqre@gmail.com",
+                FullName: "qwewqre",
+                Password: "qwewqre@44",
+                Phone: "0986413545",
+                Role: "ADMIN",
+                Picture: "images/StateBags.jpg"),
             User(
-                email: "qwewqre@gmail.com",
-                fName: "qwewqre",
-                password: "qwewqre@44",
-                phone: "0986413545",
-                role: "ADMIN",
-                imageUrl: "images/StateBags.jpg"),
+                Email: "qwewqre@gmail.com",
+                FullName: "qwewqre",
+                Password: "qwewqre@44",
+                Phone: "0986413545",
+                Role: "ADMIN",
+                Picture: "images/StateBags.jpg"),
 
             User(
-              email: "qwewqre@gmail.com",
-              fName: "qwewqre",
-              password: "qwewqre@44",
-              phone: "0986413545",
-              role: "ADMIN",
-              imageUrl: "images/StateBags.jpg"),
+              Email: "qwewqre@gmail.com",
+              FullName: "qwewqre",
+              Password: "qwewqre@44",
+              Phone: "0986413545",
+              Role: "ADMIN",
+              Picture: "images/StateBags.jpg"),
           ];
 
           blocTest(

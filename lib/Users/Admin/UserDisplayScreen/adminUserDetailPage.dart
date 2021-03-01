@@ -19,7 +19,7 @@ class UserDetail extends StatelessWidget {//To show detail of User
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('${(this.user.fName)}'),
+        title: Text('${(this.user.FullName)}'),
         actions: [
           IconButton(
             icon: Icon(Icons.edit),
@@ -44,8 +44,8 @@ class UserDetail extends StatelessWidget {//To show detail of User
         child: Column(
           children: [
             ListTile(
-              title: Text('User Email: ${this.user.email}'),
-              subtitle: Text('Full Name: ${this.user.fName}'),
+              title: Text('User Email: ${this.user.Email}'),
+              subtitle: Text('Full Name: ${this.user.FullName}'),
             ),
             Text(
               'Details',
@@ -57,14 +57,14 @@ class UserDetail extends StatelessWidget {//To show detail of User
             SizedBox(
               height: 10,
             ),
-            Text('Phone: ${this.user.phone}',style: TextStyle(
+            Text('Phone: ${this.user.Phone}',style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
             ),),
             SizedBox(
               height: 10,
             ),
-            Text('Role: ${this.user.role}',style: TextStyle(
+            Text('Role: ${this.user.Role}',style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
             )),
