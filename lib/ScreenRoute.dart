@@ -183,8 +183,10 @@ class ServiceAppRoute {
         break;
       case UserCreateJob.routeName:
 //        /user/job/create
+      final JobArguments args = settings.arguments;
         return MaterialPageRoute(
             builder: (context) => UserCreateJob(
+              args: args,
 //              the arguments will pass here
             ));
         break;
@@ -260,4 +262,12 @@ class UserArgument {
   final User.User user;
   final bool edit;
   UserArgument({this.user, this.edit});
+}
+
+class CategoryArgument{
+  final String title;
+  final String image;
+  final List<Service> services;
+
+  CategoryArgument({this.services, this.title,this.image});
 }

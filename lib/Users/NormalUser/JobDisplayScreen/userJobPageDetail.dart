@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_group_project/Features/Job/bloc/bloc.dart';
 import 'package:flutter_group_project/Features/Job/models/models.dart';
+
+import '../userMainPage.dart';
 const _kTitleTextStyle = TextStyle(
     color: Color(0xffe6020a), fontSize: 24.0, fontWeight: FontWeight.bold);
 const _kJobTitleTextStyle = TextStyle(
@@ -16,6 +18,7 @@ const _kStatusTextStyle = TextStyle(
 class UserJobDetail extends StatelessWidget {
   static const routeName='/user/job/detail';
   final Job job;
+
   UserJobDetail({this.job});
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -27,6 +30,7 @@ class UserJobDetail extends StatelessWidget {
             appBar: AppBar(
               title: Text("${this.job.jobName}"),
               centerTitle: true,
+
             ),
 
             body: Container(
@@ -57,10 +61,38 @@ class UserJobDetail extends StatelessWidget {
               ),
             ),
             floatingActionButton: FloatingActionButton(
-              child: Icon(Icons.check_circle_sharp,color:Colors.green),
+              child: Icon(Icons.check_circle_sharp,
+                  ),
+              backgroundColor: job.doneStatus == "done" ? Colors.green : Colors.grey,
               onPressed: () async {
-                await context.read<JobBloc>().add(JobDelete(this.job));
+                final event = job.doneStatus =='done'? JobUpdate(
+                  Job(
+                      jobId: job.jobId,
+                      jobName: job.jobName,
+                      description:job.description,
+                      userId: job.userId,
+                      location: job.location,
+                      technicianId: job.technicianId,
+                      acceptanceStatus:job.acceptanceStatus!=null? job.acceptanceStatus: null,
+                      doneStatus: null
+                  ),
+                ):  JobUpdate(
+                  Job(
+                      jobId: job.jobId,
+                      jobName: job.jobName,
+                      description:job.description,
+                      userId: job.userId,
+                      location: job.location,
+                      technicianId: job.technicianId,
+                      acceptanceStatus:job.acceptanceStatus!=null? job.acceptanceStatus: null,
+                      doneStatus: "done"
+                  ),
+                );
+                await context.read<JobBloc>().add(
+                   event
+                );
                 Navigator.of(context).pop();
+//                Navigator.of(context).pushAndRemoveUntil(UserMain.routeName, (route) => false);
                 // AdminJobMainPage.routeName, (route) => false);
 
               },

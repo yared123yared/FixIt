@@ -30,23 +30,40 @@ class Job extends Equatable{
 
     List<Object> get props => [jobName,description,userId,location,technicianId,acceptanceStatus,doneStatus,user];
 
-    factory Job.fromJson(Map<String, dynamic> json){
-      final user = User(
-        userId: json['user']['userId'],
-        fullName: json['user']['fullName'] ,
-        email: json['user']['email'] ,
-        password: json['user']['password'],
-        phone: json['user']['phone'] ,
-        address: json['user']['address'] ,
-        picture: json['user']['picture'] ,
-        sex: json['user']['sex'] ,
-        dob: json['user']['dob'] ,
-        role: json['user']['role'] ,
+    factory Job.fromJsonCreate(Map<String, dynamic> json){
+      return Job(
+          jobId: json["jobId"],
+          jobName: json["jobName"],
+          description: json["description"],
+          userId: json["userId"],
+          location: json["location"],
+          technicianId: json["technicianId"],
+          acceptanceStatus: json["accepteStatus"],
+          doneStatus: json["doneStatus"],
 
       );
+    }
+    factory Job.fromJson(Map<String, dynamic> json){
+      User user;
+      final userRaw = json['user'];
+      userRaw!=null?user = User(
+        userId: userRaw['userId'],
+        fullName: userRaw['fullName'] ,
+        email: userRaw['email'] ,
+        password: userRaw['password'],
+        phone: userRaw['phone'] ,
+        address: userRaw['address'] ,
+        picture: userRaw['picture'] ,
+        sex: userRaw['sex'] ,
+        dob: userRaw['dob'] ,
+        role: userRaw['role'] ,
+
+      // ignore: unnecessary_statements
+      ):null;
       final technicianRaw = json['technician'];
       final techUserRaw = technicianRaw['user'];
-      final techUser =  User(
+      User techUser;
+       techUserRaw!=null?techUser =  User(
         userId: techUserRaw['userId'],
         fullName: techUserRaw['fullName'] ,
         email: techUserRaw['email'] ,
@@ -58,7 +75,9 @@ class Job extends Equatable{
         dob: techUserRaw['dob'] ,
         role: techUserRaw['role'] ,
 
-      );
+      // ignore: unnecessary_statements
+      ):null;
+
       final technicain = Technician(
           technicianId: technicianRaw['technicianId'],
           userId: technicianRaw['userId'],
