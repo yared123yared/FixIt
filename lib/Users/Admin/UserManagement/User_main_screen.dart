@@ -83,7 +83,7 @@ class CategoryMainScreen extends StatelessWidget {//Main screen for the ADMIM
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('${(this.admin.FullName)}'),
+        // title: Text('${(this.admin?.FullName)}'),
         actions: [
           IconButton(
             icon: Icon(Icons.edit),

@@ -7,8 +7,8 @@ import '../../../ScreenRoute.dart';
 
 const _kTitleTextStyle = TextStyle(
     color: Color(0xffe6020a), fontSize: 24.0, fontWeight: FontWeight.bold);
-const _kServiceTitleTextStyle = TextStyle(
-    color: Color(0xffe602ba), fontSize: 18.0, fontWeight: FontWeight.bold);
+// const _kServiceTitleTextStyle = TextStyle(
+//     color: Color(0xffe602ba), fontSize: 18.0, fontWeight: FontWeight.bold);
 const _kServiceLocationTextStyle =
 TextStyle(color: Colors.green, fontSize: 18.0, fontWeight: FontWeight.bold);
 const _kDetailsTextStyle = TextStyle(

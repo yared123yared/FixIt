@@ -47,7 +47,7 @@ class UserDataProvider {
     try {
       String token = await util.getUserToken();
       String expiry = await util.getExpiryTime();
-      final response = await httpClient.get('http://192.168.137.1:4000/User',
+      final response = await httpClient.get('http://192.168.137.1:5001/api/users',
           headers: {HttpHeaders.authorizationHeader: token, 'expiry': expiry});
       if (response.statusCode == 200) {
         final user = jsonDecode(response.body) as List;
@@ -104,7 +104,7 @@ class UserDataProvider {
     String token = await util.getUserToken();
     String expiry = await util.getExpiryTime();
     final http.Response response = await httpClient.put(
-      'http://192.168.137.1:4000/User/',
+      'http://192.168.137.1:5001/api/users',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         HttpHeaders.authorizationHeader: token, 'expiry': expiry

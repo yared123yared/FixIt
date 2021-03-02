@@ -5,6 +5,8 @@ import 'package:flutter_group_project/Features/Role/models/models.dart';
 import 'package:flutter_group_project/ip_address.dart';
 import 'package:http/http.dart' as http;
 
+import '../../../ip_address.dart';
+
 class RoleDataProvider {
   final _baseUrl = "${IpAdress.ipAddress}/api/roles";
   final http.Client httpClient;
