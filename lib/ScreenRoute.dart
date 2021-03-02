@@ -89,13 +89,13 @@ class ServiceAppRoute {
 // //              the arguments will pass here
 //             ));
 //         break;
-//       case UserMain.routeName:
-// //        /user
-//         return MaterialPageRoute(
-//             builder: (context) => UserMain(
-// //              the arguments will pass here
-//             ));
-//         break;
+       case UserMain.routeName:
+ //        /user
+         return MaterialPageRoute(
+             builder: (context) => UserMain(
+ //              the arguments will pass here
+             ));
+         break;
       case UserJobMain.routeName:
 //        /user/job
         return MaterialPageRoute(
@@ -104,9 +104,11 @@ class ServiceAppRoute {
             ));
       break;
       case UserJobDetail.routeName:
+        final args = settings.arguments;
 //        /user/job/detail
         return MaterialPageRoute(
             builder: (context) => UserJobDetail(
+
 //              the arguments will pass here
             ));
         break;
@@ -134,8 +136,10 @@ class ServiceAppRoute {
         break;
       case UserServiceDetail.routeName:
 //        /user/category/service/detail
+      final CategoryArgument lists = settings.arguments;
         return MaterialPageRoute(
             builder: (context) => UserServiceDetail(
+              services: lists
 //              the arguments will pass here
             ));
         break;
@@ -184,4 +188,11 @@ class RoleArgument{
   final Role role;
   final bool edit;
   RoleArgument({this.role, this.edit});
+}
+
+class CategoryArgument{
+  final List<Service> services;
+  final String title;
+  final String image;
+  CategoryArgument({this.services, this.title, this.image});
 }

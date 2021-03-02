@@ -85,7 +85,7 @@ class UserAppRoute {//All the routing info
           ));
     }
 
-    return MaterialPageRoute(builder: (context) => AdminMainPage(admin: user));
+    return MaterialPageRoute(builder: (context) => AdminMainPage());
   }
 }
 
