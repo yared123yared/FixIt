@@ -113,8 +113,8 @@ class MyApp extends StatelessWidget {
               headline6:
               TextStyle(fontSize: 24, fontFamily: 'RobotoCondensed'))),
 
-      initialRoute: '/',
-      onGenerateRoute: UserAppRoute.generateRoute,
+      initialRoute:AdminMainPage.routeName,
+      onGenerateRoute: ServiceAppRoute.generateRoute,
       // onUnknownRoute: (settings) {
       //   return MaterialPageRoute(builder: (ctx) => CategoryMainScreen());
       // },

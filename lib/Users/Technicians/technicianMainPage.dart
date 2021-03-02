@@ -20,7 +20,8 @@ class TechnicianMainPage extends StatelessWidget {
               ),
               decoration: BoxDecoration(
                 gradient: LinearGradient(begin: Alignment.bottomLeft,end: Alignment.topRight,
-                    colors:[Colors.purple,Colors.green] ),
+//                    colors:[Colors.purple,Colors.green]
+                ),
 
                 // color: Colors.purpleAccent
               ),

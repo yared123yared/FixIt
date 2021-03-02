@@ -7,6 +7,8 @@ import 'ServiceDisplayScreen/adminService.dart';
 
 
 class AdminMainPage extends StatefulWidget {
+  final int index;
+  AdminMainPage({this.index});
   static const routeName='/admin';
 
   @override
@@ -81,17 +83,18 @@ class _AdminMainPageState extends State<AdminMainPage> {
 
           children: [
             UserAccountsDrawerHeader(
-              accountName: Text('Fasikaw'),
-              accountEmail: Text('fasikaw@gmail.com'),
+              accountName: Text('admin'),
+              accountEmail: Text('admin@fixit.com'),
               currentAccountPicture: CircleAvatar(
                 backgroundImage: AssetImage('assets/images/user.jpg'),
               ),
               arrowColor: Colors.purple,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(begin: Alignment.bottomLeft,end: Alignment.topRight,
-                    colors:[Colors.blue,Colors.green] ),
-                // color: Colors.purpleAccent
-              ),
+//              decoration: BoxDecoration(
+//                gradient: LinearGradient(begin: Alignment.bottomLeft,end: Alignment.topRight,
+//                    colors:[Colors.blue,Colors.green]
+//                ),
+//                // color: Colors.purpleAccent
+//              ),
 
             ),
             ListTile(
@@ -144,7 +147,8 @@ class _AdminMainPageState extends State<AdminMainPage> {
         animationCurve: Curves.bounceOut,
         onTap: (index){
           setState(() {
-            _navIndex = index;
+            widget.index == 0? _navIndex=widget.index :_navIndex =index;
+
           });
         },
       ),
