@@ -26,6 +26,7 @@ class AdminServiceDetail extends StatelessWidget {
         title: Text('${this.service.ServiceName}'),
         actions: [
           IconButton(
+            key: Key('adminServiceEditButton'),
             icon: Icon(Icons.edit),
             onPressed: () => Navigator.of(context).pushNamed(
               AdminServiceCreate.routeName,
@@ -36,6 +37,7 @@ class AdminServiceDetail extends StatelessWidget {
             width: 32,
           ),
           IconButton(
+            key: Key('adminServiceDeleteButton'),
               icon: Icon(Icons.delete),
               onPressed: () {
                 BlocProvider.of<ServiceBloc>(context).add(ServiceDelete(this.service));

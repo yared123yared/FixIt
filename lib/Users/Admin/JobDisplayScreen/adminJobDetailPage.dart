@@ -61,6 +61,7 @@ class AdminJobDetail extends StatelessWidget {
             ),
           ),
           floatingActionButton: FloatingActionButton(
+            key: Key('adminJobDeleteButton'),
             child: Icon(Icons.delete),
             onPressed: () async {
               await context.read<JobBloc>().add(JobDelete(this.job));

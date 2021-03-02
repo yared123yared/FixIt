@@ -40,6 +40,7 @@ void main()
   //
   AuthDataProvider authDataProvider= AuthDataProvider(httpClient: http.Client());
   final AuthenticationRepository authenticationRepository=AuthenticationRepository(authDataProvider: authDataProvider);
+  
   runApp(
     FixIt(serviceRepository: serviceRepository,
       jobRepository: jobRepository,

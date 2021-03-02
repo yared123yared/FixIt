@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_group_project/Features/Service/Service.dart';
-import 'package:flutter_group_project/Users/Admin/UserManagement/User_main_screen.dart';
-
 import '../../../ScreenRoute.dart';
 import '../admin.dart';
-
-
-
 
 class AdminServiceCreate extends StatefulWidget {
   static const routeName = '/admin/service/create';
@@ -35,24 +30,27 @@ class _AddUpdateServiceState extends State<AdminServiceCreate> {
           key: _formKey,
           child: Column(
             children: [
-
               TextFormField(
-                  initialValue: widget.args.edit ? widget.args.service.ServiceName : '',
+                  key: Key('serviceNameField'),
+                  initialValue:
+                      widget.args.edit ? widget.args.service.ServiceName : '',
                   validator: (value) {
                     if (value.isEmpty) {
-                      return 'Please enter course code';
+                      return 'Please enter service name';
                     }
                     return null;
                   },
-                  decoration: InputDecoration(labelText: 'Features.Service Name'),
+                  decoration:
+                      InputDecoration(labelText: 'Features.Service Name'),
                   onSaved: (value) {
                     setState(() {
                       this._service["serviceName"] = value;
                     });
                   }),
               TextFormField(
+                  key: Key('serviceDescription'),
                   initialValue:
-                  widget.args.edit ? widget.args.service.Description : '',
+                      widget.args.edit ? widget.args.service.Description : '',
                   validator: (value) {
                     if (value.isEmpty) {
                       return 'Please enter service  Description';
@@ -64,12 +62,12 @@ class _AddUpdateServiceState extends State<AdminServiceCreate> {
                     this._service["description"] = value;
                   }),
               TextFormField(
-                  initialValue: widget.args.edit
-                      ? widget.args.service.Category
-                      : '',
+                  key: Key('serviceCategoryField'),
+                  initialValue:
+                      widget.args.edit ? widget.args.service.Category : '',
                   validator: (value) {
                     if (value.isEmpty) {
-                      return 'Please enter Features.Service Category';
+                      return 'Please enter Service Category';
                     }
                     return null;
                   },
@@ -79,14 +77,14 @@ class _AddUpdateServiceState extends State<AdminServiceCreate> {
                       this._service["category"] = value;
                     });
                   }),
-
               TextFormField(
+                  key: Key('serviceInitialPriceField'),
                   initialValue: widget.args.edit
                       ? widget.args.service.InitialPrice.toString()
                       : '',
                   validator: (value) {
                     if (value.isEmpty) {
-                      return 'Please enter Features.Service Initial Pice';
+                      return 'Please enter Service Initial Pice';
                     }
                     return null;
                   },
@@ -97,12 +95,13 @@ class _AddUpdateServiceState extends State<AdminServiceCreate> {
                     });
                   }),
               TextFormField(
+                  key: Key('serviceIntermidiatePriceField'),
                   initialValue: widget.args.edit
                       ? widget.args.service.IntermediatePrice.toString()
                       : '',
                   validator: (value) {
                     if (value.isEmpty) {
-                      return 'Please enter Features.Service Intermediate Pice';
+                      return 'Please enter Service Intermediate Pice';
                     }
                     return null;
                   },
@@ -113,6 +112,7 @@ class _AddUpdateServiceState extends State<AdminServiceCreate> {
                     });
                   }),
               TextFormField(
+                  key: Key('serviceAdancedPriceField'),
                   initialValue: widget.args.edit
                       ? widget.args.service.AdvancedPrice.toString()
                       : '',
@@ -129,6 +129,7 @@ class _AddUpdateServiceState extends State<AdminServiceCreate> {
                     });
                   }),
               Padding(
+                key: Key('serviceSaveButton'),
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: ElevatedButton.icon(
                   onPressed: () {
@@ -137,39 +138,38 @@ class _AddUpdateServiceState extends State<AdminServiceCreate> {
                       form.save();
                       final ServiceEvent event = widget.args.edit
                           ? ServiceUpdate(
-
-                        Service(
-                          id: widget.args.service.id,
-                          ServiceName: this._service["serviceName"],
-                          Description: this._service["description"],
-                          Category: this._service["category"],
-                          InitialPrice: this._service["initialPrice"],
-                          IntermediatePrice: this._service["intermediatePrice"],
-                          AdvancedPrice: this._service["advancedPrice"],
-                        ),
-                      )
+                              Service(
+                                id: widget.args.service.id,
+                                ServiceName: this._service["serviceName"],
+                                Description: this._service["description"],
+                                Category: this._service["category"],
+                                InitialPrice: this._service["initialPrice"],
+                                IntermediatePrice:
+                                    this._service["intermediatePrice"],
+                                AdvancedPrice: this._service["advancedPrice"],
+                              ),
+                            )
                           : ServiceCreate(
-                        Service(
-
-                          ServiceName: this._service["serviceName"],
-                          Description: this._service["description"],
-                          Category: this._service["category"],
-                          InitialPrice: this._service["initialPrice"],
-                          IntermediatePrice: this._service["intermediatePrice"],
-                          AdvancedPrice: this._service["advancedPrice"],
-                        ),
-                      );
+                              Service(
+                                ServiceName: this._service["serviceName"],
+                                Description: this._service["description"],
+                                Category: this._service["category"],
+                                InitialPrice: this._service["initialPrice"],
+                                IntermediatePrice:
+                                    this._service["intermediatePrice"],
+                                AdvancedPrice: this._service["advancedPrice"],
+                              ),
+                            );
                       BlocProvider.of<ServiceBloc>(context).add(event);
                       Navigator.of(context).pushNamedAndRemoveUntil(
-
-                          AdminMainPage.routeName, (route) => false,arguments: AdminArgument(index: 2) );
+                          AdminMainPage.routeName, (route) => false,
+                          arguments: AdminArgument(index: 2));
                     }
                   },
                   label: Text('SAVE'),
                   icon: Icon(Icons.save),
                 ),
               ),
-
             ],
           ),
         ),

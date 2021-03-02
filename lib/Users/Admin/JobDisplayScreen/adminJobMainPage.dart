@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_group_project/Features/Job/bloc/job_bloc.dart';
 import 'package:flutter_group_project/Features/Job/bloc/job_state.dart';
-import 'package:flutter_group_project/Features/Job/job.dart';
 import 'package:flutter_group_project/Users/Admin/JobDisplayScreen/adminJobDetailPage.dart';
 
 class AdminJobMainPage extends StatelessWidget {

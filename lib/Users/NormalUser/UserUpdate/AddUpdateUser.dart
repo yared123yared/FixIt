@@ -18,9 +18,7 @@ class AddUpdateUser extends StatefulWidget {//Update page for user, Only Updates
 
 class _AddUpdateUserState extends State<AddUpdateUser> {
   final _formKey = GlobalKey<FormState>();
-
   final Map<String, dynamic> _user = {};
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,6 +33,7 @@ class _AddUpdateUserState extends State<AddUpdateUser> {
           child: Column(
             children: [
               TextFormField(
+                key: Key('userAddpdateEmailField'),
                   initialValue: widget.args.edit ? widget.args.user.Email : '',
                   validator: (value) {
                     if (value.isEmpty) {
@@ -50,6 +49,7 @@ class _AddUpdateUserState extends State<AddUpdateUser> {
                     });
                   }),
               TextFormField(
+                key: Key('userAddUpdateFname'),
                   initialValue:
                   widget.args.edit ? widget.args.user.FullName : '',
                   validator: (value) {
@@ -63,6 +63,7 @@ class _AddUpdateUserState extends State<AddUpdateUser> {
                     this._user["fName"] = value;
                   }),
               TextFormField(
+                key: Key('userAddUpdatePhone'),
                   initialValue: widget.args.edit
                       ? widget.args.user.Phone
                       : '',
@@ -79,6 +80,7 @@ class _AddUpdateUserState extends State<AddUpdateUser> {
                     });
                   }),
               TextFormField(
+                key: Key('userAddUpdatePassword'),
                   initialValue: widget.args.edit
                       ? widget.args.user.Password
                       : '',
@@ -97,6 +99,7 @@ class _AddUpdateUserState extends State<AddUpdateUser> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: ElevatedButton.icon(
+                key: Key('userAddUpdateSaveButton'),                  
                   onPressed: () {
                     final form = _formKey.currentState;
                     if (form.validate()) {

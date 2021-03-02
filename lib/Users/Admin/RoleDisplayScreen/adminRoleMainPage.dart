@@ -52,6 +52,7 @@ class AdminRoleMainPage extends StatelessWidget {
                                 },
                               ),
                               IconButton(
+                                key: Key('roleDeleteButton'),
                                 icon: Icon(Icons.delete),
                                 iconSize: 10,
                                 onPressed: () {
@@ -80,6 +81,7 @@ class AdminRoleMainPage extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton(
+        key: Key('roleAddButton'),
         onPressed: () {
           print('create');
           Navigator.of(context).pushNamed(RoleAddUpate.routeName,arguments:RoleArguments(edit:false));

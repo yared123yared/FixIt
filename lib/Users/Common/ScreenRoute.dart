@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_group_project/Features/Authentication/bloc/auth.dart';
@@ -18,19 +17,24 @@ bool isAuthenticated = false;
 bool isAdmin = false;
 bool isTechnician = false;
 User user;
-class UserAppRoute {//All the routing info
-  static Route generateRoute(RouteSettings settings,) {
+
+class UserAppRoute {
+  //All the routing info
+  static Route generateRoute(
+    RouteSettings settings,
+  ) {
     if (settings.name == '/') {
       return MaterialPageRoute(
           builder: (context) =>
               BlocBuilder<AuthBloc, AuthStates>(builder: (context, state) {
                 if (state is AutoLoginState) {
                   return loading_screen(title: 'Authenticating');
-                } else if (state is AutoLoginSuccessState) {//If the User has already signed in switch by the role
+                } else if (state is AutoLoginSuccessState) {
+                  //If the User has already signed in switch by the role
                   isAdmin = state.user.Role == "2";
                   isTechnician = state.user.Role == 'TECHNICIAN';
                   isAuthenticated = true;
-                  user=state.user;
+                  user = state.user;
                 } else if (state is AutoLoginFailedState) {
                   isAuthenticated = false;
                 } else if (state is LoggingOutState) {
@@ -55,7 +59,11 @@ class UserAppRoute {//All the routing info
                   );
                 }
                 return isAuthenticated
-                    ? (isAdmin ? CategoryMainScreen( admin: user) : (isTechnician? Technician_main(technician: user) : Users_main(user: user)))
+                    ? (isAdmin
+                        ? CategoryMainScreen(admin: user)
+                        : (isTechnician
+                            ? Technician_main(technician: user)
+                            : Users_main(user: user)))
                     : SignIn();
               }));
     }
@@ -67,25 +75,23 @@ class UserAppRoute {//All the routing info
       return MaterialPageRoute(builder: (context) => Register());
     }
 
-
     if (settings.name == AddUpdateUser.routeName) {
       UserArgument args = settings.arguments;
       return MaterialPageRoute(
           builder: (context) => AddUpdateUser(
-            args: args,
-          ));
+                args: args,
+              ));
     }
-
 
     if (settings.name == UserDetail.routeName) {
       User user = settings.arguments;
       return MaterialPageRoute(
           builder: (context) => UserDetail(
-            user: user,
-          ));
+                user: user,
+              ));
     }
 
-    return MaterialPageRoute(builder: (context) => AdminMainPage(admin: user));
+    return MaterialPageRoute(builder: (context) => AdminMainPage());
   }
 }
 
