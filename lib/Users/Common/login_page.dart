@@ -4,7 +4,7 @@ import 'package:flutter_group_project/Features/Authentication/authntication.dart
 import 'package:flutter_group_project/Features/User/Bloc/User_bloc.dart';
 import 'package:flutter_group_project/Features/User/Bloc/User_event.dart';
 import 'package:flutter_group_project/Features/User/Bloc/User_state.dart';
-import 'package:flutter_group_project/Users/Common/ScreenRoute.dart';
+
 import 'package:flutter_group_project/Users/Admin/UserManagement/User_main_screen.dart';
 import 'package:flutter_group_project/Users/Technicians/TechnicianUpdate/Technician_main.dart';
 import 'package:flutter_group_project/Users/NormalUser/UserUpdate/Users_main.dart';
@@ -12,6 +12,9 @@ import 'package:flutter_group_project/Users/Common/loading_screen.dart';
 import 'package:flutter_group_project/Users/Common/signup_page.dart';
 
 import 'package:toast/toast.dart';
+
+import '../../ScreenRoute.dart';
+import '../users.dart';
 
 class SignIn extends StatefulWidget {//Login Screen
   static const routeName = 'loginPage';
@@ -41,7 +44,7 @@ class _SignInState extends State<SignIn> {
 
           if(state.user.Role=="2"){//if role is ADMIN go to ADMIN screen
 
-            Navigator.of(context).pushReplacementNamed(CategoryMainScreen.routeName, arguments: UserArgument(user: user));
+            Navigator.of(context).pushReplacementNamed(AdminMainPage.routeName, arguments: UserArgument(user: user));
           }else if(state.user.Role=="TECHNICIAN"){//If role is TECHNICIAN go to admin screen
             Navigator.of(context).pushReplacementNamed(Technician_main.routeName, arguments: UserArgument(user: user));
           }else{//else go to USER Screen

@@ -9,14 +9,22 @@ import 'package:flutter_group_project/Features/Role/models/role.dart';
 @immutable
 class User extends Equatable{
 
+  final int UserId;
   final String Email;
   final String FullName;
   final String Phone;
   final String Password;
-  final int Role;
+  final String Role;
   final String Picture;
 
-  const User({
+
+
+
+
+
+
+
+  const User({this.UserId,
     @required this.Email,
     @required this.FullName,
     @required this.Phone,
@@ -47,11 +55,12 @@ class User extends Equatable{
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
+      UserId: json["userId"],
       Email: json['email'],
       FullName: json['fullName'],
       Phone: json['phone'],
       Password: json['password'],
-      Role: json['roleId'],
+      Role: json['roleId'].toString(),
       Picture: json['picture']
     );
   }

@@ -13,7 +13,7 @@ class ServiceDataProvider {
 
   Future<Service> createService(Service service) async {
     final response = await httpClient.post(
-      Uri.http("192.168.137.1:5001", '/api/services'),
+      Uri.http(_baseUrl, '/api/services'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

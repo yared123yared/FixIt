@@ -1,16 +1,21 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_group_project/Features/User/Model/User.dart';
+import 'package:flutter_group_project/Features/User/util/util.dart';
 import 'package:flutter_group_project/Users/Admin/JobDisplayScreen/adminJobMainPage.dart';
 import 'package:flutter_group_project/Users/Admin/RoleDisplayScreen/adminRoleMainPage.dart';
-
+import 'package:flutter_group_project/Users/Admin/UserManagement/UserDetail.dart';
+import 'package:flutter_group_project/Users/Common/ScreenRoute.dart';
+import '../../ScreenRoute.dart';
 import 'ServiceDisplayScreen/adminService.dart';
+import 'UserManagement/adminUserMainPage.dart';
 
 
 class AdminMainPage extends StatefulWidget {
   final int index;
+  // final User user;
   AdminMainPage({this.index});
   static const routeName='/admin';
-
   @override
   _AdminMainPageState createState() => _AdminMainPageState();
 }
@@ -20,7 +25,8 @@ class _AdminMainPageState extends State<AdminMainPage> {
     AdminJobMainPage(),
     AdminRoleMainPage(),
     AdminServiceMainPage(),
-    Center(child: Text("No users yet!"),)
+    // Center(child: Text("No users yet!"),)
+    AdminUserMainPage()
   ];
 
   int _navIndex = 0;
@@ -53,7 +59,13 @@ class _AdminMainPageState extends State<AdminMainPage> {
               //   arguments: UserArgument(user: this.technician, edit: true),
               // )
 
-            }
+
+                Navigator.of(context)
+                    .pushNamed(
+                    UserDetail.routeName, arguments: user);
+              },
+
+
           ),
           SizedBox(
             width: 32,
@@ -83,8 +95,9 @@ class _AdminMainPageState extends State<AdminMainPage> {
 
           children: [
             UserAccountsDrawerHeader(
-              accountName: Text('admin'),
-              accountEmail: Text('admin@fixit.com'),
+
+              accountName: Text(Util().getUserInformation().toString()),
+              accountEmail: Text(Util().getUserInformation().toString()),
               currentAccountPicture: CircleAvatar(
                 backgroundImage: AssetImage('assets/images/user.jpg'),
               ),

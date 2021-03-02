@@ -46,6 +46,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         await userRepository.createUser(event.user);
         final user= await userRepository.getUser(event.user.Email);
         yield UserLoadSuccess(user);
+        print('');
       } catch (_) {
         yield UserOperationFailure();
       }
@@ -53,17 +54,20 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
     if (event is UserUpdate) {
       try {
+        print('Users Update in the bloc');
         await userRepository.updateUser(event.user);
         final user = await userRepository.getUsers();
+        print('Done ---- Users Update in the bloc');
         yield UsersLoadSuccess(user);
       } catch (_) {
+        print("Some exception happened :(");
         yield UserOperationFailure();
       }
     }
 
     if (event is UserDelete) {
       try {
-        await userRepository.deleteUser(event.user.Email);
+        await userRepository.deleteUser(event.user.UserId);
         final user = await userRepository.getUsers();
         yield UsersLoadSuccess(user);
       } catch (e) {

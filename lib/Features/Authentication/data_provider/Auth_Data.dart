@@ -29,7 +29,7 @@ class AuthDataProvider {
     User userToReturn;
     UserModel um;
     UMod user1;
-    final urlLogin ="http://192.168.137.1:5001/api/users/authenticate";
+    final urlLogin ="$URL/api/users/authenticate";
     try {
       print("++++++++Try Method");
       print("Username : ${auth.email}");

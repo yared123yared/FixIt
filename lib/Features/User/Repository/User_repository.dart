@@ -29,8 +29,8 @@ class UserRepository {
     await dataProvider.updateUser(user);
   }
 
-  Future<void> deleteUser(String user) async {
+  Future<void> deleteUser(int userId) async {
     print("This is the deleteUser method in repo");
-    await dataProvider.deleteUser(user);
+    await dataProvider.deleteUser(userId);
   }
 }

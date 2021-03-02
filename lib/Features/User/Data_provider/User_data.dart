@@ -8,7 +8,7 @@ import 'package:meta/meta.dart';
 import 'package:http/http.dart' as http;
 
 class UserDataProvider {
-  final _baseUrl = '${IpAdress.ipAddress}';
+  final _baseUrl = IpAdress.ipAddress;
   final http.Client httpClient;
 
   UserDataProvider({@required this.httpClient}) : assert(httpClient != null);
@@ -16,17 +16,17 @@ class UserDataProvider {
   Future<User> createUser(User user) async {//Used on signUp and to add new user in ADMIN interface
     print("This is the create method");
     final response = await httpClient.post(
-      Uri.http('192.168.137.1:5001', '/api/users'),
+      '$_baseUrl/api/users/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, dynamic>{
-        "fullName": user.FullName,
-        "email": user.Email,
-        "password": user.Password,
-        "phone": user.Phone,
-        "picture":"Assets/assets/fixit.png",
-        "roleId": 2
+        "FullName": user.FullName,
+        "Email": user.Email,
+        "Password": user.Password,
+        "Phone": user.Phone,
+        "Picture":"Assets/assets/fixit.png",
+        "Role": "USER"
       }),
     );
 
@@ -48,7 +48,7 @@ class UserDataProvider {
     try {
       String token = await util.getUserToken();
       String expiry = await util.getExpiryTime();
-      final response = await httpClient.get('$_baseUrl/api/users',
+      final response = await httpClient.get('http://192.168.137.1:5001/api/users',
           headers: {HttpHeaders.authorizationHeader: token, 'expiry': expiry});
       if (response.statusCode == 200) {
         final user = jsonDecode(response.body) as List;
@@ -64,7 +64,7 @@ class UserDataProvider {
     print("This is the getUser(email) method");
     User user;
     try {
-      final response = await httpClient.get('$_baseUrl/User/$email');
+      final response = await httpClient.get('http://192.168.137.1:4000/User/$email');
       if (response.statusCode == 200) {
         final extractedData =json.decode(response.body) as Map<String, dynamic>;
         user = User.fromJson(extractedData);
@@ -84,12 +84,12 @@ class UserDataProvider {
 
 
 
-  Future<void> deleteUser(String email) async {//To delete the user(either by USER or by the ADMIN)
+  Future<void> deleteUser(int id) async {//To delete the user(either by USER or by the ADMIN)
     print("This is the delete method");
-    print("email of service to be deleted : $email");
+    print("email of service to be deleted : $id");
 
     final http.Response response = await http.delete(
-      '$_baseUrl/api/users/$email',
+      '$_baseUrl/api/users/$id',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -104,20 +104,22 @@ class UserDataProvider {
   Future<void> updateUser(User user) async {//Updates user(here also by the USER or by the ADMIN => to assign role)
     String token = await util.getUserToken();
     String expiry = await util.getExpiryTime();
-    final http.Response response = await httpClient.put(
-      'http://192.168.137.1:5001/api/users',
+    final http.Response response = await httpClient.post(
+      '$_baseUrl/api/users',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
-        HttpHeaders.authorizationHeader: token, 'expiry': expiry
+        // HttpHeaders.authorizationHeader: token, 'expiry': expiry
       },
       body: jsonEncode(<String, dynamic>{
-        "FullName": user.FullName,
-        "Email": user.Email,
-        "Password": user.Password,
-        "Phone": user.Phone,
-        "Role": user.Role
+        "userId":user.UserId,
+        "fullName": user.FullName,
+        "email": user.Email,
+        "password": user.Password,
+        "phone": user.Phone,
+        "roleId": int.parse(user.Role)
       }),
     );
+    print('provider successful update ;) ${response.statusCode}');
 
     if (response.statusCode != 200) {
       throw Exception('Failed to update User.');
