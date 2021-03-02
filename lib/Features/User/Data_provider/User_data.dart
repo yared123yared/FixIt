@@ -15,21 +15,21 @@ class UserDataProvider {
   Util util=  new Util();
   Future<User> createUser(User user) async {//Used on signUp and to add new user in ADMIN interface
     print("This is the create method");
-    final response = await httpClient.post(
-      '$_baseUrl/api/users/',
+    final http.Response response = await httpClient.post(
+      Uri.http('192.168.137.1:5001', '/api/users'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, dynamic>{
-        "FullName": user.FullName,
-        "Email": user. Email,
-        "Password": user.Password,
-        "Phone": user.Phone,
-        "Picture":"Assets/assets/fixit.png",
-        "Role": "USER"
+        "fullName": user.FullName,
+        "email": user. Email,
+        "password": user.Password,
+        "phone": user.Phone,
+        "picture":"Assets/assets/fixit.png",
+        "roleId": user.Role
       }),
     );
-
+    print("response: ${response.body}");
     if (response.statusCode == 200) {
       User user = User.fromJson(jsonDecode(response.body));
       String token = response.headers['token'].toString();
@@ -37,6 +37,7 @@ class UserDataProvider {
 
       await util.storeUserInformation(user);
       await util.storeTokenAndExpiration(token);
+      print("Done end");
       return user;
     } else {
       throw Exception('Failed to create User.');
@@ -116,7 +117,7 @@ class UserDataProvider {
         "email": user.Email,
         "password": user.Password,
         "phone": user.Phone,
-        "roleId": int.parse(user.Role)
+        "roleId": user.Role
       }),
     );
     print('provider successful update ;) ${response.statusCode}');

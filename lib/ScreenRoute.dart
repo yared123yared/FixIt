@@ -62,7 +62,7 @@ class ServiceAppRoute {
                        );
                      }
                      return isAuthenticated
-                         ? (isAdmin ? AdminMainPage() : (isTechnician? Technician_main(technician: user) : Users_main(user: user)))
+                         ? (isAdmin ? AdminMainPage() : (isTechnician? Technician_main(technician: user) : UserMain()))
                          : SignIn();
                    }));
 
