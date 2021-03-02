@@ -22,7 +22,7 @@ class UserDataProvider {
       },
       body: jsonEncode(<String, dynamic>{
         "FullName": user.FullName,
-        "Email": user.Email,
+        "Email": user. Email,
         "Password": user.Password,
         "Phone": user.Phone,
         "Picture":"Assets/assets/fixit.png",
@@ -116,7 +116,7 @@ class UserDataProvider {
         "email": user.Email,
         "password": user.Password,
         "phone": user.Phone,
-        "roleId": int.parse(user.Role)
+        "roleId": user.Role.roleId
       }),
     );
     print('provider successful update ;) ${response.statusCode}');

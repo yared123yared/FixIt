@@ -252,7 +252,7 @@ class JobArguments {
 }
 
 class RoleArgument{
-  final Role role;
+  final Rolee role;
   final bool edit;
   RoleArgument({this.role, this.edit});
 }
