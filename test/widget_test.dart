@@ -1,29 +1,29 @@
-// // This is a basic Flutter widget test.
-// //
-// // To perform an interaction with a widget in your test, use the WidgetTester
-// // utility that Flutter provides. For example, you can send tap and scroll
-// // gestures. You can also use WidgetTester to find child widgets in the widget
-// // tree, read text, and verify that the values of widget properties are correct.
+import 'package:flutter_group_project/Features/Job/repository/job_repository.dart';
+import 'package:flutter_group_project/Features/Role/repository/role_repository.dart';
+import 'package:flutter_group_project/Features/Service/Repository/Service_repository.dart';
+import 'package:flutter_group_project/Features/User/Repository/User_repository.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_group_project/main.dart';
+import 'package:mockito/mockito.dart';
 
-// import 'package:flutter/material.dart';
+class MockRoleRepository extends Mock implements RoleRepository {}
 
-// import 'package:flutter_group_project/main.dart';
+class MockJobRepository extends Mock implements JobRepository {}
 
-// void main() {
-//   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-//     // Build our app and trigger a frame.
-//     await tester.pumpWidget(MyApp());
+class MockServiceRepository extends Mock implements ServiceRepository {}
 
-//     // Verify that our counter starts at 0.
-//     expect(find.text('0'), findsOneWidget);
-//     expect(find.text('1'), findsNothing);
+class MockUserRepository extends Mock implements UserRepository {}
 
-//     // Tap the '+' icon and trigger a frame.
-//     await tester.tap(find.byIcon(Icons.add));
-//     await tester.pump();
+void main() {
+  final ServiceRepository serviceRepository = MockServiceRepository();
+  final JobRepository jobRepository = MockJobRepository();
+  final RoleRepository roleRepository = MockRoleRepository();
 
-//     // Verify that our counter has incremented.
-//     expect(find.text('0'), findsNothing);
-//     expect(find.text('1'), findsOneWidget);
-//   });
-// }
+  testWidgets('Fixit Title test', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(FixIt(jobRepository: jobRepository,roleRepository: roleRepository,serviceRepository: serviceRepository,));
+    // tester.
+    // expect(find.byElementType(MyApp), findsOneWidget);
+    // expect(find.text('1'), findsNothing);
+  });
+}
