@@ -9,8 +9,8 @@ class Role extends Equatable {
   Role({@required this.roleName, this.roleId});
   factory Role.fromJson(Map<String, dynamic> json) {
     return Role(
-      roleId: json['RoleId'],
-      roleName: json['RoleName']
+      roleId: json['roleId'],
+      roleName: json['roleName']
     );
   }
 

@@ -79,10 +79,11 @@ class FixIt extends StatelessWidget {
           ),
           BlocProvider<RoleBloc>(
             create: (_) => RoleBloc(roleRepository: this.roleRepository)
-
+                ..add(RoleLoad()),
           ),
           BlocProvider<UserBloc>(
               create: (_) => UserBloc(userRepository: this.userRepository,util: Util())
+                  ..add(UsersLoad())
           ),
           BlocProvider<AuthBloc>(
               create: (_) => AuthBloc(authRepository: this.authenticationRepository,util: Util())

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_group_project/Features/Role/models/role.dart';
 import 'Features/Job/models/job.dart';
 import 'Features/Service/Service.dart';
+import 'Users/Admin/RoleDisplayScreen/AdminRoleUpdate.dart';
+import 'Users/Admin/RoleDisplayScreen/adminRoleMainPage.dart';
 import 'Users/users.dart';
 
 
@@ -21,7 +23,7 @@ class ServiceAppRoute {
         AdminArgument args = settings.arguments;
         return MaterialPageRoute(
             builder: (context) => AdminMainPage(
-              index: adminArgs.index,
+
 //              the arguments will pass here
             ));
         break;
@@ -71,13 +73,15 @@ class ServiceAppRoute {
 //              the arguments will pass here
             ));
         break;
-//       case AdminRoleMainPage.routeName:
-// //        /admin/technician
-//         return MaterialPageRoute(
-//             builder: (context) => AdminRoleMainPage(
-// //              the arguments will pass here
-//             ));
-//         break;
+       case RoleAddUpate.routeName:
+         final RoleArguments args = settings.arguments;
+ //        /admin/technician
+         return MaterialPageRoute(
+             builder: (context) => RoleAddUpate(
+               args: args,
+ //              the arguments will pass here
+             ));
+         break;
 //       case AdminRoleDetail.routeName:
 // //        /admin/technician/detail
 //         return MaterialPageRoute(
