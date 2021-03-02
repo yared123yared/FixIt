@@ -21,7 +21,8 @@ class ServiceAppRoute {
         AdminArgument args = settings.arguments;
         return MaterialPageRoute(
             builder: (context) => AdminMainPage(
-              index: adminArgs.index,
+//             args != null?
+            index: args!=null? args.index: null,
 //              the arguments will pass here
             ));
         break;

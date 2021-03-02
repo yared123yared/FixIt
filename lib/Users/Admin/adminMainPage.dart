@@ -147,7 +147,7 @@ class _AdminMainPageState extends State<AdminMainPage> {
         animationCurve: Curves.bounceOut,
         onTap: (index){
           setState(() {
-            widget.index == 0? _navIndex=widget.index :_navIndex =index;
+            _navIndex =index;
 
           });
         },

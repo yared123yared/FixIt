@@ -4,8 +4,10 @@ import 'dart:convert';
 import 'package:flutter_group_project/Features/Role/models/models.dart';
 import 'package:http/http.dart' as http;
 
+import '../../../ip_address.dart';
+
 class RoleDataProvider {
-  final _baseUrl = "http://192.168.137.1:3000/api/roles";
+  final _baseUrl = "${IpAdress.ipAddress}/api/roles";
   final http.Client httpClient;
 
   RoleDataProvider({@required this.httpClient}) : assert(httpClient != null);
@@ -13,7 +15,7 @@ class RoleDataProvider {
     print("creating role");
     print('role: $role');
     final response = await httpClient.post(
-      Uri.http('192.168.137.1:3000', '/api/roles'),
+      Uri.http('192.168.137.1:5001', '/api/roles'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
