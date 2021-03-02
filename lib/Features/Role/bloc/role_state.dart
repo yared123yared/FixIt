@@ -13,7 +13,7 @@ class Equatable {
 class RoleLoading extends RoleState{}
 
 class RoleLoadingSuccess extends RoleState{
-  final List<Rolee> roles;
+  final List<Role> roles;
 
   RoleLoadingSuccess([this.roles = const []]);
 

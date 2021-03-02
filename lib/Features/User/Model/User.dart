@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_group_project/Features/Role/models/models.dart';
-
+import 'package:flutter_group_project/Features/Role/models/role.dart';
+import 'package:flutter_group_project/Features/Role/models/role.dart';
 
 
 
@@ -14,9 +14,8 @@ class User extends Equatable{
   final String FullName;
   final String Phone;
   final String Password;
-  final int RoleId;
+  final String Role;
   final String Picture;
-  final Rolee Role;
 
 
 
@@ -30,11 +29,24 @@ class User extends Equatable{
     @required this.FullName,
     @required this.Phone,
     @required this.Password ,
-     this.Role,
-    @required this.Picture,
-     this.RoleId,
+    @required this.Role,
+    @required this.Picture ,
 
-
+  //
+  // "userId": 1,
+  // "fullName": "Fasikaw Kindye",
+  // "email": "fasikaw@fixit.com",
+  // "password": "fasikaw1234",
+  // "phone": "+251212121212",
+  // "address": "Sidist-Killo",
+  // "picture": "me.jpg",
+  // "sex": "Male",
+  // "dob": "1999-12-12T00:00:00",
+  // "roleId": 2,
+  // "role": {
+  // "roleId": 2,
+  // "roleName": "admins"
+  // }
 
   });
 
@@ -48,7 +60,7 @@ class User extends Equatable{
       FullName: json['fullName'],
       Phone: json['phone'],
       Password: json['password'],
-      Role: Rolee.fromJson(json['role']),
+      Role: json['roleId'].toString(),
       Picture: json['picture']
     );
   }
