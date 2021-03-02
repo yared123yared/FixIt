@@ -86,7 +86,7 @@ class FixIt extends StatelessWidget {
                   ..add(UsersLoad())
           ),
           BlocProvider<AuthBloc>(
-              create: (_) => AuthBloc(authRepository: this.authenticationRepository,util: Util())
+              create: (_) => AuthBloc(authRepository: this.authenticationRepository,util: Util())..add(AutoLoginEvent())
           ),
         ],
       child: MyApp(),
@@ -114,7 +114,7 @@ class MyApp extends StatelessWidget {
               headline6:
               TextStyle(fontSize: 24, fontFamily: 'RobotoCondensed'))),
 
-      initialRoute:AdminMainPage.routeName,
+      initialRoute:"/",
       onGenerateRoute: ServiceAppRoute.generateRoute,
       // onUnknownRoute: (settings) {
       //   return MaterialPageRoute(builder: (ctx) => CategoryMainScreen());

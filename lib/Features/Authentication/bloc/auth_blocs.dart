@@ -68,21 +68,24 @@ class AuthBloc extends Bloc<AuthEvents, AuthStates> {
     yield AutoLoginState();
     try {
       String token = await util.getUserToken();
+      print("TOKEN+++++ $token");
       if (token == null) {
         yield AutoLoginFailedState();
         return;
       }
-      String expiry = await util.getUserToken();
-      if (expiry == null) {
-        yield AutoLoginFailedState();
-        return;
-      }
-      bool isExpired = util.isExpired(expiry);
-      if (isExpired) {
-        yield AutoLoginFailedState();
-        return;
-      } else {
+      // String expiry = await util.getUserToken();
+      // if (expiry == null) {
+      //   yield AutoLoginFailedState();
+      //   return;
+      // }
+      // bool isExpired = util.isExpired(expiry);
+      // if (isExpired) {
+      //   yield AutoLoginFailedState();
+      //   return;
+      // } else {
+    else{
         User user = await util.getUserInformation();
+        print("SUCESSSS STATE $user");
         yield AutoLoginSuccessState(user: user);
       }
     } catch (e) {
@@ -90,3 +93,5 @@ class AuthBloc extends Bloc<AuthEvents, AuthStates> {
     }
   }
 }
+
+

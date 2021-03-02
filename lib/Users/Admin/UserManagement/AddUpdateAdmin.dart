@@ -3,16 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_group_project/Features/User/Bloc/bloc.dart';
 import 'package:flutter_group_project/Features/User/Model/models.dart';
+import 'package:flutter_group_project/Users/Admin/admin.dart';
 import 'package:flutter_group_project/Users/Common/ScreenRoute.dart';
-import 'package:flutter_group_project/Users/Admin/UserManagement/User_main_screen.dart';
+
+import '../../../ScreenRoute.dart';
 
 
 
 class AddUpdateAdmin extends StatefulWidget {//Add and Update page only for the Admin
-  static const routeName = 'adminAddUpdate';
+  static const routeName = 'adminAddUpdateee';
   final UserArgument args;
 
-  AddUpdateAdmin({this.args});
+  AddUpdateAdmin({this.args}){
+    print("Admin UPdate Create Page");
+  }
   @override
   _AddUpdateAdminState createState() => _AddUpdateAdminState();
 }
@@ -24,6 +28,8 @@ class _AddUpdateAdminState extends State<AddUpdateAdmin> {
 
   @override
   Widget build(BuildContext context) {
+
+    print("Admin UPdate Create Page");
     return Scaffold(
       appBar: AppBar(
         //title: Text('${widget.args.edit ? "Edit Profile" : "Add New Course"}'),
@@ -44,10 +50,10 @@ class _AddUpdateAdminState extends State<AddUpdateAdmin> {
                     return null;
                   },
 
-                  decoration: InputDecoration(labelText: 'email'),
+                  decoration: InputDecoration(labelText: 'Email'),
                   onSaved: (value) {
                     setState(() {
-                      this._user["email"] = value;
+                      this._user["Email"] = value;
                     });
                   }),
               TextFormField(
@@ -59,9 +65,9 @@ class _AddUpdateAdminState extends State<AddUpdateAdmin> {
                     }
                     return null;
                   },
-                  decoration: InputDecoration(labelText: 'fName'),
+                  decoration: InputDecoration(labelText: 'FullName'),
                   onSaved: (value) {
-                    this._user["fName"] = value;
+                    this._user["FullName"] = value;
                   }),
               TextFormField(
                   initialValue: widget.args.edit
@@ -69,39 +75,41 @@ class _AddUpdateAdminState extends State<AddUpdateAdmin> {
                       : '',
                   validator: (value) {
                     if (value.isEmpty) {
-                      return 'Please enter your phonr name';
+                      return 'Please enter your phone number';
                     }
                     return null;
                   },
-                  decoration: InputDecoration(labelText: 'lName'),
+                  decoration: InputDecoration(labelText: 'Phone'),
                   onSaved: (value) {
                     setState(() {
-                      this._user["phone"] = value;
+                      this._user["Phone"] = value;
                     });
                   }),
 
               DropDownFormField(
                 titleText: 'Role',
                 hintText: 'Please choose one',
-                value: this._user["role"],
+                value: widget.args.edit
+                    ? widget.args.user.Role
+                    : '',
                 onSaved: (value) {
                   setState(() {
-                    this._user["role"] = value;
+                    this._user["Role"] = value;
                   });
                 },
                 onChanged: (value) {
                   setState(() {
-                    this._user["role"] = value;
+                    this._user["Role"] = value;
                   });
                 },
                 dataSource: [
                   {
                     "display": "User",
-                    "value": "USER",
+                    "value": "8",
                   },
                   {
                     "display": "Admin",
-                    "value": "ADMIN",
+                    "value": "2",
                   },
                   {
                     "display": "Technician",
@@ -121,10 +129,10 @@ class _AddUpdateAdminState extends State<AddUpdateAdmin> {
                     }
                     return null;
                   },
-                  decoration: InputDecoration(labelText: 'password'),
+                  decoration: InputDecoration(labelText: 'Password'),
                   onSaved: (value) {
                     setState(() {
-                      this._user["password"] = value;
+                      this._user["Password"] = value;
                     });
                   }),
               Padding(
@@ -134,32 +142,38 @@ class _AddUpdateAdminState extends State<AddUpdateAdmin> {
                     final form = _formKey.currentState;
                     if (form.validate()) {
                       form.save();
+                      print("${this._user["Email"]+this._user["FullName"]+this._user["Phone"]+this._user["Password"]}");
                       final UserEvent event = widget.args.edit
                           ? UserUpdate(//If edit it will update or Creates new user
 
+
                         User(
-                          Email: this._user["email"],
-                          FullName: this._user["fName"],
-                          Phone: this._user["phone"],
-                          Password: this._user["password"],
-                          Picture: 'this._user["intermediatePrice"]',
-                          Role: this._user["role"],
+                          UserId: widget.args.user.UserId,
+
+                          Email: this._user["Email"],
+                          FullName: this._user["FullName"],
+                          Phone: this._user["Phone"],
+                          Password: this._user["Password"],
+                          Picture: 'Assets/assets/Fixit.png',
+                          Role: this._user["Role"],
                         ),
                       )
                           : UserCreate(
                         User(
 
-                          Email: this._user["email"],
-                          FullName: this._user["fName"],
-                          Phone: this._user["phone"],
-                          Password: this._user["password"],
-                          Picture: 'this._user["intermediatePrice"]',
-                          Role: this._user["role"],
+                          Email: this._user["Email"],
+                          FullName: this._user["FullName"],
+                          Phone: this._user["Phone"],
+                          Password: this._user["Password"],
+                          Picture: 'Assets/assets/Fixit.png',
+                          Role: this._user["Role"],
                         ),
                       );
+                      print("Created");
                       BlocProvider.of<UserBloc>(context).add(event);
+                      print("After bloc");
                       Navigator.of(context).pushNamedAndRemoveUntil(
-                          CategoryMainScreen.routeName, (route) => false);
+                          AdminMainPage.routeName, (route) => false);
                     }
                   },
                   label: Text('SAVE'),
