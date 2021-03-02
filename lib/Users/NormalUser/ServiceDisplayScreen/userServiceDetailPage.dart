@@ -17,7 +17,6 @@ class UserServiceDetail extends StatelessWidget {
         style: Theme.of(context).textTheme.headline6,),
     );
   }
-
   Widget buildContainer(BuildContext context , Widget child){
     return Container(
       height: MediaQuery.of(context).size.height * 0.5 ,
@@ -28,8 +27,6 @@ class UserServiceDetail extends StatelessWidget {
             color:Colors.grey
         ),
         borderRadius: BorderRadius.circular(10),
-
-
       ),
       child:child,
     );

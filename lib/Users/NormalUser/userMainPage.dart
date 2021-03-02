@@ -1,5 +1,6 @@
  import 'package:curved_navigation_bar/curved_navigation_bar.dart';
  import 'package:flutter/material.dart';
+import 'package:flutter_group_project/Users/NormalUser/JobDisplayScreen/userJobMainPage.dart';
 
 import 'CategoryDisplayScreen/userCategoryMainPage.dart';
 
@@ -13,8 +14,7 @@ import 'CategoryDisplayScreen/userCategoryMainPage.dart';
  class _UserMainState extends State<UserMain> {
    List<Widget> homeWidgets = [
      UserCategoryMain(),
-     Center(child: Text("No users yet!"),),
-     Center(child: Text("No users yet!"),)
+     UserJobMain()
    ];
 
    int _navIndex = 0;
@@ -22,20 +22,15 @@ import 'CategoryDisplayScreen/userCategoryMainPage.dart';
    String get title{
      if (_navIndex == 0){
        return 'category';
-     }else if(_navIndex ==1){
-       return 'techs';
-     }
-     else if(_navIndex ==2){
-       return 'services';
      }else{
-       return 'users';
+       return 'history';
      }
    }
    @override
    Widget build(BuildContext context) {
      return Scaffold(
        appBar: AppBar(
-         title: Text('user'),
+         title: Text('$title'),
          centerTitle: true,
        ),
        body:homeWidgets[_navIndex],
@@ -81,8 +76,6 @@ import 'CategoryDisplayScreen/userCategoryMainPage.dart';
                  Navigator.of(context).pop();
                },
              )
-
-
            ],
          ),
 
@@ -93,7 +86,6 @@ import 'CategoryDisplayScreen/userCategoryMainPage.dart';
          color: Theme.of(context).accentColor,
          items: [
            Icon(Icons.cleaning_services_rounded,color: Colors.white,size: 25.0,),
-           Icon(Icons.supervised_user_circle,color: Colors.white,size: 25.0),
            Icon(Icons.history,color: Colors.white,size: 25.0),
          ],
 

@@ -106,9 +106,10 @@ class ServiceAppRoute {
       case UserJobDetail.routeName:
         final args = settings.arguments;
 //        /user/job/detail
+        final Job job = settings.arguments;
         return MaterialPageRoute(
             builder: (context) => UserJobDetail(
-
+                      job: job,
 //              the arguments will pass here
             ));
         break;
