@@ -263,3 +263,11 @@ class UserArgument {
   final bool edit;
   UserArgument({this.user, this.edit});
 }
+
+class CategoryArgument{
+  final String title;
+  final String image;
+  final List<Service> services;
+
+  CategoryArgument({this.services, this.title,this.image});
+}
