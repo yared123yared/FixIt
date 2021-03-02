@@ -31,11 +31,15 @@ class ServiceAppRoute {
            return MaterialPageRoute(
                builder: (context) =>
                    BlocBuilder<AuthBloc, AuthStates>(builder: (context, state) {
+
                      if (state is AutoLoginState) {
+
                        return loading_screen(title: 'Authenticating');
-                     } else if (state is AutoLoginSuccessState) {//If the User has already signed in switch by the role
-                       isAdmin = state.user.Role == "2";
-                       isTechnician = state.user.Role == 'TECHNICIAN';
+                     } else if (state is AutoLoginSuccessState) {
+                       print("This is the user role++++++++++${state.user.Role.roleName}");
+                       //If the User has already signed in switch by the role
+                       isAdmin = state.user.Role.roleName == "ADMIN";
+
                        isAuthenticated = true;
                        user=state.user;
                      } else if (state is AutoLoginFailedState) {
@@ -62,7 +66,7 @@ class ServiceAppRoute {
                        );
                      }
                      return isAuthenticated
-                         ? (isAdmin ? AdminMainPage() : (isTechnician? Technician_main(technician: user) : Users_main(user: user)))
+                         ? (isAdmin ? AdminMainPage() :  Users_main(user: user))
                          : SignIn();
                    }));
 
@@ -254,7 +258,7 @@ class JobArguments {
 }
 
 class RoleArgument{
-  final Role role;
+  final Rolee role;
   final bool edit;
   RoleArgument({this.role, this.edit});
 }

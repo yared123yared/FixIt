@@ -12,7 +12,7 @@ class RoleDataProvider {
   final http.Client httpClient;
 
   RoleDataProvider({@required this.httpClient}) : assert(httpClient != null);
-  Future<Role> createRole(Role role) async {
+  Future<Rolee> createRole(Rolee role) async {
     print("creating role");
     print('role: $role');
     final response = await httpClient.post(
@@ -28,23 +28,23 @@ class RoleDataProvider {
     print("response: ${response.body}");
     if (response.statusCode == 200) {
       print('Creating the roles');
-      return Role.fromJson(jsonDecode(response.body));
+      return Rolee.fromJson(jsonDecode(response.body));
     } else {
       throw Exception('Failed to create role.');
     }
   }
 
-  Future<List<Role>> getRoles() async {
+  Future<List<Rolee>> getRoles() async {
     print("Getint all the roles");
     final response = await httpClient.get('$_baseUrl');
 
     if (response.statusCode == 200) {
       final roles = jsonDecode(response.body) as List;
       print(roles);
-      List<Role> lists = roles.map((role) => Role.fromJson(role)).toList();
+      List<Rolee> lists = roles.map((role) => Rolee.fromJson(role)).toList();
       print(lists);
 
-      return roles.map((course) => Role.fromJson(course)).toList();
+      return roles.map((course) => Rolee.fromJson(course)).toList();
     } else {
       throw Exception('Failed to load role');
     }
@@ -63,7 +63,7 @@ class RoleDataProvider {
     }
   }
 
-  Future<void> updateRole(Role role) async {
+  Future<void> updateRole(Rolee role) async {
     final http.Response response = await httpClient.put(
       '$_baseUrl/${role.roleId}',
       headers: <String, String>{

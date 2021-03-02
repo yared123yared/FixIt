@@ -1,5 +1,8 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_group_project/Features/Authentication/authntication.dart';
+import 'package:flutter_group_project/Features/Authentication/bloc/auth_blocs.dart';
 import 'package:flutter_group_project/Features/User/Model/User.dart';
 import 'package:flutter_group_project/Features/User/util/util.dart';
 import 'package:flutter_group_project/Users/Admin/JobDisplayScreen/adminJobMainPage.dart';
@@ -125,13 +128,19 @@ class _AdminMainPageState extends State<AdminMainPage> {
             // ),
             Divider(height: 20,),
             ListTile(
-              leading: Icon(Icons.flag),
-              title: Text('FAQ'),
+              leading: Icon(Icons.logout),
+              title: Text('LogOut'),
+              onTap: (){
+                Navigator.of(context).pop();
+                BlocProvider.of<AuthBloc>(context).add(LogOutEvent());
+                Navigator.of(context).pushReplacementNamed('/');
+              }
             ),
             Divider(height: 20,),
             ListTile(
               trailing: Icon(Icons.close),
-              title: Text('close'),
+              title: Text('LogOut'),
+
               onTap: (){
                 Navigator.of(context).pop();
               },

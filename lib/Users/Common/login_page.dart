@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_group_project/Features/Authentication/authntication.dart';
+import 'package:flutter_group_project/Features/Role/bloc/bloc.dart';
+import 'package:flutter_group_project/Features/Role/models/models.dart';
 import 'package:flutter_group_project/Features/User/Bloc/User_bloc.dart';
 import 'package:flutter_group_project/Features/User/Bloc/User_event.dart';
 import 'package:flutter_group_project/Features/User/Bloc/User_state.dart';
@@ -42,11 +44,10 @@ class _SignInState extends State<SignIn> {
           print(state.user.toString());print(state.user.toString());print(state.user.toString());
 
 
-          if(state.user.Role=="2"){//if role is ADMIN go to ADMIN screen
+
+          if(state.user.Role.roleName=="ADMIN"){//if role is ADMIN go to ADMIN screen
 
             Navigator.of(context).pushReplacementNamed(AdminMainPage.routeName, arguments: UserArgument(user: user));
-          }else if(state.user.Role=="TECHNICIAN"){//If role is TECHNICIAN go to admin screen
-            Navigator.of(context).pushReplacementNamed(Technician_main.routeName, arguments: UserArgument(user: user));
           }else{//else go to USER Screen
             Navigator.of(context).pushReplacementNamed(Users_main.routeName, arguments: UserArgument(user: user));
           }

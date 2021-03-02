@@ -95,7 +95,7 @@ class _AddUpdateRoleState extends State<RoleAddUpate > {
                           form.save();
                           final RoleEvent event = widget.args.edit
                               ? RoleUpdate(
-                                  Role(
+                                  Rolee(
                                     roleId: widget.args.role.roleId,
                                     roleName: this._role["roleName"],
                                     // acceptanceStatus:this._role['accepteStatus'],
@@ -103,7 +103,7 @@ class _AddUpdateRoleState extends State<RoleAddUpate > {
                                   ),
                                 )
                               : RoleCreate(
-                                  Role(
+                                  Rolee(
                                     roleName: this._role["roleName"],
                                     // acceptanceStatus:this._role['accepteStatus'],
                                     // doneStatus: this._role["doneStatus"]

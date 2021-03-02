@@ -70,15 +70,15 @@ class FixIt extends StatelessWidget {
     return MultiBlocProvider(
         providers: [
           BlocProvider<ServiceBloc>(
-            create: (_) => ServiceBloc(serviceRepository: this.serviceRepository)
+            create: (_) => ServiceBloc(serviceRepository: this.serviceRepository,util: Util())
               ..add(ServiceLoad()),
           ),
           BlocProvider<JobBloc>(
-            create: (_) => JobBloc(jobRepository: this.jobRepository)
+            create: (_) => JobBloc(jobRepository: this.jobRepository,util: Util())
               ..add(JobLoad()),
           ),
           BlocProvider<RoleBloc>(
-            create: (_) => RoleBloc(roleRepository: this.roleRepository)
+            create: (_) => RoleBloc(roleRepository: this.roleRepository,util: Util())
                 ..add(RoleLoad()),
           ),
           BlocProvider<UserBloc>(

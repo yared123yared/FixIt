@@ -21,6 +21,8 @@ class AuthBloc extends Bloc<AuthEvents, AuthStates> {
       yield* _mapAutoLoginEventToState();
     } else if (event is LoginEvent) {
       yield* _mapLoginEventToState(event.auth);
+    }else if(event is LogOutEvent){
+      await util.removeToken();
     }
   }
 

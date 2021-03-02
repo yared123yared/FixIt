@@ -14,7 +14,8 @@ class User extends Equatable{
   final String FullName;
   final String Phone;
   final String Password;
-  final String Role;
+  final int RoleId;
+  final Rolee Role;
   final String Picture;
 
 
@@ -29,24 +30,10 @@ class User extends Equatable{
     @required this.FullName,
     @required this.Phone,
     @required this.Password ,
+    @required this.RoleId ,
     @required this.Role,
     @required this.Picture ,
 
-  //
-  // "userId": 1,
-  // "fullName": "Fasikaw Kindye",
-  // "email": "fasikaw@fixit.com",
-  // "password": "fasikaw1234",
-  // "phone": "+251212121212",
-  // "address": "Sidist-Killo",
-  // "picture": "me.jpg",
-  // "sex": "Male",
-  // "dob": "1999-12-12T00:00:00",
-  // "roleId": 2,
-  // "role": {
-  // "roleId": 2,
-  // "roleName": "admins"
-  // }
 
   });
 
@@ -60,7 +47,7 @@ class User extends Equatable{
       FullName: json['fullName'],
       Phone: json['phone'],
       Password: json['password'],
-      Role: json['roleId'].toString(),
+      Role: Rolee.fromJson(json['role']),
       Picture: json['picture']
     );
   }

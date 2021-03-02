@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_group_project/Features/Job/repository/job_repository.dart';
+import 'package:flutter_group_project/Features/User/util/util.dart';
 
 import 'job_event.dart';
 import 'job_state.dart';
 
 class JobBloc extends Bloc<JobEvent, JobState>{
   final JobRepository jobRepository;
+  final Util util;
 
-  JobBloc({@required this.jobRepository})
+  JobBloc({@required this.jobRepository,@required this.util})
       : assert(jobRepository != null),
         super(JobLoading());
   @override

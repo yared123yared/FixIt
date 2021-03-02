@@ -57,6 +57,7 @@ class AuthDataProvider {
         print("...........Extracted..........");
         um = UserModel.fromJson(extractedData);
         print("...........UMod created..........");
+        print("PARSED USER  +++++++++=========+++++ ${um.user.Role.roleName}");
         String token = um.token;
         userToReturn= um.user;
         print(userToReturn.Role);

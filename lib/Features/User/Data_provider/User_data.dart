@@ -116,7 +116,7 @@ class UserDataProvider {
         "email": user.Email,
         "password": user.Password,
         "phone": user.Phone,
-        "roleId": int.parse(user.Role)
+        "roleId": user.RoleId
       }),
     );
     print('provider successful update ;) ${response.statusCode}');

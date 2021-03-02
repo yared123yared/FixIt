@@ -1,14 +1,17 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_group_project/Features/User/util/util.dart';
 import 'package:meta/meta.dart';
 import 'package:http/http.dart' as http;
 import '../../../ip_address.dart';
 import '../Service.dart';
 
+
 class ServiceDataProvider {
   final _baseUrl = IpAdress.ipAddress;
   final http.Client httpClient;
-
+  Util util=  new Util();
   ServiceDataProvider({@required this.httpClient}) : assert(httpClient != null);
 
   Future<Service> createService(Service service) async {
@@ -76,10 +79,16 @@ class ServiceDataProvider {
   }
 
   Future<void> updateService(Service service) async {
+    String token = await util.getUserToken();
     final http.Response response = await httpClient.put(
       '$_baseUrl/api/services/',
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
+//      headers: <String, String>{
+//        'Content-Type': 'application/json; charset=UTF-8',
+//      },
+
+      headers: {
+        HttpHeaders.contentTypeHeader: "application/json",
+        HttpHeaders.authorizationHeader: "Bearer $token"
       },
       body: jsonEncode(<String, dynamic>{
         "serviceId":service.id,

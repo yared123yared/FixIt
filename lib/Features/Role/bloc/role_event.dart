@@ -2,7 +2,7 @@ import 'package:flutter_group_project/Features/Role/models/role.dart';
 
 
 class RoleCreate extends RoleEvent {
-  final Role role;
+  final Rolee role;
 
   RoleCreate(this.role);
 
@@ -20,7 +20,7 @@ class RoleLoad extends RoleEvent{
 
 }
 class RoleUpdate extends RoleEvent {
-  final Role role;
+  final Rolee role;
 
   RoleUpdate(this.role);
 
@@ -32,7 +32,7 @@ class RoleUpdate extends RoleEvent {
 }
 
 class RoleDelete extends RoleEvent {
-  final Role role;
+  final Rolee role;
 
   RoleDelete(this.role);
 

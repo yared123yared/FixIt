@@ -5,7 +5,7 @@ class Util {//User Info management ... Token and Shared Preferences
   Future<void> storeUserInformation(User user) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('FullName', user.FullName);
-    await prefs.setString('Role', user.Role);
+    await prefs.setInt('RoleId', user.RoleId);
     await prefs.setString('Picture', user.Picture);
     await prefs.setString('Email', user.Email);
     await prefs.setString('Password', user.Password);
@@ -16,7 +16,7 @@ class Util {//User Info management ... Token and Shared Preferences
     SharedPreferences prefs = await SharedPreferences.getInstance();
     User user = new User(
       FullName: prefs.getString("FullName"),
-      Role: prefs.getString("Role"),
+      RoleId: prefs.getInt("Role"),
       Picture: prefs.getString("Picture"),
       Email: prefs.getString("Email"),
       Password: prefs.getString("Password"),
@@ -36,6 +36,10 @@ class Util {//User Info management ... Token and Shared Preferences
   Future<String> getUserToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString('token');
+  }
+  void removeToken() async{
+    SharedPreferences prefs=await SharedPreferences.getInstance();
+    prefs.remove('token');
   }
 
   Future<String> getExpiryTime() async {
