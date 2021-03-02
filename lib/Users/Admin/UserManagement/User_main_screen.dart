@@ -7,10 +7,11 @@ import 'package:flutter_group_project/Features/User/Bloc/User_state.dart';
 import 'package:flutter_group_project/Features/User/Model/User.dart';
 import 'package:flutter_group_project/Users/Admin/UserManagement/AddUpdateAdmin.dart';
 import 'package:flutter_group_project/Users/NormalUser/UserUpdate/AddUpdateUser.dart';
-import 'package:flutter_group_project/Users/Common/ScreenRoute.dart';
 import 'package:flutter_group_project/Users/Admin/UserManagement/UserDetail.dart';
 import 'package:flutter_group_project/Users/Common/login_page.dart';
 import 'dart:math';
+
+import '../../../ScreenRoute.dart';
 
 
 class CategoryMainScreen extends StatelessWidget {//Main screen for the ADMIM

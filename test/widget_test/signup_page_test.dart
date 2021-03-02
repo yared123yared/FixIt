@@ -83,12 +83,15 @@ void main() {
     var textFieldEmail = find.byKey(Key('signUpEmailField'));
     var textFieldPassword = find.byKey(Key('signUpPasswordField'));
     var textFieldPhone = find.byKey(Key('signUpPhoneField'));
-    var signupButton = find.byKey(Key('signUpLoginButton'));
+    var signupButtonLogin = find.byKey(Key('signUpLoginButton'));
+    var signUpButton = find.byKey(Key('signUpButton'));
+
     expect(textFieldEmail, findsOneWidget);
     expect(textFieldPassword, findsOneWidget);
     expect(nameField, findsOneWidget);
     expect(textFieldPhone, findsOneWidget);
     expect(textFieldPassword, findsOneWidget);
-    expect(signupButton, findsOneWidget);
+    expect(signupButtonLogin, findsOneWidget);
+    expect(signUpButton, findsOneWidget);
   });
 }

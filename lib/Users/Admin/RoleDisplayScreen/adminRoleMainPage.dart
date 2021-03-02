@@ -32,7 +32,7 @@ class AdminRoleMainPage extends StatelessWidget {
                   height: height*0.3,
                   child: new FittedBox(
                     child: Material(
-                      color: Colors.white,
+                      color: Theme.of(context).primaryColor,
                       elevation: 5.0,
                       borderRadius: BorderRadius.circular(10.0),
                       shadowColor: Color(0x802196F3),

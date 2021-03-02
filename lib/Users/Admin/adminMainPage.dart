@@ -1,16 +1,19 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_group_project/Features/User/util/util.dart';
 import 'package:flutter_group_project/Users/Admin/JobDisplayScreen/adminJobMainPage.dart';
 import 'package:flutter_group_project/Users/Admin/RoleDisplayScreen/adminRoleMainPage.dart';
-
+import 'package:flutter_group_project/Users/Admin/UserManagement/UserDetail.dart';
+import 'package:flutter_group_project/Users/Common/login_page.dart';
+import '../../ScreenRoute.dart';
 import 'ServiceDisplayScreen/adminService.dart';
-
+import 'UserManagement/adminUserMainPage.dart';
 
 class AdminMainPage extends StatefulWidget {
   final int index;
+  // final User user;
   AdminMainPage({this.index});
-  static const routeName='/admin';
-
+  static const routeName = '/admin';
   @override
   _AdminMainPageState createState() => _AdminMainPageState();
 }
@@ -20,20 +23,20 @@ class _AdminMainPageState extends State<AdminMainPage> {
     AdminJobMainPage(),
     AdminRoleMainPage(),
     AdminServiceMainPage(),
-    Center(child: Text("No users yet!"),)
+    // Center(child: Text("No users yet!"),)
+    AdminUserMainPage()
   ];
 
   int _navIndex = 0;
 
-  String get title{
-    if (_navIndex == 0){
+  String get title {
+    if (_navIndex == 0) {
       return 'Jobs';
-    }else if(_navIndex ==1){
+    } else if (_navIndex == 1) {
       return 'Roles';
-    }
-    else if(_navIndex ==2){
+    } else if (_navIndex == 2) {
       return 'services';
-    }else{
+    } else {
       return 'users';
     }
   }
@@ -53,7 +56,9 @@ class _AdminMainPageState extends State<AdminMainPage> {
               //   arguments: UserArgument(user: this.technician, edit: true),
               // )
 
-            }
+              Navigator.of(context)
+                  .pushNamed(UserDetail.routeName, arguments: user);
+            },
           ),
           SizedBox(
             width: 32,
@@ -69,22 +74,22 @@ class _AdminMainPageState extends State<AdminMainPage> {
             width: 32,
           ),
           IconButton(
+            key:Key('logOutButton'),
               icon: Icon(Icons.logout),
               onPressed: () {
-                // isAuthenticated=false;
-                // isTechnician=false;
-                // Navigator.of(context).pushNamedAndRemoveUntil(
-                //     SignIn.routeName, (route) => false);
+                isAuthenticated = false;
+                isTechnician = false;
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    SignIn.routeName, (route) => false);
               }),
         ],
       ),
       drawer: Drawer(
-        child:Column(
-
+        child: Column(
           children: [
             UserAccountsDrawerHeader(
-              accountName: Text('admin'),
-              accountEmail: Text('admin@fixit.com'),
+              accountName: Text(Util().getUserInformation().toString()),
+              accountEmail: Text(Util().getUserInformation().toString()),
               currentAccountPicture: CircleAvatar(
                 backgroundImage: AssetImage('assets/images/user.jpg'),
               ),
@@ -95,60 +100,56 @@ class _AdminMainPageState extends State<AdminMainPage> {
 //                ),
 //                // color: Colors.purpleAccent
 //              ),
-
             ),
             ListTile(
               leading: Icon(Icons.contact_page),
               title: Text('account'),
-
             ),
-            ListTile(
-                leading: Icon(Icons.settings),
-                title:Text('settings')
-            ),
+            ListTile(leading: Icon(Icons.settings), title: Text('settings')),
             // ListTile(
             //   leading: Icon(Icons.favorite),
             //   title: Text('favorite'),
             // ),
-            Divider(height: 20,),
+            Divider(
+              height: 20,
+            ),
             ListTile(
               leading: Icon(Icons.flag),
               title: Text('FAQ'),
             ),
-            Divider(height: 20,),
+            Divider(
+              height: 20,
+            ),
             ListTile(
               trailing: Icon(Icons.close),
               title: Text('close'),
-              onTap: (){
+              onTap: () {
                 Navigator.of(context).pop();
               },
             )
-
-
           ],
         ),
-
       ),
       body: homeWidgets[_navIndex],
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: Colors.transparent,
         color: Theme.of(context).accentColor,
         items: [
-          Icon(Icons.cleaning_services_rounded,color: Colors.white,size: 25.0,),
-          Icon(Icons.supervised_user_circle,color: Colors.white,size: 25.0),
-          Icon(Icons.history,color: Colors.white,size: 25.0),
-          Icon(Icons.history,color: Colors.white,size: 25.0),
+          Icon(
+            Icons.cleaning_services_rounded,
+            color: Colors.white,
+            size: 25.0,
+          ),
+          Icon(Icons.supervised_user_circle, color: Colors.white, size: 25.0),
+          Icon(Icons.history, color: Colors.white, size: 25.0),
+          Icon(Icons.history, color: Colors.white, size: 25.0),
         ],
-
         height: 50,
-        animationDuration: Duration(
-            microseconds: 500
-        ),
+        animationDuration: Duration(microseconds: 500),
         animationCurve: Curves.bounceOut,
-        onTap: (index){
+        onTap: (index) {
           setState(() {
-            widget.index == 0? _navIndex=widget.index :_navIndex =index;
-
+            widget.index == 0 ? _navIndex = widget.index : _navIndex = index;
           });
         },
       ),

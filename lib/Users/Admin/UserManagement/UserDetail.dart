@@ -3,9 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_group_project/Features/User/Bloc/User_event.dart';
 import 'package:flutter_group_project/Features/User/Bloc/bloc.dart';
 import 'package:flutter_group_project/Features/User/Model/User.dart';
-import 'package:flutter_group_project/Users/Admin/UserManagement/User_main_screen.dart';
-import 'package:flutter_group_project/Users/Common/ScreenRoute.dart';
-import 'package:flutter_group_project/Users/NormalUser/UserUpdate/AddUpdateUser.dart';
+import 'package:flutter_group_project/Users/Admin/UserManagement/AddUpdateAdmin.dart';
+import 'package:flutter_group_project/Users/Admin/admin.dart';
+
+
+import '../../../ScreenRoute.dart';
 
 
 class UserDetail extends StatelessWidget {//To show detail of User
@@ -17,6 +19,8 @@ class UserDetail extends StatelessWidget {//To show detail of User
   @override
   Widget build(BuildContext context) {
 
+    print("User Detail Page");
+
     return Scaffold(
       appBar: AppBar(
         title: Text('${(this.user.FullName)}'),
@@ -24,7 +28,7 @@ class UserDetail extends StatelessWidget {//To show detail of User
           IconButton(
             icon: Icon(Icons.edit),
             onPressed: () => Navigator.of(context).pushNamed(
-              AddUpdateUser.routeName,
+              AddUpdateAdmin.routeName,
               arguments: UserArgument(user: this.user, edit: true),
             ),
           ),
@@ -36,7 +40,7 @@ class UserDetail extends StatelessWidget {//To show detail of User
               onPressed: () {
                 BlocProvider.of<UserBloc>(context).add(UserDelete(this.user));
                 Navigator.of(context).pushNamedAndRemoveUntil(
-                    CategoryMainScreen.routeName, (route) => false);
+                    AdminMainPage.routeName, (route) => false);
               }),
         ],
       ),

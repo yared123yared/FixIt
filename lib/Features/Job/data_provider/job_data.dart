@@ -31,7 +31,7 @@ class JobDataProvider{
       print("response: ${response.body}");
       if (response.statusCode == 200) {
         print('Creating the jobs');
-        return Job.fromJson(jsonDecode(response.body));
+        return Job.fromJsonCreate(jsonDecode(response.body));
       } else {
         throw Exception('Failed to create job.');
       }

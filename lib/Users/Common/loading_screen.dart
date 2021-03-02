@@ -8,6 +8,7 @@ class loading_screen extends StatelessWidget {//Screen for loading event handlin
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue,
       appBar: AppBar(
         title: Text(title),
       ),

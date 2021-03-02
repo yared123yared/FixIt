@@ -82,7 +82,12 @@ void main() {
 
     var textFieldEmail = find.byKey(Key('emailField'));
     var textFieldPassword = find.byKey(Key('passwordField'));
+    var loginButton = find.byKey(Key('loginButton'));
+    var loginSignUpButton = find.byKey(Key('loginSignUpButton'));
+    // loginSignUpButton
     expect(textFieldEmail, findsOneWidget);
     expect(textFieldPassword, findsOneWidget);
+    expect(loginButton, findsOneWidget);
+    expect(loginSignUpButton, findsOneWidget);
   });
 }

@@ -18,9 +18,10 @@ class _AddUpdateRoleState extends State<RoleAddUpate > {
   final _formKey = GlobalKey<FormState>();
 
   final Map<String, dynamic> _role = {};
-
+   String dropValue = "ADMIN";
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         title: Text('${widget.args.edit ? "Edit Role" : "Add New Role"}'),
@@ -36,24 +37,54 @@ class _AddUpdateRoleState extends State<RoleAddUpate > {
                   SizedBox(
                     height: 10,
                   ),
-                  TextFormField(
-                      initialValue:
-                          widget.args.edit ? widget.args.role.roleName : '',
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please enter Role Name';
-                        }
-                        return null;
-                      },
-                      // TODO
-                      // decoration: textInputDecoration.copyWith(
-                      //     hintText:
-                      //         'Role Name'), //InputDecoration(labelText: 'Role Name'),
-                      onSaved: (value) {
-                        setState(() {
-                          this._role["roleName"] = value;
-                        });
-                      }),
+                  DropdownButton<String>(
+                    value: dropValue,
+                    icon: Icon(Icons.arrow_downward),
+                    iconSize: 24,
+                    elevation: 16,
+
+                    underline:Container(
+                      height: 2,
+                      width: 12,
+                      color:Theme.of(context).primaryColor,
+                    ),
+                    onChanged: (String values){
+                     setState(() {
+                       dropValue = values;
+                     });
+                      this._role["roleName"] = values;
+
+                    },
+
+                    items: <String> ["ADMIN","USER","TECHNICIAN"]
+                          .map<DropdownMenuItem<String>>((String value){
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+
+                            );
+                    }).toList(),
+                  ),
+                  
+                  
+//                  TextFormField(
+//                      initialValue:
+//                          widget.args.edit ? widget.args.role.roleName : '',
+//                      validator: (value) {
+//                        if (value.isEmpty) {
+//                          return 'Please enter Role Name';
+//                        }
+//                        return null;
+//                      },
+//                      // TODO
+//                      // decoration: textInputDecoration.copyWith(
+//                      //     hintText:
+//                      //         'Role Name'), //InputDecoration(labelText: 'Role Name'),
+//                      onSaved: (value) {
+//                        setState(() {
+//                          this._role["roleName"] = value;
+//                        });
+//                      }),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16.0),
                     child: ElevatedButton.icon(
@@ -96,3 +127,4 @@ class _AddUpdateRoleState extends State<RoleAddUpate > {
     );
   }
 }
+

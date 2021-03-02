@@ -3,11 +3,12 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_group_project/Features/User/Model/User.dart';
 import 'package:flutter_group_project/Features/User/util/util.dart';
+import 'package:flutter_group_project/ip_address.dart';
 import 'package:meta/meta.dart';
 import 'package:http/http.dart' as http;
 
 class UserDataProvider {
-  final _baseUrl = 'http://192.168.137.1:4000';
+  final _baseUrl = IpAdress.ipAddress;
   final http.Client httpClient;
 
   UserDataProvider({@required this.httpClient}) : assert(httpClient != null);
@@ -15,7 +16,7 @@ class UserDataProvider {
   Future<User> createUser(User user) async {//Used on signUp and to add new user in ADMIN interface
     print("This is the create method");
     final response = await httpClient.post(
-      Uri.http('192.168.137.1:4000', '/User'),
+      '$_baseUrl/api/users/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -83,12 +84,12 @@ class UserDataProvider {
 
 
 
-  Future<void> deleteUser(String email) async {//To delete the user(either by USER or by the ADMIN)
+  Future<void> deleteUser(int id) async {//To delete the user(either by USER or by the ADMIN)
     print("This is the delete method");
-    print("email of service to be deleted : $email");
+    print("email of service to be deleted : $id");
 
     final http.Response response = await http.delete(
-      'http://192.168.137.1:4000/User/$email',
+      '$_baseUrl/api/users/$id',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -103,20 +104,22 @@ class UserDataProvider {
   Future<void> updateUser(User user) async {//Updates user(here also by the USER or by the ADMIN => to assign role)
     String token = await util.getUserToken();
     String expiry = await util.getExpiryTime();
-    final http.Response response = await httpClient.put(
-      'http://192.168.137.1:5001/api/users',
+    final http.Response response = await httpClient.post(
+      '$_baseUrl/api/users',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
-        HttpHeaders.authorizationHeader: token, 'expiry': expiry
+        // HttpHeaders.authorizationHeader: token, 'expiry': expiry
       },
       body: jsonEncode(<String, dynamic>{
-        "FullName": user.FullName,
-        "Email": user.Email,
-        "Password": user.Password,
-        "Phone": user.Phone,
-        "Role": user.Role
+        "userId":user.UserId,
+        "fullName": user.FullName,
+        "email": user.Email,
+        "password": user.Password,
+        "phone": user.Phone,
+        "roleId": int.parse(user.Role)
       }),
     );
+    print('provider successful update ;) ${response.statusCode}');
 
     if (response.statusCode != 200) {
       throw Exception('Failed to update User.');

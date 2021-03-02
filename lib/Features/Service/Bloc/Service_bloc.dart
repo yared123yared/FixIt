@@ -42,7 +42,8 @@ class ServiceBloc extends Bloc<ServiceEvent, ServiceState> {
         await serviceRepository.updateService(event.service);
         final services = await serviceRepository.getServices();
         yield ServicesLoadSuccess(services);
-      } catch (_) {
+      } catch (err) {
+        print("update err===> $err");
         yield ServiceOperationFailure();
       }
     }

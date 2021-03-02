@@ -11,7 +11,6 @@ class JobBloc extends Bloc<JobEvent, JobState>{
   JobBloc({@required this.jobRepository})
       : assert(jobRepository != null),
         super(JobLoading());
-
   @override
   Stream<JobState> mapEventToState(JobEvent event) async* {
     if (event is JobLoad) {
@@ -19,7 +18,8 @@ class JobBloc extends Bloc<JobEvent, JobState>{
       try {
         final job = await jobRepository.getJobs();
         yield JobLoadingSuccess(job);
-      } catch (_) {
+      } catch (err) {
+        print("Job loading err: $err");
         yield JobOperationFailure();
       }
     }

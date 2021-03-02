@@ -9,7 +9,7 @@ import 'package:flutter_group_project/Users/NormalUser/UserUpdate/Users_main.dar
 import 'package:flutter_group_project/Users/Technicians/TechnicianUpdate/Technician_main.dart';
 import 'package:toast/toast.dart';
 
-import 'ScreenRoute.dart';
+import '../../ScreenRoute.dart';
 import 'loading_screen.dart';
 import 'login_page.dart';
 
@@ -328,6 +328,7 @@ class _RegisterState extends State<Register> {
   Widget gradientbutton(UserState state) {
     UserState _state = state;
     return InkWell(
+      key: Key('signUpButton'),
       splashColor: Colors.white,
       onTap: () {
         final UserEvent event = UserCreate(

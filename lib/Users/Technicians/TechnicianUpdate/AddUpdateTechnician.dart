@@ -4,7 +4,7 @@ import 'package:flutter_group_project/Features/User/Bloc/User_bloc.dart';
 import 'package:flutter_group_project/Features/User/Bloc/User_event.dart';
 import 'package:flutter_group_project/Features/User/Model/User.dart';
 import 'package:flutter_group_project/Users/Admin/UserManagement/User_main_screen.dart';
-import 'package:flutter_group_project/Users/Common/ScreenRoute.dart';
+import '../../../ScreenRoute.dart';
 class AddUpdateTechnician extends StatefulWidget {//Update Page for the Technician, only updates
   static const routeName = 'technicianAddUpdate';
   final UserArgument args;
