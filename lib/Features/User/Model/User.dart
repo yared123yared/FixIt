@@ -13,15 +13,8 @@ class User extends Equatable{
   final String FullName;
   final String Phone;
   final String Password;
-  final String Role;
+  final int Role;
   final String Picture;
-
-
-
-
-
-
-
 
   const User({
     @required this.Email,
@@ -58,7 +51,7 @@ class User extends Equatable{
       FullName: json['fullName'],
       Phone: json['phone'],
       Password: json['password'],
-      Role: json['roleId'].toString(),
+      Role: json['roleId'],
       Picture: json['picture']
     );
   }

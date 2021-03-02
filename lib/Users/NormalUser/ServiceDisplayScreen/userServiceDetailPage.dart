@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_group_project/Features/Service/Model/models.dart';
 import 'package:flutter_group_project/ScreenRoute.dart';
+import 'package:flutter_group_project/Users/NormalUser/JobDisplayScreen/job.dart';
 
 class UserServiceDetail extends StatelessWidget {
   static const routeName='/user/category/service/detail';
@@ -105,7 +106,8 @@ class UserServiceDetail extends StatelessWidget {
 
                               ),
                               onTap: () {
-//                                Navigator.of(context).pushNamed(AdminServiceDetail.routeName, arguments:services[index])
+                                print("Creating");
+                                Navigator.of(context).pushNamed(UserCreateJob.routeName, arguments:JobArguments(edit:false));
                               },
                             ),
 //            onTap: (){

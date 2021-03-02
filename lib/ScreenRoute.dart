@@ -115,8 +115,10 @@ class ServiceAppRoute {
         break;
       case UserCreateJob.routeName:
 //        /user/job/create
+      final JobArguments args = settings.arguments;
         return MaterialPageRoute(
             builder: (context) => UserCreateJob(
+              args: args,
 //              the arguments will pass here
             ));
         break;

@@ -3,11 +3,12 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_group_project/Features/User/Model/User.dart';
 import 'package:flutter_group_project/Features/User/util/util.dart';
+import 'package:flutter_group_project/ip_address.dart';
 import 'package:meta/meta.dart';
 import 'package:http/http.dart' as http;
 
 class UserDataProvider {
-  final _baseUrl = 'http://192.168.137.1:4000';
+  final _baseUrl = '${IpAdress.ipAddress}';
   final http.Client httpClient;
 
   UserDataProvider({@required this.httpClient}) : assert(httpClient != null);
@@ -15,17 +16,17 @@ class UserDataProvider {
   Future<User> createUser(User user) async {//Used on signUp and to add new user in ADMIN interface
     print("This is the create method");
     final response = await httpClient.post(
-      Uri.http('192.168.137.1:4000', '/User'),
+      Uri.http('192.168.137.1:5001', '/api/users'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, dynamic>{
-        "FullName": user.FullName,
-        "Email": user.Email,
-        "Password": user.Password,
-        "Phone": user.Phone,
-        "Picture":"Assets/assets/fixit.png",
-        "Role": "USER"
+        "fullName": user.FullName,
+        "email": user.Email,
+        "password": user.Password,
+        "phone": user.Phone,
+        "picture":"Assets/assets/fixit.png",
+        "roleId": 2
       }),
     );
 
@@ -47,7 +48,7 @@ class UserDataProvider {
     try {
       String token = await util.getUserToken();
       String expiry = await util.getExpiryTime();
-      final response = await httpClient.get('http://192.168.137.1:5001/api/users',
+      final response = await httpClient.get('$_baseUrl/api/users',
           headers: {HttpHeaders.authorizationHeader: token, 'expiry': expiry});
       if (response.statusCode == 200) {
         final user = jsonDecode(response.body) as List;
@@ -63,7 +64,7 @@ class UserDataProvider {
     print("This is the getUser(email) method");
     User user;
     try {
-      final response = await httpClient.get('http://192.168.137.1:4000/User/$email');
+      final response = await httpClient.get('$_baseUrl/User/$email');
       if (response.statusCode == 200) {
         final extractedData =json.decode(response.body) as Map<String, dynamic>;
         user = User.fromJson(extractedData);
@@ -88,7 +89,7 @@ class UserDataProvider {
     print("email of service to be deleted : $email");
 
     final http.Response response = await http.delete(
-      'http://192.168.137.1:4000/User/$email',
+      '$_baseUrl/api/users/$email',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

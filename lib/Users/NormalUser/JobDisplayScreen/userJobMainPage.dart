@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_group_project/Features/Job/bloc/job_bloc.dart';
 import 'package:flutter_group_project/Features/Job/bloc/job_state.dart';
+import 'package:flutter_group_project/Features/Job/models/job.dart';
 import 'package:flutter_group_project/Users/NormalUser/JobDisplayScreen/userJobPageDetail.dart';
 
 class UserJobMain extends StatelessWidget {
   static const routeName='/user/job';
+  final userId = 5;
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery
@@ -26,7 +28,15 @@ class UserJobMain extends StatelessWidget {
               return Text('Could not do job operation');
             }
             if (state is JobLoadingSuccess) {
-              final jobs = state.jobs;
+              List<Job> jobs = [];
+              final jobUser = state.jobs;
+              jobUser.forEach((element) {
+                if(element.userId == userId){
+                  jobs.add(element);
+                }
+              });
+              print("user Jobs: $jobUser");
+
 
               return ListView.builder(
                 scrollDirection: Axis.vertical,
