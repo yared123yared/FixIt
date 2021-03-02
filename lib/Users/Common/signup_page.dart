@@ -37,25 +37,26 @@ class _RegisterState extends State<Register> {
     var asd=17.50;
     return BlocConsumer<UserBloc, UserState>(
         listener:(_,state){
+          // if(state is UserLoadSuccess){
+          //   if(state.user.Password==_myPasswordController.text){
+          //     if(state.user.Role=="ADMIN"){
+          //       Navigator.of(context).pushReplacementNamed(CategoryMainScreen.routeName, arguments: UserArgument(user: user));
+          //     }else if(state.user.Role=="TECHNICIAN"){
+          //       Navigator.of(context).pushReplacementNamed(Technician_main.routeName, arguments: UserArgument(user: user));
+          //     }else{
+          //       Navigator.of(context).pushReplacementNamed(Users_main.routeName, arguments: UserArgument(user: user));
+          //     }
+          //   }
           if(state is UserLoadSuccess){
-            if(state.user.Password==_myPasswordController.text){
-              if(state.user.Role=="ADMIN"){
-                Navigator.of(context).pushReplacementNamed(CategoryMainScreen.routeName, arguments: UserArgument(user: user));
-              }else if(state.user.Role=="TECHNICIAN"){
-                Navigator.of(context).pushReplacementNamed(Technician_main.routeName, arguments: UserArgument(user: user));
-              }else{
-                Navigator.of(context).pushReplacementNamed(Users_main.routeName, arguments: UserArgument(user: user));
-              }
-            }
-            else{
-              Toast.show("Incorrect Email/password combination", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
-            }
+            Navigator.pushReplacementNamed(context, SignIn.routeName);
           }
+
+
           if(state is UserLoading){
             loading_screen(title:"Login loading");
           }
-          if(state is UserOperationFailure){
-            Toast.show("Login operation failed :(", context, backgroundColor: Colors.red, textColor: Colors.white, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+          else{
+            Toast.show("Sign up opreation failed :(", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
           }
         },
         builder:(_,state) {
@@ -404,7 +405,7 @@ class _RegisterState extends State<Register> {
     UserState _state=state;
     return InkWell(
       splashColor: Colors.white,
-      onTap: (){
+      onTap: () {
         final UserEvent event = UserCreate(
           User(
 
@@ -413,11 +414,14 @@ class _RegisterState extends State<Register> {
             Phone: _myPhoneController.text,
             Password: _myPasswordController.text,
             Picture: 'this._user["intermediatePrice"]',
-
+            Role: 8,
           ),
         );
         BlocProvider.of<UserBloc>(context).add(event);
-        if (state is UserOperationFailure) {
+        if(state is UserLoadSuccess){
+            Navigator.pushNamed(context, SignIn.routeName);
+        }
+        else if (state is UserOperationFailure) {
           Toast.show("Login operation failed :(", context, backgroundColor: Colors.red, textColor: Colors.white, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
         }
 
