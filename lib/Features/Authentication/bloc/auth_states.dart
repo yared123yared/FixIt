@@ -1,6 +1,5 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_group_project/Features/Authentication/authntication.dart';
-import 'package:flutter_group_project/Features/Role/bloc/bloc.dart';
 import 'package:flutter_group_project/Features/User/Model/User.dart';
 
 

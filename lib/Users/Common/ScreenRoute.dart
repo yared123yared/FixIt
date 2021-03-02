@@ -6,6 +6,7 @@ import 'package:flutter_group_project/Features/Authentication/bloc/auth.dart';
 import 'package:flutter_group_project/Features/User/Model/User.dart';
 import 'package:flutter_group_project/Users/Admin/UserManagement/UserDetail.dart';
 import 'package:flutter_group_project/Users/Admin/UserManagement/User_main_screen.dart';
+import 'package:flutter_group_project/Users/Admin/adminMainPage.dart';
 import 'package:flutter_group_project/Users/Common/signup_page.dart';
 import 'package:flutter_group_project/Users/NormalUser/UserUpdate/AddUpdateUser.dart';
 import 'package:flutter_group_project/Users/NormalUser/UserUpdate/Users_main.dart';
@@ -26,8 +27,8 @@ class UserAppRoute {//All the routing info
                 if (state is AutoLoginState) {
                   return loading_screen(title: 'Authenticating');
                 } else if (state is AutoLoginSuccessState) {//If the User has already signed in switch by the role
-                  isAdmin = state.user.role == 'ADMIN';
-                  isTechnician = state.user.role == 'TECHNICIAN';
+                  isAdmin = state.user.Role == "2";
+                  isTechnician = state.user.Role == 'TECHNICIAN';
                   isAuthenticated = true;
                   user=state.user;
                 } else if (state is AutoLoginFailedState) {
@@ -84,7 +85,7 @@ class UserAppRoute {//All the routing info
           ));
     }
 
-    return MaterialPageRoute(builder: (context) => CategoryMainScreen(admin: user));
+    return MaterialPageRoute(builder: (context) => AdminMainPage(admin: user));
   }
 }
 

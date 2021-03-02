@@ -19,51 +19,50 @@ class AdminRoleMainPage extends StatelessWidget {
             return Text('Could not do role operation');
           }
           if (state is RoleLoadingSuccess) {
+            print("Role is loading");
             final roles = state.roles;
 
             return ListView.builder(
               scrollDirection: Axis.vertical,
               itemCount: roles.length,
-              itemBuilder: (_, idx) => GestureDetector(
-                onTap: () {
-                  // Navigator.of(context)
-                  //           .pushNamed(AdminRoleDetail.routeName, arguments: roles[idx]);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Container(
-                    child: new FittedBox(
-                      child: Material(
-                        color: Colors.white,
-                        elevation: 14.0,
-                        borderRadius: BorderRadius.circular(24.0),
-                        shadowColor: Color(0x802196F3),
-                        child: Column(
-                          children: [
-                            Text('${roles[idx].roleName}'),
-                            Row(
-                              children: [
-                                RaisedButton(
-                                  child: Icon(Icons.edit),
-                                  onPressed: () {
-                                    Navigator.of(context).pushNamed(
-                                        RoleAddUpate.routeName,
-                                        arguments: RoleArguments(
-                                            role: roles[idx], edit: true));
-                                  },
-                                ),
-                                RaisedButton(
-                                  child: Icon(Icons.delete),
-                                  onPressed: () {
-                                    context
-                                        .read<RoleBloc>()
-                                        .add(RoleDelete(roles[idx]));
-                                  },
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
+              itemBuilder: (_, idx) => Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Container(
+                    width: width*0.15,
+                  height: height*0.3,
+                  child: new FittedBox(
+                    child: Material(
+                      color: Colors.white,
+                      elevation: 5.0,
+                      borderRadius: BorderRadius.circular(10.0),
+                      shadowColor: Color(0x802196F3),
+                      child: Column(
+                        children: [
+                          Text('${roles[idx].roleName}'),
+                          Row(
+                            children: [
+                              IconButton(
+                                icon: Icon(Icons.edit),
+                                iconSize: 10,
+                                onPressed: () {
+                                  Navigator.of(context).pushNamed(
+                                      RoleAddUpate.routeName,
+                                      arguments: RoleArguments(
+                                          role: roles[idx], edit: true));
+                                },
+                              ),
+                              IconButton(
+                                icon: Icon(Icons.delete),
+                                iconSize: 10,
+                                onPressed: () {
+                                  context
+                                      .read<RoleBloc>()
+                                      .add(RoleDelete(roles[idx]));
+                                },
+                              ),
+                            ],
+                          )
+                        ],
                       ),
                     ),
                   ),
@@ -82,7 +81,8 @@ class AdminRoleMainPage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).pushNamed(RoleAddUpate.routeName);
+          print('create');
+          Navigator.of(context).pushNamed(RoleAddUpate.routeName,arguments:RoleArguments(edit:false));
         },
         child: Icon(Icons.add),
       ),

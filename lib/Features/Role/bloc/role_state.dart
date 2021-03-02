@@ -1,13 +1,11 @@
 
+import 'package:equatable/equatable.dart';
 import 'package:flutter_group_project/Features/Role/models/models.dart';
 
 class RoleState extends Equatable{
    RoleState();
   @override
   List<Object> get props => [];
-}
-
-class Equatable {
 }
 
 class RoleLoading extends RoleState{}

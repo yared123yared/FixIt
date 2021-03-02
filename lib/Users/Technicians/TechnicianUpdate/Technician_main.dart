@@ -19,7 +19,7 @@ class Technician_main extends StatelessWidget {//Main page for the TECHNICIAN
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('${(this.technician.fName)}'),
+        title: Text('${(this.technician.FullName)}'),
         actions: [
           IconButton(
             icon: Icon(Icons.edit),
@@ -53,7 +53,7 @@ class Technician_main extends StatelessWidget {//Main page for the TECHNICIAN
       ),
       body: Center(
         child: Text(
-          "This is Technician ${this.technician.fName}",
+          "This is Technician ${this.technician.FullName}",
         ),
       ),
     );

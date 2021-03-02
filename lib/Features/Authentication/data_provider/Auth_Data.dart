@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter_group_project/Features/Authentication/authntication.dart';
+import 'package:flutter_group_project/Features/User/Model/UMod.dart';
 import 'package:flutter_group_project/Features/User/Model/User.dart';
 import 'package:flutter_group_project/Features/User/util/util.dart';
 import 'package:meta/meta.dart';
@@ -25,12 +26,19 @@ class AuthDataProvider {
   Future<User> login(Authentication auth) async {
     print('logging------------------------here-');
 
-    User user1;
-    final urlLogin ="$URL/Users/authenticate";
+    User userToReturn;
+    UserModel um;
+    UMod user1;
+    final urlLogin ="http://192.168.137.1:5001/api/users/authenticate";
     try {
+      print("++++++++Try Method");
+      print("Username : ${auth.email}");
       final response = await httpClient.post(
         urlLogin,
-        body: json.encode({
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, dynamic>{
 
           'username': auth.email,
 
@@ -41,22 +49,35 @@ class AuthDataProvider {
       print('code----------${response.statusCode}');
       if (response.statusCode == 422) {
         throw HttpException('Invalid Input');
-      } else if (response.statusCode == 404) {
+      } else if (response.statusCode == 400) {
         throw HttpException('Incorrect username or password');
       } else {
-        final extractedData =
-            json.decode(response.body) as Map<String, dynamic>;
-        user1 = UserModel.fromJson(extractedData).user;
-        String token = UserModel.fromJson(extractedData).token;
+        print("++++++ELSE+++++");
+        final extractedData = json.decode(response.body) as Map<String, dynamic>;
+        print("...........Extracted..........");
+        um = UserModel.fromJson(extractedData);
+        print("...........UMod created..........");
+        String token = um.token;
+        userToReturn= um.user;
+        print(userToReturn.Role);
         // String expiry = response.headers['expiry_date'].toString();
 
-        await util.storeUserInformation(user1);
+
+        //userToReturn = new User(Email: user1.email, FullName: user1.fullName, Phone: user1.phone, Password: user1.password, Role: user1.role, Picture: user1.picture);
+        await util.storeUserInformation(userToReturn);
         await util.storeTokenAndExpiration(token);
+        print(token);
+        print(userToReturn.toString());
+        print("...........Done..........");
+
       }
     } catch (e) {
+      print("++++++++CATCH++++");
+      print("Exception $e");
       throw e;
     }
-    return user1;
+
+    return userToReturn;
   }
 
 

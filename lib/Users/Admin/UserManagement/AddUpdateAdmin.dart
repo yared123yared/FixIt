@@ -36,7 +36,7 @@ class _AddUpdateAdminState extends State<AddUpdateAdmin> {
           child: Column(
             children: [
               TextFormField(
-                  initialValue: widget.args.edit ? widget.args.user.email : '',
+                  initialValue: widget.args.edit ? widget.args.user.Email : '',
                   validator: (value) {
                     if (value.isEmpty) {
                       return 'Please enter your email';
@@ -52,7 +52,7 @@ class _AddUpdateAdminState extends State<AddUpdateAdmin> {
                   }),
               TextFormField(
                   initialValue:
-                  widget.args.edit ? widget.args.user.fName : '',
+                  widget.args.edit ? widget.args.user.FullName : '',
                   validator: (value) {
                     if (value.isEmpty) {
                       return 'Please enter your first name';
@@ -65,7 +65,7 @@ class _AddUpdateAdminState extends State<AddUpdateAdmin> {
                   }),
               TextFormField(
                   initialValue: widget.args.edit
-                      ? widget.args.user.phone
+                      ? widget.args.user.Phone
                       : '',
                   validator: (value) {
                     if (value.isEmpty) {
@@ -113,7 +113,7 @@ class _AddUpdateAdminState extends State<AddUpdateAdmin> {
               ),
               TextFormField(
                   initialValue: widget.args.edit
-                      ? widget.args.user.password
+                      ? widget.args.user.Password
                       : '',
                   validator: (value) {
                     if (value.isEmpty) {
@@ -138,23 +138,23 @@ class _AddUpdateAdminState extends State<AddUpdateAdmin> {
                           ? UserUpdate(//If edit it will update or Creates new user
 
                         User(
-                          email: this._user["email"],
-                          fName: this._user["fName"],
-                          phone: this._user["phone"],
-                          password: this._user["password"],
-                          imageUrl: 'this._user["intermediatePrice"]',
-                          role: this._user["role"],
+                          Email: this._user["email"],
+                          FullName: this._user["fName"],
+                          Phone: this._user["phone"],
+                          Password: this._user["password"],
+                          Picture: 'this._user["intermediatePrice"]',
+                          Role: this._user["role"],
                         ),
                       )
                           : UserCreate(
                         User(
 
-                          email: this._user["email"],
-                          fName: this._user["fName"],
-                          phone: this._user["phone"],
-                          password: this._user["password"],
-                          imageUrl: 'this._user["intermediatePrice"]',
-                          role: this._user["role"],
+                          Email: this._user["email"],
+                          FullName: this._user["fName"],
+                          Phone: this._user["phone"],
+                          Password: this._user["password"],
+                          Picture: 'this._user["intermediatePrice"]',
+                          Role: this._user["role"],
                         ),
                       );
                       BlocProvider.of<UserBloc>(context).add(event);

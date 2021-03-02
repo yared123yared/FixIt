@@ -1,5 +1,5 @@
 
-import 'package:flutter_group_project/Features/User/util/util.dart';
+import 'package:flutter_group_project/Features/User/Data_provider/User_data.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:http/http.dart' as http;
@@ -13,7 +13,6 @@ class MocUserDataProvider extends Mock implements UserDataProvider {}
 
 main() {
   group('user repository test', () {
-     Util util = Util();
   final user1 = User(
       Email: 'email1',
       FullName: 'geya',

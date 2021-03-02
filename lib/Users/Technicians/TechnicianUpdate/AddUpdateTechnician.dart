@@ -33,7 +33,7 @@ class _AddUpdateTechnicianState extends State<AddUpdateTechnician> {
           child: Column(
             children: [
               TextFormField(
-                  initialValue: widget.args.edit ? widget.args.user.email : '',
+                  initialValue: widget.args.edit ? widget.args.user.Email : '',
                   validator: (value) {
                     if (value.isEmpty) {
                       return 'Please enter your email';
@@ -49,7 +49,7 @@ class _AddUpdateTechnicianState extends State<AddUpdateTechnician> {
                   }),
               TextFormField(
                   initialValue:
-                  widget.args.edit ? widget.args.user.fName : '',
+                  widget.args.edit ? widget.args.user.FullName : '',
                   validator: (value) {
                     if (value.isEmpty) {
                       return 'Please enter your first name';
@@ -62,7 +62,7 @@ class _AddUpdateTechnicianState extends State<AddUpdateTechnician> {
                   }),
               TextFormField(
                   initialValue: widget.args.edit
-                      ? widget.args.user.phone
+                      ? widget.args.user.Phone
                       : '',
                   validator: (value) {
                     if (value.isEmpty) {
@@ -78,7 +78,7 @@ class _AddUpdateTechnicianState extends State<AddUpdateTechnician> {
                   }),
               TextFormField(
                   initialValue: widget.args.edit
-                      ? widget.args.user.password
+                      ? widget.args.user.Password
                       : '',
                   validator: (value) {
                     if (value.isEmpty) {
@@ -103,12 +103,12 @@ class _AddUpdateTechnicianState extends State<AddUpdateTechnician> {
                       UserUpdate(
 
                         User(
-                          email: this._user["email"],
-                          fName: this._user["fName"],
-                          phone: this._user["phone"],
-                          password: this._user["password"],
-                          imageUrl: 'Assets/assets/fixit.png',
-                          role: this._user["role"],
+                          Email: this._user["email"],
+                          FullName: this._user["fName"],
+                          Phone: this._user["phone"],
+                          Password: this._user["password"],
+                          Picture: 'Assets/assets/fixit.png',
+                          Role: this._user["role"],
                         ),
                       );
 

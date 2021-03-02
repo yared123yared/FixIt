@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_group_project/Features/Role/models/role.dart';
+import 'package:flutter_group_project/Features/Role/models/role.dart';
 
 
 
@@ -7,44 +9,62 @@ import 'package:equatable/equatable.dart';
 @immutable
 class User extends Equatable{
 
-  final String email;
-  final String fName;
-  final String phone;
-  final String password;
-  final String role;
-  final String imageUrl;
-  final String token;
+  final String Email;
+  final String FullName;
+  final String Phone;
+  final String Password;
+  final String Role;
+  final String Picture;
+
+
+
+
+
+
 
 
   const User({
-    @required this.email,
-    @required this.fName,
-    @required this.phone,
-    @required this.password ,
-    @required this.role,
-    @required this.imageUrl ,
-    this.token,
+    @required this.Email,
+    @required this.FullName,
+    @required this.Phone,
+    @required this.Password ,
+    @required this.Role,
+    @required this.Picture ,
 
-
+  //
+  // "userId": 1,
+  // "fullName": "Fasikaw Kindye",
+  // "email": "fasikaw@fixit.com",
+  // "password": "fasikaw1234",
+  // "phone": "+251212121212",
+  // "address": "Sidist-Killo",
+  // "picture": "me.jpg",
+  // "sex": "Male",
+  // "dob": "1999-12-12T00:00:00",
+  // "roleId": 2,
+  // "role": {
+  // "roleId": 2,
+  // "roleName": "admins"
+  // }
 
   });
 
   @override
-  List<Object> get props => [email, fName, phone, password, role, imageUrl];
+  List<Object> get props => [Email, FullName, Phone, Password, Role, Picture];
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-      email: json['Email'],
-      fName: json['FullName'],
-      phone: json['Phone'],
-      password: json['Password'],
-      role: json['Role'],
-      imageUrl: json['Picture']
+      Email: json['email'],
+      FullName: json['fullName'],
+      Phone: json['phone'],
+      Password: json['password'],
+      Role: json['roleId'].toString(),
+      Picture: json['picture']
     );
   }
 
   @override
-  String toString() => 'User { Email: $email, Fname: $fName, Role: $role }';
+  String toString() => 'User { Email: $Email, Fname: $FullName, Role: $Role }';
 }
 
 

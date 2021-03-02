@@ -7,6 +7,8 @@ import 'ServiceDisplayScreen/adminService.dart';
 
 
 class AdminMainPage extends StatefulWidget {
+  final int index;
+  AdminMainPage({this.index});
   static const routeName='/admin';
 
   @override
@@ -18,7 +20,7 @@ class _AdminMainPageState extends State<AdminMainPage> {
     AdminJobMainPage(),
     AdminRoleMainPage(),
     AdminServiceMainPage(),
-    Center(child: Text("No history yet!"),)
+    Center(child: Text("No users yet!"),)
   ];
 
   int _navIndex = 0;
@@ -27,12 +29,12 @@ class _AdminMainPageState extends State<AdminMainPage> {
     if (_navIndex == 0){
       return 'Jobs';
     }else if(_navIndex ==1){
-      return 'Technicians';
+      return 'Roles';
     }
     else if(_navIndex ==2){
-      return 'Technicians';
+      return 'services';
     }else{
-      return 'History';
+      return 'users';
     }
   }
 
@@ -41,7 +43,7 @@ class _AdminMainPageState extends State<AdminMainPage> {
     print('the index is ${_navIndex}');
     return Scaffold(
       appBar: AppBar(
-        title: Text('admin'),
+        title: Text('$title'),
         actions: [
           IconButton(
             icon: Icon(Icons.edit),
@@ -81,17 +83,18 @@ class _AdminMainPageState extends State<AdminMainPage> {
 
           children: [
             UserAccountsDrawerHeader(
-              accountName: Text('Fasikaw'),
-              accountEmail: Text('fasikaw@gmail.com'),
+              accountName: Text('admin'),
+              accountEmail: Text('admin@fixit.com'),
               currentAccountPicture: CircleAvatar(
                 backgroundImage: AssetImage('assets/images/user.jpg'),
               ),
               arrowColor: Colors.purple,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(begin: Alignment.bottomLeft,end: Alignment.topRight,
-                    colors:[Colors.blue,Colors.green] ),
-                // color: Colors.purpleAccent
-              ),
+//              decoration: BoxDecoration(
+//                gradient: LinearGradient(begin: Alignment.bottomLeft,end: Alignment.topRight,
+//                    colors:[Colors.blue,Colors.green]
+//                ),
+//                // color: Colors.purpleAccent
+//              ),
 
             ),
             ListTile(
@@ -144,7 +147,8 @@ class _AdminMainPageState extends State<AdminMainPage> {
         animationCurve: Curves.bounceOut,
         onTap: (index){
           setState(() {
-            _navIndex = index;
+            widget.index == 0? _navIndex=widget.index :_navIndex =index;
+
           });
         },
       ),

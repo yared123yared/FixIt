@@ -1,151 +1,97 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_group_project/Features/Service/Service.dart';
+import 'package:flutter_group_project/Users/Admin/admin.dart';
+
+import '../../../ScreenRoute.dart';
 
 const _kTitleTextStyle = TextStyle(
     color: Color(0xffe6020a), fontSize: 24.0, fontWeight: FontWeight.bold);
-const _kServiceTitleTextStyle = TextStyle(
-    color: Color(0xffe602ba), fontSize: 18.0, fontWeight: FontWeight.bold);
+// const _kServiceTitleTextStyle = TextStyle(
+//     color: Color(0xffe602ba), fontSize: 18.0, fontWeight: FontWeight.bold);
 const _kServiceLocationTextStyle =
 TextStyle(color: Colors.green, fontSize: 18.0, fontWeight: FontWeight.bold);
 const _kDetailsTextStyle = TextStyle(
     color: Colors.black54, fontSize: 16.0, fontWeight: FontWeight.w500);
 class AdminServiceDetail extends StatelessWidget {
   static const routeName='/admin/service/detail';
+  final Service service;
+  AdminServiceDetail({this.service});
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
-    return Scaffold(
+    return  Scaffold(
       appBar: AppBar(
-        title: Text("Service Detail"),
-        centerTitle: true,
-      ),
-
-      body: Container(
-        margin: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-        child: Material(
-          color: Colors.white,
-          elevation: 0.0,
-          borderRadius: BorderRadius.circular(16.0),
-          shadowColor: Color(0x802196F3),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-
-            children: <Widget>[
-
-              Container(
-                margin: EdgeInsets.only(top: 20),
-                child: Padding(
-                  padding: EdgeInsets.only(left: 16.0),
-                  child: buildServiceDetail(),
-                ),
-              ),
-              SizedBox(height:100),
-
-              Container(child: buildUserDetail(width, height)),
-            ],
-          ),
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.delete),
-        onPressed: (){},
-      ),
-    );
-  }
-  //TODO Add user as argument
-  Column buildUserDetail(double width, double height) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left:16.0),
-              child: Text('Requested By', style: _kTitleTextStyle),
+        title: Text('${this.service.ServiceName}'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.edit),
+            onPressed: () => Navigator.of(context).pushNamed(
+              AdminServiceCreate.routeName,
+              arguments: ServiceArgument(service: this.service, edit: true),
             ),
-            SizedBox(width: 50,)
-          ],
-
-        ),
-        SizedBox(height: 30,),
-        Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-
-              CircleAvatar(
-                // TODO: user image
-                backgroundImage:
-                AssetImage('assets/images/mec.jpg'),
-                radius: width * 0.05,
-              ),
-
-              // TODO : user Detail
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "user Name",
-                    style: _kServiceTitleTextStyle,
-                  ),
-                  Row(
-                    children: [
-                      Icon(Icons.mail),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      Text(
-                        "Email",
-                        style: _kDetailsTextStyle,
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Icon(Icons.phone),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      Text(
-                        "+25190----",
-                        style: _kDetailsTextStyle,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ]),
-      ],
-    );
-  }
-
-  // TODO pass job ass argument
-  Widget buildServiceDetail() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        Row(
+          ),
+          SizedBox(
+            width: 32,
+          ),
+          IconButton(
+              icon: Icon(Icons.delete),
+              onPressed: () {
+                BlocProvider.of<ServiceBloc>(context).add(ServiceDelete(this.service));
+                Navigator.of(context).pop();
+              }),
+        ],
+      ),
+      body: Card(
+        child: Column(
           children: [
-            Text('Service Detail', style: _kTitleTextStyle),
-            SizedBox(width: 50,)
+            ListTile(
+              title: Text('Service Name: ${this.service.ServiceName}'),
+              subtitle: Text('Category: ${this.service.Category}'),
+            ),
+            Text(
+              'Details',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text('Description: ${this.service.Description}',style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),),
+            SizedBox(
+              height: 10,
+            ),
+            Text('Initial Price: ${this.service.InitialPrice}',style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            )),
+            SizedBox(
+              height: 10,
+            ),
+            Text('Intermediate Price: ${this.service.IntermediatePrice}',style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            )),
+            SizedBox(
+              height: 10,
+            ),
+            Text('Advanced Price: ${this.service.AdvancedPrice}',style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            )),
+            SizedBox(
+              height: 10,
+            ),
+
           ],
         ),
-        Container(
-          // TODO :job title
-            child: Text(
-              "Candy Bliss",
-              style: _kServiceTitleTextStyle,
-            )),
-        Text(
-          "Pastries \u00B7 Phoenix,AZ",
-          style: _kServiceLocationTextStyle,
-        ),
-        Text(
-          'dmmy dismsdjsk kfjdkf kdfj',
-          style: _kDetailsTextStyle,
-        )
-      ],
+      ),
     );
   }
 }

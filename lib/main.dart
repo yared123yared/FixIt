@@ -18,7 +18,6 @@ import 'package:http/http.dart' as http;
 import 'Features/Authentication/data_provider/Auth_Data.dart';
 import 'Features/Service/Service.dart';
 import 'ScreenRoute.dart';
-import 'Users/Common/ScreenRoute.dart';
 import 'Users/users.dart';
 
 void main()
@@ -79,10 +78,11 @@ class FixIt extends StatelessWidget {
           ),
           BlocProvider<RoleBloc>(
             create: (_) => RoleBloc(roleRepository: this.roleRepository)
-
+                ..add(RoleLoad()),
           ),
           BlocProvider<UserBloc>(
               create: (_) => UserBloc(userRepository: this.userRepository,util: Util())
+                  ..add(UsersLoad())
           ),
           BlocProvider<AuthBloc>(
               create: (_) => AuthBloc(authRepository: this.authenticationRepository,util: Util())
@@ -113,8 +113,8 @@ class MyApp extends StatelessWidget {
               headline6:
               TextStyle(fontSize: 24, fontFamily: 'RobotoCondensed'))),
 
-      initialRoute: '/',
-      onGenerateRoute: UserAppRoute.generateRoute,
+      initialRoute:AdminMainPage.routeName,
+      onGenerateRoute: ServiceAppRoute.generateRoute,
       // onUnknownRoute: (settings) {
       //   return MaterialPageRoute(builder: (ctx) => CategoryMainScreen());
       // },

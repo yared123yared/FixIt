@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_group_project/Features/Authentication/repository/AuthenticationRepository.dart';
 import 'package:flutter_group_project/Features/User/Model/User.dart';
 import 'package:flutter_group_project/Features/User/util/util.dart';
-
 import '../authntication.dart';
 
 
@@ -25,6 +24,7 @@ class AuthBloc extends Bloc<AuthEvents, AuthStates> {
   }
 
   Stream<AuthStates> _mapLoginEventToState(Authentication user) async* {
+    print("+++++++++++LoginEvent+++++");
     yield LoggingState();
     User u;
     try {

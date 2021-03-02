@@ -2,50 +2,61 @@ import 'package:flutter/material.dart';
 import 'package:flutter_group_project/Features/Role/models/role.dart';
 import 'Features/Job/models/job.dart';
 import 'Features/Service/Service.dart';
+import 'Users/Admin/RoleDisplayScreen/AdminRoleUpdate.dart';
+import 'Users/Admin/RoleDisplayScreen/adminRoleMainPage.dart';
 import 'Users/users.dart';
 
 
 class ServiceAppRoute {
   static Route generateRoute(RouteSettings settings) {
     switch(settings.name){
-//       case '/':
-// //        /
-//         return MaterialPageRoute(
-//             builder: (context) => AdminServiceMainPage(
-// //              the arguments will pass here
-//             ));
-//         break;
+       case '/':
+ //        /
+         return MaterialPageRoute(
+             builder: (context) => AdminServiceMainPage(
+ //              the arguments will pass here
+             ));
+         break;
       case AdminMainPage.routeName:
+        final AdminArgument adminArgs = settings.arguments;
 //        /admin
         AdminArgument args = settings.arguments;
         return MaterialPageRoute(
             builder: (context) => AdminMainPage(
+
 //              the arguments will pass here
             ));
         break;
 
 
-//       case AdminServiceMainPage.routeName:
-// //        /admin/service
-//         return MaterialPageRoute(
-//             builder: (context) => AdminServiceMainPage(
-// //              the arguments will pass here
-//             ));
-//         break;
-//       case AdminServiceDetail.routeName:
-// //        /admin/service/detail
-//         return MaterialPageRoute(
-//             builder: (context) => AdminServiceDetail(
-// //              the arguments will pass here
-//             ));
-//         break;
-//       case AdminServiceCreate.routeName:
-// //        /admin/service/create
-//         return MaterialPageRoute(
-//             builder: (context) => AdminServiceCreate(
-// //              the arguments will pass here
-//             ));
-//         break;
+       case AdminServiceMainPage.routeName:
+
+
+         //        /admin/service
+         return MaterialPageRoute(
+             builder: (context) => AdminServiceMainPage(
+
+ //              the arguments will pass here
+             ));
+         break;
+       case AdminServiceDetail.routeName:
+         final Service service = settings.arguments;
+ //        /admin/service/detail
+         return MaterialPageRoute(
+             builder: (context) => AdminServiceDetail(
+               service: service,
+ //              the arguments will pass here
+             ));
+         break;
+       case AdminServiceCreate.routeName:
+         final ServiceArgument argument = settings.arguments;
+ //        /admin/service/create
+         return MaterialPageRoute(
+             builder: (context) => AdminServiceCreate(
+               args: argument,
+ //              the arguments will pass here
+             ));
+         break;
       case AdminJobMainPage.routeName:
 //        /admin/job
         return MaterialPageRoute(
@@ -62,13 +73,15 @@ class ServiceAppRoute {
 //              the arguments will pass here
             ));
         break;
-//       case AdminRoleMainPage.routeName:
-// //        /admin/technician
-//         return MaterialPageRoute(
-//             builder: (context) => AdminRoleMainPage(
-// //              the arguments will pass here
-//             ));
-//         break;
+       case RoleAddUpate.routeName:
+         final RoleArguments args = settings.arguments;
+ //        /admin/technician
+         return MaterialPageRoute(
+             builder: (context) => RoleAddUpate(
+               args: args,
+ //              the arguments will pass here
+             ));
+         break;
 //       case AdminRoleDetail.routeName:
 // //        /admin/technician/detail
 //         return MaterialPageRoute(
@@ -157,7 +170,8 @@ class ServiceArgument {
   ServiceArgument({this.service, this.edit});
 }
 class AdminArgument {
-//  Login in admin object
+final int index;
+AdminArgument({this.index});
 }
 
 class JobArguments {

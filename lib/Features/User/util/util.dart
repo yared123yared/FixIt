@@ -4,23 +4,23 @@ import 'package:shared_preferences/shared_preferences.dart';
 class Util {//User Info management ... Token and Shared Preferences
   Future<void> storeUserInformation(User user) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('fName', user.fName);
-    await prefs.setString('role', user.role);
-    await prefs.setString('imageUrl', user.imageUrl);
-    await prefs.setString('email', user.email);
-    await prefs.setString('password', user.password);
-    await prefs.setString('phone', user.phone);
+    await prefs.setString('FullName', user.FullName);
+    await prefs.setString('Role', user.Role);
+    await prefs.setString('Picture', user.Picture);
+    await prefs.setString('Email', user.Email);
+    await prefs.setString('Password', user.Password);
+    await prefs.setString('Phone', user.Phone);
   }
 
   Future<User> getUserInformation() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     User user = new User(
-      fName: prefs.getString("fName"),
-      role: prefs.getString("role"),
-      imageUrl: prefs.getString("imageUrl"),
-      email: prefs.getString("email"),
-      password: prefs.getString("password"),
-      phone: prefs.getString("phone"),
+      FullName: prefs.getString("FullName"),
+      Role: prefs.getString("Role"),
+      Picture: prefs.getString("Picture"),
+      Email: prefs.getString("Email"),
+      Password: prefs.getString("Password"),
+      Phone: prefs.getString("Phone"),
 
     );
 

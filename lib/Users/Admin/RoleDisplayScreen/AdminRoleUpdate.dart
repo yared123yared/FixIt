@@ -80,8 +80,7 @@ class _AddUpdateRoleState extends State<RoleAddUpate > {
                                 );
                           print('creating role');
                           BlocProvider.of<RoleBloc>(context).add(event);
-                          Navigator.of(context).pushNamedAndRemoveUntil(
-                              AdminRoleMainPage.routeName, (route) => false);
+                          Navigator.of(context).pop();
                         }
                       },
                       label: Text('SAVE'),

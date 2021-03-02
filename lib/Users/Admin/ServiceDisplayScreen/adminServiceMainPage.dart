@@ -133,17 +133,13 @@ class AdminServiceMainPage extends StatelessWidget {
 
 
                                         )]
-
-
                                   )
-
                           ));
                         }
                         return CircularProgressIndicator();
                       }
                   ),
                 ),
-
               ]
           ),
         ),

@@ -20,10 +20,10 @@ class UserDataProvider {
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, dynamic>{
-        "FullName": user.fName,
-        "Email": user.email,
-        "Password": user.password,
-        "Phone": user.phone,
+        "FullName": user.FullName,
+        "Email": user.Email,
+        "Password": user.Password,
+        "Phone": user.Phone,
         "Picture":"Assets/assets/fixit.png",
         "Role": "USER"
       }),
@@ -47,7 +47,7 @@ class UserDataProvider {
     try {
       String token = await util.getUserToken();
       String expiry = await util.getExpiryTime();
-      final response = await httpClient.get('http://192.168.137.1:4000/User',
+      final response = await httpClient.get('http://192.168.137.1:5001/api/users',
           headers: {HttpHeaders.authorizationHeader: token, 'expiry': expiry});
       if (response.statusCode == 200) {
         final user = jsonDecode(response.body) as List;
@@ -65,8 +65,7 @@ class UserDataProvider {
     try {
       final response = await httpClient.get('http://192.168.137.1:4000/User/$email');
       if (response.statusCode == 200) {
-        final extractedData =
-        json.decode(response.body) as Map<String, dynamic>;
+        final extractedData =json.decode(response.body) as Map<String, dynamic>;
         user = User.fromJson(extractedData);
         String token = response.headers['Token'].toString();
         String expiry = response.headers['Expiry_date'].toString();
@@ -105,17 +104,17 @@ class UserDataProvider {
     String token = await util.getUserToken();
     String expiry = await util.getExpiryTime();
     final http.Response response = await httpClient.put(
-      'http://192.168.137.1:4000/User/',
+      'http://192.168.137.1:5001/api/users',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         HttpHeaders.authorizationHeader: token, 'expiry': expiry
       },
       body: jsonEncode(<String, dynamic>{
-        "FullName": user.fName,
-        "Email": user.email,
-        "Password": user.password,
-        "Phone": user.phone,
-        "Role": user.role
+        "FullName": user.FullName,
+        "Email": user.Email,
+        "Password": user.Password,
+        "Phone": user.Phone,
+        "Role": user.Role
       }),
     );
 
