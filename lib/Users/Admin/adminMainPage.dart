@@ -137,12 +137,13 @@ class _AdminMainPageState extends State<AdminMainPage> {
         items: [
           Icon(
             Icons.cleaning_services_rounded,
-            color: Colors.white,
+            key:Key('jobsIcon'),
+                        color: Colors.white,
             size: 25.0,
           ),
-          Icon(Icons.supervised_user_circle, color: Colors.white, size: 25.0),
-          Icon(Icons.history, color: Colors.white, size: 25.0),
-          Icon(Icons.history, color: Colors.white, size: 25.0),
+          Icon(Icons.supervised_user_circle,key:Key('rolesIcon'), color: Colors.white, size: 25.0),
+          Icon(Icons.history,key:Key('servicesIcon'), color: Colors.white, size: 25.0),
+          Icon(Icons.history,key:Key('usersIcon'), color: Colors.white, size: 25.0),
         ],
         height: 50,
         animationDuration: Duration(microseconds: 500),

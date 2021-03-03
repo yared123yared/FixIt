@@ -27,7 +27,7 @@ class AdminJobMainPage extends StatelessWidget {
                 scrollDirection: Axis.vertical,
                 itemCount: jobs.length,
                 itemBuilder: (_, idx) => GestureDetector(
-                  key: Key('job'),
+                  key: Key('job$idx'),
                   onTap: () {
                     Navigator.of(context).pushNamed(AdminJobDetail.routeName,
                         arguments: jobs[idx]);

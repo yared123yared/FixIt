@@ -18,6 +18,15 @@ void main() {
     var loginButton = find.byValueKey('loginButton');
     var logOutButton = find.byValueKey('logOutButton');
 
+    var adminJobsIcon = find.byValueKey('jobsIcon');
+    var adminRolesIcon = find.byValueKey('rolesIcon');
+    var adminServicesIcon = find.byValueKey('servicesIcon');
+    var adminUsersIcon = find.byValueKey('usersIcon');
+
+    var firstJob = find.byValueKey('job0');
+    var adminJobDeleteButton = find.byValueKey('adminJobDeleteButton');
+    // adminJobDeleteButton
+
     FlutterDriver driver;
 
     setUpAll(() async {
@@ -30,21 +39,45 @@ void main() {
     //   }
     // });
 
-    test('login to fixit', () async {
+    // test('login to fixit, logout then signup', () async {
+    //   await driver.tap(textFieldEmailForLoin);
+    //   await driver.enterText('yared.com');
+    //   await driver.tap(textFieldPasswordFoLogin);
+    //   await driver.enterText('1');
+    //   await driver.tap(loginButton);
+    //   // log out
+    //   await driver.tap(logOutButton);
+    //   // sign up
+    //   await driver.tap(loginSignUpButton);
+    //   await driver.tap(nameField);
+    //   await driver.enterText('Yosef Endale');
+    //   await driver.tap(textFieldEmail);
+    //   await driver.enterText('getch@gmail.com');
+    //   await driver.tap(textFieldPhone);
+    //   await driver.enterText('0989121345');
+    //   await driver.tap(textFieldPassword);
+    //   await driver.enterText('yosefendale');
+    //   await driver.tap(signUpButton);
+    // });
+
+    test('login to fixit => navigate through Tabs', () async {
       await driver.tap(textFieldEmailForLoin);
       await driver.enterText('yared.com');
       await driver.tap(textFieldPasswordFoLogin);
       await driver.enterText('1');
       await driver.tap(loginButton);
-      // TODO : list tasks after login
-      await driver.tap(logOutButton);
-      // await driver.tap(resultClub1);
-      // await driver.enterText('3');
-      // await driver.tap(resultClub2);
-      // await driver.enterText('2');
-      // await driver.tap(resultSave);
-    });
+      // print('login clicked');
+      // navigate
 
+      await driver.tap(adminRolesIcon);
+      await driver.tap(adminServicesIcon);
+
+      await driver.tap(adminUsersIcon);
+
+      await driver.tap(adminJobsIcon);
+      await driver.tap(firstJob);
+      await driver.tap(adminJobDeleteButton);
+    });
 
     // test('signup', () async {
     //   await driver.tap(loginSignUpButton);
