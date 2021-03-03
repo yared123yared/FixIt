@@ -117,6 +117,7 @@ class AdminServiceMainPage extends StatelessWidget {
                                                   textColor:Theme.of(context).errorColor,
                                                   icon: Icon(Icons.delete_forever,color: Theme.of(context).errorColor,),
                                                 ): IconButton(
+                                                  key:Key('service$index'),
                                                   icon: Icon(Icons.star_border,color: Theme.of(context).errorColor,),
 
 

@@ -24,8 +24,12 @@ void main() {
     var adminUsersIcon = find.byValueKey('usersIcon');
 
     var firstJob = find.byValueKey('job0');
+    var firstService = find.byValueKey('service0');
+
     var adminJobDeleteButton = find.byValueKey('adminJobDeleteButton');
+    var adminServiceDeleteButton = find.byValueKey('adminServiceDeleteButton');
     // adminJobDeleteButton
+    // adminServiceDeleteButton
 
     FlutterDriver driver;
 
@@ -39,28 +43,28 @@ void main() {
     //   }
     // });
 
-    // test('login to fixit, logout then signup', () async {
-    //   await driver.tap(textFieldEmailForLoin);
-    //   await driver.enterText('yared.com');
-    //   await driver.tap(textFieldPasswordFoLogin);
-    //   await driver.enterText('1');
-    //   await driver.tap(loginButton);
-    //   // log out
-    //   await driver.tap(logOutButton);
-    //   // sign up
-    //   await driver.tap(loginSignUpButton);
-    //   await driver.tap(nameField);
-    //   await driver.enterText('Yosef Endale');
-    //   await driver.tap(textFieldEmail);
-    //   await driver.enterText('getch@gmail.com');
-    //   await driver.tap(textFieldPhone);
-    //   await driver.enterText('0989121345');
-    //   await driver.tap(textFieldPassword);
-    //   await driver.enterText('yosefendale');
-    //   await driver.tap(signUpButton);
-    // });
+    test('login to fixit, logout then signup', () async {
+      await driver.tap(textFieldEmailForLoin);
+      await driver.enterText('yared.com');
+      await driver.tap(textFieldPasswordFoLogin);
+      await driver.enterText('1');
+      await driver.tap(loginButton);
+      // log out
+      await driver.tap(logOutButton);
+      // sign up
+      await driver.tap(loginSignUpButton);
+      await driver.tap(nameField);
+      await driver.enterText('gech gech');
+      await driver.tap(textFieldEmail);
+      await driver.enterText('getch@gmail.com');
+      await driver.tap(textFieldPhone);
+      await driver.enterText('0989121345');
+      await driver.tap(textFieldPassword);
+      await driver.enterText('getachw');
+      await driver.tap(signUpButton);
+    });
 
-    test('login to fixit => navigate through Tabs', () async {
+    test('login to fixit => navigate through Tabs => delete 1 job', () async {
       await driver.tap(textFieldEmailForLoin);
       await driver.enterText('yared.com');
       await driver.tap(textFieldPasswordFoLogin);
@@ -79,17 +83,37 @@ void main() {
       await driver.tap(adminJobDeleteButton);
     });
 
-    // test('signup', () async {
-    //   await driver.tap(loginSignUpButton);
-    //   await driver.tap(nameField);
-    //   await driver.enterText('Yosef Endale');
-    //   await driver.tap(textFieldEmail);
-    //   await driver.enterText('getch@gmail.com');
-    //   await driver.tap(textFieldPhone);
-    //   await driver.enterText('0989121345');
-    //   await driver.tap(textFieldPassword);
-    //   await driver.enterText('yosefendale');
-    //   await driver.tap(signUpButton);
-    // });
+    test('login to fixit => navigate through Tabs => delete 1 service',
+        () async {
+      await driver.tap(textFieldEmailForLoin);
+      await driver.enterText('yared.com');
+      await driver.tap(textFieldPasswordFoLogin);
+      await driver.enterText('1');
+      await driver.tap(loginButton);
+      // print('login clicked');
+      // navigate
+
+      await driver.tap(adminRolesIcon);
+      await driver.tap(adminServicesIcon);
+      await driver.tap(adminUsersIcon);
+      await driver.tap(adminRolesIcon);
+      await driver.tap(adminServicesIcon);
+
+      await driver.tap(firstService);
+      await driver.tap(adminServiceDeleteButton);
+    });
+
+    test('signup', () async {
+      await driver.tap(loginSignUpButton);
+      await driver.tap(nameField);
+      await driver.enterText('Yosef Endale');
+      await driver.tap(textFieldEmail);
+      await driver.enterText('getch@gmail.com');
+      await driver.tap(textFieldPhone);
+      await driver.enterText('0989121345');
+      await driver.tap(textFieldPassword);
+      await driver.enterText('yosefendale');
+      await driver.tap(signUpButton);
+    });
   });
 }
