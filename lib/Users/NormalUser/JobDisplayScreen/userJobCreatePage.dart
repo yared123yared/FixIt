@@ -162,7 +162,7 @@ class _UserCreateJobState extends State<UserCreateJob> {
                           print('creating job');
                           BlocProvider.of<JobBloc>(context).add(event);
                           Navigator.of(context).pushNamedAndRemoveUntil(
-                              UserMain.routeName, (route) => false);
+                              UserMain.routeName, (route) => false,arguments: user);
                         }
                       },
                       label: Text('SAVE'),

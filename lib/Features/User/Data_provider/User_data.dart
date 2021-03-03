@@ -26,7 +26,7 @@ class UserDataProvider {
         "Password": user.Password,
         "Phone": user.Phone,
         "Picture":"Assets/assets/fixit.png",
-        "Role": "USER"
+        "roleId": 1,
       }),
     );
 

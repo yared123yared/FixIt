@@ -1,3 +1,4 @@
+import 'package:flutter_group_project/Features/Role/models/role.dart';
 import 'package:flutter_group_project/Features/User/Model/User.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -10,6 +11,7 @@ class Util {//User Info management ... Token and Shared Preferences
     await prefs.setString('Email', user.Email);
     await prefs.setString('Password', user.Password);
     await prefs.setString('Phone', user.Phone);
+    await prefs.setString('RoleName', user.Role.roleName);
   }
 
   Future<User> getUserInformation() async {
@@ -21,6 +23,7 @@ class Util {//User Info management ... Token and Shared Preferences
       Email: prefs.getString("Email"),
       Password: prefs.getString("Password"),
       Phone: prefs.getString("Phone"),
+      Role: Rolee(roleId: prefs.getInt("RoleId"),roleName:prefs.getString("RoleName"))
 
     );
 

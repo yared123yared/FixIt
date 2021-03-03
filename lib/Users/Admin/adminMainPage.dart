@@ -15,9 +15,9 @@ import 'UserManagement/adminUserMainPage.dart';
 
 
 class AdminMainPage extends StatefulWidget {
-  final int index;
-  // final User user;
-  AdminMainPage({this.index});
+//  final int index;
+  final User args;
+  AdminMainPage({@required this.args});
   static const routeName='/admin';
   @override
   _AdminMainPageState createState() => _AdminMainPageState();
@@ -65,7 +65,7 @@ class _AdminMainPageState extends State<AdminMainPage> {
 
                 Navigator.of(context)
                     .pushNamed(
-                    UserDetail.routeName, arguments: user);
+                    UserDetail.routeName, arguments: widget.args);
               },
 
 
@@ -99,10 +99,10 @@ class _AdminMainPageState extends State<AdminMainPage> {
           children: [
             UserAccountsDrawerHeader(
 
-              accountName: Text(Util().getUserInformation().toString()),
-              accountEmail: Text(Util().getUserInformation().toString()),
+              accountName: Text(widget.args.FullName),
+              accountEmail: Text(widget.args.Email),
               currentAccountPicture: CircleAvatar(
-                backgroundImage: AssetImage('assets/images/user.jpg'),
+                backgroundImage: AssetImage("Assets/assets/fixit.png"),
               ),
               arrowColor: Colors.purple,
 //              decoration: BoxDecoration(
@@ -116,11 +116,12 @@ class _AdminMainPageState extends State<AdminMainPage> {
             ListTile(
               leading: Icon(Icons.contact_page),
               title: Text('account'),
+              onTap: () async{
+                Navigator.of(context)
+                    .pushNamed(
+                    UserDetail.routeName,arguments: widget.args);
+              },
 
-            ),
-            ListTile(
-                leading: Icon(Icons.settings),
-                title:Text('settings')
             ),
             // ListTile(
             //   leading: Icon(Icons.favorite),
@@ -139,8 +140,7 @@ class _AdminMainPageState extends State<AdminMainPage> {
             Divider(height: 20,),
             ListTile(
               trailing: Icon(Icons.close),
-              title: Text('LogOut'),
-
+              title: Text('Close'),
               onTap: (){
                 Navigator.of(context).pop();
               },
@@ -168,12 +168,12 @@ class _AdminMainPageState extends State<AdminMainPage> {
         ),
         animationCurve: Curves.bounceOut,
         onTap: (index){
-          setState(() {
-            widget.index == 0? _navIndex=widget.index :_navIndex =index;
-
-          });
+            setState(() {
+              _navIndex = index;
+            });
         },
       ),
     );
   }
+
 }

@@ -16,7 +16,7 @@ class ServiceDataProvider {
 
   Future<Service> createService(Service service) async {
     final response = await httpClient.post(
-      Uri.http(_baseUrl, '/api/services'),
+      '$_baseUrl/api/services',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -73,23 +73,23 @@ class ServiceDataProvider {
     );
 
     if (response.statusCode != 200) {
-      throw Exception('Failed to delete course.');
+      throw Exception('Failed to delete service.');
     }
 
   }
 
   Future<void> updateService(Service service) async {
     String token = await util.getUserToken();
-    final http.Response response = await httpClient.put(
+    final http.Response response = await httpClient.post(
       '$_baseUrl/api/services/',
-//      headers: <String, String>{
-//        'Content-Type': 'application/json; charset=UTF-8',
-//      },
-
-      headers: {
-        HttpHeaders.contentTypeHeader: "application/json",
-        HttpHeaders.authorizationHeader: "Bearer $token"
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
       },
+
+//      headers: {
+//        HttpHeaders.contentTypeHeader: "application/json",
+////        HttpHeaders.authorizationHeader: "Bearer $token"
+//      },
       body: jsonEncode(<String, dynamic>{
         "serviceId":service.id,
         "serviceName": service.ServiceName,
@@ -102,6 +102,7 @@ class ServiceDataProvider {
       }),
     );
 
+    print("Response: ${response.statusCode}");
     if (response.statusCode != 200) {
       throw Exception('Failed to update course.');
     }

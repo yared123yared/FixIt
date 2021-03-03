@@ -162,7 +162,7 @@ class _AddUpdateServiceState extends State<AdminServiceCreate> {
                       BlocProvider.of<ServiceBloc>(context).add(event);
                       Navigator.of(context).pushNamedAndRemoveUntil(
 
-                          AdminMainPage.routeName, (route) => false,arguments: AdminArgument(index: 2) );
+                          AdminMainPage.routeName, (route) => false );
                     }
                   },
                   label: Text('SAVE'),

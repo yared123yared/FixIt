@@ -414,7 +414,7 @@ class _RegisterState extends State<Register> {
             Phone: _myPhoneController.text,
             Password: _myPasswordController.text,
             Picture: 'this._user["intermediatePrice"]',
-            Role: 8,
+            RoleId: 8,
           ),
         );
         BlocProvider.of<UserBloc>(context).add(event);

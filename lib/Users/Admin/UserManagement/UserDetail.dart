@@ -69,7 +69,7 @@ class UserDetail extends StatelessWidget {//To show detail of User
             SizedBox(
               height: 10,
             ),
-            Text('Role: ${this.user.Role}',style: TextStyle(
+            Text('Role: ${this.user.Role.roleName}',style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
             )),

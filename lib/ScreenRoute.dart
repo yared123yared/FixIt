@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_group_project/Features/Role/models/role.dart';
 import 'package:flutter_group_project/Features/User/Model/User.dart';
+import 'package:flutter_group_project/Users/NormalUser/UserUpdate/AddUpdateUser.dart';
 import 'Features/Authentication/authntication.dart';
 import 'Features/Job/models/job.dart';
 import 'Features/Service/Service.dart';
@@ -65,8 +66,9 @@ class ServiceAppRoute {
                          ),
                        );
                      }
+//                     return UserMain();
                      return isAuthenticated
-                         ? (isAdmin ? AdminMainPage() :  Users_main(user: user))
+                         ? (isAdmin ? AdminMainPage(args: ) :  UserMain())
                          : SignIn();
                    }));
 
@@ -85,7 +87,7 @@ class ServiceAppRoute {
             ));
 
       case AdminMainPage.routeName:
-        final UserArgument adminArgs = settings.arguments;
+//        final UserArgument adminArgs = settings.arguments;
 //        /admin
         UserArgument args = settings.arguments;
         return MaterialPageRoute(
@@ -157,20 +159,20 @@ class ServiceAppRoute {
                 ));
           break;
 
-//       case AdminRoleDetail.routeName:
-// //        /admin/technician/detail
-//         return MaterialPageRoute(
-//             builder: (context) => AdminRoleDetail(
-// //              the arguments will pass here
-//             ));
-//         break;
-//       case UserMain.routeName:
-// //        /user
-//         return MaterialPageRoute(
-//             builder: (context) => UserMain(
-// //              the arguments will pass here
-//             ));
-//         break;
+       case AddUpdateUser.routeName:
+ //        /admin/technician/detail
+         return MaterialPageRoute(
+             builder: (context) => AddUpdateUser(
+ //              the arguments will pass here
+             ));
+         break;
+       case Users_mainProfile.routeName:
+ //        /user
+         return MaterialPageRoute(
+             builder: (context) => Users_mainProfile(
+ //              the arguments will pass here
+             ));
+         break;
       case UserJobMain.routeName:
 //        /user/job
         return MaterialPageRoute(
@@ -211,8 +213,10 @@ class ServiceAppRoute {
         break;
       case UserServiceDetail.routeName:
 //        /user/category/service/detail
+      final CategoryArgument args = settings.arguments;
         return MaterialPageRoute(
             builder: (context) => UserServiceDetail(
+              services: args,
 //              the arguments will pass here
             ));
         break;

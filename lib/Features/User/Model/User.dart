@@ -31,7 +31,7 @@ class User extends Equatable{
     @required this.Phone,
     @required this.Password ,
     @required this.RoleId ,
-    @required this.Role,
+     this.Role,
     @required this.Picture ,
 
 
@@ -47,6 +47,7 @@ class User extends Equatable{
       FullName: json['fullName'],
       Phone: json['phone'],
       Password: json['password'],
+      RoleId: json['roleId'],
       Role: Rolee.fromJson(json['role']),
       Picture: json['picture']
     );
