@@ -107,7 +107,7 @@ class UserServiceDetail extends StatelessWidget {
                               ),
                               onTap: () {
                                 print("Creating");
-                                Navigator.of(context).pushNamed(UserCreateJob.routeName, arguments:JobArguments(edit:false));
+                                Navigator.of(context).pushNamed(UserCreateJob.routeName, arguments:JobArguments(edit:false,));
                               },
                             ),
 //            onTap: (){

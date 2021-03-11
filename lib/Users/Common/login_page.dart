@@ -41,7 +41,9 @@ class _SignInState extends State<SignIn> {
       listener:(_,state){
         if(state is LoginSuccessState){
           print(state.user.toString());
-          print(state.user.toString());print(state.user.toString());print(state.user.toString());
+          print(state.user.toString());
+          print(state.user.toString());
+          print(state.user.toString());
 
 
 
@@ -64,10 +66,10 @@ class _SignInState extends State<SignIn> {
         if(state is UserOperationFailure){//Toast the message of the Failure
           Toast.show("Login operation failed :(", context, backgroundColor: Colors.red, textColor: Colors.white, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
         }
-        else{
-          Toast.show("Incorrect Email/Password combination", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
-
-        }
+//        else{
+//          Toast.show("Incorrect Email/Password combination", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+//
+//        }
       },
       builder:(_,state){//Build the page if not logging in
         return Scaffold(

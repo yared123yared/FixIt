@@ -3,11 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_group_project/Features/Job/bloc/job_bloc.dart';
 import 'package:flutter_group_project/Features/Job/bloc/job_state.dart';
 import 'package:flutter_group_project/Features/Job/models/job.dart';
+//import 'package:flutter_group_project/Features/Job/models/job.dart';
+import 'package:flutter_group_project/Features/User/Model/User.dart' as us ;
 import 'package:flutter_group_project/Users/NormalUser/JobDisplayScreen/userJobPageDetail.dart';
 
 class UserJobMain extends StatelessWidget {
+  final us.User user;
+  UserJobMain({this.user});
   static const routeName='/user/job';
-  final userId = 5;
+//  final userId = 2;
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery
@@ -30,8 +34,9 @@ class UserJobMain extends StatelessWidget {
             if (state is JobLoadingSuccess) {
               List<Job> jobs = [];
               final jobUser = state.jobs;
+
               jobUser.forEach((element) {
-                if(element.userId == userId){
+                if(element.userId == user.UserId){
                   jobs.add(element);
                 }
               });

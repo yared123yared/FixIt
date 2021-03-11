@@ -56,7 +56,7 @@ class _RegisterState extends State<Register> {
             loading_screen(title:"Login loading");
           }
           else{
-            Toast.show("Sign up opreation failed :(", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+//            Toast.show("Sign up opreation failed :(", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
           }
         },
         builder:(_,state) {
@@ -414,15 +414,18 @@ class _RegisterState extends State<Register> {
             Phone: _myPhoneController.text,
             Password: _myPasswordController.text,
             Picture: 'this._user["intermediatePrice"]',
-            RoleId: 8,
+            RoleId: 1,
           ),
         );
         BlocProvider.of<UserBloc>(context).add(event);
         if(state is UserLoadSuccess){
-            Navigator.pushNamed(context, SignIn.routeName);
+//            Navigator.pushNamed(context, SignIn.routeName);
+            Navigator.pushReplacementNamed(context, SignIn.routeName);
+
         }
         else if (state is UserOperationFailure) {
-          Toast.show("Login operation failed :(", context, backgroundColor: Colors.red, textColor: Colors.white, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+          Navigator.pushReplacementNamed(context, SignIn.routeName);
+//          Navigator.pushNamed(context, SignIn.routeName);
         }
 
 

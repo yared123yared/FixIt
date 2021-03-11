@@ -95,9 +95,10 @@ class UserDataProvider {
       },
     );
 
-
+      print(response.statusCode);
     if (response.statusCode != 200) {
-      throw Exception('Failed to delete course.');
+
+      throw Exception('Failed to delete user.');
     }
   }
 

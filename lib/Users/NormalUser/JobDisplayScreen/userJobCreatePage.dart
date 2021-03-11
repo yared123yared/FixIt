@@ -11,7 +11,8 @@ import '../userMainPage.dart';
 class UserCreateJob extends StatefulWidget {
   static const routeName='/user/job/create';
   final JobArguments args;
-  UserCreateJob({this.args});
+  final User user;
+  UserCreateJob({this.args, this.user});
   @override
   _UserCreateJobState createState() => _UserCreateJobState();
 }
@@ -21,7 +22,7 @@ class _UserCreateJobState extends State<UserCreateJob> {
 
   final Map<String, dynamic> _job = {};
   // final Map<String, dynamic> _job = {};
-    final userId = 5;
+    final userId = 2;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

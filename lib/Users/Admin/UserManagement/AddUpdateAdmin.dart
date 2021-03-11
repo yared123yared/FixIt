@@ -184,9 +184,8 @@ class _AddUpdateAdminState extends State<AddUpdateAdmin> {
                                 print("Created");
                                 BlocProvider.of<UserBloc>(context).add(event);
                                 print("After bloc");
+//                                Navigator.of(context).pop();
                                 Navigator.of(context).pop();
-//                                Navigator.of(context).pushNamedAndRemoveUntil(
-//                                    AdminMainPage.routeName, (route) => false);
                               }
                             },
                             label: Text('SAVE'),

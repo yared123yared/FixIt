@@ -19,10 +19,8 @@ import 'UserUpdate/Users_main.dart';
  }
 
  class _UserMainState extends State<UserMain> {
-   List<Widget> homeWidgets = [
-     UserCategoryMain(),
-     UserJobMain()
-   ];
+
+   List<Widget> homeWidgets;
 
    int _navIndex = 0;
 
@@ -35,6 +33,10 @@ import 'UserUpdate/Users_main.dart';
    }
    @override
    Widget build(BuildContext context) {
+     homeWidgets = [
+     UserCategoryMain(),
+     UserJobMain(user: widget.args,)
+     ];
      return Scaffold(
        appBar: AppBar(
          title: Text('$title'),
@@ -80,7 +82,7 @@ import 'UserUpdate/Users_main.dart';
                  leading: Icon(Icons.logout),
                  title: Text('LogOut'),
                  onTap: (){
-                   Navigator.of(context).pop();
+//                   Navigator.of(context).pop();
                    BlocProvider.of<AuthBloc>(context).add(LogOutEvent());
                    Navigator.of(context).pushReplacementNamed('/');
                  }

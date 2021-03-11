@@ -9,6 +9,7 @@ import 'package:flutter_group_project/Users/Admin/JobDisplayScreen/adminJobMainP
 import 'package:flutter_group_project/Users/Admin/RoleDisplayScreen/adminRoleMainPage.dart';
 import 'package:flutter_group_project/Users/Admin/UserManagement/UserDetail.dart';
 import 'package:flutter_group_project/Users/Common/ScreenRoute.dart';
+import 'package:flutter_group_project/Users/Common/login_page.dart';
 import '../../ScreenRoute.dart';
 import 'ServiceDisplayScreen/adminService.dart';
 import 'UserManagement/adminUserMainPage.dart';
@@ -132,9 +133,9 @@ class _AdminMainPageState extends State<AdminMainPage> {
               leading: Icon(Icons.logout),
               title: Text('LogOut'),
               onTap: (){
-                Navigator.of(context).pop();
+//                Navigator.of(context).pop();
                 BlocProvider.of<AuthBloc>(context).add(LogOutEvent());
-                Navigator.of(context).pushReplacementNamed('/');
+                Navigator.of(context).pushReplacementNamed(SignIn.routeName);
               }
             ),
             Divider(height: 20,),

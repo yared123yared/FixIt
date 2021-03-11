@@ -48,6 +48,7 @@ class ServiceAppRoute {
                      } else if (state is LoggingOutState) {
                        return loading_screen(title: 'Logging out');
                      } else if (state is LoggingOutSuccessState) {
+                       print("logingng out $isAuthenticated");
                        isAuthenticated = false;
                      } else if (state is LoggingOutErrorState) {
                        showDialog(
@@ -68,7 +69,7 @@ class ServiceAppRoute {
                      }
 //                     return UserMain();
                      return isAuthenticated
-                         ? (isAdmin ? AdminMainPage(args: ) :  UserMain())
+                         ? (isAdmin ? AdminMainPage(args: user,) :  UserMain(args: user,))
                          : SignIn();
                    }));
 
@@ -89,10 +90,22 @@ class ServiceAppRoute {
       case AdminMainPage.routeName:
 //        final UserArgument adminArgs = settings.arguments;
 //        /admin
-        UserArgument args = settings.arguments;
+       final UserArgument args = settings.arguments;
+       print("the user arrguent is ${args.user}");
         return MaterialPageRoute(
             builder: (context) => AdminMainPage(
-
+                    args: args.user,
+//              the arguments will pass here
+            ));
+        break;
+      case UserMain.routeName:
+//        final UserArgument adminArgs = settings.arguments;
+//        /admin
+        final UserArgument args = settings.arguments;
+        print("the user arrguent is ${args.user}");
+        return MaterialPageRoute(
+            builder: (context) => UserMain(
+              args: args.user,
 //              the arguments will pass here
             ));
         break;
@@ -182,8 +195,10 @@ class ServiceAppRoute {
       break;
       case UserJobDetail.routeName:
 //        /user/job/detail
+      final Job job = settings.arguments;
         return MaterialPageRoute(
             builder: (context) => UserJobDetail(
+              job: job,
 //              the arguments will pass here
             ));
         break;
