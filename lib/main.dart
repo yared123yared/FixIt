@@ -103,6 +103,7 @@ class MyApp extends StatelessWidget {
           primaryColor: Color.fromRGBO(146, 40, 105,1),
           accentColor: Color.fromRGBO(82, 51, 105,1),
           canvasColor: Color.fromRGBO(225, 254, 229, 1),
+          errorColor: Colors.redAccent,
           fontFamily: 'Raleway',
           textTheme: ThemeData.light().textTheme.copyWith(
               bodyText1: TextStyle(
@@ -111,6 +112,7 @@ class MyApp extends StatelessWidget {
               bodyText2: TextStyle(
                 color: Color.fromRGBO(20, 31, 51, 1),
               ),
+
               headline6:
               TextStyle(fontSize: 24, fontFamily: 'RobotoCondensed'))),
 
