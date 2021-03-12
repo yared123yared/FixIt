@@ -79,7 +79,7 @@ class UserTechnicianDetail extends StatelessWidget {
           child: Container(
             margin: EdgeInsets.all(10),
             child: CustomButton(
-              label: 'Hire Getachew T.',
+              label: 'hire ${technician.user.fullName}',
               backgroundColor: Colors.blueAccent,
               foregroundColor: Colors.white,
             ),

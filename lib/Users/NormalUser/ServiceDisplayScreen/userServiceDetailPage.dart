@@ -95,15 +95,13 @@ class UserServiceDetail extends StatelessWidget {
                               ),
                               title: Text(services.services[index].ServiceName !=null ? services.services[index].ServiceName : "place holder",
                                 style: Theme.of(context).textTheme.headline6,),
-                              subtitle: Text(services.services[index].Description !=null ?services.services[index].Description: "Place holder" ,),
+                              subtitle: Text(services.services[index].Description !=null ?"Price: ${services.services[index].InitialPrice}": "Place holder" ,),
                               trailing: MediaQuery.of(context).size.width > 450 ? FlatButton.icon(
                                 onPressed: (){},
                                 textColor:Theme.of(context).errorColor,
                                 icon: Icon(Icons.delete_forever,color: Theme.of(context).errorColor,),
                               ): IconButton(
                                 icon: Icon(Icons.star_border,color: Theme.of(context).errorColor,),
-
-
 
                               ),
                               onTap: () {

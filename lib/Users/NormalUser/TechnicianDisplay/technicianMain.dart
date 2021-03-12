@@ -42,7 +42,6 @@ class UserTechnicianMain extends StatelessWidget {
     );
   }
 //
-
 //
   Widget getFloatingButton(BuildContext context) {
     return FloatingActionButton(
@@ -69,20 +68,54 @@ class UserTechnicianMain extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
             children: [
-              Container(
-                height: MediaQuery
-                    .of(context)
-                    .size
-                    .width * 0.5,
-                width: double.infinity,
+              Card(
+                elevation: 10.0,
+                child: Container(
+                  padding: EdgeInsets.only(top: 10),
+                  height: MediaQuery
+                      .of(context)
+                      .size
+                      .width * 0.5,
 
-                child: Center(child: Text(service.ServiceName,style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.purple,
-                  fontSize: 40
+                  width: double.infinity,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left:8.0),
+                        child: Text(service.ServiceName,style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.purple,
+                          fontSize: 25
+                        ),),
+                      ),
+                      Divider(thickness: 1.5,),
 
-                ),),),
-
+                      Padding(
+                        padding: const EdgeInsets.only(left:8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Initial Price: ${service.InitialPrice}",style: TextStyle(color: Colors.blue, ),),
+                            SizedBox(height: 5,),
+                            Text("Intermediate Price: ${service.IntermediatePrice}",style: TextStyle(color: Colors.blue, ),),
+                            SizedBox(height: 5,),
+                            Text("Advanced Price: ${service.AdvancedPrice}",style: TextStyle(color: Colors.blue, ),),
+                          ],
+                        ),
+                      ),
+                      Divider(thickness: 1.5,),
+                      SizedBox(height: 10,),
+                      Padding(
+                        padding: const EdgeInsets.only(left:8.0),
+                        child: Text(service.Description,
+                          maxLines: 4,
+                          overflow: TextOverflow.ellipsis,style: TextStyle(color: Colors.grey),),
+                      ),
+                      SizedBox(height: 10,),
+                    ],
+                  ),
+                ),
               ),
 //           ingredient
               buildSectionTitle(context, 'Technicians'),

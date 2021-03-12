@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_group_project/Features/Role/models/role.dart';
 import 'package:flutter_group_project/Features/User/Model/User.dart';
+import 'package:flutter_group_project/Users/NormalUser/JobDisplayScreen/map_screen.dart';
 import 'package:flutter_group_project/Users/NormalUser/TechnicianDisplay/technicianDetail.dart';
 import 'package:flutter_group_project/Users/NormalUser/TechnicianDisplay/technicianMain.dart';
 import 'Features/Authentication/authntication.dart';
@@ -220,6 +221,14 @@ class ServiceAppRoute {
 //        /user/category
         return MaterialPageRoute(
             builder: (context) => UserCategoryMain(
+//              the arguments will pass here
+            ));
+
+        break;
+      case MapScreen.routeName:
+//        /user/category
+        return MaterialPageRoute(
+            builder: (context) => MapScreen(
 //              the arguments will pass here
             ));
 
