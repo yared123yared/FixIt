@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
+import 'JobRequestDisplayScreen/technicianRequestMainPage.dart';
+
 class TechnicianMainPage extends StatelessWidget {
+  static const routeName='/technician/request';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,9 +24,8 @@ class TechnicianMainPage extends StatelessWidget {
               ),
               decoration: BoxDecoration(
                 gradient: LinearGradient(begin: Alignment.bottomLeft,end: Alignment.topRight,
-//                    colors:[Colors.purple,Colors.green]
+                   colors:[Colors.purple,Colors.green]
                 ),
-
                 // color: Colors.purpleAccent
               ),
 
@@ -59,6 +62,7 @@ class TechnicianMainPage extends StatelessWidget {
         ),
 
       ),
+      body: TechnicianRequestMain(),
     );
   }
 }

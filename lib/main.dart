@@ -13,6 +13,7 @@ import 'package:flutter_group_project/Features/User/Bloc/bloc.dart';
 import 'package:flutter_group_project/Features/User/Data_provider/data_provider.dart';
 import 'package:flutter_group_project/Features/User/Repository/repository.dart';
 import 'package:flutter_group_project/Features/User/util/util.dart';
+import 'package:flutter_group_project/Users/Technicians/technicianMainPage.dart';
 import 'package:flutter_group_project/bloc_observer.dart';
 import 'package:http/http.dart' as http;
 import 'Features/Authentication/data_provider/Auth_Data.dart';
@@ -114,7 +115,7 @@ class MyApp extends StatelessWidget {
               headline6:
               TextStyle(fontSize: 24, fontFamily: 'RobotoCondensed'))),
 
-      initialRoute:"/",
+      initialRoute:TechnicianMainPage.routeName,
       onGenerateRoute: ServiceAppRoute.generateRoute,
       // onUnknownRoute: (settings) {
       //   return MaterialPageRoute(builder: (ctx) => CategoryMainScreen());
