@@ -235,7 +235,7 @@ class ServiceAppRoute {
 //              the arguments will pass here
             ));
         break;
-      case TechnicianRequestMain.rotueName:
+      case TechnicianRequestMain.routeName:
 //        /technician
         return MaterialPageRoute(
             builder: (context) => TechnicianRequestMain(
@@ -273,7 +273,8 @@ AdminArgument({this.index});
 class JobArguments {
   final Job job;
   final bool edit;
-  JobArguments({this.job, this.edit});
+  final int technicianId;
+  JobArguments({this.job, this.edit, this.technicianId});
 }
 
 class RoleArgument{

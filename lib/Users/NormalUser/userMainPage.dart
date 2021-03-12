@@ -35,8 +35,10 @@ import 'UserUpdate/Users_main.dart';
    Widget build(BuildContext context) {
      homeWidgets = [
      UserCategoryMain(),
-     UserJobMain(user: widget.args,)
+     UserJobMain()
      ];
+
+
      return Scaffold(
        appBar: AppBar(
          title: Text('$title'),
