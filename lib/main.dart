@@ -13,43 +13,52 @@ import 'package:flutter_group_project/Features/User/Bloc/bloc.dart';
 import 'package:flutter_group_project/Features/User/Data_provider/data_provider.dart';
 import 'package:flutter_group_project/Features/User/Repository/repository.dart';
 import 'package:flutter_group_project/Features/User/util/util.dart';
+import 'package:flutter_group_project/Users/Technicians/technicianMainPage.dart';
 import 'package:flutter_group_project/bloc_observer.dart';
 import 'package:http/http.dart' as http;
 import 'Features/Authentication/data_provider/Auth_Data.dart';
 import 'Features/Service/Service.dart';
 import 'ScreenRoute.dart';
 
-void main()
-{
+void main() {
   Bloc.observer = SimpleBlocObserver();
-  ServiceDataProvider serviceDataProvider=new ServiceDataProvider(httpClient: http.Client(),);
-
-  final ServiceRepository serviceRepository = ServiceRepository(
-    dataProvider:serviceDataProvider
+  ServiceDataProvider serviceDataProvider = new ServiceDataProvider(
+    httpClient: http.Client(),
   );
+
+  final ServiceRepository serviceRepository =
+      ServiceRepository(dataProvider: serviceDataProvider);
   //
   JobDataProvider jobDataProvider = JobDataProvider(httpClient: http.Client());
-  final JobRepository jobRepository = JobRepository(dataProvider: jobDataProvider);
+  final JobRepository jobRepository =
+      JobRepository(dataProvider: jobDataProvider);
   //
-  RoleDataProvider roleDataProvider = RoleDataProvider(httpClient: http.Client());
-  final RoleRepository roleRepository = RoleRepository(dataProvider: roleDataProvider);
+  RoleDataProvider roleDataProvider =
+      RoleDataProvider(httpClient: http.Client());
+  final RoleRepository roleRepository =
+      RoleRepository(dataProvider: roleDataProvider);
   //
-  UserDataProvider userDataProvider= UserDataProvider(httpClient: http.Client());
-  final UserRepository userRepository=UserRepository(dataProvider: userDataProvider);
+  UserDataProvider userDataProvider =
+      UserDataProvider(httpClient: http.Client());
+  final UserRepository userRepository =
+      UserRepository(dataProvider: userDataProvider);
   //
-  AuthDataProvider authDataProvider= AuthDataProvider(httpClient: http.Client());
-  final AuthenticationRepository authenticationRepository=AuthenticationRepository(authDataProvider: authDataProvider);
-  
+  AuthDataProvider authDataProvider =
+      AuthDataProvider(httpClient: http.Client());
+  final AuthenticationRepository authenticationRepository =
+      AuthenticationRepository(authDataProvider: authDataProvider);
+
   runApp(
-    FixIt(serviceRepository: serviceRepository,
+    FixIt(
+      serviceRepository: serviceRepository,
       jobRepository: jobRepository,
       roleRepository: roleRepository,
       userRepository: userRepository,
-    authenticationRepository: authenticationRepository,),
+      authenticationRepository: authenticationRepository,
+    ),
   );
-
-
 }
+
 class FixIt extends StatelessWidget {
   final ServiceRepository serviceRepository;
   final JobRepository jobRepository;
@@ -57,42 +66,45 @@ class FixIt extends StatelessWidget {
   final UserRepository userRepository;
   final AuthenticationRepository authenticationRepository;
 
-  FixIt({
-    @required this.serviceRepository,
-    @required this.jobRepository,
-    @required this.roleRepository,
-    @required this.userRepository,
-  @required this.authenticationRepository})
-      : assert(serviceRepository != null && jobRepository != null && roleRepository != null);
+  FixIt(
+      {@required this.serviceRepository,
+      @required this.jobRepository,
+      @required this.roleRepository,
+      @required this.userRepository,
+      @required this.authenticationRepository})
+      : assert(serviceRepository != null &&
+            jobRepository != null &&
+            roleRepository != null);
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-        providers: [
-          BlocProvider<ServiceBloc>(
-            create: (_) => ServiceBloc(serviceRepository: this.serviceRepository)
-              ..add(ServiceLoad()),
-          ),
-          BlocProvider<JobBloc>(
-            create: (_) => JobBloc(jobRepository: this.jobRepository)
-              ..add(JobLoad()),
-          ),
-          BlocProvider<RoleBloc>(
-            create: (_) => RoleBloc(roleRepository: this.roleRepository)
-                ..add(RoleLoad()),
-          ),
-          BlocProvider<UserBloc>(
-              create: (_) => UserBloc(userRepository: this.userRepository,util: Util())
-                  ..add(UsersLoad())
-          ),
-          BlocProvider<AuthBloc>(
-              create: (_) => AuthBloc(authRepository: this.authenticationRepository,util: Util())..add(AutoLoginEvent())
-          ),
-        ],
+      providers: [
+        BlocProvider<ServiceBloc>(
+          create: (_) => ServiceBloc(serviceRepository: this.serviceRepository)
+            ..add(ServiceLoad()),
+        ),
+        BlocProvider<JobBloc>(
+          create: (_) =>
+              JobBloc(jobRepository: this.jobRepository)..add(JobLoad()),
+        ),
+        BlocProvider<RoleBloc>(
+          create: (_) =>
+              RoleBloc(roleRepository: this.roleRepository)..add(RoleLoad()),
+        ),
+        BlocProvider<UserBloc>(
+            create: (_) =>
+                UserBloc(userRepository: this.userRepository, util: Util())
+                  ..add(UsersLoad())),
+        BlocProvider<AuthBloc>(
+            create: (_) => AuthBloc(
+                authRepository: this.authenticationRepository, util: Util())
+              ..add(AutoLoginEvent())),
+      ],
       child: MyApp(),
     );
-
   }
 }
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -111,9 +123,9 @@ class MyApp extends StatelessWidget {
                 color: Color.fromRGBO(20, 31, 51, 1),
               ),
               headline6:
-              TextStyle(fontSize: 24, fontFamily: 'RobotoCondensed'))),
+                  TextStyle(fontSize: 24, fontFamily: 'RobotoCondensed'))),
 
-      initialRoute:"/",
+      initialRoute: TechnicianMainPage.routeName,
       onGenerateRoute: ServiceAppRoute.generateRoute,
       // onUnknownRoute: (settings) {
       //   return MaterialPageRoute(builder: (ctx) => CategoryMainScreen());
@@ -124,4 +136,3 @@ class MyApp extends StatelessWidget {
 //
 //
 // this is the previoud main.dart file to be updated soon
-

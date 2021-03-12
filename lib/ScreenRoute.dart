@@ -210,7 +210,7 @@ class ServiceAppRoute {
 //              the arguments will pass here
             ));
         break;
-      case TechnicianRequestMain.rotueName:
+      case TechnicianRequestMain.routeName:
 //        /technician
         return MaterialPageRoute(
             builder: (context) => TechnicianRequestMain(
@@ -218,10 +218,12 @@ class ServiceAppRoute {
             ));
         break;
       case TechnicianRequestDetail.routeName:
-        return MaterialPageRoute(
+      final JobArguments args = settings.arguments;
+
+        return MaterialPageRoute(          
             builder: (context) => TechnicianRequestDetail(
-//              the arguments will pass here
-            ));
+              job: args.job,
+              ));
 //        /technician
         break;
 
