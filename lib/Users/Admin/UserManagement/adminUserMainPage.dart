@@ -44,7 +44,7 @@ class AdminUserMainPage extends StatelessWidget {
                         child: Container(
                           child: new FittedBox(
                             child: Material(
-                              color: Colors.white,
+                              color: Theme.of(context).accentColor,
                               elevation: 14.0,
                               borderRadius: BorderRadius.circular(24.0),
                               shadowColor: Color(0x802196F3),
@@ -58,7 +58,8 @@ class AdminUserMainPage extends StatelessWidget {
                                           left: 16.0),
                                       child: myDetailsContainer1(
                                           user[idx].Email,
-                                          user[idx].FullName),
+                                          user[idx].FullName,
+                                      context),
                                     ),
                                   ),
                                   SizedBox(width: 30,),
@@ -68,6 +69,8 @@ class AdminUserMainPage extends StatelessWidget {
                                     height: height * 0.3,
                                     padding: EdgeInsets.all(10.0),
                                     child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.end,
                                       children: [
                                         ClipRRect(
                                           borderRadius: new BorderRadius
@@ -84,6 +87,7 @@ class AdminUserMainPage extends StatelessWidget {
                                         SizedBox(height: 15,),
                                         Text('${user[idx].FullName}',
                                           style: TextStyle(
+                                            color: Theme.of(context).textTheme.bodyText1.color,
                                               fontWeight: FontWeight.bold),)
                                       ],
                                     ),
@@ -112,7 +116,7 @@ class AdminUserMainPage extends StatelessWidget {
     );
   }
 
-  Widget myDetailsContainer1(String title, String location) {
+  Widget myDetailsContainer1(String title, String location,BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
@@ -123,7 +127,7 @@ class AdminUserMainPage extends StatelessWidget {
               child: Text(
                 "$title",
                 style: TextStyle(
-                    color: Color(0xffe6020a),
+                    color:Theme.of(context).textTheme.bodyText1.color,
                     fontSize: 24.0,
                     fontWeight: FontWeight.bold),
               )),
@@ -133,9 +137,9 @@ class AdminUserMainPage extends StatelessWidget {
             child: Text(
               "$location",
               style: TextStyle(
-                  color: Colors.black54,
+                  color: Theme.of(context).textTheme.bodyText1.color,
                   fontSize: 18.0,
-                  fontWeight: FontWeight.bold),
+                  fontWeight: FontWeight.w300),
             )),
       ],
     );

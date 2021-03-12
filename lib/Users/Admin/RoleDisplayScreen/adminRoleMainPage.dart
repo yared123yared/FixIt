@@ -28,21 +28,25 @@ class AdminRoleMainPage extends StatelessWidget {
               itemBuilder: (_, idx) => Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: Container(
+                  padding: EdgeInsets.all(10),
+                    margin: EdgeInsets.all(10),
                     width: width*0.15,
-                  height: height*0.3,
+                  height: height*0.25,
                   child: new FittedBox(
                     child: Material(
-                      color: Theme.of(context).primaryColor,
-                      elevation: 5.0,
+                      color: Theme.of(context).accentColor,
+                      elevation: 2.0,
                       borderRadius: BorderRadius.circular(10.0),
                       shadowColor: Color(0x802196F3),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('${roles[idx].roleName}'),
+
+                          Text('${roles[idx].roleName}',style: TextStyle(color: Theme.of(context).textTheme.bodyText1.color,fontSize: 8),),
                           Row(
                             children: [
                               IconButton(
-                                icon: Icon(Icons.edit),
+                                icon: Icon(Icons.edit,color: Theme.of(context).textTheme.bodyText1.color,),
                                 iconSize: 10,
                                 onPressed: () {
                                   Navigator.of(context).pushNamed(
@@ -52,7 +56,7 @@ class AdminRoleMainPage extends StatelessWidget {
                                 },
                               ),
                               IconButton(
-                                icon: Icon(Icons.delete),
+                                icon: Icon(Icons.delete,color: Theme.of(context).textTheme.bodyText1.color),
                                 iconSize: 10,
                                 onPressed: () {
                                   context
@@ -80,11 +84,12 @@ class AdminRoleMainPage extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor:Colors.amber,
         onPressed: () {
           print('create');
           Navigator.of(context).pushNamed(RoleAddUpate.routeName,arguments:RoleArguments(edit:false));
         },
-        child: Icon(Icons.add),
+        child: Icon(Icons.add,color: Theme.of(context).accentColor,),
       ),
     );
   }

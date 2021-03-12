@@ -15,6 +15,7 @@ class Util {//User Info management ... Token and Shared Preferences
   }
 
   Future<User> getUserInformation() async {
+    print("Entered to the getUserInformation Method");
     SharedPreferences prefs = await SharedPreferences.getInstance();
     User user = new User(
       FullName: prefs.getString("FullName"),
@@ -26,7 +27,7 @@ class Util {//User Info management ... Token and Shared Preferences
       Role: Rolee(roleId: prefs.getInt("RoleId"),roleName:prefs.getString("RoleName"))
 
     );
-
+print("this is the user going to return $user");
     return user;
   }
 
@@ -46,7 +47,8 @@ class Util {//User Info management ... Token and Shared Preferences
   }
   Future<void> removeUser() async{
     SharedPreferences prefs=await SharedPreferences.getInstance();
-    prefs.clear();
+   prefs.clear();
+
   }
 
   Future<String> getExpiryTime() async {
