@@ -4,6 +4,8 @@ import 'package:flutter_group_project/Features/Job/bloc/bloc.dart';
 import 'package:flutter_group_project/Features/Job/bloc/job_bloc.dart';
 import 'package:flutter_group_project/Features/Job/models/job.dart';
 import 'package:flutter_group_project/Users/Common/BoxDecoration.dart';
+import 'package:flutter_group_project/Users/NormalUser/JobDisplayScreen/map_screen.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../../ScreenRoute.dart';
 import '../userMainPage.dart';
@@ -11,8 +13,8 @@ import '../userMainPage.dart';
 class UserCreateJob extends StatefulWidget {
   static const routeName='/user/job/create';
   final JobArguments args;
-  final User user;
-  UserCreateJob({this.args, this.user});
+
+  UserCreateJob({this.args});
   @override
   _UserCreateJobState createState() => _UserCreateJobState();
 }
@@ -22,9 +24,12 @@ class _UserCreateJobState extends State<UserCreateJob> {
 
   final Map<String, dynamic> _job = {};
   // final Map<String, dynamic> _job = {};
-    final userId = 2;
+    final userId = 5;
+     String latitude;
+     String longitude;
   @override
   Widget build(BuildContext context) {
+    print("build - Latitude $latitude, longitude $longitude");
     return Scaffold(
       appBar: AppBar(
         title: Text('${widget.args.edit ? "Edit Job" : "Add New Job"}'),
@@ -48,7 +53,6 @@ class _UserCreateJobState extends State<UserCreateJob> {
                         return null;
                       },
                       decoration: textInputDecoration.copyWith(
-
                           hintText: 'Job Name'
                       ) ,//InputDecoration(labelText: 'Job Name'),
                       onSaved: (value) {
@@ -112,8 +116,9 @@ class _UserCreateJobState extends State<UserCreateJob> {
 //                      }),
                   SizedBox(height: 10,),
                   TextFormField(
+
                       initialValue:
-                      widget.args.edit ? widget.args.job.location : '',
+                      latitude != null? "Latitude: ${this.latitude}, Longitude: ${this.longitude}" : '',
                       validator: (value) {
                         if (value.isEmpty) {
                           return 'Please enter location ';
@@ -132,7 +137,7 @@ class _UserCreateJobState extends State<UserCreateJob> {
                     padding: const EdgeInsets.symmetric(vertical: 16.0),
                     child: ElevatedButton.icon(
                       onPressed: () {
-                        print("jobcreate");
+                        print("job create");
                         final form = _formKey.currentState;
                         if (form.validate()) {
                           form.save();
@@ -144,7 +149,7 @@ class _UserCreateJobState extends State<UserCreateJob> {
                                 description: this._job["description"],
                                 userId: userId,
                                 location: this._job["location"],
-                                technicianId: 1,
+                                technicianId: widget.args.technicianId,
                                 acceptanceStatus:this._job['accepteStatus'],
                                 doneStatus: this._job["doneStatus"]
                             ),
@@ -153,23 +158,38 @@ class _UserCreateJobState extends State<UserCreateJob> {
                             Job(
                                 jobName: this._job["jobName"],
                                 description: this._job["description"],
-                                userId: userId,
-                                location: this._job["location"],
-                                technicianId: 1,
-                                acceptanceStatus: 'not',
-                                doneStatus: 'not'
+                                userId: 2,
+                                location: "Latitude: ${this.latitude}, Longitude: ${this.longitude}",
+                                technicianId: widget.args.technicianId,
+                                acceptanceStatus: 'not accepted',
+                                doneStatus: 'not done'
                             ),
                           );
                           print('creating job');
                           BlocProvider.of<JobBloc>(context).add(event);
                           Navigator.of(context).pushNamedAndRemoveUntil(
-                              UserMain.routeName, (route) => false,arguments: user);
+                              UserMain.routeName, (route) => false);
                         }
                       },
                       label: Text('SAVE'),
                       icon: Icon(Icons.save),
                     ),
                   ),
+                  IconButton(
+                    icon: Icon(Icons.location_on),
+                    onPressed: () async{
+                       final LocationArgument location = await Navigator.push(
+                         context,
+                         MaterialPageRoute(builder: (context) => MapScreen()),
+                       );
+                       setState(() {
+                         latitude = location.latitude;
+                         longitude = location.longitude;
+                       });
+                       print(latitude);
+                       print(longitude);
+                    },
+                  )
                 ],
               ),
             ),

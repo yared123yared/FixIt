@@ -13,10 +13,14 @@ import 'package:flutter_group_project/Features/User/Bloc/bloc.dart';
 import 'package:flutter_group_project/Features/User/Data_provider/data_provider.dart';
 import 'package:flutter_group_project/Features/User/Repository/repository.dart';
 import 'package:flutter_group_project/Features/User/util/util.dart';
+import 'package:flutter_group_project/Users/Technicians/technicianMainPage.dart';
 import 'package:flutter_group_project/bloc_observer.dart';
 import 'package:http/http.dart' as http;
 import 'Features/Authentication/data_provider/Auth_Data.dart';
 import 'Features/Service/Service.dart';
+import 'Features/Technician/bloc/technician_bloc.dart';
+import 'Features/Technician/bloc/technician_event.dart';
+import 'Features/Technician/technician.dart';
 import 'ScreenRoute.dart';
 import 'Users/Common/ScreenRoute.dart';
 import 'Users/users.dart';
@@ -32,6 +36,8 @@ void main()
   //
   JobDataProvider jobDataProvider = JobDataProvider(httpClient: http.Client());
   final JobRepository jobRepository = JobRepository(dataProvider: jobDataProvider);
+  TechnicianDataProvider technicianDataProvider = TechnicianDataProvider(httpClient: http.Client());
+  final TechnicianRepository technicianRepository = TechnicianRepository(dataProvider: technicianDataProvider);
   //
   RoleDataProvider roleDataProvider = RoleDataProvider(httpClient: http.Client());
   final RoleRepository roleRepository = RoleRepository(dataProvider: roleDataProvider);
@@ -46,6 +52,7 @@ void main()
       jobRepository: jobRepository,
       roleRepository: roleRepository,
       userRepository: userRepository,
+      technicianRepository: technicianRepository,
     authenticationRepository: authenticationRepository,),
   );
 
@@ -54,6 +61,7 @@ void main()
 class FixIt extends StatelessWidget {
   final ServiceRepository serviceRepository;
   final JobRepository jobRepository;
+  final TechnicianRepository technicianRepository;
   final RoleRepository roleRepository;
   final UserRepository userRepository;
   final AuthenticationRepository authenticationRepository;
@@ -61,6 +69,7 @@ class FixIt extends StatelessWidget {
   FixIt({
     @required this.serviceRepository,
     @required this.jobRepository,
+    @required this.technicianRepository,
     @required this.roleRepository,
     @required this.userRepository,
   @required this.authenticationRepository})
@@ -77,6 +86,10 @@ class FixIt extends StatelessWidget {
             create: (_) => JobBloc(jobRepository: this.jobRepository,util: Util())
               ..add(JobLoad()),
           ),
+          BlocProvider<TechnicianBloc>(
+            create: (_) => TechnicianBloc(technicianRepository: this.technicianRepository)
+              ..add(TechnicianLoad()),
+          ),
           BlocProvider<RoleBloc>(
             create: (_) => RoleBloc(roleRepository: this.roleRepository,util: Util())
                 ..add(RoleLoad()),
@@ -91,9 +104,9 @@ class FixIt extends StatelessWidget {
         ],
       child: MyApp(),
     );
-
   }
 }
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -116,7 +129,7 @@ class MyApp extends StatelessWidget {
               headline6:
               TextStyle(fontSize: 24, fontFamily: 'RobotoCondensed'))),
 
-      initialRoute:"/",
+      initialRoute:UserMain.routeName,
       onGenerateRoute: ServiceAppRoute.generateRoute,
       // onUnknownRoute: (settings) {
       //   return MaterialPageRoute(builder: (ctx) => CategoryMainScreen());

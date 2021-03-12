@@ -9,7 +9,7 @@ import '../../../ScreenRoute.dart';
 class UserCategoryMain extends StatelessWidget {
   static const routeName='/user/category';
 
-  final texts =['Building','Mechanical','Electr','Metal','Plumbing','Wood'];
+  final texts =['Building','Mechanical','Electrical','Metal','Plumbing','Wood'];
   final images =['building.jpg','mechanical.jpg','electric.jpg','metal.jpg','plumbing.png','wood.jpg'];
 
   @override
@@ -35,19 +35,12 @@ class UserCategoryMain extends StatelessWidget {
                         child: GestureDetector(
                           onTap: (){
                             List<Service> service =[];
-//                            services.foreach()(e) {
-//                              print("Yes_1");
-//                              if(e.Category.toLowerCase() == texts[index].toLowerCase()){
-//                                print("yes");
-//                                service.add(e);
-//                              }
-//                            }) ;
-                            services.forEach((e) {
-                              print("yes_1");
-                                  if(e.Category.toLowerCase() == texts[index].toLowerCase()){
-                                    print("yes");
-                                    service.add(e);
-                                  }
+                            services.forEach((element) {
+                            print("Yes_1");
+                            if(element.Category.toLowerCase() == texts[index].toLowerCase()){
+                            print("yes");
+                            service.add(element);
+                            }
                             });
                             print("services $service");
                             Navigator.of(context).pushNamed(UserServiceDetail.routeName, arguments:CategoryArgument(services:service,title: texts[index],image: images[index]));

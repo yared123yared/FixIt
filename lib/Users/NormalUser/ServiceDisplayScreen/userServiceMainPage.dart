@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_group_project/Features/Service/Bloc/Service_bloc.dart';
 import 'package:flutter_group_project/Features/Service/Bloc/bloc.dart';
 import 'package:flutter_group_project/Users/NormalUser/ServiceDisplayScreen/userServiceDetailPage.dart';
+import 'package:flutter_group_project/Users/NormalUser/TechnicianDisplay/technicianMain.dart';
 import 'package:flutter_group_project/dummy_data.dart';
 
 class UserServiceMain extends StatelessWidget {
@@ -52,6 +53,7 @@ class UserServiceMain extends StatelessWidget {
       child: Icon(Icons.home),
     );
   }
+
   @override
   Widget build(BuildContext context) {
     Random random = new Random();
@@ -120,7 +122,7 @@ class UserServiceMain extends StatelessWidget {
 
 
                                               ),
-                                              onTap: () => Navigator.of(context).pushNamed(UserServiceDetail.routeName, arguments:services[index]),
+                                              onTap: () => Navigator.of(context).pushNamed(UserTechnicianMain.routeName),
                                             ),
 //            onTap: (){
 //              print(this.index);
