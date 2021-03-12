@@ -52,7 +52,7 @@ class UserJobDetail extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 5),
-                    Container(child: buildUserDetail(width, height, job.user)),
+
                     SizedBox(height: 5),
                     Container(child: buildTechnicianDetail(
                         width, height, job.technician, job.technician.user)),
@@ -162,70 +162,7 @@ class UserJobDetail extends StatelessWidget {
       ],
     );
   }
-  Column buildUserDetail(double width, double height,User user) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left:16.0),
-              child: Text('Requested By', style: _kTitleTextStyle),
-            ),
-            SizedBox(width: 50,)
-          ],
-        ),
-        SizedBox(height: 30,),
-        Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            mainAxisSize: MainAxisSize.max,
-            children: [
 
-              CircleAvatar(
-                // TODO: user image
-                backgroundImage:
-                AssetImage('Assets/Images/mec.jpg'),
-                radius: width * 0.1,
-              ),
-
-              // TODO : user Detail
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "${user.fullName}",
-                    style: _kJobTitleTextStyle,
-                  ),
-                  Row(
-                    children: [
-                      Icon(Icons.mail),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      Text(
-                        "${user.email}",
-                        style: _kDetailsTextStyle,
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Icon(Icons.phone),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      Text(
-                        "${user.phone}",
-                        style: _kDetailsTextStyle,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ]),
-      ],
-    );
-  }
   Column buildTechnicianDetail(double width, double height,Technician technician,User user) {
     return Column(
       children: [

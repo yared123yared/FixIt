@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_group_project/Features/Role/models/role.dart';
 import 'package:flutter_group_project/Features/User/Model/User.dart';
+import 'package:flutter_group_project/Users/NormalUser/TechnicianDisplay/technicianDetail.dart';
+import 'package:flutter_group_project/Users/NormalUser/TechnicianDisplay/technicianMain.dart';
 import 'Features/Authentication/authntication.dart';
 import 'Features/Job/models/job.dart';
 import 'Features/Service/Service.dart';
@@ -160,13 +162,13 @@ class ServiceAppRoute {
 // //              the arguments will pass here
 //             ));
 //         break;
-//       case UserMain.routeName:
-// //        /user
-//         return MaterialPageRoute(
-//             builder: (context) => UserMain(
-// //              the arguments will pass here
-//             ));
-//         break;
+      case UserMain.routeName:
+//        /user
+        return MaterialPageRoute(
+            builder: (context) => UserMain(
+//              the arguments will pass here
+            ));
+        break;
       case UserJobMain.routeName:
 //        /user/job
         return MaterialPageRoute(
@@ -175,18 +177,42 @@ class ServiceAppRoute {
             ));
       break;
       case UserJobDetail.routeName:
+        final args = settings.arguments;
 //        /user/job/detail
         return MaterialPageRoute(
             builder: (context) => UserJobDetail(
+              job: args,
+//              the arguments will pass here
+            ));
+        break;
+      case UserTechnicianMain.routeName:
+        final Service args = settings.arguments;
+
+//        /user/job/detail
+        return MaterialPageRoute(
+            builder: (context) => UserTechnicianMain(
+              service: args,
+//              the arguments will pass here
+            ));
+        break;
+      case UserTechnicianDetail.routeName:
+        final args = settings.arguments;
+//        /user/job/detail
+        return MaterialPageRoute(
+
+            builder: (context) => UserTechnicianDetail(
+              technician: args,
 //              the arguments will pass here
             ));
         break;
       case UserCreateJob.routeName:
 //        /user/job/create
       final JobArguments args = settings.arguments;
+
         return MaterialPageRoute(
             builder: (context) => UserCreateJob(
               args: args,
+
 //              the arguments will pass here
             ));
         break;
@@ -206,9 +232,11 @@ class ServiceAppRoute {
             ));
         break;
       case UserServiceDetail.routeName:
+        final services = settings.arguments;
 //        /user/category/service/detail
         return MaterialPageRoute(
             builder: (context) => UserServiceDetail(
+              services: services,
 //              the arguments will pass here
             ));
         break;
@@ -250,7 +278,8 @@ AdminArgument({this.index});
 class JobArguments {
   final Job job;
   final bool edit;
-  JobArguments({this.job, this.edit});
+  final int technicianId;
+  JobArguments({this.job, this.edit, this.technicianId});
 }
 
 class RoleArgument{

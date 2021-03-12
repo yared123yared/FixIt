@@ -36,6 +36,7 @@ dependencies:
   dropdown_formfield: ^0.1.3
   curved_navigation_bar:
   shared_preferences:
+  step_progress_indicator: ^0.2.5+8
 
 
 dev_dependencies:

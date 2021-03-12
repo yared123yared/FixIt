@@ -7,7 +7,7 @@ import 'package:flutter_group_project/Users/NormalUser/JobDisplayScreen/userJobP
 
 class UserJobMain extends StatelessWidget {
   static const routeName='/user/job';
-  final userId = 5;
+  final userId = 2;
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery

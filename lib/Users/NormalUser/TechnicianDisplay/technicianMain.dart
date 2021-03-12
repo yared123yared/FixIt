@@ -2,24 +2,29 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_group_project/Features/Service/Bloc/Service_bloc.dart';
-import 'package:flutter_group_project/Features/Service/Bloc/bloc.dart';
-import 'package:flutter_group_project/Users/NormalUser/ServiceDisplayScreen/userServiceDetailPage.dart';
-import 'package:flutter_group_project/Users/NormalUser/TechnicianDisplay/technicianMain.dart';
+import 'package:flutter_group_project/Features/Service/Model/models.dart';
+import 'package:flutter_group_project/Features/Technician/bloc/technician_bloc.dart';
+import 'package:flutter_group_project/Features/Technician/bloc/technician_state.dart';
+import 'package:flutter_group_project/Features/Technician/models/models.dart';
+import 'package:flutter_group_project/Users/NormalUser/TechnicianDisplay/technicianDetail.dart';
 import 'package:flutter_group_project/dummy_data.dart';
 
-class UserServiceMain extends StatelessWidget {
-  static const routeName='/user/category/service';
+class UserTechnicianMain extends StatelessWidget {
+  static const routeName = '/user/category/services/technicians';
+
+  final Service service;
+  UserTechnicianMain({this.service});
+
   Widget buildSectionTitle(BuildContext context, String text){
     return  Container(
-
       margin: EdgeInsets.symmetric(
         vertical: 10,
-
       ),
+
       child: Text('${text}',
         style: Theme.of(context).textTheme.headline6,),
     );
+
   }
 
   Widget buildContainer(BuildContext context , Widget child){
@@ -32,8 +37,6 @@ class UserServiceMain extends StatelessWidget {
             color:Colors.grey
         ),
         borderRadius: BorderRadius.circular(10),
-
-
       ),
       child:child,
     );
@@ -53,7 +56,6 @@ class UserServiceMain extends StatelessWidget {
       child: Icon(Icons.home),
     );
   }
-
   @override
   Widget build(BuildContext context) {
     Random random = new Random();
@@ -61,6 +63,9 @@ class UserServiceMain extends StatelessWidget {
     print(randomNumber);
     var  selectedCategory= DUMMY_CATEGORIES[randomNumber];
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Technicians'),
+      ),
       body: SingleChildScrollView(
         child: Column(
             children: [
@@ -71,24 +76,34 @@ class UserServiceMain extends StatelessWidget {
                     .width * 0.5,
                 width: double.infinity,
 
-                child: Image.network(
-                  selectedCategory.imageUrl, fit: BoxFit.cover,),
+                child: Center(child: Text(service.ServiceName,style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.purple,
+                  fontSize: 40
+
+                ),),),
 
               ),
 //           ingredient
-              buildSectionTitle(context, 'Services'),
+              buildSectionTitle(context, 'Technicians'),
               BlocProvider.value(
-                value: BlocProvider.of<ServiceBloc>(context),
-                child: BlocBuilder<ServiceBloc, ServiceState>(
+                value: BlocProvider.of<TechnicianBloc>(context),
+                child: BlocBuilder<TechnicianBloc, TechnicianState>(
                     builder: (_, state) {
-                      if (state is ServiceOperationFailure) {
-                        return Text('Could not do Service  operation');
+                      if (state is TechnicianOperationFailure) {
+                        return Text('Could not do Technician  operation');
                       }
-                      if (state is ServicesLoadSuccess) {
-                        final services = state.services;
-                        print("This is the comming service _______________+++++++++++++++++$services");
+                      if (state is TechnicianLoadingSuccess) {
+                        final techs = state.jobs;
+                        List<Technician> technicians = [];
+                        techs.forEach((element) {
+                          if(element.department.toLowerCase() == service.Category.toLowerCase()){
+                            technicians.add(element);
+                          }
+                        });
+                        print("This is the comming technician _______________+++++++++++++++++$technicians");
                         return buildContainer(context, ListView.builder(
-                            itemCount: services.length,
+                            itemCount: technicians.length,
                             itemBuilder: (ctx, index) =>
                                 Column(
                                     children: [
@@ -107,11 +122,11 @@ class UserServiceMain extends StatelessWidget {
                                           child: Center(
                                             child: ListTile(
                                               leading: CircleAvatar(
-                                                backgroundImage: AssetImage('Assets/Images/${services[index].imageUrl}'),
+                                                backgroundImage: AssetImage('Assets/Images/${technicians[index].user.picture}'),
                                               ),
-                                              title: Text(services[index].ServiceName !=null ? services[index].ServiceName : "place holder",
+                                              title: Text(technicians[index].user.fullName !=null ? technicians[index].user.fullName : "place holder",
                                                 style: Theme.of(context).textTheme.headline6,),
-                                              subtitle: Text(services[index].Description !=null ?services[index].Description: "Place holder" ,),
+                                              subtitle: Text(technicians[index].department !=null ?technicians[index].department: "Place holder" ,),
                                               trailing: MediaQuery.of(context).size.width > 450 ? FlatButton.icon(
                                                 onPressed: (){},
                                                 textColor:Theme.of(context).errorColor,
@@ -122,11 +137,14 @@ class UserServiceMain extends StatelessWidget {
 
 
                                               ),
-                                              onTap: () => Navigator.of(context).pushNamed(UserTechnicianMain.routeName),
+                                              onTap: (){
+                                                print("I am printing the details of the techinicains");
+                                                Navigator.of(context).pushNamed(UserTechnicianDetail.routeName,arguments: technicians[index]);
+                                              }
                                             ),
 //            onTap: (){
 //              print(this.index);
-//              Navigator.pushNamed(context, ServiceMainScreen.routeName,arguments: selectedService[index].ServiceName);
+//              Navigator.pushNamed(context, TechnicianMainScreen.routeName,arguments: selectedTechnician[index].TechnicianName);
 //            },
                                           ),
                                         ),
@@ -147,4 +165,5 @@ class UserServiceMain extends StatelessWidget {
 
 
     );
-}}
+  }
+}

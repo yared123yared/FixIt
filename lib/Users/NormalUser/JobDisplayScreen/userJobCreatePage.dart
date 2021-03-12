@@ -11,6 +11,7 @@ import '../userMainPage.dart';
 class UserCreateJob extends StatefulWidget {
   static const routeName='/user/job/create';
   final JobArguments args;
+
   UserCreateJob({this.args});
   @override
   _UserCreateJobState createState() => _UserCreateJobState();
@@ -143,7 +144,7 @@ class _UserCreateJobState extends State<UserCreateJob> {
                                 description: this._job["description"],
                                 userId: userId,
                                 location: this._job["location"],
-                                technicianId: 1,
+                                technicianId: widget.args.technicianId,
                                 acceptanceStatus:this._job['accepteStatus'],
                                 doneStatus: this._job["doneStatus"]
                             ),
@@ -152,11 +153,11 @@ class _UserCreateJobState extends State<UserCreateJob> {
                             Job(
                                 jobName: this._job["jobName"],
                                 description: this._job["description"],
-                                userId: userId,
+                                userId: 2,
                                 location: this._job["location"],
-                                technicianId: 1,
-                                acceptanceStatus: 'not',
-                                doneStatus: 'not'
+                                technicianId: widget.args.technicianId,
+                                acceptanceStatus: 'not accepted',
+                                doneStatus: 'not done'
                             ),
                           );
                           print('creating job');
