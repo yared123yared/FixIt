@@ -5,7 +5,6 @@ import 'package:flutter_group_project/Features/Job/bloc/job_bloc.dart';
 import 'package:flutter_group_project/Features/Job/models/job.dart';
 import 'package:flutter_group_project/Users/Common/BoxDecoration.dart';
 import 'package:flutter_group_project/Users/NormalUser/JobDisplayScreen/map_screen.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../../ScreenRoute.dart';
 import '../userMainPage.dart';
@@ -117,8 +116,8 @@ class _UserCreateJobState extends State<UserCreateJob> {
                   SizedBox(height: 10,),
                   TextFormField(
 
-                      initialValue:
-                      latitude != null? "Latitude: ${this.latitude}, Longitude: ${this.longitude}" : '',
+                      initialValue:"Latitude: ${this.latitude.toString()}, Longitude: ${this.longitude.toString()}",
+                      // latitude != null? "Latitude: ${this.latitude}, Longitude: ${this.longitude}" : '',
                       validator: (value) {
                         if (value.isEmpty) {
                           return 'Please enter location ';
@@ -159,7 +158,7 @@ class _UserCreateJobState extends State<UserCreateJob> {
                                 jobName: this._job["jobName"],
                                 description: this._job["description"],
                                 userId: 2,
-                                location: "Latitude: ${this.latitude}, Longitude: ${this.longitude}",
+                                location: "Latitude: ${this.latitude.toString()}, Longitude: ${this.longitude.toString()}",
                                 technicianId: widget.args.technicianId,
                                 acceptanceStatus: 'not accepted',
                                 doneStatus: 'not done'
@@ -195,7 +194,6 @@ class _UserCreateJobState extends State<UserCreateJob> {
             ),
           ),
         ],
-
       ),
     );
   }

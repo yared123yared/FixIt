@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_group_project/ScreenRoute.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -74,7 +73,7 @@ class _MyAppState extends State<MapScreen> {
             target: _center,
             zoom: 18.0,
           ),
-          mapType: MapType.hybrid,
+          mapType: MapType.satellite,
           onTap: _handleTap,
         ),
         Positioned(
