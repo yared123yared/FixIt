@@ -75,16 +75,16 @@ class TechnicianRequestDetail extends StatelessWidget {
                   )
                 : JobUpdate(
                     Job(
-                        jobId: job.jobId,
-                        jobName: job.jobName,
-                        description: job.description,
-                        userId: job.userId,
-                        location: job.location,
-                        technicianId: job.technicianId,
-                        acceptanceStatus: job.acceptanceStatus != null
-                            ? job.acceptanceStatus
-                            : null,
-                        doneStatus: "done"),
+                      jobId: job.jobId,
+                      jobName: job.jobName,
+                      description: job.description,
+                      userId: job.userId,
+                      location: job.location,
+                      technicianId: job.technicianId,
+                      acceptanceStatus: " Accepted ",
+                      doneStatus:
+                          job.doneStatus == null ? "not done" : job.doneStatus,
+                    ),
                   );
             await context.read<JobBloc>().add(event);
             Navigator.of(context).pop();
