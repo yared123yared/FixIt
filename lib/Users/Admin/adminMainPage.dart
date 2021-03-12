@@ -9,6 +9,7 @@ import 'package:flutter_group_project/Users/Admin/JobDisplayScreen/adminJobMainP
 import 'package:flutter_group_project/Users/Admin/RoleDisplayScreen/adminRoleMainPage.dart';
 import 'package:flutter_group_project/Users/Admin/UserManagement/UserDetail.dart';
 import 'package:flutter_group_project/Users/Common/ScreenRoute.dart';
+import 'package:flutter_group_project/Users/Common/drawer.dart';
 import 'package:flutter_group_project/Users/Common/login_page.dart';
 import '../../ScreenRoute.dart';
 import 'ServiceDisplayScreen/adminService.dart';
@@ -94,68 +95,11 @@ class _AdminMainPageState extends State<AdminMainPage> {
               }),
         ],
       ),
-      drawer: Drawer(
-        child:Column(
-
-          children: [
-            UserAccountsDrawerHeader(
-
-              accountName: Text(widget.args.FullName),
-              accountEmail: Text(widget.args.Email),
-              currentAccountPicture: CircleAvatar(
-                backgroundImage: AssetImage("Assets/assets/fixit.png"),
-              ),
-              arrowColor: Colors.purple,
-//              decoration: BoxDecoration(
-//                gradient: LinearGradient(begin: Alignment.bottomLeft,end: Alignment.topRight,
-//                    colors:[Colors.blue,Colors.green]
-//                ),
-//                // color: Colors.purpleAccent
-//              ),
-
-            ),
-            ListTile(
-              leading: Icon(Icons.contact_page),
-              title: Text('account'),
-              onTap: () async{
-                Navigator.of(context)
-                    .pushNamed(
-                    UserDetail.routeName,arguments: widget.args);
-              },
-
-            ),
-            // ListTile(
-            //   leading: Icon(Icons.favorite),
-            //   title: Text('favorite'),
-            // ),
-            Divider(height: 20,),
-            ListTile(
-              leading: Icon(Icons.logout),
-              title: Text('LogOut'),
-              onTap: (){
-//                Navigator.of(context).pop();
-                BlocProvider.of<AuthBloc>(context).add(LogOutEvent());
-                Navigator.of(context).pushReplacementNamed(SignIn.routeName);
-              }
-            ),
-            Divider(height: 20,),
-            ListTile(
-              trailing: Icon(Icons.close),
-              title: Text('Close'),
-              onTap: (){
-                Navigator.of(context).pop();
-              },
-            )
-
-
-          ],
-        ),
-
-      ),
+      drawer:CommonDrawerClass(),
       body: homeWidgets[_navIndex],
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: Colors.transparent,
-        color: Theme.of(context).accentColor,
+        color: Theme.of(context).primaryColor,
         items: [
           Icon(Icons.cleaning_services_rounded,color: Colors.white,size: 25.0,),
           Icon(Icons.supervised_user_circle,color: Colors.white,size: 25.0),

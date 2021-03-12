@@ -46,7 +46,8 @@ class Util {//User Info management ... Token and Shared Preferences
   }
   Future<void> removeUser() async{
     SharedPreferences prefs=await SharedPreferences.getInstance();
-    prefs.clear();
+   prefs.clear();
+
   }
 
   Future<String> getExpiryTime() async {
