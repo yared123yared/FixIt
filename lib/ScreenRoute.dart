@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_group_project/Features/Role/models/role.dart';
 import 'package:flutter_group_project/Features/User/Model/User.dart';
+import 'package:flutter_group_project/Users/NormalUser/TechnicianDisplay/technicianDetail.dart';
+import 'package:flutter_group_project/Users/NormalUser/TechnicianDisplay/technicianMain.dart';
 import 'package:flutter_group_project/Users/NormalUser/UserUpdate/AddUpdateUser.dart';
 import 'Features/Authentication/authntication.dart';
 import 'Features/Job/models/job.dart';
@@ -69,7 +71,7 @@ class ServiceAppRoute {
                      }
 //                     return UserMain();
                      return isAuthenticated
-                         ? (isAdmin ? AdminMainPage(args: user,) :  UserMain(args: user,))
+                         ? (isAdmin ? AdminMainPage(args: user,) :  UserMain())
                          : SignIn();
                    }));
 
@@ -102,10 +104,10 @@ class ServiceAppRoute {
 //        final UserArgument adminArgs = settings.arguments;
 //        /admin
         final UserArgument args = settings.arguments;
-        print("the user arrguent is ${args.user}");
+//        print("the user arrguent is ${args.user}");
         return MaterialPageRoute(
             builder: (context) => UserMain(
-              args: args.user,
+//              args: args.user,
 //              the arguments will pass here
             ));
         break;
@@ -186,6 +188,22 @@ class ServiceAppRoute {
  //              the arguments will pass here
              ));
          break;
+      case UserTechnicianMain.routeName:
+        final Service args= settings.arguments;
+        return MaterialPageRoute(
+            builder: (context) => UserTechnicianMain(
+              service: args,
+            ));
+break;
+      case UserTechnicianDetail.routeName:
+        final  args= settings.arguments;
+        return MaterialPageRoute(
+            builder: (context) => UserTechnicianDetail(
+              technician: args,
+            ));
+        break;
+
+
       case UserJobMain.routeName:
 //        /user/job
         return MaterialPageRoute(
