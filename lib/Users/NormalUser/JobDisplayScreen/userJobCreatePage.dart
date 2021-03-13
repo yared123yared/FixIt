@@ -44,7 +44,6 @@ class _UserCreateJobState extends State<UserCreateJob> {
                   SizedBox(height: 10,),
                   TextFormField(
                       initialValue: widget.args.edit ? widget.args.job.jobName : '',
-
                       validator: (value) {
                         if (value.isEmpty) {
                           return 'Please enter Job Name';
