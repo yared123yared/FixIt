@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_group_project/Features/Authentication/authntication.dart';
+import 'package:flutter_group_project/Features/Role/bloc/bloc.dart';
+import 'package:flutter_group_project/Features/Role/models/models.dart';
 import 'package:flutter_group_project/Features/User/Bloc/User_bloc.dart';
 import 'package:flutter_group_project/Features/User/Bloc/User_event.dart';
 import 'package:flutter_group_project/Features/User/Bloc/User_state.dart';
@@ -39,16 +41,17 @@ class _SignInState extends State<SignIn> {
       listener:(_,state){
         if(state is LoginSuccessState){
           print(state.user.toString());
-          print(state.user.toString());print(state.user.toString());print(state.user.toString());
+          print(state.user.toString());
+          print(state.user.toString());
+          print(state.user.toString());
 
 
-          if(state.user.Role=="2"){//if role is ADMIN go to ADMIN screen
+
+          if(state.user.Role.roleName=="ADMIN"){//if role is ADMIN go to ADMIN screen
 
             Navigator.of(context).pushReplacementNamed(AdminMainPage.routeName, arguments: UserArgument(user: user));
-          }else if(state.user.Role=="TECHNICIAN"){//If role is TECHNICIAN go to admin screen
-            Navigator.of(context).pushReplacementNamed(Technician_main.routeName, arguments: UserArgument(user: user));
           }else{//else go to USER Screen
-            Navigator.of(context).pushReplacementNamed(Users_main.routeName, arguments: UserArgument(user: user));
+            Navigator.of(context).pushReplacementNamed(UserMain.routeName, arguments: UserArgument(user: user));
           }
 
 
@@ -63,10 +66,10 @@ class _SignInState extends State<SignIn> {
         if(state is UserOperationFailure){//Toast the message of the Failure
           Toast.show("Login operation failed :(", context, backgroundColor: Colors.red, textColor: Colors.white, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
         }
-        else{
-          Toast.show("Incorrect Email/Password combination", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
-
-        }
+//        else{
+//          Toast.show("Incorrect Email/Password combination", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+//
+//        }
       },
       builder:(_,state){//Build the page if not logging in
         return Scaffold(

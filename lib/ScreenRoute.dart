@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_group_project/Features/Role/models/role.dart';
 import 'package:flutter_group_project/Features/User/Model/User.dart';
-import 'package:flutter_group_project/Users/NormalUser/JobDisplayScreen/map_screen.dart';
 import 'package:flutter_group_project/Users/NormalUser/TechnicianDisplay/technicianDetail.dart';
 import 'package:flutter_group_project/Users/NormalUser/TechnicianDisplay/technicianMain.dart';
+import 'package:flutter_group_project/Users/NormalUser/UserUpdate/AddUpdateUser.dart';
 import 'Features/Authentication/authntication.dart';
 import 'Features/Job/models/job.dart';
 import 'Features/Service/Service.dart';
@@ -34,11 +34,15 @@ class ServiceAppRoute {
            return MaterialPageRoute(
                builder: (context) =>
                    BlocBuilder<AuthBloc, AuthStates>(builder: (context, state) {
+
                      if (state is AutoLoginState) {
+
                        return loading_screen(title: 'Authenticating');
-                     } else if (state is AutoLoginSuccessState) {//If the User has already signed in switch by the role
-                       isAdmin = state.user.Role == "2";
-                       isTechnician = state.user.Role == 'TECHNICIAN';
+                     } else if (state is AutoLoginSuccessState) {
+                       print("This is the user role++++++++++${state.user.Role.roleName}");
+                       //If the User has already signed in switch by the role
+                       isAdmin = state.user.Role.roleName == "ADMIN";
+
                        isAuthenticated = true;
                        user=state.user;
                      } else if (state is AutoLoginFailedState) {
@@ -46,6 +50,7 @@ class ServiceAppRoute {
                      } else if (state is LoggingOutState) {
                        return loading_screen(title: 'Logging out');
                      } else if (state is LoggingOutSuccessState) {
+                       print("logingng out $isAuthenticated");
                        isAuthenticated = false;
                      } else if (state is LoggingOutErrorState) {
                        showDialog(
@@ -64,8 +69,9 @@ class ServiceAppRoute {
                          ),
                        );
                      }
+//                     return UserMain();
                      return isAuthenticated
-                         ? (isAdmin ? AdminMainPage() : (isTechnician? Technician_main(technician: user) : Users_main(user: user)))
+                         ? (isAdmin ? AdminMainPage(args: user,) :  UserMain())
                          : SignIn();
                    }));
 
@@ -84,12 +90,24 @@ class ServiceAppRoute {
             ));
 
       case AdminMainPage.routeName:
-        final UserArgument adminArgs = settings.arguments;
+//        final UserArgument adminArgs = settings.arguments;
 //        /admin
-        UserArgument args = settings.arguments;
+       final UserArgument args = settings.arguments;
+       print("the user arrguent is ${args.user}");
         return MaterialPageRoute(
             builder: (context) => AdminMainPage(
-
+                    args: args.user,
+//              the arguments will pass here
+            ));
+        break;
+      case UserMain.routeName:
+//        final UserArgument adminArgs = settings.arguments;
+//        /admin
+        final UserArgument args = settings.arguments;
+//        print("the user arrguent is ${args.user}");
+        return MaterialPageRoute(
+            builder: (context) => UserMain(
+//              args: args.user,
 //              the arguments will pass here
             ));
         break;
@@ -156,20 +174,36 @@ class ServiceAppRoute {
                 ));
           break;
 
-//       case AdminRoleDetail.routeName:
-// //        /admin/technician/detail
-//         return MaterialPageRoute(
-//             builder: (context) => AdminRoleDetail(
-// //              the arguments will pass here
-//             ));
-//         break;
-      case UserMain.routeName:
-//        /user
+       case AddUpdateUser.routeName:
+ //        /admin/technician/detail
+         return MaterialPageRoute(
+             builder: (context) => AddUpdateUser(
+ //              the arguments will pass here
+             ));
+         break;
+       case Users_mainProfile.routeName:
+ //        /user
+         return MaterialPageRoute(
+             builder: (context) => Users_mainProfile(
+ //              the arguments will pass here
+             ));
+         break;
+      case UserTechnicianMain.routeName:
+        final Service args= settings.arguments;
         return MaterialPageRoute(
-            builder: (context) => UserMain(
-//              the arguments will pass here
+            builder: (context) => UserTechnicianMain(
+              service: args,
+            ));
+break;
+      case UserTechnicianDetail.routeName:
+        final  args= settings.arguments;
+        return MaterialPageRoute(
+            builder: (context) => UserTechnicianDetail(
+              technician: args,
             ));
         break;
+
+
       case UserJobMain.routeName:
 //        /user/job
         return MaterialPageRoute(
@@ -178,42 +212,20 @@ class ServiceAppRoute {
             ));
       break;
       case UserJobDetail.routeName:
-        final args = settings.arguments;
 //        /user/job/detail
+      final Job job = settings.arguments;
         return MaterialPageRoute(
             builder: (context) => UserJobDetail(
-              job: args,
-//              the arguments will pass here
-            ));
-        break;
-      case UserTechnicianMain.routeName:
-        final Service args = settings.arguments;
-
-//        /user/job/detail
-        return MaterialPageRoute(
-            builder: (context) => UserTechnicianMain(
-              service: args,
-//              the arguments will pass here
-            ));
-        break;
-      case UserTechnicianDetail.routeName:
-        final args = settings.arguments;
-//        /user/job/detail
-        return MaterialPageRoute(
-
-            builder: (context) => UserTechnicianDetail(
-              technician: args,
+              job: job,
 //              the arguments will pass here
             ));
         break;
       case UserCreateJob.routeName:
 //        /user/job/create
       final JobArguments args = settings.arguments;
-
         return MaterialPageRoute(
             builder: (context) => UserCreateJob(
               args: args,
-
 //              the arguments will pass here
             ));
         break;
@@ -221,14 +233,6 @@ class ServiceAppRoute {
 //        /user/category
         return MaterialPageRoute(
             builder: (context) => UserCategoryMain(
-//              the arguments will pass here
-            ));
-
-        break;
-      case MapScreen.routeName:
-//        /user/category
-        return MaterialPageRoute(
-            builder: (context) => MapScreen(
 //              the arguments will pass here
             ));
 
@@ -241,11 +245,11 @@ class ServiceAppRoute {
             ));
         break;
       case UserServiceDetail.routeName:
-        final services = settings.arguments;
 //        /user/category/service/detail
+      final CategoryArgument args = settings.arguments;
         return MaterialPageRoute(
             builder: (context) => UserServiceDetail(
-              services: services,
+              services: args,
 //              the arguments will pass here
             ));
         break;
@@ -292,7 +296,7 @@ class JobArguments {
 }
 
 class RoleArgument{
-  final Role role;
+  final Rolee role;
   final bool edit;
   RoleArgument({this.role, this.edit});
 }

@@ -1,20 +1,25 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_group_project/Features/Authentication/authntication.dart';
+import 'package:flutter_group_project/Features/Authentication/bloc/auth_blocs.dart';
 import 'package:flutter_group_project/Features/User/Model/User.dart';
 import 'package:flutter_group_project/Features/User/util/util.dart';
 import 'package:flutter_group_project/Users/Admin/JobDisplayScreen/adminJobMainPage.dart';
 import 'package:flutter_group_project/Users/Admin/RoleDisplayScreen/adminRoleMainPage.dart';
 import 'package:flutter_group_project/Users/Admin/UserManagement/UserDetail.dart';
 import 'package:flutter_group_project/Users/Common/ScreenRoute.dart';
+import 'package:flutter_group_project/Users/Common/drawer.dart';
+import 'package:flutter_group_project/Users/Common/login_page.dart';
 import '../../ScreenRoute.dart';
 import 'ServiceDisplayScreen/adminService.dart';
 import 'UserManagement/adminUserMainPage.dart';
 
 
 class AdminMainPage extends StatefulWidget {
-  final int index;
-  // final User user;
-  AdminMainPage({this.index});
+//  final int index;
+  final User args;
+  AdminMainPage({@required this.args});
   static const routeName='/admin';
   @override
   _AdminMainPageState createState() => _AdminMainPageState();
@@ -62,7 +67,7 @@ class _AdminMainPageState extends State<AdminMainPage> {
 
                 Navigator.of(context)
                     .pushNamed(
-                    UserDetail.routeName, arguments: user);
+                    UserDetail.routeName, arguments: widget.args);
               },
 
 
@@ -91,62 +96,11 @@ class _AdminMainPageState extends State<AdminMainPage> {
         ],
 
       ),
-      drawer: Drawer(
-        child:Column(
-
-          children: [
-            UserAccountsDrawerHeader(
-
-              accountName: Text(Util().getUserInformation().toString()),
-              accountEmail: Text(Util().getUserInformation().toString()),
-              currentAccountPicture: CircleAvatar(
-                backgroundImage: AssetImage('assets/images/user.jpg'),
-              ),
-              arrowColor: Colors.purple,
-//              decoration: BoxDecoration(
-//                gradient: LinearGradient(begin: Alignment.bottomLeft,end: Alignment.topRight,
-//                    colors:[Colors.blue,Colors.green]
-//                ),
-//                // color: Colors.purpleAccent
-//              ),
-
-            ),
-            ListTile(
-              leading: Icon(Icons.contact_page),
-              title: Text('account'),
-
-            ),
-            ListTile(
-                leading: Icon(Icons.settings),
-                title:Text('settings')
-            ),
-            // ListTile(
-            //   leading: Icon(Icons.favorite),
-            //   title: Text('favorite'),
-            // ),
-            Divider(height: 20,),
-            ListTile(
-              leading: Icon(Icons.flag),
-              title: Text('FAQ'),
-            ),
-            Divider(height: 20,),
-            ListTile(
-              trailing: Icon(Icons.close),
-              title: Text('close'),
-              onTap: (){
-                Navigator.of(context).pop();
-              },
-            )
-
-
-          ],
-        ),
-
-      ),
+      drawer:CommonDrawerClass(),
       body: homeWidgets[_navIndex],
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: Colors.transparent,
-        color: Theme.of(context).accentColor,
+        color: Theme.of(context).primaryColor,
         items: [
           Icon(Icons.cleaning_services_rounded,color: Colors.white,size: 25.0,),
           Icon(Icons.supervised_user_circle,color: Colors.white,size: 25.0),
@@ -160,12 +114,12 @@ class _AdminMainPageState extends State<AdminMainPage> {
         ),
         animationCurve: Curves.bounceOut,
         onTap: (index){
-          setState(() {
-            widget.index == 0? _navIndex=widget.index :_navIndex =index;
-
-          });
+            setState(() {
+              _navIndex = index;
+            });
         },
       ),
     );
   }
+
 }

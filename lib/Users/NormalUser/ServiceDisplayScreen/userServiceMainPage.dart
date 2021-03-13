@@ -107,7 +107,7 @@ class UserServiceMain extends StatelessWidget {
                                           child: Center(
                                             child: ListTile(
                                               leading: CircleAvatar(
-                                                backgroundImage: AssetImage('Assets/Images/${services[index].imageUrl}'),
+                                                backgroundImage: AssetImage('Assets/assets/fixit.png'),
                                               ),
                                               title: Text(services[index].ServiceName !=null ? services[index].ServiceName : "place holder",
                                                 style: Theme.of(context).textTheme.headline6,),

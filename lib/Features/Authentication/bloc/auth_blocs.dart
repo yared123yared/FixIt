@@ -21,6 +21,10 @@ class AuthBloc extends Bloc<AuthEvents, AuthStates> {
       yield* _mapAutoLoginEventToState();
     } else if (event is LoginEvent) {
       yield* _mapLoginEventToState(event.auth);
+    }else if(event is LogOutEvent){
+      await util.removeToken();
+      await util.removeUser();
+      yield LoggingOutSuccessState();
     }
   }
 
@@ -30,7 +34,7 @@ class AuthBloc extends Bloc<AuthEvents, AuthStates> {
     User u;
     try {
       u = await authRepository.login(user);
-     await util.storeUserInformation(u);
+//      await util.storeUserInformation(u);
       yield LoginSuccessState(user: u);
     } on HttpException catch (e) {
       if (e.message == 'Incorrect username or password') {

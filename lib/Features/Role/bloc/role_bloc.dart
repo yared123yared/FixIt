@@ -2,11 +2,13 @@ import 'package:flutter_group_project/Features/Role/bloc/bloc.dart';
 import 'package:flutter_group_project/Features/Role/repository/role_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_group_project/Features/User/util/util.dart';
 
 class RoleBloc extends Bloc<RoleEvent, RoleState>{
   final RoleRepository roleRepository;
+  final Util util;
 
-  RoleBloc({@required this.roleRepository})
+  RoleBloc({@required this.roleRepository,@required this.util})
       : assert(roleRepository != null),
         super(RoleLoading());
 
@@ -16,7 +18,7 @@ class RoleBloc extends Bloc<RoleEvent, RoleState>{
       yield RoleLoading();
       try {
         final role = await roleRepository.getRoles();
-        yield RoleLoadingSuccess(role);
+        yield RoleLoadingSuccess(roles: role);
       } catch (err) {
         print('the error is -$err');
         yield RoleOperationFailure();
@@ -27,7 +29,7 @@ class RoleBloc extends Bloc<RoleEvent, RoleState>{
       try {
         await roleRepository.createRole(event.role);
         final role = await roleRepository.getRoles();
-        yield RoleLoadingSuccess(role);
+        yield RoleLoadingSuccess(roles: role);
       } catch (e) {
         print("Error: $e");
         yield RoleOperationFailure();
@@ -39,7 +41,7 @@ class RoleBloc extends Bloc<RoleEvent, RoleState>{
       try {
         await roleRepository.updateRole(event.role);
         final role = await roleRepository.getRoles();
-        yield RoleLoadingSuccess(role);
+        yield RoleLoadingSuccess(roles: role);
       } catch (_) {
         yield RoleOperationFailure();
       }
@@ -49,7 +51,7 @@ class RoleBloc extends Bloc<RoleEvent, RoleState>{
       try {
         await roleRepository.deleteRole(event.role.roleId);
         final role = await roleRepository.getRoles();
-        yield RoleLoadingSuccess(role);
+        yield RoleLoadingSuccess(roles: role);
       } catch (e) {
         print("Delete Error: $e");
         yield RoleOperationFailure();

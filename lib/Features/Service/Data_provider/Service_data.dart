@@ -1,19 +1,22 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_group_project/Features/User/util/util.dart';
 import 'package:meta/meta.dart';
 import 'package:http/http.dart' as http;
 import '../../../ip_address.dart';
 import '../Service.dart';
 
+
 class ServiceDataProvider {
   final _baseUrl = IpAdress.ipAddress;
   final http.Client httpClient;
-
+  Util util=  new Util();
   ServiceDataProvider({@required this.httpClient}) : assert(httpClient != null);
 
   Future<Service> createService(Service service) async {
     final response = await httpClient.post(
-      Uri.http(_baseUrl, '/api/services'),
+      '$_baseUrl/api/services',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -70,17 +73,23 @@ class ServiceDataProvider {
     );
 
     if (response.statusCode != 200) {
-      throw Exception('Failed to delete course.');
+      throw Exception('Failed to delete service.');
     }
 
   }
 
   Future<void> updateService(Service service) async {
-    final http.Response response = await httpClient.put(
+    String token = await util.getUserToken();
+    final http.Response response = await httpClient.post(
       '$_baseUrl/api/services/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
+
+//      headers: {
+//        HttpHeaders.contentTypeHeader: "application/json",
+////        HttpHeaders.authorizationHeader: "Bearer $token"
+//      },
       body: jsonEncode(<String, dynamic>{
         "serviceId":service.id,
         "serviceName": service.ServiceName,
@@ -93,6 +102,7 @@ class ServiceDataProvider {
       }),
     );
 
+    print("Response: ${response.statusCode}");
     if (response.statusCode != 200) {
       throw Exception('Failed to update course.');
     }

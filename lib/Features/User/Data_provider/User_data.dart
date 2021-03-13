@@ -26,7 +26,7 @@ class UserDataProvider {
         "Password": user.Password,
         "Phone": user.Phone,
         "Picture":"Assets/assets/fixit.png",
-        "Role": "USER"
+        "roleId": 1,
       }),
     );
 
@@ -95,9 +95,10 @@ class UserDataProvider {
       },
     );
 
-
+      print(response.statusCode);
     if (response.statusCode != 200) {
-      throw Exception('Failed to delete course.');
+
+      throw Exception('Failed to delete user.');
     }
   }
 
@@ -116,7 +117,7 @@ class UserDataProvider {
         "email": user.Email,
         "password": user.Password,
         "phone": user.Phone,
-        "roleId": int.parse(user.Role)
+        "roleId": user.RoleId
       }),
     );
     print('provider successful update ;) ${response.statusCode}');

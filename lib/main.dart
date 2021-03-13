@@ -79,11 +79,11 @@ class FixIt extends StatelessWidget {
     return MultiBlocProvider(
         providers: [
           BlocProvider<ServiceBloc>(
-            create: (_) => ServiceBloc(serviceRepository: this.serviceRepository)
+            create: (_) => ServiceBloc(serviceRepository: this.serviceRepository,util: Util())
               ..add(ServiceLoad()),
           ),
           BlocProvider<JobBloc>(
-            create: (_) => JobBloc(jobRepository: this.jobRepository)
+            create: (_) => JobBloc(jobRepository: this.jobRepository,util: Util())
               ..add(JobLoad()),
           ),
           BlocProvider<TechnicianBloc>(
@@ -91,7 +91,7 @@ class FixIt extends StatelessWidget {
               ..add(TechnicianLoad()),
           ),
           BlocProvider<RoleBloc>(
-            create: (_) => RoleBloc(roleRepository: this.roleRepository)
+            create: (_) => RoleBloc(roleRepository: this.roleRepository,util: Util())
                 ..add(RoleLoad()),
           ),
           BlocProvider<UserBloc>(
@@ -116,6 +116,7 @@ class MyApp extends StatelessWidget {
           primaryColor: Color.fromRGBO(146, 40, 105,1),
           accentColor: Color.fromRGBO(82, 51, 105,1),
           canvasColor: Color.fromRGBO(225, 254, 229, 1),
+          errorColor: Colors.redAccent,
           fontFamily: 'Raleway',
           textTheme: ThemeData.light().textTheme.copyWith(
               bodyText1: TextStyle(
@@ -124,6 +125,7 @@ class MyApp extends StatelessWidget {
               bodyText2: TextStyle(
                 color: Color.fromRGBO(20, 31, 51, 1),
               ),
+
               headline6:
               TextStyle(fontSize: 24, fontFamily: 'RobotoCondensed'))),
 

@@ -8,13 +8,13 @@ class RoleRepository{
 
   RoleRepository({@required this.dataProvider})
       : assert(dataProvider != null);
-  Future<Role> createRole(Role role) async {
+  Future<Rolee> createRole(Rolee role) async {
     return await dataProvider.createRole(role);
   }
-  Future<List<Role>> getRoles() async {
+  Future<List<Rolee>> getRoles() async {
     return await dataProvider.getRoles();
   }
-  Future<void> updateRole(Role role) async {
+  Future<void> updateRole(Rolee role) async {
     await dataProvider.updateRole(role);
   }
   Future<void> deleteRole(int id) async {

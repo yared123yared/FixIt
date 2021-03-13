@@ -96,7 +96,7 @@ class AdminRoleMainPage extends StatelessWidget {
 }
 
 class RoleArguments {
-  final Role role;
+  final Rolee role;
   final bool edit;
   RoleArguments({this.role, this.edit});
 }

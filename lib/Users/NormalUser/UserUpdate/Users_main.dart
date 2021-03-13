@@ -10,17 +10,17 @@ import 'package:flutter_group_project/Users/NormalUser/UserUpdate/AddUpdateUser.
 import '../../../ScreenRoute.dart';
 
 
-class Users_main extends StatelessWidget {//Main page of the User
+class Users_mainProfile extends StatelessWidget {//Main page of the User
   static const routeName = 'usersMain';
   final User user;
 
-  Users_main({@required this.user});
+  Users_mainProfile({@required this.user});
 
   @override
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
+      appBar: AppBar(
         title: Text('${(this.user.FullName)}'),
         actions: [
           IconButton(
@@ -28,7 +28,7 @@ class Users_main extends StatelessWidget {//Main page of the User
             onPressed: () => Navigator.of(context).pushNamed(
               AddUpdateUser.routeName,
               arguments: UserArgument(user: this.user, edit: true),
-          ),
+            ),
           ),
           SizedBox(
             width: 32,
@@ -38,7 +38,7 @@ class Users_main extends StatelessWidget {//Main page of the User
               onPressed: () {
                 BlocProvider.of<UserBloc>(context).add(UserDelete(this.user));
                 Navigator.of(context).pushNamedAndRemoveUntil(
-                    SignIn.routeName, (route) => false);
+                        SignIn.routeName, (route) => false);
               }),
           SizedBox(
             width: 32,
@@ -51,7 +51,7 @@ class Users_main extends StatelessWidget {//Main page of the User
                     SignIn.routeName, (route) => false);
               }),
         ],
-        ),
+      ),
 
       body: Center(
         child: Text(

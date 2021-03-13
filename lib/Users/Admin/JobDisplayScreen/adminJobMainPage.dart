@@ -45,7 +45,7 @@ class AdminJobMainPage extends StatelessWidget {
                         child: Container(
                           child: new FittedBox(
                             child: Material(
-                              color: Colors.white,
+                              color: Theme.of(context).accentColor,
                               elevation: 14.0,
                               borderRadius: BorderRadius.circular(24.0),
                               shadowColor: Color(0x802196F3),
@@ -59,16 +59,20 @@ class AdminJobMainPage extends StatelessWidget {
                                           left: 16.0),
                                       child: myDetailsContainer1(
                                           jobs[idx].jobName,
-                                          jobs[idx].location),
+                                          jobs[idx].location,
+                                          context),
+
                                     ),
                                   ),
-                                  SizedBox(width: 30,),
+
                                   Container(
                                     margin: EdgeInsets.only(top: 10, left: 50),
                                     width: width - 16,
                                     height: height * 0.3,
-                                    padding: EdgeInsets.all(10.0),
+                                    padding: EdgeInsets.all(30.0),
                                     child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.end,
                                       children: [
                                         ClipRRect(
                                           borderRadius: new BorderRadius
@@ -85,6 +89,7 @@ class AdminJobMainPage extends StatelessWidget {
                                         SizedBox(height: 15,),
                                         Text('${jobs[idx].user.fullName}',
                                           style: TextStyle(
+                                            color: Theme.of(context).textTheme.bodyText1.color,
                                               fontWeight: FontWeight.bold),)
                                       ],
                                     ),
@@ -113,7 +118,7 @@ class AdminJobMainPage extends StatelessWidget {
     );
   }
 
-  Widget myDetailsContainer1(String title, String location) {
+  Widget myDetailsContainer1(String title, String location,BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
@@ -124,19 +129,20 @@ class AdminJobMainPage extends StatelessWidget {
               child: Text(
                 "$title",
                 style: TextStyle(
-                    color: Color(0xffe6020a),
-                    fontSize: 24.0,
+                    color: Theme.of(context).textTheme.bodyText1.color,
+                    fontSize: 40.0,
                     fontWeight: FontWeight.bold),
               )),
         ),
+        SizedBox(height: 10,),
         Container(
           // TODO
             child: Text(
               "$location",
               style: TextStyle(
-                  color: Colors.black54,
+                  color: Theme.of(context).textTheme.bodyText1.color,
                   fontSize: 18.0,
-                  fontWeight: FontWeight.bold),
+                  fontWeight: FontWeight.w300),
             )),
       ],
     );

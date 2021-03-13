@@ -74,7 +74,7 @@ class AdminServiceMainPage extends StatelessWidget {
                   child: Image.network(
                     selectedCategory.imageUrl, fit: BoxFit.cover,),
 
-                ),
+                ) ,
 //           ingredient
                 buildSectionTitle(context, 'Services'),
                 BlocProvider.value(
@@ -94,7 +94,7 @@ class AdminServiceMainPage extends StatelessWidget {
                                       children: [
                                         Container(
                                           decoration: BoxDecoration(
-                                              color: Colors.white38,
+                                              color: Theme.of(context).accentColor,
                                               borderRadius: BorderRadius.circular(20)
                                           ),
                                           height: MediaQuery.of(context).size.height * 0.15,
@@ -107,7 +107,7 @@ class AdminServiceMainPage extends StatelessWidget {
                                             child: Center(
                                               child: ListTile(
                                                 leading: CircleAvatar(
-                                                  backgroundImage: AssetImage('Assets/Images/${services[index].imageUrl}'),
+                                                  backgroundImage: AssetImage('Assets/assets/fixit.png'),
                                                 ),
                                                 title: Text(services[index].ServiceName !=null ? services[index].ServiceName : "place holder",
                                                   style: Theme.of(context).textTheme.headline6,),

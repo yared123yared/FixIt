@@ -1,3 +1,4 @@
+import 'package:flutter_group_project/Features/Role/models/role.dart';
 import 'package:flutter_group_project/Features/User/Model/User.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -5,25 +6,28 @@ class Util {//User Info management ... Token and Shared Preferences
   Future<void> storeUserInformation(User user) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('FullName', user.FullName);
-    await prefs.setString('Role', user.Role);
+    await prefs.setInt('RoleId', user.RoleId);
     await prefs.setString('Picture', user.Picture);
     await prefs.setString('Email', user.Email);
     await prefs.setString('Password', user.Password);
     await prefs.setString('Phone', user.Phone);
+    await prefs.setString('RoleName', user.Role.roleName);
   }
 
   Future<User> getUserInformation() async {
+    print("Entered to the getUserInformation Method");
     SharedPreferences prefs = await SharedPreferences.getInstance();
     User user = new User(
       FullName: prefs.getString("FullName"),
-      Role: prefs.getString("Role"),
+      RoleId: prefs.getInt("Role"),
       Picture: prefs.getString("Picture"),
       Email: prefs.getString("Email"),
       Password: prefs.getString("Password"),
       Phone: prefs.getString("Phone"),
+      Role: Rolee(roleId: prefs.getInt("RoleId"),roleName:prefs.getString("RoleName"))
 
     );
-
+print("this is the user going to return $user");
     return user;
   }
 

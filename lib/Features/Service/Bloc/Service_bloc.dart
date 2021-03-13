@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_group_project/Features/User/util/util.dart';
 import '../Service.dart';
 
 
@@ -7,8 +8,10 @@ import '../Service.dart';
 
 class ServiceBloc extends Bloc<ServiceEvent, ServiceState> {
   final ServiceRepository serviceRepository;
+  final Util util;
 
-  ServiceBloc({@required this.serviceRepository})
+
+  ServiceBloc({@required this.serviceRepository,@required this.util})
       : assert(serviceRepository != null),
         super(ServiceLoading());
 
@@ -32,7 +35,8 @@ class ServiceBloc extends Bloc<ServiceEvent, ServiceState> {
         await serviceRepository.createService(event.service);
         final services = await serviceRepository.getServices();
         yield ServicesLoadSuccess(services);
-      } catch (_) {
+      } catch (err) {
+        print("err err err $err");
         yield ServiceOperationFailure();
       }
     }
