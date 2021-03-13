@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_group_project/Features/Role/models/role.dart';
 import 'package:flutter_group_project/Features/User/Model/User.dart';
+import 'package:flutter_group_project/Users/Admin/UserManagement/userProfiles.dart';
+import 'package:flutter_group_project/Users/Admin/UserManagement/userUpdate.dart';
 import 'package:flutter_group_project/Users/NormalUser/TechnicianDisplay/technicianDetail.dart';
 import 'package:flutter_group_project/Users/NormalUser/TechnicianDisplay/technicianMain.dart';
 import 'package:flutter_group_project/Users/NormalUser/UserUpdate/AddUpdateUser.dart';
+import 'package:flutter_group_project/Users/NormalUser/UserUpdate/userProfile.dart';
 import 'Features/Authentication/authntication.dart';
 import 'Features/Job/models/job.dart';
 import 'Features/Service/Service.dart';
@@ -241,6 +244,24 @@ break;
 //        /user/category/service
         return MaterialPageRoute(
             builder: (context) => UserServiceMain(
+//              the arguments will pass here
+            ));
+        break;
+      case AdminUserProfile.routeName:
+        final args = settings.arguments;
+//        /user/category/service
+        return MaterialPageRoute(
+            builder: (context) => AdminUserProfile(
+               user: args,
+//              the arguments will pass here
+            ));
+        break;
+      case UserProfileUpdate.routeName:
+        final args = settings.arguments;
+//        /user/category/service
+        return MaterialPageRoute(
+            builder: (context) => UserProfileUpdate(
+              args: args,
 //              the arguments will pass here
             ));
         break;

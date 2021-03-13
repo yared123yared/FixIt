@@ -123,6 +123,7 @@ class CommonDrawerClass extends StatelessWidget {
     User user = await util.getUserInformation();
     return user;
   }
+
 //  void _getUserInfo() async {
 //
 //    Util util= new Util();

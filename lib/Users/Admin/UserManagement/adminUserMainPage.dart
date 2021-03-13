@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_group_project/Features/User/Bloc/bloc.dart';
 import 'package:flutter_group_project/Users/Admin/JobDisplayScreen/adminJobDetailPage.dart';
 import 'package:flutter_group_project/Users/Admin/UserManagement/UserDetail.dart';
+import 'package:flutter_group_project/Users/Admin/UserManagement/userProfiles.dart';
 
 class AdminUserMainPage extends StatelessWidget {
   static const routeName = '/admin/Features.user';
@@ -35,9 +36,10 @@ class AdminUserMainPage extends StatelessWidget {
                 itemBuilder: (_, idx) =>
                     GestureDetector(
                       onTap: () {
+                        print("On Account User id is: ${user[idx].UserId}");
                         Navigator.of(context)
                             .pushNamed(
-                        UserDetail.routeName, arguments: user[idx]);
+                            AdminUserProfile.routeName, arguments: user[idx]);
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(16.0),

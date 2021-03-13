@@ -59,8 +59,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         final user = await userRepository.getUsers();
         print('Done ---- Users Update in the bloc');
         yield UsersLoadSuccess(user);
-      } catch (_) {
-        print("Some exception happened :(");
+      } catch (err) {
+        print("Some exception happened : $err");
         yield UserOperationFailure();
       }
     }
