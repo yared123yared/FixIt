@@ -63,7 +63,7 @@ class UserJobDetail extends StatelessWidget {
             floatingActionButton: FloatingActionButton(
               child: Icon(Icons.check_circle_sharp,
                   ),
-              backgroundColor: job.doneStatus == "done" ? Colors.green : Colors.grey,
+              backgroundColor: job.doneStatus == "done" ? Colors.grey : Colors.green,
               onPressed: () async {
                 final event = job.doneStatus =='done'? JobUpdate(
                   Job(
@@ -105,138 +105,138 @@ class UserJobDetail extends StatelessWidget {
   Widget buildJobDetail(Job job) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
-        Row(
-          children: [
-            Text('Job Detail', style: _kTitleTextStyle),
-            SizedBox(width: 50,)
-          ],
+        Card(
+          margin: EdgeInsets.only(bottom: 20.0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(20),
+                bottomRight: Radius.circular(20)),
+          ),
+          elevation: 5.0,
+          borderOnForeground: true,
+          shadowColor: Colors.grey,
+          child: Container(
+            padding: EdgeInsets.only(top: 20.0, bottom: 40.0),
+            child: Column(
+              children: [
+                Text(
+                  "${job.jobName}",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30,
+                  ),
+                ),
+                SizedBox(
+                  height: 10.0,
+                ),
+                Text(
+                  "${job.location}",
+                  style: TextStyle(),
+                ),
+              ],
+            ),
+          ),
         ),
+        Card(
+          margin: EdgeInsets.only(bottom: 20.0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          elevation: 5.0,
+          borderOnForeground: true,
+          shadowColor: Colors.grey,
+          child: Container(
+            padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 20.0),
+                  child: Text('Accept Status: ${job.acceptanceStatus}',
+                      style: _kStatusTextStyle),
+                ),
+                SizedBox(
+                  height: 10.0,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20.0),
+                  child: Text(
+                    'Done Status: ${job.doneStatus}',
+                    style: _kStatusTextStyle,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Description ',
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 10,),
+            Container(
+              margin: EdgeInsets.only(bottom: 15.0),
+              child: Text(
+                '${job.description} ',
+                maxLines: 5,
+                overflow: TextOverflow.ellipsis,
 
-        Row(
-          children: [
-            Text("Name: ",style: _kDetailsTextStyle,),
-            SizedBox(
-              width: 15,
-            ),
-            Text(
-              "${job.jobName}",
-            ),
-          ],
-        ),Row(
-          children: [
-            Text("location: ",style: _kDetailsTextStyle,),
-            SizedBox(
-              width: 15,
-            ),
-            Text(
-              "${job.location}",
+              ),
             ),
           ],
         ),
-        Row(
-          children: [
-            Text(
-                'Done Status: ${job.doneStatus}',
-                style: _kStatusTextStyle
-            ),
-          ],
-        ),
-        Row(
-          children: [
-            Text(
-                'accept status: ${job.acceptanceStatus}',
-                style: _kStatusTextStyle
-            ),
-          ],
-        ),
-        Row(
-          children: [
-            Text(
-              'Description: ${job.description}',
-              style: _kDetailsTextStyle,
-            ),
-          ],
-        ),
-
       ],
     );
   }
 
-  Column buildTechnicianDetail(double width, double height,Technician technician,User user) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left:16.0),
-              child: Text('Assigned to', style: _kTitleTextStyle),
-            ),
-            SizedBox(width: 50,)
-          ],
-        ),
-        SizedBox(height: 30,),
-        Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            mainAxisSize: MainAxisSize.max,
+
+  Card buildTechnicianDetail(double width, double height, Technician technician, User user) {
+    return Card(
+      child: Row(
+        children: [
+          Row(
             children: [
-
-              CircleAvatar(
-                // TODO: user image
-                backgroundImage:
-                AssetImage('Assets/Images/mec.jpg'),
-                radius: width * 0.10,
+              Padding(
+                padding: const EdgeInsets.only(left: 16.0,top: 5,bottom: 30),
+                child: Text('Assigned To', style: _kTitleTextStyle),
               ),
-
-              // TODO : user Detail
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "${user.fullName}",
-                    style: _kJobTitleTextStyle,
-                  ),
-                  Row(
-                    children: [
-                      Icon(Icons.mail),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      Text(
-                        "${user.email}",
-                        style: _kDetailsTextStyle,
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Icon(Icons.phone),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      Text(
-                        "${user.phone}",
-                        style: _kDetailsTextStyle,
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Icon(Icons.category_sharp),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      Text(
-                        "${technician.department}",
-                        style: _kDetailsTextStyle,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ]),
-      ],
+              SizedBox(
+                width: 50,
+              )
+            ],
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                CircleAvatar(
+                  // TODO: user image
+                  backgroundImage: AssetImage('Assets/Images/me.jpg'),
+                  radius: width * 0.07,
+                ),
+                SizedBox(width: 5,),
+                // TODO : user Detail
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "${technician.user.fullName}",
+                      style: _kJobTitleTextStyle,
+                    ),
+                  ],
+                ),
+              ]),
+        ],
+      ),
     );
   }
 }

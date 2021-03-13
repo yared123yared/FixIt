@@ -42,13 +42,7 @@ class UserDetail extends StatelessWidget {//To show detail of User
           SizedBox(
             width: 32,
           ),
-          IconButton(
-              icon: Icon(Icons.delete),
-              onPressed: () {
-                BlocProvider.of<UserBloc>(context).add(UserDelete(this.user));
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                    AdminMainPage.routeName, (route) => false);
-              }),
+          
         ],
       ),
       body: Column(

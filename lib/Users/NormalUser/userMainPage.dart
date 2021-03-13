@@ -50,7 +50,7 @@ import 'UserUpdate/Users_main.dart';
 
        bottomNavigationBar:  CurvedNavigationBar(
          backgroundColor: Colors.transparent,
-         color: Theme.of(context).accentColor,
+         color: Theme.of(context).primaryColor,
          items: [
            Icon(Icons.cleaning_services_rounded,color: Colors.white,size: 25.0,),
            Icon(Icons.history,color: Colors.white,size: 25.0),

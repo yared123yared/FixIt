@@ -47,8 +47,7 @@ class AdminUserProfile extends StatelessWidget {//To show detail of User
               icon: Icon(Icons.delete),
               onPressed: () {
                 BlocProvider.of<UserBloc>(context).add(UserDelete(this.user));
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                    AdminMainPage.routeName, (route) => false);
+                Navigator.of(context).pop();
               }),
         ],
       ),

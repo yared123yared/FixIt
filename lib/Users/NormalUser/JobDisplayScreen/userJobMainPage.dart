@@ -26,7 +26,7 @@ class UserJobMain extends StatelessWidget {
         future: this.getUserInfo() ,
         builder: (context,snapshot) {
         if(snapshot.hasData) {
-        User user = snapshot.data;
+        models.User user = snapshot.data;
         return BlocProvider.value(
           value: BlocProvider.of<JobBloc>(context),
           child: Scaffold(
@@ -39,7 +39,7 @@ class UserJobMain extends StatelessWidget {
                   List<Job> jobs = [];
                   final jobUser = state.jobs;
                   jobUser.forEach((element) {
-                    if(element.userId == user.userId){
+                    if(element.userId == user.UserId){
                       jobs.add(element);
                     }
                   });
