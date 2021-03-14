@@ -126,6 +126,7 @@ class UserTechnicianMain extends StatelessWidget {
                       if (state is TechnicianOperationFailure) {
                         return Text('Could not do Technician  operation');
                       }
+                      
                       if (state is TechnicianLoadingSuccess) {
                         final techs = state.jobs;
                         List<Technician> technicians = [];

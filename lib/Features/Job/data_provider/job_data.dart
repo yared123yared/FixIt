@@ -27,7 +27,6 @@ class JobDataProvider{
           'doneStatus':job.doneStatus
         }),
       );
-
       print("response: ${response.body}");
       if (response.statusCode == 200) {
         print('Creating the jobs');
@@ -36,7 +35,6 @@ class JobDataProvider{
         throw Exception('Failed to create job.');
       }
     }
-
 
   Future<List<Job>> getJobs() async {
     print("Getint all the jobs");
