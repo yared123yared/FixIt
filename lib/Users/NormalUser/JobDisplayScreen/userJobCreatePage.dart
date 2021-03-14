@@ -30,7 +30,7 @@ class _UserCreateJobState extends State<UserCreateJob> {
     final userId = 5;
      String latitude;
      String longitude;
-     String address;
+     String address = "choose location...";
   @override
   Widget build(BuildContext context) {
     print("build - Latitude $latitude, longitude $longitude");
@@ -92,7 +92,36 @@ class _UserCreateJobState extends State<UserCreateJob> {
                           }),
 //
                       SizedBox(height: 10,),
-                      Text("$address"),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("$address"),
+                          SizedBox(width: 10,),
+                          IconButton(
+                            icon: Icon(Icons.location_on),
+                            onPressed: () async {
+                              Position position = await Geolocator.getCurrentPosition(
+                                  desiredAccuracy: LocationAccuracy.high);
+                              LatLng loaction=LatLng(position.latitude, position.longitude);
+                              final LocationArgument location = await Navigator
+                                  .push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MapScreen(
+                                      args: MapArgument(location: loaction,isUser: true),
+                                    )),
+                              );
+                              setState(() {
+                                latitude = location.latitude;
+                                longitude = location.longitude;
+                                address = location.address;
+                              });
+                              print(latitude);
+                              print(longitude);
+                            },
+                          )
+                        ],
+                      ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 16.0),
                         child: ElevatedButton.icon(
@@ -138,29 +167,7 @@ class _UserCreateJobState extends State<UserCreateJob> {
                           icon: Icon(Icons.save),
                         ),
                       ),
-                      IconButton(
-                        icon: Icon(Icons.location_on),
-                        onPressed: () async {
-                          Position position = await Geolocator.getCurrentPosition(
-                              desiredAccuracy: LocationAccuracy.high);
-                          LatLng loaction=LatLng(position.latitude, position.longitude);
-                          final LocationArgument location = await Navigator
-                              .push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MapScreen(
-                                  args: MapArgument(location: loaction,isUser: true),
-                                )),
-                          );
-                          setState(() {
-                            latitude = location.latitude;
-                            longitude = location.longitude;
-                            address = location.address;
-                          });
-                          print(latitude);
-                          print(longitude);
-                        },
-                      )
+
                     ],
                   ),
                 ),

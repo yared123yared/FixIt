@@ -7,6 +7,7 @@ import 'package:flutter_group_project/Features/Role/data_provider/role_data.dart
 import 'package:flutter_group_project/Features/Role/models/role.dart';
 import 'package:flutter_group_project/Features/User/Bloc/bloc.dart';
 import 'package:flutter_group_project/Features/User/Model/models.dart';
+import 'package:flutter_group_project/Features/User/util/util.dart';
 import 'package:flutter_group_project/Users/Admin/admin.dart';
 import 'package:flutter_group_project/Users/Common/BoxDecoration.dart';
 import 'package:flutter_group_project/Users/Common/ScreenRoute.dart';
@@ -213,6 +214,17 @@ class _AddUpdateAdminState extends State<AddUpdateAdmin> {
                                   print("Created");
                                   BlocProvider.of<UserBloc>(context).add(event);
                                   print("After bloc");
+                                  Util util= new Util();
+                                  util.removeUser();
+                                  util.storeUserInformation(User(
+                                    UserId: widget.args.user.UserId,
+                                    Email: this._user["Email"],
+                                    FullName: this._user["FullName"],
+                                    Phone: this._user["Phone"],
+                                    Password: this._user["Password"],
+                                    Picture: 'Assets/assets/Fixit.png',
+                                    RoleId: widget.args.user.Role.roleId,
+                                  ),);
 //                                Navigator.of(context).pop();
                                   Navigator.of(context).pop();
                                 }
