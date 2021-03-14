@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_group_project/ScreenRoute.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapScreen extends StatefulWidget {
+  final MapArgument args;
+  MapScreen({this.args});
   static const routeName = 'map';
   @override
   _MyAppState createState() => _MyAppState();
@@ -11,13 +15,12 @@ class MapScreen extends StatefulWidget {
 class _MyAppState extends State<MapScreen> {
   List<Marker> myMarker = [];
   GoogleMapController mapController;
-  final LatLng _center = LatLng(9, 38.7);
+  // final LatLng _center = LatLng(9, 38.7);
 
   LatLng _currentLocation;
   void _onMapCreated(GoogleMapController controller) async {
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
-    // await centerScreen(position);
 
     setState(
       () {
@@ -36,12 +39,14 @@ class _MyAppState extends State<MapScreen> {
       },
     );
     mapController = controller;
+    await centerScreen(position);
+
   }
 
   @override
   void initState() {
+
     GeolocatorService().getCurrentLocation().listen((position) async {
-      // await centerScreen(position);
       setState(
         () {
           _currentLocation = LatLng(position.latitude, position.longitude);
@@ -57,6 +62,8 @@ class _MyAppState extends State<MapScreen> {
           );
         },
       );
+      await centerScreen(position);
+
     });
 
     super.initState();
@@ -64,6 +71,7 @@ class _MyAppState extends State<MapScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final LatLng _center = widget.args.location;
     return Scaffold(
       body: Stack(children: [
         GoogleMap(
@@ -75,33 +83,44 @@ class _MyAppState extends State<MapScreen> {
           ),
           mapType: MapType.satellite,
           onTap: _handleTap,
+          myLocationButtonEnabled: true,
         ),
         Positioned(
           bottom: 0,
           left: 100,
-          child: FlatButton(
+          child: widget.args.isUser? FlatButton(
             color: Colors.blueAccent,
-            onPressed: () {
+            onPressed: () async {
+              var address= await  _fetchLocation(_currentLocation);
+
               Navigator.of(context).pop(LocationArgument(latitude: _currentLocation.latitude.toString(),
-                longitude: _currentLocation.longitude.toString()
+                longitude: _currentLocation.longitude.toString(),
+                address: address
 
               ));
             },
             child: Text("Confirm Location",style: TextStyle(
               color: Colors.white
             ),),
-          ),
-        )
+          ): Container()
+        ),
+        Positioned(
+            top: 20,
+            child: IconButton(
+
+          icon: Icon(Icons.arrow_back,color: Colors.white, size: 30,),
+          onPressed: ()=> Navigator.of(context).pop(),
+        ))
       ]),
     );
   }
 
-  // Future<void> centerScreen(Position position) async {
-  //   await mapController.animateCamera(CameraUpdate.newCameraPosition(
-  //       CameraPosition(
-  //           target: LatLng(position.latitude, position.longitude),
-  //           zoom: 18.0)));
-  // }
+  Future<void> centerScreen(Position position) async {
+    await mapController.animateCamera(CameraUpdate.newCameraPosition(
+        CameraPosition(
+            target: LatLng(position.latitude, position.longitude),
+            zoom: 18.0)));
+  }
 
   void _handleTap(LatLng tappedPoint) {
     setState(() {
@@ -112,12 +131,33 @@ class _MyAppState extends State<MapScreen> {
         draggable: true,
         onDragEnd: (value) => _handleTap(value),
       ));
+      _currentLocation=tappedPoint;
       print(tappedPoint);
     });
-    // centerScreen(Position(
-    //   latitude: _currentLocation.latitude,
-    //   longitude: _currentLocation.longitude,
-    // ));
+    centerScreen(Position(
+      latitude: _currentLocation.latitude,
+      longitude: _currentLocation.longitude,
+    ));
+
+
+  }
+
+
+  Future<String>_fetchLocation(LatLng position) async {
+    // Position position = await Geolocator.getCurrentPosition(
+    //     desiredAccuracy: LocationAccuracy.best);
+
+    ///Here you have choose level of distance
+    var latitude = position.latitude.toString() ?? '';
+    var longitude = position.longitude.toString() ?? '';
+    var placemarks =
+    await placemarkFromCoordinates(position.latitude, position.longitude);
+    var address =
+        '${placemarks.first.name.isNotEmpty ? placemarks.first.name + ', ' : ''}${placemarks.first.subLocality.isNotEmpty ? placemarks.first.subLocality + ', ' : ''}${placemarks.first.locality.isNotEmpty ? placemarks.first.locality + ', ' : ''}${placemarks.first.subAdministrativeArea.isNotEmpty ? placemarks.first.subAdministrativeArea + ', ' : ''}';
+    print("latitude" + latitude);
+    print("longitude" + longitude);
+    print("adreess  " + address);
+    return address;
   }
 }
 
@@ -139,6 +179,7 @@ class GeolocatorService {
 class LocationArgument{
   final String latitude;
   final String longitude;
+  final String address;
 
-  LocationArgument({this.latitude, this.longitude});
+  LocationArgument({this.latitude, this.longitude,this.address});
 }

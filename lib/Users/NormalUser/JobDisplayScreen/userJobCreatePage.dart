@@ -7,6 +7,8 @@ import 'package:flutter_group_project/Features/User/util/util.dart';
 import 'package:flutter_group_project/Features/User/User.dart' as models;
 import 'package:flutter_group_project/Users/Common/BoxDecoration.dart';
 import 'package:flutter_group_project/Users/NormalUser/JobDisplayScreen/map_screen.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../../ScreenRoute.dart';
 import '../userMainPage.dart';
@@ -28,6 +30,7 @@ class _UserCreateJobState extends State<UserCreateJob> {
     final userId = 5;
      String latitude;
      String longitude;
+     String address;
   @override
   Widget build(BuildContext context) {
     print("build - Latitude $latitude, longitude $longitude");
@@ -89,27 +92,7 @@ class _UserCreateJobState extends State<UserCreateJob> {
                           }),
 //
                       SizedBox(height: 10,),
-                      TextFormField(
-
-                          initialValue: "Latitude: ${this.latitude
-                              .toString()}, Longitude: ${this.longitude
-                              .toString()}",
-                          // latitude != null? "Latitude: ${this.latitude}, Longitude: ${this.longitude}" : '',
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              return 'Please enter location ';
-                            }
-                            return null;
-                          },
-                          decoration: textInputDecoration.copyWith(
-                              hintText: 'Location'
-                          ),
-                          // InputDecoration(labelText: 'location'),
-                          onSaved: (value) {
-                            setState(() {
-                              this._job["location"] = value;
-                            });
-                          }),
+                      Text("$address"),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 16.0),
                         child: ElevatedButton.icon(
@@ -137,9 +120,9 @@ class _UserCreateJobState extends State<UserCreateJob> {
                                     jobName: this._job["jobName"],
                                     description: this._job["description"],
                                     userId: user.UserId,
-                                    location: "Latitude: ${this.latitude
-                                        .toString()}, Longitude: ${this
-                                        .longitude.toString()}",
+                                    location: "${this.latitude
+                                        .toString()},${this
+                                        .longitude.toString()},${this.address}",
                                     technicianId: widget.args.technicianId,
                                     acceptanceStatus: 'not accepted',
                                     doneStatus: 'not done'
@@ -158,15 +141,21 @@ class _UserCreateJobState extends State<UserCreateJob> {
                       IconButton(
                         icon: Icon(Icons.location_on),
                         onPressed: () async {
+                          Position position = await Geolocator.getCurrentPosition(
+                              desiredAccuracy: LocationAccuracy.high);
+                          LatLng loaction=LatLng(position.latitude, position.longitude);
                           final LocationArgument location = await Navigator
                               .push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => MapScreen()),
+                                builder: (context) => MapScreen(
+                                  args: MapArgument(location: loaction,isUser: true),
+                                )),
                           );
                           setState(() {
                             latitude = location.latitude;
                             longitude = location.longitude;
+                            address = location.address;
                           });
                           print(latitude);
                           print(longitude);

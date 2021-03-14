@@ -5,7 +5,7 @@ import 'package:flutter_group_project/Features/Job/models/models.dart';
 
 import '../userMainPage.dart';
 const _kTitleTextStyle = TextStyle(
-    color: Color(0xffe6020a), fontSize: 24.0, fontWeight: FontWeight.bold);
+    color: Color(0xffe6020a), fontSize: 18.0, fontWeight: FontWeight.bold);
 const _kJobTitleTextStyle = TextStyle(
     color: Color(0xffe602ba), fontSize: 18.0, fontWeight: FontWeight.bold);
 const _kJobLocationTextStyle =
@@ -103,6 +103,10 @@ class UserJobDetail extends StatelessWidget {
   }
   // TODO pass job ass argument
   Widget buildJobDetail(Job job) {
+    var addressArray = job.location.split(",").sublist(2);
+
+    var address = '${addressArray[0]}, ${addressArray[1]}, ${addressArray[2]}';
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -132,7 +136,7 @@ class UserJobDetail extends StatelessWidget {
                   height: 10.0,
                 ),
                 Text(
-                  "${job.location}",
+                  "$address",
                   style: TextStyle(),
                 ),
               ],
@@ -203,7 +207,7 @@ class UserJobDetail extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 16.0,top: 5,bottom: 30),
-                child: Text('Assigned To', style: _kTitleTextStyle),
+                child: Text('Assigned To', style: _kTitleTextStyle,overflow: TextOverflow.fade,),
               ),
               SizedBox(
                 width: 50,

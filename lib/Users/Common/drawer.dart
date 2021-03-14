@@ -34,8 +34,8 @@ class CommonDrawerClass extends StatelessWidget {
               children: [
                 UserAccountsDrawerHeader(
 
-                  accountName: Text(user.FullName),
-                  accountEmail: Text(user.Email),
+                  accountName: user.FullName==null ? Text("Full Name"):Text(user.FullName),
+                  accountEmail:user.Email==null ? Text("Email"): Text(user.Email),
                   currentAccountPicture: CircleAvatar(
                     backgroundImage: AssetImage("Assets/assets/customer.png"),
                   ),

@@ -39,6 +39,7 @@ dependencies:
   step_progress_indicator: ^0.2.5+8
   geolocator: ^6.1.13
   google_maps_flutter: ^1.1.1
+  geocoding: ^1.0.5
 
 
 dev_dependencies:

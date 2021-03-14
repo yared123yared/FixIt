@@ -4,10 +4,13 @@ import 'package:flutter_group_project/Features/Role/models/role.dart';
 import 'package:flutter_group_project/Features/User/Model/User.dart';
 import 'package:flutter_group_project/Users/Admin/UserManagement/userProfiles.dart';
 import 'package:flutter_group_project/Users/Admin/UserManagement/userUpdate.dart';
+import 'package:flutter_group_project/Users/NormalUser/JobDisplayScreen/map_screen.dart';
 import 'package:flutter_group_project/Users/NormalUser/TechnicianDisplay/technicianDetail.dart';
 import 'package:flutter_group_project/Users/NormalUser/TechnicianDisplay/technicianMain.dart';
 import 'package:flutter_group_project/Users/NormalUser/UserUpdate/AddUpdateUser.dart';
 import 'package:flutter_group_project/Users/NormalUser/UserUpdate/userProfile.dart';
+import 'package:flutter_group_project/Users/Technicians/technicianMainPage.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'Features/Authentication/authntication.dart';
 import 'Features/Job/models/job.dart';
 import 'Features/Service/Service.dart';
@@ -281,12 +284,30 @@ break;
 //              the arguments will pass here
             ));
         break;
+      case TechnicianMainPage.routeName:
+//        /technician
+        return MaterialPageRoute(
+            builder: (context) => TechnicianMainPage(
+//              the arguments will pass here
+            ));
+        break;
       case TechnicianRequestDetail.routeName:
+        final JobArguments args = settings.arguments;
         return MaterialPageRoute(
             builder: (context) => TechnicianRequestDetail(
+              job: args.job,
 //              the arguments will pass here
             ));
 //        /technician
+        break;
+      case MapScreen.routeName:
+        final args = settings.arguments;
+//        /technician
+        return MaterialPageRoute(
+            builder: (context) => MapScreen(
+              args: args,
+//              the arguments will pass here
+            ));
         break;
 
 
@@ -333,4 +354,10 @@ class CategoryArgument{
   final List<Service> services;
 
   CategoryArgument({this.services, this.title,this.image});
+}
+
+class MapArgument{
+  final LatLng location;
+  final bool isUser;
+  MapArgument({this.location,this.isUser});
 }

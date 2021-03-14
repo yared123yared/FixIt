@@ -12,6 +12,7 @@ import 'package:flutter_group_project/Users/Technicians/TechnicianUpdate/Technic
 import 'package:flutter_group_project/Users/NormalUser/UserUpdate/Users_main.dart';
 import 'package:flutter_group_project/Users/Common/loading_screen.dart';
 import 'package:flutter_group_project/Users/Common/signup_page.dart';
+import 'package:flutter_group_project/Users/Technicians/technicianMainPage.dart';
 
 import 'package:toast/toast.dart';
 
@@ -50,7 +51,11 @@ class _SignInState extends State<SignIn> {
           if(state.user.Role.roleName=="ADMIN"){//if role is ADMIN go to ADMIN screen
 
             Navigator.of(context).pushReplacementNamed(AdminMainPage.routeName, arguments: UserArgument(user: user));
-          }else{//else go to USER Screen
+          }else if(state.user.Role.roleName=="TECHNICIAN"){
+            print("technician logging in ");
+            Navigator.of(context).pushReplacementNamed(TechnicianMainPage.routeName, arguments: UserArgument(user: user));
+          }
+          else{//else go to USER Screen
             Navigator.of(context).pushReplacementNamed(UserMain.routeName, arguments: UserArgument(user: user));
           }
 
