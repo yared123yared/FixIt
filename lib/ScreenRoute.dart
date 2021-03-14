@@ -22,6 +22,7 @@ import 'Users/Admin/UserManagement/User_main_screen.dart';
 import 'Users/Common/loading_screen.dart';
 import 'Users/Common/login_page.dart';
 import 'Users/Common/signup_page.dart';
+import 'Users/Common/signup_page_for_technichian.dart';
 import 'Users/NormalUser/UserUpdate/Users_main.dart';
 import 'Users/Technicians/TechnicianUpdate/Technician_main.dart';
 import 'Users/users.dart';
@@ -88,6 +89,8 @@ class ServiceAppRoute {
              return MaterialPageRoute(builder: (context) => SignIn());
       case  Register.routeName:
         return MaterialPageRoute(builder: (context) => Register());
+      case  TechnicianRegister.routeName:
+        return MaterialPageRoute(builder: (context) => TechnicianRegister());
       case UserDetail.routeName:
         User.User user = settings.arguments;
         return MaterialPageRoute(
