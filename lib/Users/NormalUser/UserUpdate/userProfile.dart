@@ -11,11 +11,11 @@ import 'package:flutter_group_project/Users/Common/ScreenRoute.dart';
 import '../../../ScreenRoute.dart';
 
 
-class UserDetail extends StatelessWidget {//To show detail of User
-  static const routeName = 'userDetail';
+class UserProfile extends StatelessWidget {//To show detail of User
+  static const routeName = '/user/userDetail';
   final User user;
 
-  UserDetail({@required this.user});
+  UserProfile({@required this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -27,30 +27,36 @@ class UserDetail extends StatelessWidget {//To show detail of User
         elevation: 0.0,
         actions: [
           IconButton(
-            icon: Icon(Icons.edit),
-            onPressed: () {
-              print("Before navigations user id is ${this.user.UserId}");
-              Navigator.of(context).pushNamed(
-                AddUpdateAdmin.routeName,
-                arguments: UserArgument(user: this.user, edit: true),
+              icon: Icon(Icons.edit),
+              onPressed: () {
+                print("Before navigations user id is ${this.user.UserId}");
+                Navigator.of(context).pushNamed(
+                  AddUpdateAdmin.routeName,
+                  arguments: UserArgument(user: this.user, edit: true),
 
-              );
+                );
 
-            }
+              }
 
           ),
           SizedBox(
             width: 32,
           ),
-          
+          IconButton(
+              icon: Icon(Icons.delete),
+              onPressed: () {
+                BlocProvider.of<UserBloc>(context).add(UserDelete(this.user));
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    AdminMainPage.routeName, (route) => false);
+              }),
         ],
       ),
       body: Column(
         children: [
           Expanded(
-            flex: 4,
+              flex: 4,
               child: Container(
-            color: Theme.of(context).primaryColor,
+                color: Theme.of(context).primaryColor,
                 child: Container(
                   padding: EdgeInsets.only(top: 30.0),
                   child: Column(
@@ -66,17 +72,17 @@ class UserDetail extends StatelessWidget {//To show detail of User
                       SizedBox(height: 10.0,),
                       Center(
                         child: Text("${this.user.FullName}", style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold
                         ),),
                       )
                     ],
                   ),
                 ),
-          )),
+              )),
           Expanded(
-            flex: 6,
+              flex: 6,
               child: Container(
                 child: Column(
                   children: [

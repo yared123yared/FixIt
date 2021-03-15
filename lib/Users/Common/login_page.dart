@@ -12,6 +12,7 @@ import 'package:flutter_group_project/Users/Technicians/TechnicianUpdate/Technic
 import 'package:flutter_group_project/Users/NormalUser/UserUpdate/Users_main.dart';
 import 'package:flutter_group_project/Users/Common/loading_screen.dart';
 import 'package:flutter_group_project/Users/Common/signup_page.dart';
+import 'package:flutter_group_project/Users/Technicians/technicianMainPage.dart';
 
 import 'package:toast/toast.dart';
 
@@ -19,6 +20,7 @@ import '../../ScreenRoute.dart';
 import '../users.dart';
 
 class SignIn extends StatefulWidget {//Login Screen
+
   static const routeName = 'loginPage';
   const SignIn({Key key}) : super(key: key);
 
@@ -29,11 +31,11 @@ class SignIn extends StatefulWidget {//Login Screen
 class _SignInState extends State<SignIn> {
   bool ispassshow = false;
   bool _rememberme = false;
+
   final _myemailController = TextEditingController();
   final _myPasswordController = TextEditingController();
 
   //String _password, _email;
-
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +52,11 @@ class _SignInState extends State<SignIn> {
           if(state.user.Role.roleName=="ADMIN"){//if role is ADMIN go to ADMIN screen
 
             Navigator.of(context).pushReplacementNamed(AdminMainPage.routeName, arguments: UserArgument(user: user));
-          }else{//else go to USER Screen
+          }else if(state.user.Role.roleName=="TECHNICIAN"){
+            print("technician logging in ");
+            Navigator.of(context).pushReplacementNamed(TechnicianMainPage.routeName, arguments: UserArgument(user: user));
+          }
+          else{//else go to USER Screen
             Navigator.of(context).pushReplacementNamed(UserMain.routeName, arguments: UserArgument(user: user));
           }
 
@@ -246,7 +252,6 @@ class _SignInState extends State<SignIn> {
                                     GestureDetector(
                                       onTap: () => _pushPage(context, Register()),
                                       child: new Text(
-
                                         "Signup",
                                         style: TextStyle(
                                             color: Colors.blue,
@@ -268,7 +273,6 @@ class _SignInState extends State<SignIn> {
         );
       } ,
     );
-
   }
   void _pushPage(BuildContext context, Widget page) {
     Navigator.of(context).push(

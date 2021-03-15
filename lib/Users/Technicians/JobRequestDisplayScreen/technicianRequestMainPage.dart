@@ -3,22 +3,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_group_project/Features/Job/bloc/bloc.dart';
 import 'package:flutter_group_project/Features/Job/bloc/job_bloc.dart';
 import 'package:flutter_group_project/Features/Job/models/job.dart';
+import 'package:flutter_group_project/Features/User/User.dart' as models;
+import 'package:flutter_group_project/Features/User/util/util.dart';
+import 'package:flutter_group_project/ScreenRoute.dart';
 import 'package:flutter_group_project/Users/Technicians/JobRequestDisplayScreen/technicianRequestDetailPage.dart';
 
-import '../../../ScreenRoute.dart';
-
 class TechnicianRequestMain extends StatelessWidget {
-  static const routeName='/technician/request';
+  static const routeName = '/technician/request';
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery
-        .of(context)
-        .size
-        .width;
-    final height = MediaQuery
-        .of(context)
-        .size
-        .height;
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
 
     return BlocProvider.value(
       value: BlocProvider.of<JobBloc>(context),
@@ -29,96 +24,106 @@ class TechnicianRequestMain extends StatelessWidget {
               return Text('Could not do job operation');
             }
             if (state is JobLoadingSuccess) {
-              List<Job> jobs = state.jobs;
+              List<Job> totalJobs = state.jobs;
+              List<Job> jobs = [];
 
-              // final jobUser = state.jobs;
-              //
-              // jobUser.forEach((element) {
-              //   if(element.userId == ){
-              //     jobs.add(element);
-              //   }
-              // });
-              // print("user Jobs: $jobUser");
 
-              return ListView.builder(
-                scrollDirection: Axis.vertical,
-                itemCount: jobs.length,
-                itemBuilder: (_, idx) =>
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.of(context)
-                            .pushNamed(
-                            TechnicianRequestDetail.routeName, arguments: jobs[idx]);
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Container(
-                          child: new FittedBox(
-                            child: Material(
-                              color: Colors.white,
-                              elevation: 14.0,
-                              borderRadius: BorderRadius.circular(24.0),
-                              shadowColor: Color(0x802196F3),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment
-                                    .spaceBetween,
-                                children: <Widget>[
-                                  Container(
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 16.0),
-                                      child: myDetailsContainer1(
-                                          jobs[idx].jobName,
-                                          jobs[idx].location),
+
+              return FutureBuilder(
+                      future: this.getUserInfo() ,
+                      builder: (context,snapshot) {
+                  if (snapshot.hasData) {
+                    models.User user = snapshot.data;
+                    totalJobs.forEach((element) {
+                      if(element.technician.userId == user.UserId){
+                        jobs.add(element);
+                      }
+                    });
+                    return ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      itemCount: jobs.length,
+                      itemBuilder: (_, idx) => GestureDetector(
+                        onTap: () {
+                          Navigator.of(context)
+                              .pushNamed(TechnicianRequestDetail.routeName,
+                              arguments: JobArguments(
+                                edit: true,
+                                job: jobs[idx],
+                              ));
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Container(
+                            child: new FittedBox(
+                              child: Material(
+                                color: Colors.white,
+                                elevation: 14.0,
+                                borderRadius: BorderRadius.circular(24.0),
+                                shadowColor: Color(0x802196F3),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Container(
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(left: 16.0),
+                                        child: myDetailsContainer1(
+                                            jobs[idx].jobName, jobs[idx].location),
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(width: 30,),
-                                  Container(
-                                    margin: EdgeInsets.only(top: 10, left: 50),
-                                    width: width - 16,
-                                    height: height * 0.3,
-                                    padding: EdgeInsets.all(10.0),
-                                    child: Column(
-                                      children: [
-                                        ClipRRect(
-                                          borderRadius: new BorderRadius
-                                              .circular(24.0),
-                                          child: CircleAvatar(
-                                            radius: 50,
-                                            backgroundImage: AssetImage(
-                                              // TODO: change this image path
-                                              'Assets/Images/me.jpg',
-
+                                    SizedBox(
+                                      width: 30,
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.only(top: 10, left: 50),
+                                      width: width - 16,
+                                      height: height * 0.3,
+                                      padding: EdgeInsets.all(10.0),
+                                      child: Column(
+                                        children: [
+                                          ClipRRect(
+                                            borderRadius:
+                                            new BorderRadius.circular(24.0),
+                                            child: CircleAvatar(
+                                              radius: 50,
+                                              backgroundImage: AssetImage(
+                                                // TODO: change this image path
+                                                'Assets/Images/me.jpg',
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        SizedBox(height: 15,),
-                                        Text('${jobs[idx].user.fullName}',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold),)
-                                      ],
+                                          SizedBox(
+                                            height: 15,
+                                          ),
+                                          Text(
+                                            '${jobs[idx].user.fullName}',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                          )
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-              );
+                    );
+                  } else {
+                    return Container();
+                  }
+    });
             }
 
             return Scaffold(
               backgroundColor: Colors.white,
-              body: Center(child: CircularProgressIndicator(
-
-              ),),
+              body: Center(
+                child: CircularProgressIndicator(),
+              ),
             );
           },
         ),
-
-
       ),
     );
   }
@@ -150,5 +155,11 @@ class TechnicianRequestMain extends StatelessWidget {
             )),
       ],
     );
+  }
+
+  Future<models.User> getUserInfo() async{
+    Util util= new Util();
+    final user = await util.getUserInformation();
+    return user;
   }
 }

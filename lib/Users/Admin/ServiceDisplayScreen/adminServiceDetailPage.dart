@@ -43,50 +43,127 @@ class AdminServiceDetail extends StatelessWidget {
               }),
         ],
       ),
-      body: Card(
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
         child: Column(
+          crossAxisAlignment:CrossAxisAlignment.stretch ,
           children: [
-            ListTile(
-              title: Text('Service Name: ${this.service.ServiceName}'),
-              subtitle: Text('Category: ${this.service.Category}'),
-            ),
-            Text(
-              'Details',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
+            Card(
+              margin: EdgeInsets.only(bottom: 20.0),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20)),
+              ),
+              elevation: 5.0,
+              borderOnForeground: true,
+              shadowColor: Colors.grey,
+              child: Container(
+                padding: EdgeInsets.only(top: 20.0, bottom: 40.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
+                      child: Text(
+                        "${this.service.ServiceName}",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 30,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Center(
+                      child: Text(
+                        "${this.service.Category}",
+                        style: TextStyle(fontWeight: FontWeight.bold,color: Colors.grey,fontSize: 18.0),
+                      ),
+                    ),
+                    Divider(thickness: 2.0,),
+                    Container(
+                      padding: EdgeInsets.only( bottom: 10.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 20.0),
+                            child:  Row(
+                              children: [
+                                Text(
+                                  'Initial Price: ',
+                                  style: TextStyle(color: Colors.green[500],fontSize: 18,fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  '\$${this.service.InitialPrice}',
+                                  style: TextStyle(color: Colors.red[900],fontSize: 18,fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10.0,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 20.0),
+                            child: Row(
+                              children: [
+                                Text(
+                                  'Intermediate Price: ',
+                                  style: TextStyle(color: Colors.green[500],fontSize: 18,fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  '\$${this.service.IntermediatePrice}',
+                                  style: TextStyle(color: Colors.red[900],fontSize: 18,fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10.0,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 20.0),
+                            child:  Row(
+                              children: [
+                                Text(
+                                  'Advanced Price: ',
+                                  style: TextStyle(color: Colors.green[500],fontSize: 18,fontWeight: FontWeight.bold),
+
+                                ),
+                                Text(
+                                  '\$${this.service.AdvancedPrice}',
+                                  style: TextStyle(color: Colors.red[900],fontSize: 18,fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-            SizedBox(
-              height: 10,
-            ),
-            Text('Description: ${this.service.Description}',style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),),
-            SizedBox(
-              height: 10,
-            ),
-            Text('Initial Price: ${this.service.InitialPrice}',style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            )),
-            SizedBox(
-              height: 10,
-            ),
-            Text('Intermediate Price: ${this.service.IntermediatePrice}',style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            )),
-            SizedBox(
-              height: 10,
-            ),
-            Text('Advanced Price: ${this.service.AdvancedPrice}',style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            )),
-            SizedBox(
-              height: 10,
+
+
+            Padding(
+              padding: const EdgeInsets.only(left:18.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Description',style: TextStyle(
+                    fontSize: 25,
+                  ),),
+                  SizedBox(height: 12.0,),
+                  Text('${this.service.Description}',style: TextStyle(
+                    fontSize:18.0,
+
+
+                  ),),
+                ],
+              ),
             ),
 
           ],

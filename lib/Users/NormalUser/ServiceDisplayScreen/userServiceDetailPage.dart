@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_group_project/Features/Service/Model/models.dart';
 import 'package:flutter_group_project/ScreenRoute.dart';
 import 'package:flutter_group_project/Users/NormalUser/JobDisplayScreen/job.dart';
+import 'package:flutter_group_project/Users/NormalUser/TechnicianDisplay/technicianMain.dart';
 
 class UserServiceDetail extends StatelessWidget {
   static const routeName='/user/category/service/detail';
@@ -94,7 +95,7 @@ class UserServiceDetail extends StatelessWidget {
                               ),
                               title: Text(services.services[index].ServiceName !=null ? services.services[index].ServiceName : "place holder",
                                 style: Theme.of(context).textTheme.headline6,),
-                              subtitle: Text(services.services[index].Description !=null ?services.services[index].Description: "Place holder" ,),
+                              subtitle: Text(services.services[index].Description !=null ?"Price: ${services.services[index].InitialPrice}": "Place holder" ,),
                               trailing: MediaQuery.of(context).size.width > 450 ? FlatButton.icon(
                                 onPressed: (){},
                                 textColor:Theme.of(context).errorColor,
@@ -102,12 +103,10 @@ class UserServiceDetail extends StatelessWidget {
                               ): IconButton(
                                 icon: Icon(Icons.star_border,color: Theme.of(context).errorColor,),
 
-
-
                               ),
                               onTap: () {
                                 print("Creating");
-                                Navigator.of(context).pushNamed(UserCreateJob.routeName, arguments:JobArguments(edit:false,));
+                                Navigator.of(context).pushNamed(UserTechnicianMain.routeName,arguments: services.services[index]);
                               },
                             ),
 //            onTap: (){

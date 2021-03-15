@@ -17,10 +17,11 @@ import 'UserManagement/adminUserMainPage.dart';
 
 
 class AdminMainPage extends StatefulWidget {
+  static const routeName='/admin';
 //  final int index;
   final User args;
   AdminMainPage({@required this.args});
-  static const routeName='/admin';
+
   @override
   _AdminMainPageState createState() => _AdminMainPageState();
 }
@@ -94,6 +95,7 @@ class _AdminMainPageState extends State<AdminMainPage> {
                 //     SignIn.routeName, (route) => false);
               }),
         ],
+
       ),
       drawer:CommonDrawerClass(),
       body: homeWidgets[_navIndex],

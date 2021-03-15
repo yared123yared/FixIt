@@ -2,7 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_group_project/Features/Role/models/role.dart';
 import 'package:flutter_group_project/Features/User/Model/User.dart';
+import 'package:flutter_group_project/Users/Admin/UserManagement/userProfiles.dart';
+import 'package:flutter_group_project/Users/Admin/UserManagement/userUpdate.dart';
+import 'package:flutter_group_project/Users/NormalUser/JobDisplayScreen/map_screen.dart';
+import 'package:flutter_group_project/Users/NormalUser/TechnicianDisplay/technicianDetail.dart';
+import 'package:flutter_group_project/Users/NormalUser/TechnicianDisplay/technicianMain.dart';
 import 'package:flutter_group_project/Users/NormalUser/UserUpdate/AddUpdateUser.dart';
+import 'package:flutter_group_project/Users/NormalUser/UserUpdate/userProfile.dart';
+import 'package:flutter_group_project/Users/Technicians/technicianMainPage.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'Features/Authentication/authntication.dart';
 import 'Features/Job/models/job.dart';
 import 'Features/Service/Service.dart';
@@ -14,6 +22,7 @@ import 'Users/Admin/UserManagement/User_main_screen.dart';
 import 'Users/Common/loading_screen.dart';
 import 'Users/Common/login_page.dart';
 import 'Users/Common/signup_page.dart';
+import 'Users/Common/signup_page_for_technichian.dart';
 import 'Users/NormalUser/UserUpdate/Users_main.dart';
 import 'Users/Technicians/TechnicianUpdate/Technician_main.dart';
 import 'Users/users.dart';
@@ -69,7 +78,7 @@ class ServiceAppRoute {
                      }
 //                     return UserMain();
                      return isAuthenticated
-                         ? (isAdmin ? AdminMainPage(args: user,) :  UserMain(args: user,))
+                         ? (isAdmin ? AdminMainPage(args: user,) :  UserMain())
                          : SignIn();
                    }));
 
@@ -80,6 +89,8 @@ class ServiceAppRoute {
              return MaterialPageRoute(builder: (context) => SignIn());
       case  Register.routeName:
         return MaterialPageRoute(builder: (context) => Register());
+      case  TechnicianRegister.routeName:
+        return MaterialPageRoute(builder: (context) => TechnicianRegister());
       case UserDetail.routeName:
         User.User user = settings.arguments;
         return MaterialPageRoute(
@@ -102,10 +113,10 @@ class ServiceAppRoute {
 //        final UserArgument adminArgs = settings.arguments;
 //        /admin
         final UserArgument args = settings.arguments;
-        print("the user arrguent is ${args.user}");
+//        print("the user arrguent is ${args.user}");
         return MaterialPageRoute(
             builder: (context) => UserMain(
-              args: args.user,
+//              args: args.user,
 //              the arguments will pass here
             ));
         break;
@@ -186,6 +197,22 @@ class ServiceAppRoute {
  //              the arguments will pass here
              ));
          break;
+      case UserTechnicianMain.routeName:
+        final Service args= settings.arguments;
+        return MaterialPageRoute(
+            builder: (context) => UserTechnicianMain(
+              service: args,
+            ));
+break;
+      case UserTechnicianDetail.routeName:
+        final  args= settings.arguments;
+        return MaterialPageRoute(
+            builder: (context) => UserTechnicianDetail(
+              technician: args,
+            ));
+        break;
+
+
       case UserJobMain.routeName:
 //        /user/job
         return MaterialPageRoute(
@@ -226,6 +253,24 @@ class ServiceAppRoute {
 //              the arguments will pass here
             ));
         break;
+      case AdminUserProfile.routeName:
+        final args = settings.arguments;
+//        /user/category/service
+        return MaterialPageRoute(
+            builder: (context) => AdminUserProfile(
+               user: args,
+//              the arguments will pass here
+            ));
+        break;
+      case UserProfileUpdate.routeName:
+        final args = settings.arguments;
+//        /user/category/service
+        return MaterialPageRoute(
+            builder: (context) => UserProfileUpdate(
+              args: args,
+//              the arguments will pass here
+            ));
+        break;
       case UserServiceDetail.routeName:
 //        /user/category/service/detail
       final CategoryArgument args = settings.arguments;
@@ -242,12 +287,30 @@ class ServiceAppRoute {
 //              the arguments will pass here
             ));
         break;
+      case TechnicianMainPage.routeName:
+//        /technician
+        return MaterialPageRoute(
+            builder: (context) => TechnicianMainPage(
+//              the arguments will pass here
+            ));
+        break;
       case TechnicianRequestDetail.routeName:
+        final JobArguments args = settings.arguments;
         return MaterialPageRoute(
             builder: (context) => TechnicianRequestDetail(
+              job: args.job,
 //              the arguments will pass here
             ));
 //        /technician
+        break;
+      case MapScreen.routeName:
+        final args = settings.arguments;
+//        /technician
+        return MaterialPageRoute(
+            builder: (context) => MapScreen(
+              args: args,
+//              the arguments will pass here
+            ));
         break;
 
 
@@ -273,7 +336,8 @@ AdminArgument({this.index});
 class JobArguments {
   final Job job;
   final bool edit;
-  JobArguments({this.job, this.edit});
+  final int technicianId;
+  JobArguments({this.job, this.edit, this.technicianId});
 }
 
 class RoleArgument{
@@ -293,4 +357,10 @@ class CategoryArgument{
   final List<Service> services;
 
   CategoryArgument({this.services, this.title,this.image});
+}
+
+class MapArgument{
+  final LatLng location;
+  final bool isUser;
+  MapArgument({this.location,this.isUser});
 }

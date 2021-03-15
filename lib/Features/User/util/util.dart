@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class Util {//User Info management ... Token and Shared Preferences
   Future<void> storeUserInformation(User user) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('UserId', user.UserId);
     await prefs.setString('FullName', user.FullName);
     await prefs.setInt('RoleId', user.RoleId);
     await prefs.setString('Picture', user.Picture);
@@ -18,6 +19,7 @@ class Util {//User Info management ... Token and Shared Preferences
     print("Entered to the getUserInformation Method");
     SharedPreferences prefs = await SharedPreferences.getInstance();
     User user = new User(
+      UserId: prefs.getInt("UserId"),
       FullName: prefs.getString("FullName"),
       RoleId: prefs.getInt("Role"),
       Picture: prefs.getString("Picture"),

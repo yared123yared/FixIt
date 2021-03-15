@@ -2,19 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_group_project/Features/Job/bloc/bloc.dart';
 import 'package:flutter_group_project/Features/Job/models/job.dart';
+import 'package:flutter_group_project/ScreenRoute.dart';
+import 'package:flutter_group_project/Users/NormalUser/JobDisplayScreen/map_screen.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 const _kTitleTextStyle = TextStyle(
-    color: Color(0xffe6020a), fontSize: 24.0, fontWeight: FontWeight.bold);
+    color: Color(0xffe6020a), fontSize: 18.0, fontWeight: FontWeight.bold);
 const _kJobTitleTextStyle = TextStyle(
-    color: Color(0xffe602ba), fontSize: 18.0, fontWeight: FontWeight.bold);
+    color: Color(0xffe602ba), fontSize: 15.0, fontWeight: FontWeight.bold);
 const _kJobLocationTextStyle =
 TextStyle(color: Colors.green, fontSize: 18.0, fontWeight: FontWeight.bold);
 const _kDetailsTextStyle = TextStyle(
     color: Colors.black54, fontSize: 16.0, fontWeight: FontWeight.w500);
-const _kStatusTextStyle = TextStyle(
-    color: Colors.pink, fontSize: 18.0, fontWeight: FontWeight.w500);
+const _kStatusTextStyle =
+TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500);
 
 class TechnicianRequestDetail extends StatelessWidget {
-  static const routeName='/technician/request/detail';
+  static const routeName = '/technician/request/detail';
   final Job job;
   TechnicianRequestDetail({this.job});
   Widget build(BuildContext context) {
@@ -45,14 +49,14 @@ class TechnicianRequestDetail extends StatelessWidget {
                       margin: EdgeInsets.only(top: 20),
                       child: Padding(
                         padding: EdgeInsets.only(left: 16.0),
-                        child: buildJobDetail(job),
+                        child: buildJobDetail(job,context),
                       ),
                     ),
                     SizedBox(height: 5),
-                    Container(child: buildUserDetail(width, height, job.user)),
+
                     SizedBox(height: 5),
-                    Container(child: buildTechnicianDetail(
-                        width, height, job.technician, job.technician.user)),
+                    Container(child: buildUserDetail(
+                        width, height, job.technician.user)),
                   ],
                 ),
               ),
@@ -60,9 +64,9 @@ class TechnicianRequestDetail extends StatelessWidget {
             floatingActionButton: FloatingActionButton(
               child: Icon(Icons.check_circle_sharp,
               ),
-              backgroundColor: job.doneStatus == "done" ? Colors.green : Colors.grey,
+              backgroundColor: job.acceptanceStatus.trim().toLowerCase() == "accepted" ? Colors.green : Colors.grey,
               onPressed: () async {
-                final event = job.doneStatus =='done'? JobUpdate(
+                final event = job.acceptanceStatus =='accepted'? JobUpdate(
                   Job(
                       jobId: job.jobId,
                       jobName: job.jobName,
@@ -70,8 +74,8 @@ class TechnicianRequestDetail extends StatelessWidget {
                       userId: job.userId,
                       location: job.location,
                       technicianId: job.technicianId,
-                      acceptanceStatus:job.acceptanceStatus!=null? job.acceptanceStatus: null,
-                      doneStatus: null
+                      acceptanceStatus:"waiting",
+                      doneStatus: job.doneStatus
                   ),
                 ):  JobUpdate(
                   Job(
@@ -81,8 +85,8 @@ class TechnicianRequestDetail extends StatelessWidget {
                       userId: job.userId,
                       location: job.location,
                       technicianId: job.technicianId,
-                      acceptanceStatus:job.acceptanceStatus!=null? job.acceptanceStatus: null,
-                      doneStatus: "done"
+                      acceptanceStatus:"accepted",
+                      doneStatus: job.doneStatus != null? job.doneStatus : "not done"
                   ),
                 );
                 await context.read<JobBloc>().add(
@@ -98,205 +102,164 @@ class TechnicianRequestDetail extends StatelessWidget {
         }
     );
   }
-  // TODO pass job ass argument
-  Widget buildJobDetail(Job job) {
+
+  Widget buildJobDetail(Job job,BuildContext context) {
+    var addressArray = job.location.split(",").sublist(2);
+    LatLng location=LatLng(double.parse(job.location.split(",")[0]), double.parse(job.location.split(",")[1]));
+
+    var address = '${addressArray[0]}, ${addressArray[1]}, ${addressArray[2]}';
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
-        Row(
-          children: [
-            Text('Job Detail', style: _kTitleTextStyle),
-            SizedBox(width: 50,)
-          ],
+        Card(
+          margin: EdgeInsets.only(bottom: 20.0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(20),
+                bottomRight: Radius.circular(20)),
+          ),
+          elevation: 5.0,
+          borderOnForeground: true,
+          shadowColor: Colors.grey,
+          child: Container(
+            padding: EdgeInsets.only(top: 20.0, bottom: 40.0),
+            child: Column(
+              children: [
+                Text(
+                  "${job.jobName}",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30,
+                  ),
+                ),
+                SizedBox(
+                  height: 10.0,
+                ),
+                Row(
+                  children: [
+                    IconButton(
+                      icon: Icon(Icons.location_on,color: Colors.blue),
+                      onPressed: (){
+                        Navigator.of(context).pushNamed(
+                          MapScreen.routeName,
+                          arguments: MapArgument(
+                            location: location,
+                            isUser: false,
+                          )
+                        );
+                      },
+                    ),
+                    Text(
+                      "$address",
+                      style: TextStyle(),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
         ),
+        Card(
+          margin: EdgeInsets.only(bottom: 20.0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          elevation: 5.0,
+          borderOnForeground: true,
+          shadowColor: Colors.grey,
+          child: Container(
+            padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 20.0),
+                  child: Text('Accept Status: ${job.acceptanceStatus}',
+                      style: _kTitleTextStyle),
+                ),
+                SizedBox(
+                  height: 10.0,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20.0),
+                  child: Text(
+                    'Done Status: ${job.doneStatus}',
+                    style: _kTitleTextStyle,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Description ',
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 10,),
+            Container(
+              margin: EdgeInsets.only(bottom: 15.0),
+              child: Text(
+                '${job.description} ',
+                maxLines: 5,
+                overflow: TextOverflow.ellipsis,
 
-        Row(
-          children: [
-            Text("Name: ",style: _kDetailsTextStyle,),
-            SizedBox(
-              width: 15,
-            ),
-            Text(
-              "${job.jobName}",
-            ),
-          ],
-        ),Row(
-          children: [
-            Text("location: ",style: _kDetailsTextStyle,),
-            SizedBox(
-              width: 15,
-            ),
-            Text(
-              "${job.location}",
+              ),
             ),
           ],
         ),
-        Row(
-          children: [
-            Text(
-                'Done Status: ${job.doneStatus}',
-                style: _kStatusTextStyle
-            ),
-          ],
-        ),
-        Row(
-          children: [
-            Text(
-                'accept status: ${job.acceptanceStatus}',
-                style: _kStatusTextStyle
-            ),
-          ],
-        ),
-        Row(
-          children: [
-            Text(
-              'Description: ${job.description}',
-              style: _kDetailsTextStyle,
-            ),
-          ],
-        ),
-
       ],
     );
   }
-  Column buildUserDetail(double width, double height,User user) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left:16.0),
-              child: Text('Requested By', style: _kTitleTextStyle),
-            ),
-            SizedBox(width: 50,)
-          ],
-        ),
-        SizedBox(height: 30,),
-        Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            mainAxisSize: MainAxisSize.max,
+
+  Card buildUserDetail(double width, double height, User user) {
+    return Card(
+      child: Row(
+        children: [
+          Row(
             children: [
-
-              CircleAvatar(
-                // TODO: user image
-                backgroundImage:
-                AssetImage('Assets/Images/mec.jpg'),
-                radius: width * 0.1,
+              Padding(
+                padding: const EdgeInsets.only(left: 16.0,top: 5,bottom: 30),
+                child: Text('Requested By', style: _kTitleTextStyle),
               ),
-
-              // TODO : user Detail
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "${user.fullName}",
-                    style: _kJobTitleTextStyle,
-                  ),
-                  Row(
-                    children: [
-                      Icon(Icons.mail),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      Text(
-                        "${user.email}",
-                        style: _kDetailsTextStyle,
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Icon(Icons.phone),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      Text(
-                        "${user.phone}",
-                        style: _kDetailsTextStyle,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ]),
-      ],
-    );
-  }
-  Column buildTechnicianDetail(double width, double height,Technician technician,User user) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left:16.0),
-              child: Text('Assigned to', style: _kTitleTextStyle),
-            ),
-            SizedBox(width: 50,)
-          ],
-        ),
-        SizedBox(height: 30,),
-        Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-
-              CircleAvatar(
-                // TODO: user image
-                backgroundImage:
-                AssetImage('Assets/Images/mec.jpg'),
-                radius: width * 0.10,
-              ),
-
-              // TODO : user Detail
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "${user.fullName}",
-                    style: _kJobTitleTextStyle,
-                  ),
-                  Row(
-                    children: [
-                      Icon(Icons.mail),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      Text(
-                        "${user.email}",
-                        style: _kDetailsTextStyle,
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Icon(Icons.phone),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      Text(
-                        "${user.phone}",
-                        style: _kDetailsTextStyle,
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Icon(Icons.category_sharp),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      Text(
-                        "${technician.department}",
-                        style: _kDetailsTextStyle,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ]),
-      ],
+              SizedBox(
+                width: 50,
+              )
+            ],
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                CircleAvatar(
+                  // TODO: user image
+                  backgroundImage: AssetImage('Assets/Images/me.jpg'),
+                  radius: width * 0.07,
+                ),
+                SizedBox(width: 5,),
+                // TODO : user Detail
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "${user.fullName}",
+                      overflow: TextOverflow.ellipsis,
+                      style: _kJobTitleTextStyle,
+                    ),
+                  ],
+                ),
+              ]),
+        ],
+      ),
     );
   }
 }
+

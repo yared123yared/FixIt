@@ -1,11 +1,15 @@
+import 'package:dropdown_formfield/dropdown_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_group_project/Features/Technician/bloc/technician_bloc.dart';
+import 'package:flutter_group_project/Features/Technician/bloc/technician_event.dart';
+import 'package:flutter_group_project/Features/Technician/models/technician.dart';
 import 'package:flutter_group_project/Features/User/Bloc/User_bloc.dart';
 import 'package:flutter_group_project/Features/User/Bloc/User_event.dart';
 import 'package:flutter_group_project/Features/User/Bloc/bloc.dart';
 import 'package:flutter_group_project/Features/User/Model/User.dart';
 import 'package:flutter_group_project/Users/Admin/UserManagement/User_main_screen.dart';
-import 'package:flutter_group_project/Users/Common/signup_page_for_technichian.dart';
+import 'package:flutter_group_project/Users/Common/signup_page.dart';
 import 'package:flutter_group_project/Users/NormalUser/UserUpdate/Users_main.dart';
 import 'package:flutter_group_project/Users/Technicians/TechnicianUpdate/Technician_main.dart';
 import 'package:toast/toast.dart';
@@ -15,20 +19,23 @@ import 'ScreenRoute.dart';
 import 'loading_screen.dart';
 import 'login_page.dart';
 
-class Register extends StatefulWidget {
-  static const routeName = 'registerPage';
-  const Register({Key key}) : super(key: key);
+class TechnicianRegister extends StatefulWidget {
+  static const routeName = 'technicianRegisterPage';
+  const TechnicianRegister({Key key}) : super(key: key);
 
   @override
-  _RegisterState createState() => _RegisterState();
+  _TechnicianRegisterState createState() => _TechnicianRegisterState();
 }
 
-class _RegisterState extends State<Register> {
+class _TechnicianRegisterState extends State<TechnicianRegister> {
   bool ispassshow = false;
   final _myemailController = TextEditingController();
   final _mynameController = TextEditingController();
   final _myPhoneController = TextEditingController();
   final _myPasswordController = TextEditingController();
+  final _myCategoryController = TextEditingController();
+  final _myYearsWorkedController = TextEditingController();
+  String _myValue ;
 
   //String _password, _email;
 
@@ -77,7 +84,7 @@ class _RegisterState extends State<Register> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Expanded(
-                          flex:4,
+                          flex: 3,
                           child: Container(
                             decoration: BoxDecoration(
                                 color: Colors.grey[200],
@@ -112,23 +119,23 @@ class _RegisterState extends State<Register> {
                                       fontSize: displayHeight(context) * 0.06,
                                       color: Colors.white),
                                 ),
-                                Container(
-                                  color: Colors.transparent,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 3.5,
-                                  width: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width / 3.5,
-                                  child: new Image.asset(
-                                    'Assets/assets/fixit.png',
-                                    // width: 600.0,
-                                    // height: 240.0,
-                                    //fit: BoxFit.cover,
-                                  ),
-                                ),
+                                // Container(
+                                //   color: Colors.transparent,
+                                //   height: MediaQuery
+                                //       .of(context)
+                                //       .size
+                                //       .height / 3.5,
+                                //   width: MediaQuery
+                                //       .of(context)
+                                //       .size
+                                //       .width / 3.5,
+                                //   child: new Image.asset(
+                                //     'Assets/assets/fixit.png',
+                                //     // width: 600.0,
+                                //     // height: 240.0,
+                                //     //fit: BoxFit.cover,
+                                //   ),
+                                // ),
                                 Padding(
                                   padding: const EdgeInsets.only(right: 22),
                                   child: Row(
@@ -138,7 +145,7 @@ class _RegisterState extends State<Register> {
                                         color: Colors.transparent,
                                         width: displayHeight(context) * 0.25,
                                         child: Text(
-                                          'Users Sign Up',
+                                          'Sign Up',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
@@ -149,13 +156,12 @@ class _RegisterState extends State<Register> {
                                       ),
                                     ],
                                   ),
-                                ),
-
+                                )
                               ],
                             ),
                           )),
                       Expanded(
-                        flex:6,
+                          flex: 7,
                           child: Container(
                             color: Colors.grey[200],
                             child: Padding(
@@ -171,30 +177,31 @@ class _RegisterState extends State<Register> {
                                           .height * 0.05,
                                       child: Row(
 
-                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        mainAxisAlignment: MainAxisAlignment.start,
                                         children: [
+
+                                          RaisedButton(
+                                            onPressed: ()=>_pushPage(context, Register()),
+                                            child:  Material(
+                                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+                                                color: Colors.white,
+                                                elevation: 6.0,
+                                                child: Container(
+                                                    decoration: BoxDecoration(
+                                                        gradient: LinearGradient(
+                                                            colors: <Color>[Colors.orange, Colors.orange[800]]),
+                                                        borderRadius: BorderRadius.circular(40)),
+                                                    height: 60,
+                                                    width: MediaQuery.of(context).size.width * 0.07,
+                                                    child: Center( child:Icon(Icons.subdirectory_arrow_left,color: Colors.white),)
+                                                )
+                                            ),
+                                          ),
                                           Text(
-                                            'Sign Up as a technician?',
+                                            'Sign Up as a User?',
                                             style: TextStyle(
                                                 color: Colors.orange, fontSize: 20, fontWeight: FontWeight.bold),
                                           ),
-                                         RaisedButton(
-                                                onPressed: ()=>_pushPage(context, TechnicianRegister()),
-                                                child:  Material(
-                                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
-                                                  color: Colors.white,
-                                                  elevation: 6.0,
-                                                  child: Container(
-                                                      decoration: BoxDecoration(
-                                                          gradient: LinearGradient(
-                                                              colors: <Color>[Colors.orange, Colors.orange[800]]),
-                                                          borderRadius: BorderRadius.circular(40)),
-                                                      height: 60,
-                                                      width: MediaQuery.of(context).size.width * 0.07,
-                                                      child: Center( child:Icon(Icons.arrow_right_alt_rounded,color: Colors.white),)
-                                                      )
-                                                  ),
-                                                ),
 
                                         ],
                                       )
@@ -379,6 +386,119 @@ class _RegisterState extends State<Register> {
                                           .size
                                           .height * 0.01),
                                   SizedBox(
+                                      height: MediaQuery
+                                          .of(context)
+                                          .size
+                                          .height * 0.117,
+                                      child: Material(
+                                        elevation: 6.0,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(
+                                                40)),
+                                        child: DropDownFormField(
+                                          required: true,
+                                          titleText: 'Please choose category?',
+                                          hintText: 'Please choose one',
+                                          value: _myValue,
+                                          onSaved: (value) {
+                                            setState(() {
+                                              _myValue = value;
+                                              _myCategoryController.text=value;
+                                            });
+                                          },
+                                          onChanged: (value) {
+                                            setState(() {
+                                              _myValue = value;
+                                              _myCategoryController.text=value;
+                                              print("My current category is...${_myCategoryController.text}");
+                                              print("My current category is...${value}");
+                                            });
+                                          },
+                                          dataSource:
+                                            [
+                                             {
+                                               "display" : "Electrical",
+                                               "value" :"Electrical"
+                                             },
+                                              {
+                                                "display":"Mechanical" ,
+                                                "value": "Mechanical"
+                                              },
+                                              {
+                                                "display":"Plumbing" ,
+                                                "value": "Plumbing"
+                                              },
+
+                                              {
+                                                "display":"Metal" ,
+                                                "value": "Metal"
+                                              },
+                                              {
+                                                "display":"Building" ,
+                                                "value": "Building"
+                                              },
+                                              {
+                                                "display":"Wood" ,
+                                                "value": "Wood"
+                                              }
+                                            ],
+                                          textField: 'display',
+                                          valueField: 'value',
+                                        ),
+                                      )),
+
+
+                                  SizedBox(
+                                      width: MediaQuery
+                                          .of(context)
+                                          .size
+                                          .width * 0.5,
+                                      height:
+                                      MediaQuery
+                                          .of(context)
+                                          .size
+                                          .height * 0.01),
+                                  SizedBox(
+                                      height: MediaQuery
+                                          .of(context)
+                                          .size
+                                          .height * 0.05,
+                                      child: Material(
+                                        elevation: 6.0,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(
+                                                40)),
+                                        child: TextField(
+                                          controller: _myYearsWorkedController,
+                                          keyboardType: TextInputType
+                                              .emailAddress,
+                                          textInputAction: TextInputAction.next,
+                                          onEditingComplete: () =>
+                                              FocusScope.of(context)
+                                                  .nextFocus(),
+                                          style: TextStyle(
+                                              fontSize: asd,
+                                              color: Colors.grey),
+                                          decoration: InputDecoration(
+                                            contentPadding: EdgeInsets.only(
+                                                top: 14),
+                                            prefixIcon: Icon(Icons.email),
+                                            border: InputBorder.none,
+                                            hintText: "How much year have you worked? ",
+                                          ),
+                                        ),
+                                      )),
+                                  SizedBox(
+                                      width: MediaQuery
+                                          .of(context)
+                                          .size
+                                          .width * 0.5,
+                                      height:
+                                      MediaQuery
+                                          .of(context)
+                                          .size
+                                          .height * 0.01),
+                                  SizedBox(
                                       width: MediaQuery
                                           .of(context)
                                           .size
@@ -399,7 +519,6 @@ class _RegisterState extends State<Register> {
                                           .of(context)
                                           .size
                                           .height * 0.01),
-
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
@@ -422,8 +541,7 @@ class _RegisterState extends State<Register> {
                                         ),
                                       )
                                     ],
-                                  ),
-
+                                  )
                                 ],
                               ),
                             ),
@@ -454,53 +572,62 @@ class _RegisterState extends State<Register> {
   }
   Widget gradientbutton(UserState state) {
     UserState _state=state;
-    return InkWell(
-      splashColor: Colors.white,
-      onTap: () {
-        print("this is the create method");
-        final UserEvent event = UserCreate(
-          User(
-
+    return BlocProvider.value(
+      value: BlocProvider.of<UserBloc>(context),
+      child: InkWell(
+        splashColor: Colors.white,
+        onTap: () async {
+          User user = User(
             Email: _myemailController.text,
             FullName: _mynameController.text,
             Phone: _myPhoneController.text,
             Password: _myPasswordController.text,
             Picture: 'this._user["intermediatePrice"]',
-            RoleId: 1,
-          ),
-        );
-        BlocProvider.of<UserBloc>(context).add(event);
-        print("created user");
-        if(state is UserLoadSuccess){
+            RoleId: 9,
+          );
+          final TechnicianEvent event = TechnicianCreate(
+            Technician(
+          userId: 0,
+          completedWork: int.parse(_myYearsWorkedController.text),
+          department: _myCategoryController.text,
+          user: user
+          )
+          );
+
+
+          BlocProvider.of<TechnicianBloc>(context).add(event);
+
+          if(state is UserLoadSuccess){
 //            Navigator.pushNamed(context, SignIn.routeName);
             Navigator.pushReplacementNamed(context, SignIn.routeName);
 
-        }
-        else if (state is UserOperationFailure) {
-          Navigator.pushReplacementNamed(context, SignIn.routeName);
+          }
+          else if (state is UserOperationFailure) {
+            Navigator.pushReplacementNamed(context, SignIn.routeName);
 //          Navigator.pushNamed(context, SignIn.routeName);
-        }
+          }
 
 
 
-      },
-      // onTap: () => _pushPage(context, Register()),
-      child: Material(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
-        elevation: 6.0,
-        child: Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  colors: <Color>[Colors.orange, Colors.orange[800]]),
-              borderRadius: BorderRadius.circular(40)),
-          height: 60,
-          width: MediaQuery.of(context).size.width * 0.75,
-          child: Center(
-              child: Text(
-                'SIGN UP',
-                style: TextStyle(
-                    color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
-              )),
+        },
+        // onTap: () => _pushPage(context, Register()),
+        child: Material(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+          elevation: 6.0,
+          child: Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    colors: <Color>[Colors.orange, Colors.orange[800]]),
+                borderRadius: BorderRadius.circular(40)),
+            height: 60,
+            width: MediaQuery.of(context).size.width * 0.75,
+            child: Center(
+                child: Text(
+                  'SIGN UP',
+                  style: TextStyle(
+                      color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                )),
+          ),
         ),
       ),
     );

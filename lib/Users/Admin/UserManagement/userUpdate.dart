@@ -15,18 +15,18 @@ import '../../../ScreenRoute.dart';
 
 
 
-class AddUpdateUser extends StatefulWidget {//Add and Update page only for the Admin
-  static const routeName = '/user/userAddUpdateee';
+class UserProfileUpdate extends StatefulWidget {//Add and Update page only for the Admin
+  static const routeName = '/admin/adminAddUpdateee';
   final UserArgument args;
 
-  AddUpdateUser({this.args}){
-    print("Admin UPdate Create Page");
+  UserProfileUpdate({this.args}){
+    print("yes");
   }
   @override
-  _AddUpdateUserState createState() => _AddUpdateUserState();
+  _UserProfileUpdateState createState() => _UserProfileUpdateState();
 }
 
-class _AddUpdateUserState extends State<AddUpdateUser> {
+class _UserProfileUpdateState extends State<UserProfileUpdate> {
   final _formKey = GlobalKey<FormState>();
 
   final Map<String, dynamic> _user = {};
@@ -120,40 +120,40 @@ class _AddUpdateUserState extends State<AddUpdateUser> {
                                   });
                                 }),
                             SizedBox(height: 5.0,),
-//                             DecoratedBox(
-//                               decoration: ShapeDecoration(
-//                                 color: Colors.transparent,
-//                                 shape: RoundedRectangleBorder(
-//                                   side: BorderSide(width: 1.0, style: BorderStyle.solid, color: Colors.grey),
-//                                   borderRadius: BorderRadius.all(Radius.circular(5.0)),
-//                                 ),
-//                               ),
-//
-//                               child: DropDownFormField(
-//                                 titleText: 'Role',
-//                                 hintText: 'Please choose one',
-// //                          value: widget.args.edit ? widget.args.user.Role
-// //                              : null,
-//
-// //                          value: _myValue,
-//                                 onSaved: (value) {
-//                                   setState(() {
-//                                     this._user["RoleId"] = value;
-//                                     print("role role role ${this._user["RoleId"] }");
-//                                     _myValue = value;
-//                                   });
-//                                 },
-//                                 onChanged: (value) {
-//                                   setState(() {
-//                                     this._user["RoleId"] = value;
-//                                   });
-//                                 },
-//                                 dataSource: dataSource,
-//                                 textField: 'display',
-//                                 valueField: 'value',
-//                               ),
-//                             ),
-//                             SizedBox(height: 5.0,),
+                            DecoratedBox(
+                              decoration: ShapeDecoration(
+                                color: Colors.transparent,
+                                shape: RoundedRectangleBorder(
+                                  side: BorderSide(width: 1.0, style: BorderStyle.solid, color: Colors.grey),
+                                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                ),
+                              ),
+
+                              child: DropDownFormField(
+                                titleText: 'Role',
+                                hintText: 'Please choose one',
+//                          value: widget.args.edit ? widget.args.user.Role
+//                              : null,
+
+//                          value: _myValue,
+                                onSaved: (value) {
+                                  setState(() {
+                                    this._user["RoleId"] = value;
+                                    print("role role role ${this._user["RoleId"] }");
+                                    _myValue = value;
+                                  });
+                                },
+                                onChanged: (value) {
+                                  setState(() {
+                                    this._user["RoleId"] = value;
+                                  });
+                                },
+                                dataSource: dataSource,
+                                textField: 'display',
+                                valueField: 'value',
+                              ),
+                            ),
+                            SizedBox(height: 5.0,),
                             TextFormField(
                                 initialValue: widget.args.edit
                                     ? widget.args.user.Password
@@ -183,9 +183,7 @@ class _AddUpdateUserState extends State<AddUpdateUser> {
 //                                Rolee role= new Rolee(roleName: this._user["Role"]
                                     print("${this._user["Email"]+this._user["FullName"]+this._user["Phone"]+this._user["Password"]}");
                                     final UserEvent event = widget.args.edit
-                                        ? UserUpdate(//If edit it will update or Creates new user
-
-
+                                        ? UserUpdate(
                                       User(
                                         UserId: widget.args.user.UserId,
                                         Email: this._user["Email"],
@@ -193,7 +191,7 @@ class _AddUpdateUserState extends State<AddUpdateUser> {
                                         Phone: this._user["Phone"],
                                         Password: this._user["Password"],
                                         Picture: 'Assets/assets/Fixit.png',
-                                        RoleId: widget.args.user.RoleId,
+                                        RoleId: int.parse(this._user['RoleId']),
                                       ),
                                     )
                                         : UserCreate(
