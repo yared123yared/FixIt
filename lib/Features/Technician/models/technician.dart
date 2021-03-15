@@ -2,7 +2,7 @@
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_group_project/Features/Job/models/models.dart';
+import 'package:flutter_group_project/Features/User/User.dart';
 
 class Technician extends Equatable{
   final int technicianId;
@@ -15,10 +15,10 @@ class Technician extends Equatable{
   Technician({
     this.technicianId,
     @required this.userId,
-    @required this.experiance,
-    @required this.completedWork,
-    @required this.department,
-    @required this.user
+     this.experiance,
+     this.completedWork,
+     this.department,
+     this.user
 });
 
   List<Object> get props =>[userId,experiance,completedWork,department,user];
@@ -26,18 +26,15 @@ class Technician extends Equatable{
   factory Technician.fromJson(Map<String,dynamic> json){
     User user;
     final userRaw = json['user'];
+    print("Tech user is $userRaw");
     user = User(
-      userId: userRaw['userId'],
-      fullName: userRaw['fullName'] ,
-      email: userRaw['email'] ,
-      password: userRaw['password'],
-      phone: userRaw['phone'] ,
-      address: userRaw['address'] ,
-      picture: userRaw['picture'] ,
-      sex: userRaw['sex'] ,
-      dob: userRaw['dob'] ,
-      role: userRaw['role'] ,
-
+      UserId: userRaw['userId'],
+      FullName: userRaw['fullName'] ,
+      Email: userRaw['email'] ,
+      Password: userRaw['password'],
+      Phone: userRaw['phone'] ,
+      Picture: userRaw['picture'] ,
+      RoleId: userRaw['roleId'] ,
       // ignore: unnecessary_statements
     );
     return Technician(

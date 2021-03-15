@@ -20,6 +20,15 @@ class UserLoad extends UserEvent {
   @override
   List<Object> get props => [email];
 }
+class UserLoadEmail extends UserEvent {
+  final String email;
+
+  const UserLoadEmail(this.email);
+
+  @override
+  List<Object> get props => [email];
+}
+
 
 class UserCreate extends UserEvent {
   final User user;

@@ -156,9 +156,9 @@ class UserTechnicianMain extends StatelessWidget {
                                           child: Center(
                                             child: ListTile(
                                               leading: CircleAvatar(
-                                                backgroundImage: AssetImage('Assets/Images/${technicians[index].user.picture}'),
+                                                backgroundImage: AssetImage('Assets/Images/${technicians[index].user.Picture}'),
                                               ),
-                                              title: Text(technicians[index].user.fullName !=null ? technicians[index].user.fullName : "place holder",
+                                              title: Text(technicians[index].user.FullName !=null ? technicians[index].user.FullName : "place holder",
                                                 style: Theme.of(context).textTheme.headline6,),
                                               subtitle: Text(technicians[index].department !=null ?technicians[index].department: "Place holder" ,),
                                               trailing: MediaQuery.of(context).size.width > 450 ? FlatButton.icon(
@@ -167,8 +167,6 @@ class UserTechnicianMain extends StatelessWidget {
                                                 icon: Icon(Icons.delete_forever,color: Theme.of(context).errorColor,),
                                               ): IconButton(
                                                 icon: Icon(Icons.star_border,color: Theme.of(context).errorColor,),
-
-
 
                                               ),
                                               onTap: (){
@@ -195,7 +193,6 @@ class UserTechnicianMain extends StatelessWidget {
             ]
         ),
       ),
-
 
 
     );

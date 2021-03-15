@@ -23,6 +23,11 @@ class UserRepository {
     print("This is the getUser(email) method in repo");
     return await dataProvider.getUser(email);
   }
+  Future<User> getUserByEmail(String email) async {
+    print("This is the getUser(email) method in repo");
+    return await dataProvider.getUserByEmail(email);
+  }
+
 
   Future<void> updateUser(User user) async {
     print("This is the updateUser method in repo");

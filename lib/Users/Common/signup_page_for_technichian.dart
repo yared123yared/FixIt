@@ -1,6 +1,9 @@
 import 'package:dropdown_formfield/dropdown_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_group_project/Features/Technician/bloc/technician_bloc.dart';
+import 'package:flutter_group_project/Features/Technician/bloc/technician_event.dart';
+import 'package:flutter_group_project/Features/Technician/models/technician.dart';
 import 'package:flutter_group_project/Features/User/Bloc/User_bloc.dart';
 import 'package:flutter_group_project/Features/User/Bloc/User_event.dart';
 import 'package:flutter_group_project/Features/User/Bloc/bloc.dart';
@@ -386,7 +389,7 @@ class _TechnicianRegisterState extends State<TechnicianRegister> {
                                       height: MediaQuery
                                           .of(context)
                                           .size
-                                          .height * 0.062,
+                                          .height * 0.117,
                                       child: Material(
                                         elevation: 6.0,
                                         shape: RoundedRectangleBorder(
@@ -414,28 +417,29 @@ class _TechnicianRegisterState extends State<TechnicianRegister> {
                                           dataSource:
                                             [
                                              {
-                                               "display" : "Electrician",
-                                               "value" :"Electrician"
+                                               "display" : "Electrical",
+                                               "value" :"Electrical"
                                              },
                                               {
-                                                "display":"Mechanic" ,
-                                                "value": "Mechanic"
+                                                "display":"Mechanical" ,
+                                                "value": "Mechanical"
                                               },
                                               {
-                                                "display":"Plumber" ,
-                                                "value": "Plumber"
+                                                "display":"Plumbing" ,
+                                                "value": "Plumbing"
+                                              },
+
+                                              {
+                                                "display":"Metal" ,
+                                                "value": "Metal"
                                               },
                                               {
-                                                "display":"Satellite Dish" ,
-                                                "value": "Satellite Dish"
+                                                "display":"Building" ,
+                                                "value": "Building"
                                               },
                                               {
-                                                "display":"Metal Works" ,
-                                                "value": "Metal Works"
-                                              },
-                                              {
-                                                "display":"Wood Works" ,
-                                                "value": "Wood Works"
+                                                "display":"Wood" ,
+                                                "value": "Wood"
                                               }
                                             ],
                                           textField: 'display',
@@ -568,51 +572,62 @@ class _TechnicianRegisterState extends State<TechnicianRegister> {
   }
   Widget gradientbutton(UserState state) {
     UserState _state=state;
-    return InkWell(
-      splashColor: Colors.white,
-      onTap: () {
-        final UserEvent event = UserCreate(
-          User(
-
+    return BlocProvider.value(
+      value: BlocProvider.of<UserBloc>(context),
+      child: InkWell(
+        splashColor: Colors.white,
+        onTap: () async {
+          User user = User(
             Email: _myemailController.text,
             FullName: _mynameController.text,
             Phone: _myPhoneController.text,
             Password: _myPasswordController.text,
             Picture: 'this._user["intermediatePrice"]',
-            RoleId: 1,
-          ),
-        );
-        BlocProvider.of<UserBloc>(context).add(event);
-        if(state is UserLoadSuccess){
+            RoleId: 9,
+          );
+          final TechnicianEvent event = TechnicianCreate(
+            Technician(
+          userId: 0,
+          completedWork: int.parse(_myYearsWorkedController.text),
+          department: _myCategoryController.text,
+          user: user
+          )
+          );
+
+
+          BlocProvider.of<TechnicianBloc>(context).add(event);
+
+          if(state is UserLoadSuccess){
 //            Navigator.pushNamed(context, SignIn.routeName);
-          Navigator.pushReplacementNamed(context, SignIn.routeName);
+            Navigator.pushReplacementNamed(context, SignIn.routeName);
 
-        }
-        else if (state is UserOperationFailure) {
-          Navigator.pushReplacementNamed(context, SignIn.routeName);
+          }
+          else if (state is UserOperationFailure) {
+            Navigator.pushReplacementNamed(context, SignIn.routeName);
 //          Navigator.pushNamed(context, SignIn.routeName);
-        }
+          }
 
 
 
-      },
-      // onTap: () => _pushPage(context, Register()),
-      child: Material(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
-        elevation: 6.0,
-        child: Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  colors: <Color>[Colors.orange, Colors.orange[800]]),
-              borderRadius: BorderRadius.circular(40)),
-          height: 60,
-          width: MediaQuery.of(context).size.width * 0.75,
-          child: Center(
-              child: Text(
-                'SIGN UP',
-                style: TextStyle(
-                    color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
-              )),
+        },
+        // onTap: () => _pushPage(context, Register()),
+        child: Material(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+          elevation: 6.0,
+          child: Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    colors: <Color>[Colors.orange, Colors.orange[800]]),
+                borderRadius: BorderRadius.circular(40)),
+            height: 60,
+            width: MediaQuery.of(context).size.width * 0.75,
+            child: Center(
+                child: Text(
+                  'SIGN UP',
+                  style: TextStyle(
+                      color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                )),
+          ),
         ),
       ),
     );

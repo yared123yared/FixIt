@@ -79,7 +79,7 @@ class UserTechnicianDetail extends StatelessWidget {
           child: Container(
             margin: EdgeInsets.all(10),
             child: CustomButton(
-              label: 'hire ${technician.user.fullName}',
+              label: 'hire ${technician.user.FullName}',
               backgroundColor: Colors.blueAccent,
               foregroundColor: Colors.white,
             ),
@@ -140,7 +140,7 @@ class UserTechnicianDetail extends StatelessWidget {
                   AssetImage('Assets/Images/computer_technician.jpg'),
                 ),
                 Text(
-                  "${technician.user.fullName}",
+                  "${technician.user.FullName}",
                   style: _kTechnicianNameStyle,
                 ),
                 Row(
@@ -172,7 +172,7 @@ Widget _aboutSection(Technician technician) {
         style: _kTitleStyle,
       ),
       Text(
-          "Hi I'm ${technician.user.fullName} a ${technician.department} Expert from ${technician.user.address}. I can do Almost every Thing."),
+          "Hi I'm ${technician.user.FullName} a ${technician.department} Expert from addis. I can do Almost every Thing."),
     ],
   ),
 );

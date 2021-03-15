@@ -20,6 +20,7 @@ import '../../ScreenRoute.dart';
 import '../users.dart';
 
 class SignIn extends StatefulWidget {//Login Screen
+
   static const routeName = 'loginPage';
   const SignIn({Key key}) : super(key: key);
 
@@ -30,11 +31,11 @@ class SignIn extends StatefulWidget {//Login Screen
 class _SignInState extends State<SignIn> {
   bool ispassshow = false;
   bool _rememberme = false;
+
   final _myemailController = TextEditingController();
   final _myPasswordController = TextEditingController();
 
   //String _password, _email;
-
 
   @override
   Widget build(BuildContext context) {
@@ -251,7 +252,6 @@ class _SignInState extends State<SignIn> {
                                     GestureDetector(
                                       onTap: () => _pushPage(context, Register()),
                                       child: new Text(
-
                                         "Signup",
                                         style: TextStyle(
                                             color: Colors.blue,
@@ -273,7 +273,6 @@ class _SignInState extends State<SignIn> {
         );
       } ,
     );
-
   }
   void _pushPage(BuildContext context, Widget page) {
     Navigator.of(context).push(

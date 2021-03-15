@@ -22,6 +22,17 @@ class TechnicianBloc extends Bloc<TechnicianEvent, TechnicianState>{
         print("Technician loading err: $err");
         yield TechnicianOperationFailure();
       }
+    }else if(event is TechnicianCreate) {
+      yield TechnicianLoading();
+      try {
+        await technicianRepository.createTechnician(event.technician);
+        final technician = await technicianRepository.getTechnicians();
+
+        yield TechnicianLoadingSuccess(technician);
+      } catch (err) {
+        print("Technician create err: $err");
+        yield TechnicianOperationFailure();
+      }
     }
 
   }

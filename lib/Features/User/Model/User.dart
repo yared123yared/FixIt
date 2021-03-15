@@ -30,7 +30,7 @@ class User extends Equatable{
     @required this.FullName,
     @required this.Phone,
     @required this.Password ,
-    @required this.RoleId ,
+     this.RoleId ,
      this.Role,
     @required this.Picture ,
 
@@ -41,20 +41,23 @@ class User extends Equatable{
   List<Object> get props => [Email, FullName, Phone, Password, Role, Picture];
 
   factory User.fromJson(Map<String, dynamic> json) {
-    return User(
+    print("user from json is $json");
+     User user = User(
       UserId: json["userId"],
       Email: json['email'],
       FullName: json['fullName'],
       Phone: json['phone'],
       Password: json['password'],
       RoleId: json['roleId'],
-      Role: Rolee.fromJson(json['role']),
+      Role:json['role'] != null? Rolee.fromJson(json['role']) :null,
       Picture: json['picture']
     );
+     print("user form json2 is ${user.RoleId}");
+     return user;
   }
 
   @override
-  String toString() => 'User { Email: $Email, Fname: $FullName, Role: $Role }';
+  String toString() => 'User { Email: $Email, Fname: $FullName, Role: $Role ,roleid : $RoleId }';
 }
 
 

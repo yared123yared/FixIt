@@ -12,6 +12,9 @@ class TechnicianRepository{
   Future<List<Technician>> getTechnicians() async {
     return await dataProvider.getTechnicians();
   }
+  Future<Technician> createTechnician(Technician technician) async {
+    return await dataProvider.createTechnician(technician);
+  }
 
 
 }

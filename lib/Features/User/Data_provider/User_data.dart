@@ -14,30 +14,48 @@ class UserDataProvider {
   UserDataProvider({@required this.httpClient}) : assert(httpClient != null);
   Util util=  new Util();
   Future<User> createUser(User user) async {//Used on signUp and to add new user in ADMIN interface
+
     print("This is the create method");
+    print('role id is ${user.RoleId}');
+    print('name is  ${user.FullName}');
+    print("user ${user.toString()}");
     final response = await httpClient.post(
       '$_baseUrl/api/users/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, dynamic>{
-        "FullName": user.FullName,
-        "Email": user.Email,
-        "Password": user.Password,
-        "Phone": user.Phone,
-        "Picture":"Assets/assets/fixit.png",
-        "roleId": 1,
+        "fullName": user.FullName,
+        "email": user.Email,
+        "password": user.Password,
+        "phone": user.Phone,
+        "picture":"Assets/assets/fixit.png",
+        "roleId": int.parse(user.RoleId.toString())
       }),
     );
 
-    if (response.statusCode == 200) {
-      User user = User.fromJson(jsonDecode(response.body));
-      String token = response.headers['token'].toString();
-      String expiry = response.headers['expiry_date'].toString();
+    print("create status code is :${response.statusCode}");
 
-      await util.storeUserInformation(user);
-      await util.storeTokenAndExpiration(token);
-      return user;
+    if (response.statusCode == 200) {
+
+
+      print('returning user$user');
+
+      // String token = response.headers['token'].toString();
+      // String expiry = response.headers['expiry_date'].toString();
+      // await util.storeUserInformation(user);
+      // await util.storeTokenAndExpiration(token);
+
+      print("user created success fully");
+      return User(
+        UserId: 0,
+        Email: '',
+        FullName: '',
+        Phone: '',
+        Password: "",
+        RoleId: 0,
+        Picture: ""
+      );
     } else {
       throw Exception('Failed to create User.');
     }
@@ -72,6 +90,27 @@ class UserDataProvider {
         String expiry = response.headers['Expiry_date'].toString();
         await util.storeUserInformation(user);
         await util.storeTokenAndExpiration(token);
+        return User.fromJson(jsonDecode(response.body));
+      } else {
+        throw Exception('Failed to load User');
+      }
+    } catch (e) {
+      print("Exception thrown $e");
+    }
+  }
+
+  Future <User> getUserByEmail(String email) async {//Used for login => Returns User then done flutter side authentication
+    print("This is the getUser(email) method");
+    User user;
+    try {
+      final response = await httpClient.get('http://192.168.137.1:5001/api/users/n/$email');
+      if (response.statusCode == 200) {
+        final extractedData =json.decode(response.body) as Map<String, dynamic>;
+        // user = User.fromJson(extractedData);
+        // String token = response.headers['Token'].toString();
+        // String expiry = response.headers['Expiry_date'].toString();
+        // await util.storeUserInformation(user);
+        // await util.storeTokenAndExpiration(token);
         return User.fromJson(jsonDecode(response.body));
       } else {
         throw Exception('Failed to load User');

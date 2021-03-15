@@ -457,6 +457,7 @@ class _RegisterState extends State<Register> {
     return InkWell(
       splashColor: Colors.white,
       onTap: () {
+        print("this is the create method");
         final UserEvent event = UserCreate(
           User(
 
@@ -469,6 +470,7 @@ class _RegisterState extends State<Register> {
           ),
         );
         BlocProvider.of<UserBloc>(context).add(event);
+        print("created user");
         if(state is UserLoadSuccess){
 //            Navigator.pushNamed(context, SignIn.routeName);
             Navigator.pushReplacementNamed(context, SignIn.routeName);
